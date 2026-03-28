@@ -11,7 +11,7 @@ class SuhaimApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Suhaim Data App',
+      title: 'data-app',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       home: const SplashScreen(),

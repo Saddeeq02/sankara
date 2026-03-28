@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                   const SizedBox(height: 15),
                   const Text(
-                    'WELCOME TO SUHAIM DATA APP',
+                    'WELCOME TO DATA APP',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
