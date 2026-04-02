@@ -1,110 +1,43 @@
-<<<<<<< HEAD
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.build/
-.buildlog/
-.history
-.svn/
-.swiftpm/
-migrate_working_dir/
+# Sankara Nigeria Limited - Web Project Ignore List
 
-# IntelliJ related
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
-
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
-.dart_tool/
-.flutter-plugins-dependencies
-.pub-cache/
-.pub/
-/build/
-/coverage/
-
-# Symbolication related
-app.*.symbols
-
-# Obfuscation related
-app.*.map.json
-
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
-=======
 # --- System Files ---
 .DS_Store
 Thumbs.db
 *.log
 
-# --- Environments & Secrets (CRITICAL) ---
+# --- Environments & Secrets ---
 .env
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.flaskenv
-*.pem
+.env.*.local
 *.key
+*.pem
 
 # --- Dependencies ---
-node_modules/
-jspm_packages/
-package-lock.json (optional: keep if you want strict versioning)
-yarn-error.log
-.pnp*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
+**/node_modules/
+**/vendor/
+package-lock.json
+composer.lock
 
 # --- Build & Output ---
-.next/
-out/
-build/
-dist/
+**/dist/
+**/build/
 .cache/
-.parcel-cache/
-.eslintcache
+.vite/
+.output/
 
-# --- Data & Databases ---
-*.sqlite
-*.db
-*.csv
-*.json
-# Ignore large data dumps but keep the folder structure
-data/*
-!data/.gitkeep
+# --- Laravel Specific ---
+backend/storage/*.key
+backend/storage/framework/cache/data/*
+backend/storage/framework/sessions/*
+backend/storage/framework/views/*
+backend/storage/logs/*
+backend/bootstrap/cache/*
 
-# --- IDEs & Tools ---
-.vscode/*
-!.vscode/extensions.json
+# --- Keep Local Database for Now (JsonDB) ---
+# !backend/storage/app/db.json
+
+# --- IDEs ---
 .idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
+.vscode/
 *.swp
-
-# --- Debugging ---
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-logs
-*.log
->>>>>>> 0d48efd (feat: initial project structure with premium industrial UI assets)
+*.swo
