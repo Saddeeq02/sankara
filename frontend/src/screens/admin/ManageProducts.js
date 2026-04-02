@@ -54,6 +54,18 @@ export function renderAdminProducts() {
         </form>
       </div>
     </div>
+
+    <div id="adminConfirmOverlay" class="admin-confirm-overlay">
+      <div class="admin-confirm-modal">
+        <div class="admin-confirm-icon">${Trash2}</div>
+        <h2 style="margin: 0 0 10px; color: var(--admin-text);">Delete Product?</h2>
+        <p style="margin: 0; color: var(--admin-text-muted); line-height: 1.5;">This action cannot be undone. Are you sure you want to remove this equipment from the database?</p>
+        <div class="admin-confirm-btns">
+          <button class="confirm-no">Cancel</button>
+          <button class="confirm-yes">Yes, Delete</button>
+        </div>
+      </div>
+    </div>
   `;
 
   let currentEditId = null;
@@ -64,6 +76,23 @@ export function renderAdminProducts() {
   const closeModalBtn = content.querySelector('#closeModalBtn');
   const addForm = content.querySelector('#addProductForm');
   const submitBtn = addForm.querySelector('button[type="submit"]');
+
+  const customConfirm = () => {
+    return new Promise((resolve) => {
+      const overlay = content.querySelector('#adminConfirmOverlay');
+      overlay.classList.add('active');
+      const yesBtn = overlay.querySelector('.confirm-yes');
+      const noBtn = overlay.querySelector('.confirm-no');
+      const cleanup = (val) => {
+        overlay.classList.remove('active');
+        yesBtn.onclick = null;
+        noBtn.onclick = null;
+        resolve(val);
+      };
+      yesBtn.onclick = () => cleanup(true);
+      noBtn.onclick = () => cleanup(false);
+    });
+  };
 
   const openEditModal = (product) => {
     currentEditId = product.id;
@@ -157,7 +186,7 @@ export function renderAdminProducts() {
           const deleteBtn = e.target.closest('.delete-btn');
           if (deleteBtn) {
             const id = deleteBtn.getAttribute('data-id');
-            if (confirm('Are you sure you want to permanently delete this product?')) {
+            if (await customConfirm()) {
               try {
                 const res = await fetch(`http://localhost:8080/api/products/${id}`, {
                   method: 'DELETE',
