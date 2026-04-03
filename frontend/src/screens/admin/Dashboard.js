@@ -40,18 +40,21 @@ export function renderAdminDashboard() {
 
       <div class="admin-card" style="display: flex; align-items: center; gap: 20px;">
         <div style="width: 50px; height: 50px; border-radius: 12px; background: #fae8ff; color: #a21caf; display: flex; align-items: center; justify-content: center;">
-          ${TrendingUp}
+          ${Users}
         </div>
         <div>
-          <div style="color: var(--admin-text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Site Visits</div>
-          <div style="font-size: 1.8rem; font-weight: 700;">1.2K</div>
+          <div style="color: var(--admin-text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Total Team</div>
+          <div id="stat-team" style="font-size: 1.8rem; font-weight: 700;">...</div>
         </div>
       </div>
     </div>
 
     <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
       <div class="admin-card">
-        <h2 style="font-size: 1.25rem; margin-bottom: 20px;">Recent Inquiries</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h2 style="font-size: 1.25rem; margin: 0;">Recent Inquiries</h2>
+          <button data-route="admin-inquiries" style="font-size: 0.85rem; font-weight: 700; color: var(--primary-color); background: none; border: none; cursor: pointer;">View All &rarr;</button>
+        </div>
         <div class="admin-table-container">
           <table class="admin-table">
             <thead>
@@ -99,6 +102,7 @@ export function renderAdminDashboard() {
       const data = await response.json();
       content.querySelector('#stat-products').textContent = data.total_products;
       content.querySelector('#stat-inquiries').textContent = data.total_inquiries;
+      content.querySelector('#stat-team').textContent = data.total_team;
       
       const tbody = content.querySelector('#inquiries-tbody');
       if (data.recent_inquiries.length > 0) {

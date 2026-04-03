@@ -1,15 +1,30 @@
 import { renderAdminLayout } from '../../components/AdminLayout';
-import { Plus, Edit, Trash2 } from 'lucide-static';
+import { Plus, Edit, Trash2, Search, Filter } from 'lucide-static';
 
 export function renderAdminProducts() {
   const content = document.createElement('div');
-  
+  let allProducts = [];
+  let currentSearch = '';
+  let currentCategory = 'All';
+
   content.innerHTML = `
-    <div class="flex-between" style="margin-bottom: 24px;">
+    <div class="flex-between" style="margin-bottom: 24px; flex-wrap: wrap; gap: 15px;">
       <h1 class="admin-page-title" style="margin-bottom: 0;">Manage Products</h1>
-      <button id="openModalBtn" class="btn-primary" style="display: flex; align-items: center; gap: 8px; padding: 10px 20px;">
-        ${Plus} Add Product
-      </button>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <div style="position: relative;">
+          <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--admin-text-muted); pointer-events: none;">${Search}</span>
+          <input type="text" id="adminSearchInput" placeholder="Search product name..." style="padding: 10px 15px 10px 40px; background: var(--admin-surface); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 8px; font-size: 0.9rem; min-width: 250px; outline: none;">
+        </div>
+        <select id="adminCategoryFilter" style="padding: 10px 15px; background: var(--admin-surface); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 8px; font-size: 0.9rem; outline: none; cursor: pointer;">
+          <option value="All">All Categories</option>
+          <option value="Tractors">Tractors</option>
+          <option value="Farm Implements">Farm Implements</option>
+          <option value="Spare Parts">Spare Parts</option>
+        </select>
+        <button id="openModalBtn" class="btn-primary" style="display: flex; align-items: center; gap: 8px; padding: 10px 20px;">
+          ${Plus} Add Product
+        </button>
+      </div>
     </div>
 
     <div class="admin-card">
@@ -76,6 +91,9 @@ export function renderAdminProducts() {
   const closeModalBtn = content.querySelector('#closeModalBtn');
   const addForm = content.querySelector('#addProductForm');
   const submitBtn = addForm.querySelector('button[type="submit"]');
+  const tbody = content.querySelector('#products-tbody');
+  const searchInput = content.querySelector('#adminSearchInput');
+  const categoryFilter = content.querySelector('#adminCategoryFilter');
 
   const customConfirm = () => {
     return new Promise((resolve) => {
@@ -94,6 +112,54 @@ export function renderAdminProducts() {
     });
   };
 
+  const renderTableRows = (dataToRender) => {
+    if (dataToRender.length > 0) {
+      tbody.innerHTML = dataToRender.map(product => `
+        <tr>
+          <td><strong>${product.name}</strong></td>
+          <td>${product.category || 'Tractors'}</td>
+          <td>${product.price}</td>
+          <td>
+            <button class="status-btn" data-id="${product.id}" title="Click to toggle status" style="border: none; background: none; cursor: pointer;">
+              <span class="badge ${product.status === 'Active' ? 'badge-success' : 'badge-pending'}">${product.status}</span>
+            </button>
+          </td>
+          <td style="text-align: right;">
+            <button class="edit-btn" data-id="${product.id}" style="background: none; border: none; cursor: pointer; color: var(--admin-text-muted); margin-right: 12px;">${Edit}</button>
+            <button class="delete-btn" data-id="${product.id}" style="background: none; border: none; cursor: pointer; color: #ef4444;">${Trash2}</button>
+          </td>
+        </tr>
+      `).join('');
+    } else {
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--admin-text-muted); padding: 40px;">No matching products found.</td></tr>';
+    }
+  };
+
+  const applyFilters = () => {
+    let filtered = allProducts;
+    
+    if (currentCategory !== 'All') {
+      filtered = filtered.filter(p => p.category === currentCategory);
+    }
+    
+    if (currentSearch) {
+      const q = currentSearch.toLowerCase();
+      filtered = filtered.filter(p => p.name.toLowerCase().includes(q));
+    }
+    
+    renderTableRows(filtered);
+  };
+
+  searchInput.oninput = (e) => {
+    currentSearch = e.target.value;
+    applyFilters();
+  };
+
+  categoryFilter.onchange = (e) => {
+    currentCategory = e.target.value;
+    applyFilters();
+  };
+
   const openEditModal = (product) => {
     currentEditId = product.id;
     modalTitle.textContent = 'Edit Product';
@@ -102,7 +168,7 @@ export function renderAdminProducts() {
     addForm.category.value = product.category || 'Tractors';
     addForm.price.value = product.price;
     addForm.description.value = product.description || '';
-    addForm.image.required = false; // Not required for edit
+    addForm.image.required = false; 
     modal.style.display = 'flex';
   };
 
@@ -129,7 +195,7 @@ export function renderAdminProducts() {
     
     try {
       const response = await fetch(url, {
-        method: 'POST', // Both use POST (Add is standard, Edit uses POST/{id} for multipart ease)
+        method: 'POST',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` },
         body: formData
       });
@@ -159,89 +225,53 @@ export function renderAdminProducts() {
         window.dispatchEvent(new Event('popstate'));
         return;
       }
-      const data = await response.json();
-      const tbody = content.querySelector('#products-tbody');
-      
-      if (data.length > 0) {
-        tbody.innerHTML = data.map(product => `
-          <tr>
-            <td><strong>${product.name}</strong></td>
-            <td>${product.category || 'Tractors'}</td>
-            <td>${product.price}</td>
-            <td>
-              <button class="status-btn" data-id="${product.id}" title="Click to toggle status" style="border: none; background: none; cursor: pointer;">
-                <span class="badge ${product.status === 'Active' ? 'badge-success' : 'badge-pending'}">${product.status}</span>
-              </button>
-            </td>
-            <td style="text-align: right;">
-              <button class="edit-btn" data-id="${product.id}" style="background: none; border: none; cursor: pointer; color: var(--admin-text-muted); margin-right: 12px;">${Edit}</button>
-              <button class="delete-btn" data-id="${product.id}" style="background: none; border: none; cursor: pointer; color: #ef4444;">${Trash2}</button>
-            </td>
-          </tr>
-        `).join('');
-        
-        // Robust Event Delegation for all table actions
-        tbody.onclick = async (e) => {
-          // Handle Delete
-          const deleteBtn = e.target.closest('.delete-btn');
-          if (deleteBtn) {
-            const id = deleteBtn.getAttribute('data-id');
-            if (await customConfirm()) {
-              try {
-                const res = await fetch(`http://localhost:8080/api/products/${id}`, {
-                  method: 'DELETE',
-                  headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
-                });
-                if (res.ok) {
-                  loadProducts();
-                } else {
-                  const error = await res.json();
-                  alert(`Error: ${error.error || 'Failed to delete product'}`);
-                }
-              } catch (err) {
-                alert('Connection error. Please try again.');
-              }
-            }
-            return;
-          }
-
-          // Handle Edit
-          const editBtn = e.target.closest('.edit-btn');
-          if (editBtn) {
-            const id = editBtn.getAttribute('data-id');
-            const product = data.find(p => p.id.toString() === id.toString());
-            if (product) openEditModal(product);
-            return;
-          }
-
-          // Handle Status Toggle
-          const statusBtn = e.target.closest('.status-btn');
-          if (statusBtn) {
-            const id = statusBtn.getAttribute('data-id');
-            try {
-              const res = await fetch(`http://localhost:8080/api/products/${id}/status`, {
-                method: 'PATCH',
-                headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
-              });
-              if (res.ok) {
-                loadProducts();
-              }
-            } catch (err) {
-              console.error('Status update failed:', err);
-            }
-            return;
-          }
-        };
-
-      } else {
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--admin-text-muted);">No products found.</td></tr>';
-      }
+      allProducts = await response.json();
+      applyFilters();
     } catch (err) {
       console.error(err);
     }
   };
 
-  setTimeout(loadProducts, 100);
+  // Global Table Actions (Delegation)
+  tbody.onclick = async (e) => {
+    const deleteBtn = e.target.closest('.delete-btn');
+    if (deleteBtn) {
+      const id = deleteBtn.getAttribute('data-id');
+      if (await customConfirm()) {
+        try {
+          const res = await fetch(`http://localhost:8080/api/products/${id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
+          });
+          if (res.ok) loadProducts();
+        } catch (err) { alert('Connection error'); }
+      }
+      return;
+    }
+
+    const editBtn = e.target.closest('.edit-btn');
+    if (editBtn) {
+      const id = editBtn.getAttribute('data-id');
+      const product = allProducts.find(p => p.id.toString() === id.toString());
+      if (product) openEditModal(product);
+      return;
+    }
+
+    const statusBtn = e.target.closest('.status-btn');
+    if (statusBtn) {
+      const id = statusBtn.getAttribute('data-id');
+      try {
+        const res = await fetch(`http://localhost:8080/api/products/${id}/status`, {
+          method: 'PATCH',
+          headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
+        });
+        if (res.ok) loadProducts();
+      } catch (err) { console.error(err); }
+      return;
+    }
+  };
+
+  loadProducts();
 
   return renderAdminLayout(content, 'admin-products');
 }

@@ -51,19 +51,50 @@ export function renderContactScreen() {
             <input type="tel" name="phone" placeholder="e.g., +234 800 0000" style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit;">
           </div>
           <div style="display: grid; gap: 8px;">
-            <label style="font-weight: 600;">Message</label>
-            <textarea name="message" rows="4" placeholder="How can we help you?" style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
+            <label style="font-weight: 600;">Message Subject</label>
+            <input type="text" name="subject" placeholder="e.g., Request for Quote" required style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit;">
           </div>
-          <button type="submit" class="btn-primary" style="width: 100%; font-size: 1.1rem; padding: 15px;">Send Inquiry</button>
+          <div style="display: grid; gap: 8px;">
+            <label style="font-weight: 600;">Message Content</label>
+            <textarea name="message" rows="4" placeholder="How can we help you?" required style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
+          </div>
+          <button type="submit" id="submit-btn" class="btn-primary" style="width: 100%; font-size: 1.1rem; padding: 15px;">Send Inquiry</button>
         </form>
       </div>
     </div>
   `;
 
   const form = contactSection.querySelector('#inquiry-form');
-  form.addEventListener('submit', (e) => {
+  const submitBtn = contactSection.querySelector('#submit-btn');
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    alert('Thank you for your interest! We will contact you shortly.');
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    try {
+      const response = await fetch('http://localhost:8080/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        alert('Thank you for your interest! Your message has been sent successfully.');
+        form.reset();
+      } else {
+        throw new Error('Failed to send inquiry');
+      }
+    } catch (err) {
+      alert('Sorry, there was an error sending your message. Please try again later.');
+      console.error(err);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Inquiry';
+    }
   });
 
   container.appendChild(renderNavbar());

@@ -1,76 +1,222 @@
 import { renderAdminLayout } from '../../components/AdminLayout';
-import { Plus, Edit, Trash2, Image as ImageIcon } from 'lucide-static';
+import { Plus, Trash2, Play, X, Briefcase, Calendar, Image as ImageIcon } from 'lucide-static';
 
 export function renderAdminContent() {
   const content = document.createElement('div');
-  
-  content.innerHTML = `
-    <div class="flex-between" style="margin-bottom: 24px;">
-      <h1 class="admin-page-title" style="margin-bottom: 0;">Content Manager</h1>
-      <div style="display: flex; gap: 15px;">
-        <button class="btn-primary" style="display: flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--admin-surface); color: var(--admin-text); border: 1px solid var(--admin-border);">
-          ${ImageIcon} Upload Media
-        </button>
-        <button class="btn-primary" style="display: flex; align-items: center; gap: 8px; padding: 10px 20px;">
-          ${Plus} New Content
+  let activeTab = 'gallery';
+  let data = { gallery: [], portfolio: [], activities: [], team: [] };
+
+  const renderContainer = () => {
+    content.innerHTML = `
+      <div class="flex-between" style="margin-bottom: 24px;">
+        <h1 class="admin-page-title" style="margin-bottom: 0;">Content Manager</h1>
+        <button id="addBtn" class="btn-primary" style="display: flex; align-items: center; gap: 8px; padding: 10px 20px;">
+          ${Plus} Add ${activeTab === 'activities' ? 'Activity' : activeTab === 'team' ? 'Member' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1, -1)}
         </button>
       </div>
-    </div>
 
-    <!-- Tabs (Visual only for now) -->
-    <div style="display: flex; gap: 20px; margin-bottom: 24px; border-bottom: 1px solid var(--admin-border);">
-      <div style="padding: 10px 0; border-bottom: 2px solid var(--primary-color); font-weight: 600; color: var(--primary-color); cursor: pointer;">Gallery</div>
-      <div style="padding: 10px 0; color: var(--admin-text-muted); cursor: pointer;">Portfolio</div>
-      <div style="padding: 10px 0; color: var(--admin-text-muted); cursor: pointer;">Activities</div>
-      <div style="padding: 10px 0; color: var(--admin-text-muted); cursor: pointer;">Services</div>
-    </div>
-
-    <div class="admin-card">
-      <h2 style="font-size: 1.25rem; margin-bottom: 20px;">Gallery Images</h2>
-      <div id="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
-        <div style="padding: 20px; text-align: center; color: var(--admin-text-muted); grid-column: 1 / -1;">Loading from API...</div>
+      <!-- Tab Navigation -->
+      <div style="display: flex; gap: 20px; margin-bottom: 24px; border-bottom: 1px solid var(--admin-border);">
+        <div class="tab-item ${activeTab === 'gallery' ? 'active' : ''}" data-tab="gallery" style="padding: 10px 0; cursor: pointer; font-weight: 600; color: ${activeTab === 'gallery' ? 'var(--primary-color)' : 'var(--admin-text-muted)'}; border-bottom: 2px solid ${activeTab === 'gallery' ? 'var(--primary-color)' : 'transparent'}">Gallery</div>
+        <div class="tab-item ${activeTab === 'portfolio' ? 'active' : ''}" data-tab="portfolio" style="padding: 10px 0; cursor: pointer; font-weight: 600; color: ${activeTab === 'portfolio' ? 'var(--primary-color)' : 'var(--admin-text-muted)'}; border-bottom: 2px solid ${activeTab === 'portfolio' ? 'var(--primary-color)' : 'transparent'}">Portfolio</div>
+        <div class="tab-item ${activeTab === 'activities' ? 'active' : ''}" data-tab="activities" style="padding: 10px 0; cursor: pointer; font-weight: 600; color: ${activeTab === 'activities' ? 'var(--primary-color)' : 'var(--admin-text-muted)'}; border-bottom: 2px solid ${activeTab === 'activities' ? 'var(--primary-color)' : 'transparent'}">Activities</div>
+        <div class="tab-item ${activeTab === 'team' ? 'active' : ''}" data-tab="team" style="padding: 10px 0; cursor: pointer; font-weight: 600; color: ${activeTab === 'team' ? 'var(--primary-color)' : 'var(--admin-text-muted)'}; border-bottom: 2px solid ${activeTab === 'team' ? 'var(--primary-color)' : 'transparent'}">Team</div>
       </div>
-    </div>
-  `;
 
-  const loadContent = async () => {
-    try {
-      const response = await fetch('http://localhost:8080/api/gallery', {
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
-      });
-      if (response.status === 401) {
-        window.history.pushState({}, '', '/admin/login');
-        window.dispatchEvent(new Event('popstate'));
-        return;
-      }
-      const data = await response.json();
-      const grid = content.querySelector('#gallery-grid');
-      
-      if (data.length > 0) {
-        grid.innerHTML = data.map(item => `
-          <div style="border: 1px solid var(--admin-border); border-radius: 8px; overflow: hidden;">
-            <div style="height: 150px; background: #eee; position: relative;">
-              <img src="${item.image}" style="width: 100%; height: 100%; object-fit: cover;">
-              <div style="position: absolute; top: 10px; right: 10px; background: white; border-radius: 4px; padding: 5px; display: flex; gap: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                <span style="color: var(--admin-text-muted); cursor: pointer;">${Edit}</span>
-                <span style="color: #ef4444; cursor: pointer;">${Trash2}</span>
-              </div>
-            </div>
-            <div style="padding: 12px;">
-              <div style="font-weight: 500; font-size: 0.9rem;">${item.title || 'Untitled Image'}</div>
-              <div style="color: var(--admin-text-muted); font-size: 0.8rem; margin-top: 5px;">Category: ${item.category || 'General'}</div>
-            </div>
-          </div>
-        `).join('');
-      } else {
-        grid.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--admin-text-muted); grid-column: 1 / -1;">No images found in gallery database.</div>';
-      }
-    } catch (err) {
-      console.error(err);
-    }
+      <div class="admin-card">
+        <h2 style="font-size: 1.25rem; margin-bottom: 20px; text-transform: capitalize;">Manage ${activeTab}</h2>
+        <div id="items-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+          <div style="padding: 40px; text-align: center; color: var(--admin-text-muted); grid-column: 1 / -1;">Loading section data...</div>
+        </div>
+      </div>
+
+      <!-- Modals injected below -->
+      <div id="modalContainer"></div>
+    `;
+
+    // Tab Logic
+    content.querySelectorAll('.tab-item').forEach(tab => {
+      tab.onclick = () => {
+        activeTab = tab.dataset.tab;
+        renderContainer();
+        loadSectionData();
+      };
+    });
+
+    content.querySelector('#addBtn').onclick = () => openModal();
+    renderGrid();
   };
 
-  setTimeout(loadContent, 100);
+  const renderGrid = () => {
+    const grid = content.querySelector('#items-grid');
+    const items = data[activeTab] || [];
+    
+    if (items.length === 0) {
+      grid.innerHTML = `<div style="padding: 60px; text-align: center; color: var(--admin-text-muted); grid-column: 1/-1;">No ${activeTab} entries found.</div>`;
+      return;
+    }
 
+    grid.innerHTML = items.map(item => {
+      if (activeTab === 'gallery') {
+        return `
+          <div style="border: 1px solid var(--admin-border); background: var(--admin-bg); border-radius: 12px; overflow: hidden;">
+            <div style="height: 180px; position: relative; background: #000;">
+              <img src="${item.image}" style="width: 100%; height: 100%; object-fit: cover;">
+              ${item.video_url ? `<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: white;">${Play}</div>` : ''}
+              <button class="delete-btn" data-id="${item.id}" style="position: absolute; top: 10px; right: 10px; padding: 6px; background: rgba(239,68,68,0.9); border: none; border-radius: 6px; color: white; cursor: pointer;">${Trash2}</button>
+            </div>
+            <div style="padding: 15px;">
+              <div style="font-weight: 600;">${item.title}</div>
+              <div style="font-size: 0.75rem; color: var(--admin-text-muted);">${item.category}</div>
+            </div>
+          </div>
+        `;
+      } else if (activeTab === 'portfolio') {
+        return `
+          <div style="border: 1px solid var(--admin-border); background: var(--admin-bg); border-radius: 12px; overflow: hidden;">
+            <div style="height: 160px; position: relative;">
+              <img src="${item.image}" style="width: 100%; height: 100%; object-fit: cover;">
+              <button class="delete-btn" data-id="${item.id}" style="position: absolute; top: 10px; right: 10px; padding: 6px; background: rgba(239,68,68,0.9); border: none; border-radius: 6px; color: white; cursor: pointer;">${Trash2}</button>
+            </div>
+            <div style="padding: 15px;">
+              <div style="font-weight: 700; margin-bottom: 5px;">${item.title}</div>
+              <div style="font-size: 0.8rem; color: var(--primary-color); font-weight: 600;">${item.client} | ${item.year}</div>
+              <div style="font-size: 0.85rem; color: var(--admin-text-muted); margin-top: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${item.description}</div>
+            </div>
+          </div>
+        `;
+      } else if (activeTab === 'activities') {
+        return `
+          <div style="border: 1px solid var(--admin-border); background: var(--admin-bg); border-radius: 12px; padding: 15px; display: flex; gap: 15px; align-items: flex-start;">
+            <div style="width: 80px; height: 80px; border-radius: 8px; overflow: hidden; flex-shrink: 0; background: #eee;">
+              ${item.image ? `<img src="${item.image}" style="width: 100%; height: 100%; object-fit: cover;">` : `<div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#999;">${ImageIcon}</div>`}
+            </div>
+            <div style="flex-grow: 1;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div style="font-weight: 700;">${item.title}</div>
+                <button class="delete-btn" data-id="${item.id}" style="padding: 4px; background: none; border: none; color: #ef4444; cursor: pointer;">${Trash2}</button>
+              </div>
+              <div style="font-size: 0.8rem; color: var(--primary-color); font-weight: 600; margin: 4px 0;">${item.date}</div>
+              <div style="font-size: 0.85rem; color: var(--admin-text-muted); line-height: 1.4;">${item.summary}</div>
+            </div>
+          </div>
+        `;
+      } else if (activeTab === 'team') {
+        return `
+          <div style="border: 1px solid var(--admin-border); background: var(--admin-bg); border-radius: 12px; padding: 20px; text-align: center; position: relative;">
+            <button class="delete-btn" data-id="${item.id}" style="position: absolute; top: 10px; right: 10px; padding: 4px; background: none; border: none; color: #ef4444; cursor: pointer;">${Trash2}</button>
+            <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; margin: 0 auto 15px; border: 2px solid var(--primary-color);">
+              <img src="${item.image}" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div style="font-weight: 700; font-size: 1.1rem;">${item.name}</div>
+            <div style="font-size: 0.85rem; color: var(--primary-color); font-weight: 600; margin-top: 5px;">${item.role}</div>
+          </div>
+        `;
+      }
+      return '';
+    }).join('');
+
+    grid.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.onclick = async () => {
+        if (confirm(`Delete this ${activeTab} item?`)) {
+          const res = await fetch(`http://localhost:8080/api/${activeTab}/${btn.dataset.id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
+          });
+          if (res.ok) loadSectionData();
+        }
+      };
+    });
+  };
+
+  const openModal = () => {
+    const container = content.querySelector('#modalContainer');
+    let formFields = '';
+    
+    if (activeTab === 'gallery') {
+       formFields = `
+         <input type="text" name="title" placeholder="Title" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
+         <select name="category" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
+           <option value="Exhibition">Exhibition</option>
+           <option value="Workshop">Workshop</option>
+           <option value="Visit">Visit</option>
+         </select>
+         <input type="url" name="video_url" placeholder="Video URL (Optional)" style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
+         <input type="file" name="image" required style="font-size:0.8rem; color:white;">
+       `;
+    } else if (activeTab === 'portfolio') {
+       formFields = `
+         <input type="text" name="title" placeholder="Project Title" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
+         <input type="text" name="client" placeholder="Client (e.g. Oyo State Govt)" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
+         <input type="text" name="year" placeholder="Year (e.g. 2024)" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
+         <textarea name="description" placeholder="Project Description" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white; min-height:100px;"></textarea>
+         <input type="file" name="image" required style="font-size:0.8rem; color:white;">
+       `;
+    } else if (activeTab === 'activities') {
+       formFields = `
+         <input type="text" name="title" placeholder="Event Title" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
+         <input type="text" name="date" placeholder="Date (e.g. Oct 12, 2024)" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
+         <textarea name="summary" placeholder="Brief Summary" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white; min-height:80px;"></textarea>
+         <input type="file" name="image" style="font-size:0.8rem; color:white;">
+       `;
+    } else if (activeTab === 'team') {
+       formFields = `
+         <input type="text" name="name" placeholder="Full Name" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
+         <input type="text" name="role" placeholder="Job Title / Role" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
+         <input type="file" name="image" required style="font-size:0.8rem; color:white;">
+       `;
+    }
+
+    container.innerHTML = `
+      <div style="position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; display:flex; align-items:center; justify-content:center;">
+        <div style="background:var(--admin-surface); padding:30px; border-radius:12px; width:450px; border:1px solid var(--admin-border);">
+          <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
+            <h3 style="margin:0;">Add New ${activeTab === 'activities' ? 'Activity' : activeTab === 'team' ? 'Member' : activeTab.slice(0,-1)}</h3>
+            <button id="closeModal" style="background:none; border:none; cursor:pointer; color:white;">${X}</button>
+          </div>
+          <form id="addForm" style="display:flex; flex-direction:column; gap:15px;">
+            ${formFields}
+            <button type="submit" class="btn-primary" style="padding:12px; margin-top:10px;">Upload Content</button>
+          </form>
+        </div>
+      </div>
+    `;
+
+    container.querySelector('#closeModal').onclick = () => container.innerHTML = '';
+    
+    container.querySelector('#addForm').onsubmit = async (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Uploading...';
+      btn.disabled = true;
+
+      const formData = new FormData(e.target);
+      const res = await fetch(`http://localhost:8080/api/${activeTab}`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` },
+        body: formData
+      });
+
+      if (res.ok) {
+        container.innerHTML = '';
+        loadSectionData();
+      } else {
+        alert('Upload failed');
+        btn.textContent = 'Upload Content';
+        btn.disabled = false;
+      }
+    };
+  };
+
+  const loadSectionData = async () => {
+    try {
+      const res = await fetch(`http://localhost:8080/api/${activeTab}`);
+      data[activeTab] = await res.json();
+      renderGrid();
+    } catch (err) { console.error(err); }
+  };
+
+  loadSectionData();
+  renderContainer();
   return renderAdminLayout(content, 'admin-content');
 }

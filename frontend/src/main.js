@@ -13,6 +13,7 @@ import { renderPortfolioScreen } from './screens/Portfolio';
 import { renderAdminDashboard } from './screens/admin/Dashboard';
 import { renderAdminProducts } from './screens/admin/ManageProducts';
 import { renderAdminContent } from './screens/admin/ManageContent';
+import { renderAdminInquiries } from './screens/admin/ManageInquiries';
 import { renderLogin } from './screens/admin/Login';
 
 const appRoot = document.querySelector('#app');
@@ -42,6 +43,7 @@ const routes = {
   'admin-dashboard': renderAdminDashboard,
   'admin-products': renderAdminProducts,
   'admin-content': renderAdminContent,
+  'admin-inquiries': renderAdminInquiries,
 };
 
 window.navigate = function(routeName) {
