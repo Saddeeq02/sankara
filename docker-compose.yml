@@ -11,7 +11,7 @@ services:
       - ./backend/public/uploads:/var/www/public/uploads
     environment:
       - APP_ENV=production
-      - APP_DEBUG=false
+      - APP_DEBUG=true
       - APP_KEY=base64:uS3v7fVz0v1b2n3m4L5K6j7H8G9F0e1D2c3B4a5Z6Y8= # Replace with a real key in production
     networks:
       - sankara-network
