@@ -4,11 +4,11 @@ export function renderNavbar() {
   nav.innerHTML = `
     <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px;">
       <a href="/" data-route="home" class="logo" style="display: flex; align-items: center; text-decoration: none;">
-        <img src="/src/assets/logo.png" alt="Sankara Logo" style="height: 45px; object-fit: contain;">
+        <img src="/assets/logo.png" alt="Sankara Nigeria Limited Logo" style="height: 45px; object-fit: contain;">
       </a>
       <ul style="display: flex; gap: 20px; list-style: none; align-items: center; margin: 0;">
         <li><a href="/" data-route="home" style="text-decoration: none; color: var(--text-main); font-weight: 500;">Home</a></li>
-        <li><a href="/about" data-route="about" style="text-decoration: none; color: var(--text-main); font-weight: 500;">About</a></li>
+        <li><a href="#about" data-route="about" style="text-decoration: none; color: var(--text-main); font-weight: 500;">About</a></li>
         <li><a href="/products" data-route="products" style="text-decoration: none; color: var(--text-main); font-weight: 500;">Products</a></li>
         <li><a href="/services" data-route="services" style="text-decoration: none; color: var(--text-main); font-weight: 500;">Services</a></li>
         <li><a href="/gallery" data-route="gallery" style="text-decoration: none; color: var(--text-main); font-weight: 500;">Gallery</a></li>
@@ -53,10 +53,10 @@ export function renderFooter() {
         <!-- Column 1: Info and Socials -->
         <div class="reveal" style="animation-delay: 0.1s">
           <a href="/" data-route="home" style="display: inline-block; margin-bottom: 20px;">
-            <img src="/src/assets/logo.png" alt="Sankara Logo" style="height: 45px; object-fit: contain;">
+            <img src="/assets/logo.png" alt="Sankara Logo" style="height: 45px; object-fit: contain;">
           </a>
           <p style="color: var(--footer-link); font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px;">
-            Driving agricultural growth with reliable machinery. Your trusted partner for tractors, farm implements, and genuine spare parts.
+            Sankara Nigeria Limited is your trusted partner for premium heavy-duty tractors, farm implements, and genuine spare parts across Nigeria.
           </p>
           <div style="display: flex; gap: 15px;">
             <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">f</div>
@@ -70,13 +70,12 @@ export function renderFooter() {
         <div class="reveal" style="animation-delay: 0.2s">
           <h4 style="margin-bottom: 25px; font-size: 1.1rem; font-weight: 600;">Company</h4>
           <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 15px;">
-            <li><a href="/about" data-route="about" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">About Us</a></li>
+            <li><a href="#about" data-route="about" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">About Us</a></li>
             <li><a href="/services" data-route="services" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">Services</a></li>
             <li><a href="/products" data-route="products" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">Products</a></li>
             <li><a href="/contact" data-route="contact" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">Contact</a></li>
           </ul>
         </div>
-
         <!-- Column 3: Products -->
         <div class="reveal" style="animation-delay: 0.3s">
           <h4 style="margin-bottom: 25px; font-size: 1.1rem; font-weight: 600;">Products</h4>

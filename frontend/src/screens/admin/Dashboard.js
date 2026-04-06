@@ -88,7 +88,7 @@ export function renderAdminDashboard() {
   // Fetch logic
   setTimeout(async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/metrics', {
+      const response = await fetch('/api/metrics', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('admin_token')}`
         }

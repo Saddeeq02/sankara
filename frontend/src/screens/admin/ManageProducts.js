@@ -49,38 +49,55 @@ export function renderAdminProducts() {
     <div id="addProductModal" class="admin-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
       <div style="background: var(--admin-surface); padding: 30px; border-radius: 12px; width: 500px; max-width: 90%; border: 1px solid var(--admin-border);">
         <h2 style="margin-top: 0; margin-bottom: 20px; font-size: 1.25rem;">Add New Product</h2>
-        <form id="addProductForm" style="display: flex; flex-direction: column; gap: 15px;">
-          <input type="text" name="name" placeholder="Product Name (e.g. Massey Ferguson 385)" required style="padding: 10px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 6px;">
-          <select name="category" required style="padding: 10px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 6px;">
-            <option value="Tractors">Tractors</option>
-            <option value="Farm Implements">Farm Implements</option>
-            <option value="Spare Parts">Spare Parts</option>
-          </select>
-          <input type="text" name="price" placeholder="Price (e.g. ₦15,000,000)" required style="padding: 10px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 6px;">
-          <textarea name="description" placeholder="Short description of features..." style="padding: 10px; min-height: 100px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 6px;"></textarea>
-          <div>
-            <label style="display: block; font-size: 0.85rem; margin-bottom: 5px; font-weight: 600;">Product Image</label>
-            <input type="file" name="image" accept="image/*" required style="font-size: 0.85rem; padding: 5px 0;">
+        <form id="addProductForm" style="display: flex; flex-direction: column; gap: 18px;">
+          <div class="form-group-v2">
+            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; margin-bottom: 5px; display: block;">EQUIPMENT NAME</label>
+            <input type="text" name="name" placeholder="e.g. Massey Ferguson 385" required style="width: 100%; padding: 12px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 8px; outline: none;">
           </div>
-          <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px;">
-            <button type="button" id="closeModalBtn" style="padding: 10px 20px; background: none; border: 1px solid var(--admin-border); color: var(--admin-text); border-radius: 6px; cursor: pointer;">Cancel</button>
-            <button type="submit" class="btn-primary" style="padding: 10px 20px; border-radius: 6px;">Save Product</button>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="form-group-v2">
+              <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; margin-bottom: 5px; display: block;">CATEGORY</label>
+              <select name="category" required style="width: 100%; padding: 12px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 8px; outline: none; cursor: pointer;">
+                <option value="Tractors">Tractors</option>
+                <option value="Farm Implements">Farm Implements</option>
+                <option value="Spare Parts">Spare Parts</option>
+              </select>
+            </div>
+            <div class="form-group-v2">
+              <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; margin-bottom: 5px; display: block;">ESTIMATED PRICE / TAG</label>
+              <input type="text" name="price" placeholder="e.g. ₦15,000,000" required style="width: 100%; padding: 12px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 8px; outline: none;">
+            </div>
+          </div>
+
+          <div class="form-group-v2">
+            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; margin-bottom: 5px; display: block;">TECHNICAL SPECIFICATIONS (COMMA SEPARATED)</label>
+            <input type="text" name="specs" placeholder="75 HP, 2WD, Fuel Efficient, Direct Injection" style="width: 100%; padding: 12px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 8px; outline: none;">
+          </div>
+
+          <div class="form-group-v2">
+            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; margin-bottom: 5px; display: block;">PRIMARY CAPABILITY / TASK</label>
+            <textarea name="task" placeholder="Ideal for large-scale plowing, heavy-duty hauling, and intensive soil preparation." style="width: 100%; padding: 12px; min-height: 70px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 8px; outline: none; resize: vertical;"></textarea>
+          </div>
+
+          <div class="form-group-v2">
+            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; margin-bottom: 5px; display: block;">DETAILED OVERVIEW</label>
+            <textarea name="description" placeholder="Provide a comprehensive breakdown of the equipment's history, condition, and value proposition." style="width: 100%; padding: 12px; min-height: 100px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 8px; outline: none; resize: vertical;"></textarea>
+          </div>
+
+          <div class="form-group-v2">
+            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; margin-bottom: 5px; display: block;">MARKETING ASSETS (MAX 5 IMAGES)</label>
+            <input type="file" name="image[]" accept="image/*" multiple style="width: 100%; padding: 10px; background: var(--admin-bg); color: var(--admin-text); border: 1px dashed var(--admin-border); border-radius: 8px; cursor: pointer;">
+          </div>
+
+          <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 15px; border-top: 1px solid var(--admin-border); padding-top: 20px;">
+            <button type="button" id="closeModalBtn" style="padding: 12px 25px; background: none; border: 1px solid var(--admin-border); color: var(--admin-text); border-radius: 8px; cursor: pointer; font-weight: 600;">Cancel</button>
+            <button type="submit" class="btn-primary" style="padding: 12px 30px; border-radius: 8px; font-weight: 700;">COMMIT CHANGES</button>
           </div>
         </form>
       </div>
     </div>
 
-    <div id="adminConfirmOverlay" class="admin-confirm-overlay">
-      <div class="admin-confirm-modal">
-        <div class="admin-confirm-icon">${Trash2}</div>
-        <h2 style="margin: 0 0 10px; color: var(--admin-text);">Delete Product?</h2>
-        <p style="margin: 0; color: var(--admin-text-muted); line-height: 1.5;">This action cannot be undone. Are you sure you want to remove this equipment from the database?</p>
-        <div class="admin-confirm-btns">
-          <button class="confirm-no">Cancel</button>
-          <button class="confirm-yes">Yes, Delete</button>
-        </div>
-      </div>
-    </div>
   `;
 
   let currentEditId = null;
@@ -94,23 +111,6 @@ export function renderAdminProducts() {
   const tbody = content.querySelector('#products-tbody');
   const searchInput = content.querySelector('#adminSearchInput');
   const categoryFilter = content.querySelector('#adminCategoryFilter');
-
-  const customConfirm = () => {
-    return new Promise((resolve) => {
-      const overlay = content.querySelector('#adminConfirmOverlay');
-      overlay.classList.add('active');
-      const yesBtn = overlay.querySelector('.confirm-yes');
-      const noBtn = overlay.querySelector('.confirm-no');
-      const cleanup = (val) => {
-        overlay.classList.remove('active');
-        yesBtn.onclick = null;
-        noBtn.onclick = null;
-        resolve(val);
-      };
-      yesBtn.onclick = () => cleanup(true);
-      noBtn.onclick = () => cleanup(false);
-    });
-  };
 
   const renderTableRows = (dataToRender) => {
     if (dataToRender.length > 0) {
@@ -137,16 +137,13 @@ export function renderAdminProducts() {
 
   const applyFilters = () => {
     let filtered = allProducts;
-    
     if (currentCategory !== 'All') {
       filtered = filtered.filter(p => p.category === currentCategory);
     }
-    
     if (currentSearch) {
       const q = currentSearch.toLowerCase();
       filtered = filtered.filter(p => p.name.toLowerCase().includes(q));
     }
-    
     renderTableRows(filtered);
   };
 
@@ -162,13 +159,15 @@ export function renderAdminProducts() {
 
   const openEditModal = (product) => {
     currentEditId = product.id;
-    modalTitle.textContent = 'Edit Product';
-    submitBtn.textContent = 'Update Product';
+    modalTitle.textContent = 'Refine Equipment Details';
+    submitBtn.textContent = 'UPDATE RECODRD';
     addForm.name.value = product.name;
     addForm.category.value = product.category || 'Tractors';
     addForm.price.value = product.price;
+    addForm.specs.value = (product.specs || []).join(', ');
+    addForm.task.value = product.task || '';
     addForm.description.value = product.description || '';
-    addForm.image.required = false; 
+    addForm.elements['image[]'].required = false; 
     modal.style.display = 'flex';
   };
 
@@ -177,7 +176,7 @@ export function renderAdminProducts() {
     modalTitle.textContent = 'Add New Product';
     submitBtn.textContent = 'Save Product';
     addForm.reset();
-    addForm.image.required = true;
+    addForm.elements['image[]'].required = true;
     modal.style.display = 'flex';
   };
 
@@ -189,27 +188,39 @@ export function renderAdminProducts() {
     submitBtn.disabled = true;
 
     const formData = new FormData(addForm);
+    
+    // In case we want to support PUT/PATCH via FormData (Laravel convention)
+    // if (currentEditId) formData.append('_method', 'POST'); 
+    
     const url = currentEditId 
-      ? `http://localhost:8080/api/products/${currentEditId}` 
-      : 'http://localhost:8080/api/products';
+      ? `/api/products/${currentEditId}` 
+      : '/api/products';
+    
+    const token = localStorage.getItem('admin_token');
     
     try {
       const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` },
+        headers: { 
+          'Authorization': `Bearer ${token}` 
+        },
         body: formData
       });
+      
+      const result = await response.json();
       
       if (response.ok) {
         modal.style.display = 'none';
         addForm.reset();
         loadProducts();
+        alert(currentEditId ? 'Product updated successfully!' : 'Product added successfully!');
       } else {
-        alert('Failed to process request');
+        console.error('Server Error:', result);
+        alert(`Error: ${result.error || 'Failed to process request'}`);
       }
     } catch (err) {
-      console.error(err);
-      alert('Network error');
+      console.error('Fetch Error:', err);
+      alert('Network error. Is the backend running?');
     } finally {
       submitBtn.disabled = false;
     }
@@ -217,7 +228,7 @@ export function renderAdminProducts() {
 
   const loadProducts = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/products?all=1', {
+      const response = await fetch('/api/products?all=1', {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
       });
       if (response.status === 401) {
@@ -237,9 +248,9 @@ export function renderAdminProducts() {
     const deleteBtn = e.target.closest('.delete-btn');
     if (deleteBtn) {
       const id = deleteBtn.getAttribute('data-id');
-      if (await customConfirm()) {
+      if (await window.showConfirm('Are you sure you want to delete this equipment? This action cannot be undone.')) {
         try {
-          const res = await fetch(`http://localhost:8080/api/products/${id}`, {
+          const res = await fetch(`/api/products/${id}`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
           });
@@ -261,7 +272,7 @@ export function renderAdminProducts() {
     if (statusBtn) {
       const id = statusBtn.getAttribute('data-id');
       try {
-        const res = await fetch(`http://localhost:8080/api/products/${id}/status`, {
+        const res = await fetch(`/api/products/${id}/status`, {
           method: 'PATCH',
           headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
         });

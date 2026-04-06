@@ -110,6 +110,7 @@ export function renderAdminContent() {
             </div>
             <div style="font-weight: 700; font-size: 1.1rem;">${item.name}</div>
             <div style="font-size: 0.85rem; color: var(--primary-color); font-weight: 600; margin-top: 5px;">${item.role}</div>
+            <div style="font-size: 0.8rem; color: var(--admin-text-muted); margin-top: 5px;">${item.phone || 'No phone set'}</div>
           </div>
         `;
       }
@@ -118,8 +119,9 @@ export function renderAdminContent() {
 
     grid.querySelectorAll('.delete-btn').forEach(btn => {
       btn.onclick = async () => {
-        if (confirm(`Delete this ${activeTab} item?`)) {
-          const res = await fetch(`http://localhost:8080/api/${activeTab}/${btn.dataset.id}`, {
+        const confirmed = await window.showConfirm(`Delete this ${activeTab} item?`);
+        if (confirmed) {
+          const res = await fetch(`/api/${activeTab}/${btn.dataset.id}`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
           });
@@ -135,35 +137,36 @@ export function renderAdminContent() {
     
     if (activeTab === 'gallery') {
        formFields = `
-         <input type="text" name="title" placeholder="Title" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
-         <select name="category" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
+         <input type="text" name="title" placeholder="Title" required class="theme-input">
+         <select name="category" required class="theme-input">
            <option value="Exhibition">Exhibition</option>
            <option value="Workshop">Workshop</option>
            <option value="Visit">Visit</option>
          </select>
-         <input type="url" name="video_url" placeholder="Video URL (Optional)" style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
-         <input type="file" name="image" required style="font-size:0.8rem; color:white;">
+         <input type="url" name="video_url" placeholder="Video URL (Optional)" class="theme-input">
+         <input type="file" name="image" required style="font-size:0.8rem; color: var(--admin-text);">
        `;
     } else if (activeTab === 'portfolio') {
        formFields = `
-         <input type="text" name="title" placeholder="Project Title" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
-         <input type="text" name="client" placeholder="Client (e.g. Oyo State Govt)" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
-         <input type="text" name="year" placeholder="Year (e.g. 2024)" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
-         <textarea name="description" placeholder="Project Description" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white; min-height:100px;"></textarea>
-         <input type="file" name="image" required style="font-size:0.8rem; color:white;">
+         <input type="text" name="title" placeholder="Project Title" required class="theme-input">
+         <input type="text" name="client" placeholder="Client (e.g. Oyo State Govt)" required class="theme-input">
+         <input type="text" name="year" placeholder="Year (e.g. 2024)" required class="theme-input">
+         <textarea name="description" placeholder="Project Description" required class="theme-input" style="min-height:100px;"></textarea>
+         <input type="file" name="image" required style="font-size:0.8rem; color: var(--admin-text);">
        `;
     } else if (activeTab === 'activities') {
        formFields = `
-         <input type="text" name="title" placeholder="Event Title" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
-         <input type="text" name="date" placeholder="Date (e.g. Oct 12, 2024)" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
-         <textarea name="summary" placeholder="Brief Summary" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white; min-height:80px;"></textarea>
-         <input type="file" name="image" style="font-size:0.8rem; color:white;">
+         <input type="text" name="title" placeholder="Event Title" required class="theme-input">
+         <input type="text" name="date" placeholder="Date (e.g. Oct 12, 2024)" required class="theme-input">
+         <textarea name="summary" placeholder="Brief Summary" required class="theme-input" style="min-height:80px;"></textarea>
+         <input type="file" name="image" style="font-size:0.8rem; color: var(--admin-text);">
        `;
     } else if (activeTab === 'team') {
        formFields = `
-         <input type="text" name="name" placeholder="Full Name" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
-         <input type="text" name="role" placeholder="Job Title / Role" required style="padding:10px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:white;">
-         <input type="file" name="image" required style="font-size:0.8rem; color:white;">
+         <input type="text" name="name" placeholder="Full Name" required class="theme-input">
+         <input type="text" name="role" placeholder="Job Title / Role" required class="theme-input">
+         <input type="tel" name="phone" placeholder="Phone Number (e.g. +234 ...)" class="theme-input">
+         <input type="file" name="image" required style="font-size:0.8rem; color: var(--admin-text);">
        `;
     }
 
@@ -171,8 +174,8 @@ export function renderAdminContent() {
       <div style="position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; display:flex; align-items:center; justify-content:center;">
         <div style="background:var(--admin-surface); padding:30px; border-radius:12px; width:450px; border:1px solid var(--admin-border);">
           <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
-            <h3 style="margin:0;">Add New ${activeTab === 'activities' ? 'Activity' : activeTab === 'team' ? 'Member' : activeTab.slice(0,-1)}</h3>
-            <button id="closeModal" style="background:none; border:none; cursor:pointer; color:white;">${X}</button>
+            <h3 style="margin:0; color: var(--admin-text);">Add New ${activeTab === 'activities' ? 'Activity' : activeTab === 'team' ? 'Member' : activeTab.slice(0,-1)}</h3>
+            <button id="closeModal" style="background:none; border:none; cursor:pointer; color: var(--admin-text);">${X}</button>
           </div>
           <form id="addForm" style="display:flex; flex-direction:column; gap:15px;">
             ${formFields}
@@ -191,7 +194,7 @@ export function renderAdminContent() {
       btn.disabled = true;
 
       const formData = new FormData(e.target);
-      const res = await fetch(`http://localhost:8080/api/${activeTab}`, {
+      const res = await fetch(`/api/${activeTab}`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` },
         body: formData
@@ -210,7 +213,7 @@ export function renderAdminContent() {
 
   const loadSectionData = async () => {
     try {
-      const res = await fetch(`http://localhost:8080/api/${activeTab}`);
+      const res = await fetch(`/api/${activeTab}`);
       data[activeTab] = await res.json();
       renderGrid();
     } catch (err) { console.error(err); }

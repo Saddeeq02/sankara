@@ -1,40 +1,43 @@
 import { renderNavbar, renderFooter } from '../components/Navigation';
-import { Calendar, MapPin, ArrowRight, Newspaper } from 'lucide-static';
+import { Calendar, MapPin, ArrowRight, Newspaper, ChevronRight } from 'lucide-static';
 
 export function renderActivitiesScreen() {
   const container = document.createElement('div');
   let events = [];
 
-  // 1. Header
+  // 1. Header (Premium V2)
   const header = document.createElement('header');
-  header.style.padding = '140px 0 60px';
+  header.style.padding = '180px 0 80px';
   header.style.textAlign = 'center';
   header.style.background = 'var(--background-color)';
   header.innerHTML = `
     <div class="container">
-      <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(253,186,11,0.1); color: var(--primary-color); padding: 8px 16px; border-radius: 100px; font-size: 0.85rem; font-weight: 700; margin-bottom: 20px;">
-        ${Newspaper} LATEST NEWS & UPDATES
+      <div class="reveal" style="display: inline-flex; align-items: center; gap: 10px; background: rgba(59, 130, 246, 0.1); color: var(--primary-color); padding: 10px 20px; border-radius: 100px; font-size: 0.9rem; font-weight: 800; margin-bottom: 25px; letter-spacing: 1px;">
+        ${Newspaper} CORPORATE JOURNAL 2026
       </div>
-      <h1 class="reveal" style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 900; margin-bottom: 15px;">Corporate Activities</h1>
-      <p class="reveal" style="color: var(--text-muted); font-size: 1.1rem; max-width: 650px; margin: 0 auto; line-height: 1.6;">
-        Tracking our journey across Nigeria through workshops, government partnerships, and community mechanization events.
+      <h1 class="reveal" style="font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; line-height: 1.05; margin-bottom: 25px;">Driving Innovation <br><span style="color: var(--primary-color);">In The Field</span></h1>
+      <p class="reveal" style="color: var(--text-muted); font-size: 1.25rem; max-width: 700px; margin: 0 auto; line-height: 1.8;">
+        Tracking our journey across Nigeria through specialized workshops, government partnerships, and community-shifting mechanization events.
       </p>
     </div>
   `;
 
-  // 2. Timeline Container
+  // 2. Timeline Grid Section
   const timelineSection = document.createElement('section');
-  timelineSection.style.paddingBottom = '100px';
+  timelineSection.style.paddingBottom = '140px';
+  timelineSection.style.background = 'var(--background-color)';
   timelineSection.innerHTML = `
-    <div class="container" style="max-width: 1000px; position: relative;">
-      <div class="timeline-line"></div>
-      <div id="events-loader"></div>
+    <div class="container" style="max-width: 1100px; position: relative;">
+      <div id="activities-timeline-line"></div>
+      <div id="events-loader-v2" style="display: flex; flex-direction: column; gap: 80px;">
+        <!-- Events injected via JS -->
+      </div>
     </div>
   `;
 
   const loadData = async () => {
     try {
-      const res = await fetch('http://localhost:8080/api/activities');
+      const res = await fetch('/api/activities');
       events = await res.json();
       // Sort newest at the top
       events.sort((a,b) => b.id - a.id);
@@ -43,30 +46,40 @@ export function renderActivitiesScreen() {
   };
 
   const renderEvents = () => {
-    const list = timelineSection.querySelector('#events-loader');
+    const list = timelineSection.querySelector('#events-loader-v2');
     
     if (events.length === 0) {
-      list.innerHTML = `<div style="text-align: center; padding: 60px; color: var(--text-muted);">No recent activities posted.</div>`;
+      list.innerHTML = `<div style="text-align: center; padding: 100px 0; background: var(--surface-color); border: 1px solid var(--glass-border); border-radius: 32px; color: var(--text-muted); font-size: 1.1rem;">Our technical activity log is currently being updated. Check back shortly.</div>`;
       return;
     }
 
     list.innerHTML = events.map((event, idx) => `
-      <div class="timeline-item reveal" style="animation-delay: ${idx * 0.1}s;">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <div class="timeline-date">${event.date}</div>
-          <div style="display: flex; gap: 25px; flex-wrap: wrap;">
+      <div class="activity-block reveal" style="animation-delay: ${idx * 0.15}s;">
+        <div class="activity-dot-v2">${Calendar}</div>
+        <div class="activity-card-v2 premium-glass-card">
+          <div class="activity-top">
+            <span class="activity-date-v2">${event.date}</span>
+            <span class="activity-tag-v2"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--primary-color); display: inline-block;"></span> Recent Fieldwork</span>
+          </div>
+          
+          <div class="activity-content-grid">
             ${event.image ? `
-              <div class="event-img">
-                <img src="${event.image}" alt="${event.title}">
+              <div class="activity-image-v2">
+                <img src="${event.image}" alt="${event.title}" loading="lazy">
               </div>
             ` : ''}
-            <div class="event-text" style="flex: 1; min-width: 250px;">
-              <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 12px; line-height: 1.2;">${event.title}</h3>
-              <p style="color: var(--text-muted); line-height: 1.7; font-size: 1rem; margin-bottom: 20px;">${event.summary}</p>
-              <button style="background: none; border: none; padding: 0; color: var(--primary-color); font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px;">
-                Read Full Entry ${ArrowRight}
-              </button>
+            <div class="activity-text-v2">
+              <h2 style="font-size: 2.2rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; color: var(--primary-color);">${event.title}</h2>
+              <p style="color: var(--text-muted); line-height: 1.8; font-size: 1.15rem; margin-bottom: 30px;">${event.summary}</p>
+              
+              <div style="display: flex; gap: 20px; align-items: center; border-top: 1px solid var(--glass-border); padding-top: 25px;">
+                <button class="activity-cta-btn">
+                  Read Full Entry <span style="margin-left: 10px;">${ArrowRight}</span>
+                </button>
+                <div style="display: flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.9rem; font-weight: 600;">
+                  ${MapPin} Lagos, Nigeria
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -81,43 +94,61 @@ export function renderActivitiesScreen() {
   container.appendChild(timelineSection);
   container.appendChild(renderFooter());
 
-  // Component Styles
+  // Component Custom Styles (Scoped)
   const style = document.createElement('style');
   style.innerHTML = `
-    .timeline-line {
-      position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
-      background: linear-gradient(to bottom, var(--primary-color), var(--admin-border) 80%);
-      transform: translateX(-50%);
+    #activities-timeline-line {
+      position: absolute; left: 40px; top: 0; bottom: 0; width: 4px;
+      background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color) 40%, transparent);
+      border-radius: 50px; opacity: 0.3;
     }
-    .timeline-item {
-      position: relative; margin-bottom: 60px; width: 100%;
-      display: flex; justify-content: center;
+    .activity-block {
+      position: relative; padding-left: 100px; width: 100%;
     }
-    .timeline-dot {
-      position: absolute; left: 50%; top: 20px; width: 16px; height: 16px;
+    .activity-dot-v2 {
+      position: absolute; left: 24px; top: 40px; width: 36px; height: 36px;
       background: var(--primary-color); border: 4px solid var(--background-color);
-      border-radius: 50%; transform: translateX(-50%); z-index: 2;
+      border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center;
+      z-index: 5; box-shadow: 0 0 20px var(--stats-glow-color);
     }
-    .timeline-card {
-      width: 85%; background: var(--surface-color); padding: 35px;
-      border-radius: 24px; border: 1px solid var(--admin-border);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease;
+    .activity-card-v2 {
+      padding: 50px; border-radius: 32px; overflow: hidden;
     }
-    .timeline-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-    
-    .timeline-date {
-      display: inline-block; padding: 5px 15px; background: var(--admin-bg);
-      border-radius: 100px; font-size: 0.85rem; font-weight: 800; color: var(--primary-color);
-      margin-bottom: 20px;
+    .activity-top {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px;
     }
-    .event-img { width: 180px; height: 120px; border-radius: 12px; overflow: hidden; flex-shrink: 0; }
-    .event-img img { width: 100%; height: 100%; object-fit: cover; }
+    .activity-date-v2 {
+      padding: 8px 20px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.1);
+      border-radius: 100px; color: var(--primary-color); font-weight: 800; font-size: 0.95rem;
+    }
+    .activity-tag-v2 {
+      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); font-weight: 700;
+      display: flex; align-items: center; gap: 8px;
+    }
 
-    @media (max-width: 768px) {
-      .timeline-line { left: 20px; }
-      .timeline-dot { left: 20px; }
-      .timeline-card { width: calc(100% - 60px); margin-left: 60px; padding: 25px; }
-      .event-img { width: 100%; height: 200px; }
+    .activity-content-grid {
+      display: grid; grid-template-columns: 320px 1fr; gap: 60px; align-items: start;
+    }
+    .activity-image-v2 {
+      width: 100%; height: 300px; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+    .activity-image-v2 img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .activity-card-v2:hover .activity-image-v2 img { transform: scale(1.08); }
+
+    .activity-cta-btn {
+      background: none; border: none; padding: 0; color: var(--primary-color); font-weight: 800; cursor: pointer;
+      display: flex; align-items: center; font-size: 1.05rem; transition: all 0.3s ease;
+    }
+    .activity-cta-btn:hover { letter-spacing: 0.5px; opacity: 0.8; }
+
+    @media (max-width: 968px) {
+      .activity-content-grid { grid-template-columns: 1fr; gap: 30px; }
+      .activity-block { padding-left: 60px; }
+      #activities-timeline-line { left: 20px; }
+      .activity-dot-v2 { left: 4px; }
+      .activity-card-v2 { padding: 30px; }
+      .activity-image-v2 { height: 240px; }
     }
   `;
   document.head.appendChild(style);

@@ -113,7 +113,7 @@ export function renderAdminInquiries() {
         portal.querySelector('#cancelDel').onclick = () => portal.innerHTML = '';
         portal.querySelector('#confirmDel').onclick = async () => {
           portal.querySelector('#confirmDel').textContent = 'Deleting...';
-          const res = await fetch(`http://localhost:8080/api/inquiries/${id}`, {
+          const res = await fetch(`/api/inquiries/${id}`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
           });
@@ -182,7 +182,7 @@ export function renderAdminInquiries() {
   };
 
   const toggleStatus = async (id) => {
-    const res = await fetch(`http://localhost:8080/api/inquiries/${id}/status`, {
+    const res = await fetch(`/api/inquiries/${id}/status`, {
       method: 'PATCH',
       headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
     });
@@ -191,7 +191,7 @@ export function renderAdminInquiries() {
 
   const loadData = async () => {
     try {
-      const res = await fetch('http://localhost:8080/api/inquiries', {
+      const res = await fetch('/api/inquiries', {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` }
       });
       if (res.ok) {

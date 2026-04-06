@@ -1,0 +1,37 @@
+services:
+  # Backend API Service
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sankara-api
+    restart: unless-stopped
+    volumes:
+      - ./backend/storage/app/db.json:/var/www/storage/app/db.json
+      - ./backend/public/uploads:/var/www/public/uploads
+    environment:
+      - APP_ENV=production
+      - APP_DEBUG=false
+      - APP_KEY=base64:uS3v7fVz0v1b2n3m4L5K6j7H8G9F0e1D2c3B4a5Z6Y8= # Replace with a real key in production
+    networks:
+      - sankara-network
+
+  # Frontend Gateway (Nginx)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: sankara-frontend
+    restart: unless-stopped
+    ports:
+      - "8085:80"
+    depends_on:
+      - api
+    volumes:
+      - ./backend/public/uploads:/var/www/public/uploads:ro # Read-only access to uploads for Nginx
+    networks:
+      - sankara-network
+
+networks:
+  sankara-network:
+    driver: bridge

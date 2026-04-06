@@ -26,6 +26,17 @@ Route::get('products', function(Request $request) {
         if ($showAll) return true;
         return ($p['status'] ?? 'Active') === 'Active';
     }));
+    
+    // Auto-Fix: Ensure every product has an 'images' array for the frontend slider
+    $dbUpdated = false;
+    foreach ($db['products'] as &$product) {
+        if (!isset($product['images']) || !is_array($product['images'])) {
+            $product['images'] = isset($product['image']) ? [$product['image']] : [];
+            $dbUpdated = true;
+        }
+    }
+    if ($dbUpdated) JsonDB::write($db);
+
     return response()->json($products);
 });
 Route::get('gallery', function() {
@@ -55,18 +66,29 @@ Route::post('products', function(Request $request) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
     $db = JsonDB::read();
-    $data = $request->only(['name', 'category', 'price', 'description']);
+    $data = $request->only(['name', 'category', 'price', 'description', 'task']);
     
+    // Handle Specifications (from comma-separated string)
+    $specs = $request->input('specs');
+    $data['specs'] = $specs ? array_map('trim', explode(',', $specs)) : [];
+    
+    // Handle Multiple Images
+    $data['images'] = [];
     if ($request->hasFile('image')) {
-        $file = $request->file('image');
-        $filename = time() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
-        $file->move(public_path('uploads'), $filename);
-        $data['image'] = 'http://localhost:8080/uploads/' . $filename;
+        $files = $request->file('image');
+        if (!is_array($files)) $files = [$files];
+        foreach ($files as $file) {
+            $filename = time() . '_' . uniqid() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
+            $file->move(public_path('uploads'), $filename);
+            $data['images'][] = '/uploads/' . $filename;
+        }
+        $data['image'] = $data['images'][0]; // Compatibility
     } else {
-        $data['image'] = 'https://images.unsplash.com/photo-1594411139708-ba98d5f30e06?auto=format&fit=crop&q=80&w=800'; // Default placeholder
+        $data['image'] = 'https://images.unsplash.com/photo-1594411139708-ba98d5f30e06?auto=format&fit=crop&q=80&w=800';
+        $data['images'] = [$data['image']];
     }
     
-    $data['id'] = count($db['products']) > 0 ? max(array_column($db['products'], 'id')) + 1 : 1;
+    $data['id'] = (count($db['products'] ?? []) > 0) ? max(array_column($db['products'], 'id')) + 1 : 1;
     $data['status'] = 'Active';
     $db['products'][] = $data;
     JsonDB::write($db);
@@ -80,16 +102,28 @@ Route::post('products/{id}', function(Request $request, $id) use ($verifyToken) 
     $db = JsonDB::read();
     foreach ($db['products'] as &$product) {
         if ((string)$product['id'] === (string)$id) {
-            $updatedData = $request->only(['name', 'category', 'price', 'description', 'status']);
+            $updatedData = $request->only(['name', 'category', 'price', 'description', 'task', 'status']);
             foreach ($updatedData as $key => $val) {
                 if ($val !== null) $product[$key] = $val;
             }
             
+            // Handle Specs
+            if ($request->has('specs')) {
+                $specs = $request->input('specs');
+                $product['specs'] = $specs ? array_map('trim', explode(',', $specs)) : [];
+            }
+            
+            // Handle Multiple Images (Replace if new ones uploaded)
             if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                $filename = time() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
-                $file->move(public_path('uploads'), $filename);
-                $product['image'] = 'http://localhost:8080/uploads/' . $filename;
+                $product['images'] = [];
+                $files = $request->file('image');
+                if (!is_array($files)) $files = [$files];
+                foreach ($files as $file) {
+                    $filename = time() . '_' . uniqid() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
+                    $file->move(public_path('uploads'), $filename);
+                    $product['images'][] = '/uploads/' . $filename;
+                }
+                $product['image'] = $product['images'][0]; // Compatibility
             }
             
             JsonDB::write($db);
@@ -135,7 +169,7 @@ Route::post('gallery', function(Request $request) use ($verifyToken) {
         $file = $request->file('image');
         $filename = 'gallery_' . time() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
         $file->move(public_path('uploads'), $filename);
-        $data['image'] = 'http://localhost:8080/uploads/' . $filename;
+        $data['image'] = '/uploads/' . $filename;
     } else {
         return response()->json(['error' => 'Image is required'], 422);
     }
@@ -169,7 +203,7 @@ Route::post('portfolio', function(Request $request) use ($verifyToken) {
         $file = $request->file('image');
         $filename = 'portfolio_' . time() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
         $file->move(public_path('uploads'), $filename);
-        $data['image'] = 'http://localhost:8080/uploads/' . $filename;
+        $data['image'] = '/uploads/' . $filename;
     } else {
         return response()->json(['error' => 'Image is required'], 422);
     }
@@ -203,7 +237,7 @@ Route::post('activities', function(Request $request) use ($verifyToken) {
         $file = $request->file('image');
         $filename = 'activity_' . time() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
         $file->move(public_path('uploads'), $filename);
-        $data['image'] = 'http://localhost:8080/uploads/' . $filename;
+        $data['image'] = '/uploads/' . $filename;
     } else {
         $data['image'] = null; // Activities can be text-only if needed
     }
@@ -269,13 +303,13 @@ Route::post('team', function(Request $request) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
     $db = JsonDB::read();
-    $data = $request->only(['name', 'role']);
+    $data = $request->only(['name', 'role', 'phone']);
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');
         $filename = 'team_' . time() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
         $file->move(public_path('uploads'), $filename);
-        $data['image'] = 'http://localhost:8080/uploads/' . $filename;
+        $data['image'] = '/uploads/' . $filename;
     } else {
         return response()->json(['error' => 'Photo is required'], 422);
     }
@@ -311,5 +345,54 @@ Route::get('metrics', function(Request $request) use ($verifyToken) {
         'total_activities' => count($db['activities']),
         'total_team' => count($db['team'] ?? []),
         'recent_inquiries' => array_slice(array_reverse($db['inquiries']), 0, 5)
+    ]);
+});
+
+// System Health Diagnostics
+Route::get('admin/health', function(Request $request) use ($verifyToken) {
+    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+    
+    $dbPath = storage_path('app/db.json');
+    $uploadsPath = public_path('uploads');
+    
+    // 1. Data Storage Health
+    $dbStatus = file_exists($dbPath) && is_readable($dbPath) && is_writable($dbPath);
+    
+    // 2. File System Health
+    if (!file_exists($uploadsPath)) {
+        mkdir($uploadsPath, 0755, true);
+    }
+    $uploadsStatus = is_writable($uploadsPath);
+    
+    // 3. System Context
+    return response()->json([
+        'status' => 'success',
+        'timestamp' => now()->toIso8601String(),
+        'diagnostics' => [
+            [
+                'name' => 'JSON Database',
+                'status' => $dbStatus ? 'Healthy' : 'Error',
+                'message' => $dbStatus ? 'Readable/Writable' : 'Permissions issue at storage/app/db.json',
+                'id' => 'db'
+            ],
+            [
+                'name' => 'Uploads Directory',
+                'status' => $uploadsStatus ? 'Healthy' : 'Error',
+                'message' => $uploadsStatus ? 'Writable' : 'Permissions issue at public/uploads',
+                'id' => 'uploads'
+            ],
+            [
+                'name' => 'API Endpoint',
+                'status' => 'Healthy',
+                'message' => 'Responding correctly',
+                'id' => 'api'
+            ]
+        ],
+        'system' => [
+            'php_version' => PHP_VERSION,
+            'memory_usage' => round(memory_get_usage() / 1024 / 1024, 2) . ' MB',
+            'environment' => config('app.env'),
+            'uptime' => 'System Online'
+        ]
     ]);
 });

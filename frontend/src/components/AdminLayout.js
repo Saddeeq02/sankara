@@ -1,5 +1,4 @@
-import { createElement } from 'lucide';
-import { LayoutDashboard, Package, MessageSquare, Image, LogOut } from 'lucide-static';
+import { LayoutDashboard, Package, MessageSquare, Image, Activity, LogOut, AlertTriangle } from 'lucide-static';
 
 export function renderAdminLayout(contentElement, activeRoute) {
   const container = document.createElement('div');
@@ -8,14 +7,14 @@ export function renderAdminLayout(contentElement, activeRoute) {
   // Toggle body class for admin styles
   document.body.classList.add('admin-mode');
 
-  // Sidebar
+  // 1. Sidebar
   const sidebar = document.createElement('aside');
   sidebar.className = 'admin-sidebar';
   
   const sidebarHeader = document.createElement('div');
   sidebarHeader.className = 'admin-sidebar-header';
   sidebarHeader.style.justifyContent = 'center';
-  sidebarHeader.innerHTML = `<img src="/src/assets/logo.png" alt="Sankara Admin Logo" style="height: 40px; object-fit: contain;">`;
+  sidebarHeader.innerHTML = `<img src="/assets/logo.png" alt="Sankara Admin Logo" style="height: 40px; object-fit: contain;">`;
   
   const nav = document.createElement('nav');
   nav.className = 'admin-nav';
@@ -25,6 +24,7 @@ export function renderAdminLayout(contentElement, activeRoute) {
       <li><a href="/admin/products" data-route="admin-products" class="${activeRoute === 'admin-products' ? 'active' : ''}">${Package} Products</a></li>
       <li><a href="/admin/inquiries" data-route="admin-inquiries" class="${activeRoute === 'admin-inquiries' ? 'active' : ''}">${MessageSquare} Inquiries</a></li>
       <li><a href="/admin/content" data-route="admin-content" class="${activeRoute === 'admin-content' ? 'active' : ''}">${Image} Content</a></li>
+      <li><a href="/admin/health" data-route="admin-health" class="${activeRoute === 'admin-health' ? 'active' : ''}">${Activity} System Health</a></li>
     </ul>
   `;
 
@@ -52,7 +52,7 @@ export function renderAdminLayout(contentElement, activeRoute) {
   sidebar.appendChild(nav);
   sidebar.appendChild(logoutContainer);
 
-  // Main Content Area
+  // 2. Main Content Area
   const main = document.createElement('main');
   main.className = 'admin-main';
 
@@ -99,6 +99,38 @@ export function renderAdminLayout(contentElement, activeRoute) {
 
   container.appendChild(sidebar);
   container.appendChild(main);
+
+  // 3. Global Confirm Modal Implementation
+  const confirmOverlay = document.createElement('div');
+  confirmOverlay.className = 'admin-confirm-overlay';
+  confirmOverlay.innerHTML = `
+    <div class="admin-confirm-modal">
+      <div class="admin-confirm-icon">${AlertTriangle}</div>
+      <h3 style="margin-bottom: 10px; font-size: 1.25rem;">Are you sure?</h3>
+      <p id="confirmMessage" style="color: var(--admin-text-muted); font-size: 0.95rem;">This action cannot be undone.</p>
+      <div class="admin-confirm-btns">
+        <button id="confirmNo" class="confirm-no">Cancel</button>
+        <button id="confirmYes" class="confirm-yes">Confirm</button>
+      </div>
+    </div>
+  `;
+  container.appendChild(confirmOverlay);
+
+  window.showConfirm = (message) => {
+    return new Promise((resolve) => {
+      confirmOverlay.querySelector('#confirmMessage').textContent = message || 'This action cannot be undone.';
+      confirmOverlay.classList.add('active');
+      
+      const handleResponse = (result) => {
+        confirmOverlay.classList.remove('active');
+        resolve(result);
+      };
+
+      confirmOverlay.querySelector('#confirmYes').onclick = () => handleResponse(true);
+      confirmOverlay.querySelector('#confirmNo').onclick = () => handleResponse(false);
+      confirmOverlay.onclick = (e) => { if(e.target === confirmOverlay) handleResponse(false); };
+    });
+  };
 
   return container;
 }
