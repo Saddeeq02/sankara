@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: sankara
+    runtime: docker
+    plan: free
+    region: ohio # Change as preferred
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        generateValue: true # Generates a secure random key
+      - key: PORT
+        value: 80

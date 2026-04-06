@@ -85,7 +85,7 @@ export function renderContactScreen() {
               <div style="color: var(--primary-color); opacity: 0.8;">${MapPin}</div>
               <div>
                 <h5 style="font-size: 1rem; font-weight: 800; margin-bottom: 4px; color: var(--text-main);">Visit Our Office</h5>
-                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.4;">C21 Suite 1, First Floor Safiya House Zaria Road, Kano</p>
+                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.4;">7, Gadon Kaya, 8 BUK Road, Kano</p>
                 <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">Click to navigate via GPS</p>
               </div>
             </a>
