@@ -24,12 +24,15 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Copy Backend Source
+# --- Backend Setup ---
+RUN mkdir -p /var/www/backend
+WORKDIR /var/www/backend
 COPY backend/ .
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
-# Copy Built Frontend into Backend Public folder
-COPY --from=build-stage /app/dist /var/www/public
+# --- Frontend Setup ---
+RUN mkdir -p /var/www/frontend
+COPY --from=build-stage /app/dist /var/www/frontend
 
 # 🛡️ Configure PHP-FPM to use custom config for logging & connectivity
 COPY php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
@@ -51,5 +54,6 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/
 EXPOSE 80
 
 ENTRYPOINT ["/entrypoint.sh"]
+
 
 

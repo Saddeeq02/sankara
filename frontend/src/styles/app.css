@@ -1122,7 +1122,162 @@ input.theme-input:focus, select.theme-input:focus, textarea.theme-input:focus {
   transform: translateY(-3px);
 }
 
-/* Color Themes for Index-based variety */
-.theme-blue { background: var(--primary-color); }
-.theme-light { background: var(--secondary-color); }
-.theme-emerald { background: #10b981; }
+/* --- Responsive Navigation (Premium Mobile Menu) --- */
+.nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+}
+
+.nav-logo {
+  height: 45px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.nav-links {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link-item {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+.nav-link-item:hover {
+  color: var(--primary-color);
+}
+
+.theme-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  color: var(--text-main);
+  transition: transform 0.3s;
+}
+
+.theme-btn:hover {
+  transform: rotate(15deg) scale(1.1);
+}
+
+/* Hamburger UI */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.hamburger span {
+  width: 26px;
+  height: 2.5px;
+  background: var(--primary-color);
+  border-radius: 10px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Tablet & Mobile Overrides */
+@media (max-width: 1024px) {
+  .hamburger {
+    display: flex;
+    z-index: 1100;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    background: var(--surface-color);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    flex-direction: column;
+    justify-content: center;
+    gap: 35px;
+    padding: 60px 40px;
+    box-shadow: -15px 0 45px rgba(0, 0, 0, 0.1);
+    transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+  }
+
+  .nav-links.mobile-active {
+    right: 0;
+  }
+
+  .nav-link-item {
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .contact-nav-btn {
+    width: 100%;
+    text-align: center;
+    padding: 18px !important;
+  }
+
+  /* Hamburger to X Transformation */
+  .toggle-active span:nth-child(1) {
+    transform: translateY(8.5px) rotate(45deg);
+  }
+  .toggle-active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  .toggle-active span:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
+  }
+
+  /* Reduce Hero Spacing for Mobile */
+  header {
+    padding: 140px 0 60px !important;
+  }
+}
+
+/* --- Responsive Product Filters --- */
+@media (max-width: 768px) {
+  .premium-glass-card {
+    padding: 20px !important;
+    border-radius: 24px !important;
+    width: 100%;
+  }
+
+  #category-filters-v2 {
+    display: flex !important;
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 10px;
+    gap: 8px !important;
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+  }
+
+  #category-filters-v2::-webkit-scrollbar {
+    display: none; /* Hide scrollbar Chrome/Safari */
+  }
+
+  .prod-filter-pill {
+    white-space: nowrap;
+    padding: 8px 18px !important;
+    font-size: 0.85rem !important;
+  }
+
+  #product-search-v2 {
+    max-width: 100% !important;
+    min-width: 100% !important;
+  }
+}

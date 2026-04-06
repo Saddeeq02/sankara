@@ -2,43 +2,68 @@ export function renderNavbar() {
   const nav = document.createElement('nav');
   nav.className = 'glass-navbar';
   nav.innerHTML = `
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px;">
-      <a href="/" data-route="home" class="logo" style="display: flex; align-items: center; text-decoration: none;">
-        <img src="/assets/logo.png" alt="Sankara Nigeria Limited Logo" style="height: 45px; object-fit: contain;">
+    <div class="container nav-row">
+      <a href="/" data-route="home" class="logo">
+        <img src="/assets/logo.png" alt="Sankara Logo" class="nav-logo">
       </a>
-      <ul style="display: flex; gap: 20px; list-style: none; align-items: center; margin: 0;">
-        <li><a href="/" data-route="home" style="text-decoration: none; color: var(--text-main); font-weight: 500;">Home</a></li>
-        <li><a href="#about" data-route="about" style="text-decoration: none; color: var(--text-main); font-weight: 500;">About</a></li>
-        <li><a href="/products" data-route="products" style="text-decoration: none; color: var(--text-main); font-weight: 500;">Products</a></li>
-        <li><a href="/services" data-route="services" style="text-decoration: none; color: var(--text-main); font-weight: 500;">Services</a></li>
-        <li><a href="/gallery" data-route="gallery" style="text-decoration: none; color: var(--text-main); font-weight: 500;">Gallery</a></li>
-        <li><a href="/activities" data-route="activities" style="text-decoration: none; color: var(--text-main); font-weight: 500;">Activities</a></li>
-        <li><a href="/portfolio" data-route="portfolio" style="text-decoration: none; color: var(--text-main); font-weight: 500;">Portfolio</a></li>
-        <li><a href="/contact" data-route="contact" class="btn-primary">Contact</a></li>
+      
+      <!-- Hamburger Toggle -->
+      <div class="hamburger" id="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <ul class="nav-links" id="nav-menu">
+        <li><a href="/" data-route="home" class="nav-link-item">Home</a></li>
+        <li><a href="#about" data-route="about" class="nav-link-item">About</a></li>
+        <li><a href="/products" data-route="products" class="nav-link-item">Products</a></li>
+        <li><a href="/services" data-route="services" class="nav-link-item">Services</a></li>
+        <li><a href="/gallery" data-route="gallery" class="nav-link-item">Gallery</a></li>
+        <li><a href="/activities" data-route="activities" class="nav-link-item">Activities</a></li>
+        <li><a href="/portfolio" data-route="portfolio" class="nav-link-item">Portfolio</a></li>
+        <li><a href="/contact" data-route="contact" class="btn-primary contact-nav-btn">Contact</a></li>
         <li>
-          <button id="theme-toggle" style="background: none; border: none; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; padding: 5px; color: var(--text-main);">
-            🌙
-          </button>
+          <button id="theme-toggle" class="theme-btn">🌙</button>
         </li>
       </ul>
     </div>
   `;
 
-  const toggleBtn = nav.querySelector('#theme-toggle');
+  const toggle = nav.querySelector('#nav-toggle');
+  const menu = nav.querySelector('#nav-menu');
+  const themeBtn = nav.querySelector('#theme-toggle');
+
+  // Mobile Menu Toggle
+  toggle.onclick = () => {
+    menu.classList.toggle('mobile-active');
+    toggle.classList.toggle('toggle-active');
+  };
+
+  // Close menu when clicking a link
+  menu.querySelectorAll('a').forEach(link => {
+    link.onclick = () => {
+      menu.classList.remove('mobile-active');
+      toggle.classList.remove('toggle-active');
+    }
+  });
+
+  // Theme Toggle Logic
   const currentTheme = localStorage.getItem('theme') || 'light';
   if (currentTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-  toggleBtn.innerHTML = currentTheme === 'dark' ? '☀️' : '🌙';
+  themeBtn.innerHTML = currentTheme === 'dark' ? '☀️' : '🌙';
 
-  toggleBtn.onclick = () => {
+  themeBtn.onclick = () => {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const newTheme = isDark ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
-    toggleBtn.innerHTML = newTheme === 'dark' ? '☀️' : '🌙';
+    themeBtn.innerHTML = newTheme === 'dark' ? '☀️' : '🌙';
   };
 
   return nav;
 }
+
 
 export function renderFooter() {
   const footer = document.createElement('footer');
