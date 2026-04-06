@@ -117,14 +117,11 @@ window.navigate = function(routeName) {
     if (routeName === 'admin-login') urlPath = '/admin/login';
   }
   
-  // Only push state if path changed OR we are clearing a hash for home
-  if (window.location.pathname !== urlPath || (routeName === 'home' && window.location.hash)) {
-    window.history.pushState({ route: routeName }, '', urlPath);
-  }
-
-  // If we are already on home and route is home, we just did the scroll/hash clear above
-  // but we still want to make sure the content is correct if it was a real navigation
-  if (routeName !== 'home' || appRoot.innerHTML === '' || window.location.pathname !== urlPath) {
+  // Render the screen if it's new, OR if we are showing home on the root URL
+  const screenPathChanged = window.location.pathname !== urlPath;
+  const isTargetHomeOnRoot = routeName === 'home' && (window.location.pathname === '/' || window.location.pathname === '/home');
+  
+  if (screenPathChanged || isTargetHomeOnRoot || appRoot.children.length === 0) {
     appRoot.innerHTML = '';
     const screenRenderer = routes[routeName] || renderHomeScreen;
     appRoot.appendChild(screenRenderer());
@@ -159,12 +156,26 @@ window.addEventListener('popstate', (e) => {
   navigate(route);
 });
 
-// Start the app (Parse initial URL)
-const path = window.location.pathname;
-let initialRoute = 'home';
-if (path.startsWith('/admin')) {
-  initialRoute = path === '/admin' ? 'admin-dashboard' : path.replace('/', '').replace('/', '-');
-} else if (path.length > 1) {
-  initialRoute = path.substring(1).split('#')[0];
-}
-navigate(initialRoute);
+// Start the app (Parse initial URL) - Robust for Production
+const getInitialRoute = () => {
+    const path = window.location.pathname;
+    
+    // 1. Root and explicit home
+    if (path === '/' || path === '/home') return 'home';
+    
+    // 2. Admin routes
+    if (path.startsWith('/admin')) {
+      if (path === '/admin') return 'admin-dashboard';
+      if (path === '/admin/login') return 'admin-login';
+      return path.replace('/admin/', 'admin-');
+    }
+    
+    // 3. Other clean routes (e.g. /products)
+    const cleanPath = path.replace(/^\/+|\/+$/g, ''); // Remove trailing/leading slashes
+    if (routes[cleanPath]) return cleanPath;
+    
+    return 'home'; // Default
+};
+
+navigate(getInitialRoute());
+
