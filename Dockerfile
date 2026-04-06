@@ -13,7 +13,7 @@ RUN npm run build
 FROM php:8.4-fpm-alpine
 
 # Install Nginx and required dependencies
-RUN apk add --no-cache nginx libpng-dev libonig-dev libxml2-dev zip unzip libzip-dev
+RUN apk add --no-cache nginx libpng-dev oniguruma-dev libxml2-dev zip unzip libzip-dev
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
