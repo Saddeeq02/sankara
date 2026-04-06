@@ -29,20 +29,23 @@ COPY backend/ .
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
 # Copy Built Frontend into Backend Public folder
-# This allows Nginx to serve the SPA and API from the same port
 COPY --from=build-stage /app/dist /var/www/public
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache /var/www/public/uploads
-RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache /var/www/public/uploads
+# 🛡️ Configure Nginx to run as www-data (same as PHP-FPM)
+RUN sed -i "s/user nginx;/user www-data;/g" /etc/nginx/nginx.conf
 
-# Configure Nginx
+# 🌐 Nginx Config Mapping
 COPY nginx.conf /etc/nginx/http.d/default.conf
 
-# Expose Port 80 (Render's default)
+# 📂 Copy Entrypoint Script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# 🪵 Redirect Nginx logs to stdout/stderr
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
+
+# Expose Port 80 (Overridden by Render $PORT in entrypoint)
 EXPOSE 80
 
-# Entrypoint script to run both PHP-FPM and Nginx
-RUN printf "#!/bin/sh\nphp-fpm -D\nnginx -g 'daemon off;'\n" > /entrypoint.sh && chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["/entrypoint.sh"]
