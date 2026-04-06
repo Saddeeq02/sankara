@@ -152,31 +152,29 @@ function createTeamSection() {
         return;
       }
 
-      grid.innerHTML = team.map((member, index) => `
-        <div class="reveal team-card-modern" style="animation-delay: ${index * 0.15}s;">
-          <div class="team-card-header">
-            <div class="team-img-wrapper-modern">
-               <img src="${member.image}" alt="${member.name}">
-            </div>
+      grid.innerHTML = team.map((member, index) => {
+        // Cycle through the three theme colors defined in CSS
+        const themes = ['theme-blue', 'theme-light', 'theme-emerald'];
+        const currentTheme = themes[index % themes.length];
+        
+        return `
+        <div class="reveal team-card-v3" style="animation-delay: ${index * 0.15}s;">
+          <div class="team-img-container-v3">
+             <img src="${member.image}" alt="${member.name}" class="team-img-v3">
+             <div class="team-name-badge-v3 ${currentTheme}">${member.name}</div>
           </div>
-          <div class="team-card-body">
-            <h3>${member.name}</h3>
-            <p>${member.role}</p>
+          <div class="team-content-v3">
+            <h3 class="team-role-v3">${member.role}</h3>
+            <p class="team-phone-v3">${member.phone || 'Representative'}</p>
             
-            <div class="star-rating">
-              ${[1, 2, 3, 4, 5].map(() => `<span style="width: 16px; height: 16px;">${Star}</span>`).join('')}
-            </div>
-
-            <div class="team-email-v2">
-              ${member.phone || 'Representative'}
-            </div>
-            
-            <div style="margin-top: 25px; font-size: 0.8rem; font-weight: 700; color: var(--primary-color); opacity: 0.6; cursor: pointer;">
-               VIEW FULL PROFILE ↗
+            <div class="team-icons-v3">
+              <span title="Call">${Phone}</span>
+              <span title="Email">${Mail}</span>
+              <span title="Connect">${Users}</span>
             </div>
           </div>
         </div>
-      `).join('');
+      `}).join('');
       
       if (window.initAnimations) window.initAnimations();
     } catch (err) { console.error(err); }
