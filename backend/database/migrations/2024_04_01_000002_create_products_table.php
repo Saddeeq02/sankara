@@ -18,13 +18,11 @@ return new class extends Migration
             $table->json('images')->nullable();
             $table->json('specs')->nullable();
             $table->string('status')->default('Active');
-            $table->boolean('is_new_arrival')->default(false);
             $table->string('task')->nullable();
             $table->timestamps();
-
         });
-
     }
+
 
     public function down(): void
     {
