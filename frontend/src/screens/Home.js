@@ -46,17 +46,20 @@ export function renderHomeScreen() {
 
   // New Arrivals Section (Dynamic)
   const arrivalsSection = document.createElement('section');
-  arrivalsSection.style.padding = '100px 0 60px';
+  arrivalsSection.style.padding = '140px 0 60px'; // Increased to 140px to clear Navbar
   arrivalsSection.style.backgroundColor = 'var(--background-color)';
   arrivalsSection.innerHTML = `
     <div class="container text-center">
-      <h2 class="reveal" style="font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: var(--primary-color); margin-bottom: 15px; line-height: 1.1;">Latest Machinery</h2>
-      <p class="reveal" style="color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 50px;">Check out our newest stock of tractors and farm implements ready for deployment.</p>
-      <div id="new-arrivals-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; text-align: left;">
-        <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">Syncing with inventory...</div>
+      <h2 class="reveal" style="font-size: clamp(2.5rem, 5vw, 3.8rem); font-weight: 900; color: var(--primary-color); margin-bottom: 20px; line-height: 1.1;">Latest Machinery</h2>
+      <p class="reveal" style="color: var(--text-muted); font-size: 1.15rem; max-width: 650px; margin: 0 auto 60px;">Explore our newest stock of tractors and farm implements ready for deployment in your fields.</p>
+      <div id="new-arrivals-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; text-align: left;">
+        <div style="grid-column: 1/-1; text-align: center; padding: 60px; background: rgba(0,21,91,0.02); border: 2px dashed var(--glass-border); border-radius: 24px; color: var(--text-muted);">
+          Preparing machinery catalog...
+        </div>
       </div>
     </div>
   `;
+
 
   const loadNewArrivals = async () => {
     try {

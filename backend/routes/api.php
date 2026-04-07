@@ -183,6 +183,7 @@ Route::post('portfolio', function(Request $request) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
     $data = $request->only(['title', 'client', 'year', 'description']);
+    $data['slug'] = \Illuminate\Support\Str::slug($data['title']) . '-' . time();
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');
@@ -210,6 +211,8 @@ Route::post('activities', function(Request $request) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
     $data = $request->only(['title', 'date', 'summary']);
+    $data['slug'] = \Illuminate\Support\Str::slug($data['title']) . '-' . time();
+    $data['content'] = $data['summary']; // Map summary to content for now
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');

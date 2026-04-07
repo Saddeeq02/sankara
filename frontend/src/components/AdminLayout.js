@@ -60,8 +60,13 @@ export function renderAdminLayout(contentElement, activeRoute) {
   const header = document.createElement('header');
   header.className = 'admin-header';
   header.innerHTML = `
-    <div style="font-weight: 500; color: var(--admin-text-muted);">
-      Admin Portal / <span style="color: var(--admin-text); text-transform: capitalize;">${activeRoute.replace('admin-', '')}</span>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <button id="admin-mob-toggler" style="display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--admin-text); padding: 5px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div style="font-weight: 500; color: var(--admin-text-muted);">
+        Admin Portal / <span style="color: var(--admin-text); text-transform: capitalize;">${activeRoute.replace('admin-', '')}</span>
+      </div>
     </div>
     <div style="display: flex; align-items: center; gap: 20px;">
       <button id="admin-theme-toggle" style="background: none; border: none; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; padding: 5px; color: var(--admin-text);">
@@ -71,10 +76,26 @@ export function renderAdminLayout(contentElement, activeRoute) {
         <div style="width: 35px; height: 35px; border-radius: 50%; background: var(--primary-color); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
           A
         </div>
-        <span style="font-weight: 500;">Administrator</span>
+        <span class="admin-user-name" style="font-weight: 500;">Administrator</span>
       </div>
     </div>
   `;
+
+  // Mobile Toggling Logic
+  const toggler = header.querySelector('#admin-mob-toggler');
+  toggler.onclick = () => {
+    sidebar.classList.toggle('mob-active');
+    overlay.classList.toggle('active');
+  };
+
+  const overlay = document.createElement('div');
+  overlay.className = 'admin-sidebar-overlay';
+  overlay.onclick = () => {
+    sidebar.classList.remove('mob-active');
+    overlay.classList.remove('active');
+  };
+  container.appendChild(overlay);
+
 
   // Apply Current Theme
   const toggleBtn = header.querySelector('#admin-theme-toggle');

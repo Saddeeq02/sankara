@@ -3,8 +3,10 @@
 # 🛡️ Ensure critical directories have correct permissions
 # ---------------------------------------------------------
 echo "Configuring permissions for storage and uploads..."
+mkdir -p /var/www/backend/storage /var/www/backend/bootstrap/cache /var/www/backend/public/uploads
 chown -R www-data:www-data /var/www/backend/storage /var/www/backend/bootstrap/cache /var/www/backend/public/uploads
 chmod -R 775 /var/www/backend/storage /var/www/backend/bootstrap/cache /var/www/backend/public/uploads
+
 
 
 

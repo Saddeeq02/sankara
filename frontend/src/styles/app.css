@@ -1379,3 +1379,92 @@ html, body {
     min-width: 100% !important;
   }
 }
+/* --- ADMIN MOBILE VIEW SUITE --- */
+.admin-sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1400;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.admin-sidebar-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 1024px) {
+  .admin-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 280px;
+    z-index: 1500;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .admin-sidebar.mob-active {
+    transform: translateX(0);
+  }
+
+  .admin-main {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  #admin-mob-toggler {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .admin-header {
+    padding: 15px 20px !important;
+  }
+
+  .admin-user-name {
+    display: none; /* Hide name on small mobile for space */
+  }
+
+  .admin-content {
+    padding: 20px !important;
+  }
+
+  /* Stack Dashboard Grids */
+  .admin-content > h1 + div,
+  .admin-content > div > div[style*="display: grid"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Inquiry Table Layout Fix */
+  [style*="display: grid; grid-template-columns: 2fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  .admin-table {
+    min-width: 700px; /* Force scroll */
+  }
+
+  .admin-table-container {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--admin-border);
+  }
+
+  /* Form Responsive Fixes */
+  .modal-v2 {
+    width: 95% !important;
+    padding: 25px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-page-title {
+    font-size: 1.5rem !important;
+  }
+}
