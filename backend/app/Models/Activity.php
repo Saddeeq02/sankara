@@ -9,5 +9,6 @@ class Activity extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'slug', 'date', 'content', 'image'];
+    protected $fillable = ['title', 'date', 'summary', 'image'];
 }
+

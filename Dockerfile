@@ -13,10 +13,11 @@ RUN npm run build
 FROM php:8.4-fpm-alpine
 
 # Install Nginx and required dependencies
-RUN apk add --no-cache nginx libpng-dev oniguruma-dev libxml2-dev zip unzip libzip-dev
+RUN apk add --no-cache nginx libpng-dev oniguruma-dev libxml2-dev zip unzip libzip-dev postgresql-dev
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
+RUN docker-php-ext-install pdo_pgsql mbstring exif pcntl bcmath gd zip
+
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

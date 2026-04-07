@@ -1,74 +1,68 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
-use App\Helpers\JsonDB;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\GalleryItem;
+use App\Models\PortfolioProject;
+use App\Models\Activity;
+use App\Models\Inquiry;
+use App\Models\User;
+use App\Models\TeamMember;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/auth-check', [AuthController::class, 'check']);
 
-// Token Middleware Helper function
+// Token Middleware Helper function (Updated for DB)
 $verifyToken = function(Request $request) {
     if (!$request->bearerToken()) return false;
-    $db = JsonDB::read();
-    foreach ($db['users'] as $u) {
-        if ($u['api_token'] === $request->bearerToken()) return true;
-    }
-    return false;
+    return User::where('api_token', $request->bearerToken())->exists();
 };
 
 // PUBLIC ENDPOINTS
 Route::get('products', function(Request $request) {
-    $db = JsonDB::read();
     $showAll = $request->query('all') === '1';
     
-    $products = array_values(array_filter($db['products'], function($p) use ($showAll) {
-        if ($showAll) return true;
-        return ($p['status'] ?? 'Active') === 'Active';
-    }));
-    
-    // Auto-Fix: Ensure every product has an 'images' array for the frontend slider
-    $dbUpdated = false;
-    foreach ($db['products'] as &$product) {
-        if (!isset($product['images']) || !is_array($product['images'])) {
-            $product['images'] = isset($product['image']) ? [$product['image']] : [];
-            $dbUpdated = true;
-        }
+    $query = Product::query();
+    if (!$showAll) {
+        $query->where('status', 'Active');
     }
-    if ($dbUpdated) JsonDB::write($db);
-
+    
+    $products = $query->get();
+    
+    // Auto-Fix Logic for Images is now handled by Eloquent Casts
     return response()->json($products);
 });
+
 Route::get('gallery', function() {
-    return response()->json(JsonDB::read()['gallery']);
+    return response()->json(GalleryItem::all());
 });
+
 Route::get('portfolio', function() {
-    $db = JsonDB::read();
-    return response()->json($db['portfolio'] ?? []);
+    return response()->json(PortfolioProject::all());
 });
+
 Route::get('activities', function() {
-    $db = JsonDB::read();
-    return response()->json($db['activities'] ?? []);
+    return response()->json(Activity::all());
 });
+
 Route::post('inquiries', function(Request $request) {
-    $db = JsonDB::read();
-    $inquiry = $request->all();
-    $inquiry['id'] = (count($db['inquiries'] ?? []) > 0) ? max(array_column($db['inquiries'], 'id')) + 1 : 1;
-    $inquiry['status'] = 'Pending';
-    $inquiry['date'] = date('Y-m-d');
-    $db['inquiries'][] = $inquiry;
-    JsonDB::write($db);
-    return response()->json(['success' => true]);
+    $data = $request->only(['name', 'email', 'subject', 'message']);
+    $data['status'] = 'Pending';
+    $data['date'] = date('Y-m-d');
+    
+    $inquiry = Inquiry::create($data);
+    return response()->json(['success' => true, 'id' => $inquiry->id]);
 });
+
 
 // PROTECTED ADMIN ENDPOINTS
 Route::post('products', function(Request $request) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $db = JsonDB::read();
     $data = $request->only(['name', 'category', 'price', 'description', 'task']);
     
-    // Handle Specifications (from comma-separated string)
+    // Handle Specifications
     $specs = $request->input('specs');
     $data['specs'] = $specs ? array_map('trim', explode(',', $specs)) : [];
     
@@ -88,73 +82,61 @@ Route::post('products', function(Request $request) use ($verifyToken) {
         $data['images'] = [$data['image']];
     }
     
-    $data['id'] = (count($db['products'] ?? []) > 0) ? max(array_column($db['products'], 'id')) + 1 : 1;
     $data['status'] = 'Active';
-    $db['products'][] = $data;
-    JsonDB::write($db);
+    $product = Product::create($data);
     
-    return response()->json($data, 201);
+    return response()->json($product, 201);
 });
 
 Route::post('products/{id}', function(Request $request, $id) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $db = JsonDB::read();
-    foreach ($db['products'] as &$product) {
-        if ((string)$product['id'] === (string)$id) {
-            $updatedData = $request->only(['name', 'category', 'price', 'description', 'task', 'status']);
-            foreach ($updatedData as $key => $val) {
-                if ($val !== null) $product[$key] = $val;
-            }
-            
-            // Handle Specs
-            if ($request->has('specs')) {
-                $specs = $request->input('specs');
-                $product['specs'] = $specs ? array_map('trim', explode(',', $specs)) : [];
-            }
-            
-            // Handle Multiple Images (Replace if new ones uploaded)
-            if ($request->hasFile('image')) {
-                $product['images'] = [];
-                $files = $request->file('image');
-                if (!is_array($files)) $files = [$files];
-                foreach ($files as $file) {
-                    $filename = time() . '_' . uniqid() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
-                    $file->move(public_path('uploads'), $filename);
-                    $product['images'][] = '/uploads/' . $filename;
-                }
-                $product['image'] = $product['images'][0]; // Compatibility
-            }
-            
-            JsonDB::write($db);
-            return response()->json($product);
-        }
+    $product = Product::find($id);
+    if (!$product) return response()->json(['error' => 'Not Found'], 404);
+    
+    $updatedData = $request->only(['name', 'category', 'price', 'description', 'task', 'status']);
+    
+    // Handle Specs
+    if ($request->has('specs')) {
+        $specs = $request->input('specs');
+        $updatedData['specs'] = $specs ? array_map('trim', explode(',', $specs)) : [];
     }
-    return response()->json(['error' => 'Not Found'], 404);
+    
+    // Handle Multiple Images
+    if ($request->hasFile('image')) {
+        $newImages = [];
+        $files = $request->file('image');
+        if (!is_array($files)) $files = [$files];
+        foreach ($files as $file) {
+            $filename = time() . '_' . uniqid() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
+            $file->move(public_path('uploads'), $filename);
+            $newImages[] = '/uploads/' . $filename;
+        }
+        $updatedData['images'] = $newImages;
+        $updatedData['image'] = $newImages[0]; // Compatibility
+    }
+    
+    $product->update(array_filter($updatedData, fn($v) => !is_null($v)));
+    
+    return response()->json($product);
 });
 
 Route::patch('products/{id}/status', function(Request $request, $id) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $db = JsonDB::read();
-    foreach ($db['products'] as &$product) {
-        if ((string)$product['id'] === (string)$id) {
-            $product['status'] = $product['status'] === 'Active' ? 'Suspended' : 'Active';
-            JsonDB::write($db);
-            return response()->json(['success' => true, 'status' => $product['status']]);
-        }
-    }
-    return response()->json(['error' => 'Not Found'], 404);
+    $product = Product::find($id);
+    if (!$product) return response()->json(['error' => 'Not Found'], 404);
+    
+    $product->status = $product->status === 'Active' ? 'Suspended' : 'Active';
+    $product->save();
+    return response()->json(['success' => true, 'status' => $product->status]);
 });
 
 Route::delete('products/{id}', function(Request $request, $id) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $db = JsonDB::read();
-    $db['products'] = array_values(array_filter($db['products'], function($p) use ($id) {
-        return (string)$p['id'] !== (string)$id;
-    }));
-    JsonDB::write($db);
+    $product = Product::find($id);
+    if ($product) $product->delete();
     return response()->json(['success' => true]);
 });
 
@@ -162,7 +144,6 @@ Route::delete('products/{id}', function(Request $request, $id) use ($verifyToken
 Route::post('gallery', function(Request $request) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $db = JsonDB::read();
     $data = $request->only(['title', 'category', 'video_url']);
     
     if ($request->hasFile('image')) {
@@ -174,29 +155,23 @@ Route::post('gallery', function(Request $request) use ($verifyToken) {
         return response()->json(['error' => 'Image is required'], 422);
     }
     
-    $data['id'] = count($db['gallery']) > 0 ? max(array_column($db['gallery'], 'id')) + 1 : 1;
-    $db['gallery'][] = $data;
-    JsonDB::write($db);
-    
-    return response()->json($data, 201);
+    $item = GalleryItem::create($data);
+    return response()->json($item, 201);
 });
 
 Route::delete('gallery/{id}', function(Request $request, $id) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $db = JsonDB::read();
-    $db['gallery'] = array_values(array_filter($db['gallery'], function($item) use ($id) {
-        return (string)$item['id'] !== (string)$id;
-    }));
-    JsonDB::write($db);
+    $item = GalleryItem::find($id);
+    if ($item) $item->delete();
     return response()->json(['success' => true]);
 });
+
 
 // PORTFOLIO MANAGEMENT
 Route::post('portfolio', function(Request $request) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $db = JsonDB::read();
     $data = $request->only(['title', 'client', 'year', 'description']);
     
     if ($request->hasFile('image')) {
@@ -208,21 +183,15 @@ Route::post('portfolio', function(Request $request) use ($verifyToken) {
         return response()->json(['error' => 'Image is required'], 422);
     }
     
-    $portfolio = $db['portfolio'] ?? [];
-    $data['id'] = (count($portfolio) > 0) ? max(array_column($portfolio, 'id')) + 1 : 1;
-    $db['portfolio'][] = $data;
-    JsonDB::write($db);
-    return response()->json($data, 201);
+    $project = PortfolioProject::create($data);
+    return response()->json($project, 201);
 });
 
 Route::delete('portfolio/{id}', function(Request $request, $id) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $db = JsonDB::read();
-    $db['portfolio'] = array_values(array_filter($db['portfolio'] ?? [], function($item) use ($id) {
-        return (string)$item['id'] !== (string)$id;
-    }));
-    JsonDB::write($db);
+    $project = PortfolioProject::find($id);
+    if ($project) $project->delete();
     return response()->json(['success' => true]);
 });
 
@@ -230,7 +199,6 @@ Route::delete('portfolio/{id}', function(Request $request, $id) use ($verifyToke
 Route::post('activities', function(Request $request) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $db = JsonDB::read();
     $data = $request->only(['title', 'date', 'summary']);
     
     if ($request->hasFile('image')) {
@@ -238,71 +206,54 @@ Route::post('activities', function(Request $request) use ($verifyToken) {
         $filename = 'activity_' . time() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
         $file->move(public_path('uploads'), $filename);
         $data['image'] = '/uploads/' . $filename;
-    } else {
-        $data['image'] = null; // Activities can be text-only if needed
     }
     
-    $activities = $db['activities'] ?? [];
-    $data['id'] = (count($activities) > 0) ? max(array_column($activities, 'id')) + 1 : 1;
-    $db['activities'][] = $data;
-    JsonDB::write($db);
-    return response()->json($data, 201);
+    $activity = Activity::create($data);
+    return response()->json($activity, 201);
 });
 
 Route::delete('activities/{id}', function(Request $request, $id) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $db = JsonDB::read();
-    $db['activities'] = array_values(array_filter($db['activities'] ?? [], function($item) use ($id) {
-        return (string)$item['id'] !== (string)$id;
-    }));
-    JsonDB::write($db);
+    $activity = Activity::find($id);
+    if ($activity) $activity->delete();
     return response()->json(['success' => true]);
 });
 
 // INQUIRY MANAGEMENT
 Route::get('inquiries', function(Request $request) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
-    
-    $db = JsonDB::read();
-    return response()->json(array_reverse($db['inquiries'] ?? []));
+    return response()->json(Inquiry::latest()->get());
 });
 
 Route::patch('inquiries/{id}/status', function(Request $request, $id) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $db = JsonDB::read();
-    foreach ($db['inquiries'] as &$inquiry) {
-        if ((string)$inquiry['id'] === (string)$id) {
-            $inquiry['status'] = $inquiry['status'] === 'Resolved' ? 'Pending' : 'Resolved';
-            JsonDB::write($db);
-            return response()->json($inquiry);
-        }
-    }
-    return response()->json(['error' => 'Not Found'], 404);
+    $inquiry = Inquiry::find($id);
+    if (!$inquiry) return response()->json(['error' => 'Not Found'], 404);
+    
+    $inquiry->status = $inquiry->status === 'Resolved' ? 'Pending' : 'Resolved';
+    $inquiry->save();
+    return response()->json($inquiry);
 });
 
 Route::delete('inquiries/{id}', function(Request $request, $id) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $db = JsonDB::read();
-    $db['inquiries'] = array_values(array_filter($db['inquiries'] ?? [], function($item) use ($id) {
-        return (string)$item['id'] !== (string)$id;
-    }));
-    JsonDB::write($db);
+    $inquiry = Inquiry::find($id);
+    if ($inquiry) $inquiry->delete();
     return response()->json(['success' => true]);
 });
 
+
 // TEAM MANAGEMENT
 Route::get('team', function() {
-    $db = JsonDB::read();
-    return response()->json($db['team'] ?? []);
+    return response()->json(TeamMember::all());
 });
 
 Route::post('team', function(Request $request) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $db = JsonDB::read();
     $data = $request->only(['name', 'role', 'phone']);
     
     if ($request->hasFile('image')) {
@@ -314,21 +265,15 @@ Route::post('team', function(Request $request) use ($verifyToken) {
         return response()->json(['error' => 'Photo is required'], 422);
     }
     
-    $team = $db['team'] ?? [];
-    $data['id'] = (count($team) > 0) ? max(array_column($team, 'id')) + 1 : 1;
-    $db['team'][] = $data;
-    JsonDB::write($db);
-    return response()->json($data, 201);
+    $member = TeamMember::create($data);
+    return response()->json($member, 201);
 });
 
 Route::delete('team/{id}', function(Request $request, $id) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $db = JsonDB::read();
-    $db['team'] = array_values(array_filter($db['team'] ?? [], function($item) use ($id) {
-        return (string)$item['id'] !== (string)$id;
-    }));
-    JsonDB::write($db);
+    $member = TeamMember::find($id);
+    if ($member) $member->delete();
     return response()->json(['success' => true]);
 });
 
@@ -336,15 +281,14 @@ Route::delete('team/{id}', function(Request $request, $id) use ($verifyToken) {
 Route::get('metrics', function(Request $request) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $db = JsonDB::read();
     return response()->json([
-        'total_products' => count($db['products']),
-        'total_inquiries' => count($db['inquiries']),
-        'total_gallery' => count($db['gallery']),
-        'total_portfolio' => count($db['portfolio']),
-        'total_activities' => count($db['activities']),
-        'total_team' => count($db['team'] ?? []),
-        'recent_inquiries' => array_slice(array_reverse($db['inquiries']), 0, 5)
+        'total_products' => Product::count(),
+        'total_inquiries' => Inquiry::count(),
+        'total_gallery' => GalleryItem::count(),
+        'total_portfolio' => PortfolioProject::count(),
+        'total_activities' => Activity::count(),
+        'total_team' => TeamMember::count(),
+        'recent_inquiries' => Inquiry::latest()->limit(5)->get()
     ]);
 });
 
@@ -352,11 +296,17 @@ Route::get('metrics', function(Request $request) use ($verifyToken) {
 Route::get('admin/health', function(Request $request) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $dbPath = storage_path('app/db.json');
     $uploadsPath = public_path('uploads');
     
-    // 1. Data Storage Health
-    $dbStatus = file_exists($dbPath) && is_readable($dbPath) && is_writable($dbPath);
+    // 1. Database Health
+    try {
+        \DB::connection()->getPdo();
+        $dbStatus = true;
+        $dbMsg = 'Connected (PostgreSQL)';
+    } catch (\Exception $e) {
+        $dbStatus = false;
+        $dbMsg = 'Database Connection Error: ' . $e->getMessage();
+    }
     
     // 2. File System Health
     if (!file_exists($uploadsPath)) {
@@ -370,9 +320,9 @@ Route::get('admin/health', function(Request $request) use ($verifyToken) {
         'timestamp' => now()->toIso8601String(),
         'diagnostics' => [
             [
-                'name' => 'JSON Database',
+                'name' => 'Database',
                 'status' => $dbStatus ? 'Healthy' : 'Error',
-                'message' => $dbStatus ? 'Readable/Writable' : 'Permissions issue at storage/app/db.json',
+                'message' => $dbMsg,
                 'id' => 'db'
             ],
             [
@@ -396,3 +346,4 @@ Route::get('admin/health', function(Request $request) use ($verifyToken) {
         ]
     ]);
 });
+

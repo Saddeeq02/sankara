@@ -10,17 +10,18 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id');
             $table->string('name');
-            $table->string('slug')->unique();
+            $table->string('category')->nullable();
             $table->text('description')->nullable();
-            $table->decimal('price', 15, 2)->nullable();
+            $table->string('price')->nullable();
             $table->string('image')->nullable();
-            $table->string('video')->nullable();
+            $table->json('images')->nullable();
+            $table->json('specs')->nullable();
+            $table->string('status')->default('Active');
+            $table->string('task')->nullable();
             $table->timestamps();
-
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
+
     }
 
     public function down(): void

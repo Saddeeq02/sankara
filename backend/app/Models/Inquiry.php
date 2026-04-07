@@ -9,10 +9,6 @@ class Inquiry extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['product_id', 'name', 'email', 'phone', 'message'];
-
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
+    protected $fillable = ['name', 'email', 'subject', 'message', 'status', 'date'];
 }
+

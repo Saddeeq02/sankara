@@ -1,15 +1,47 @@
 services:
+  # --- Web Service (Frontend + Backend) ---
   - type: web
-    name: sankara
-    runtime: docker
+    name: sankara-app
+    env: docker
+    dockerContext: .
+    dockerfilePath: Dockerfile
     plan: free
-    region: ohio # Change as preferred
+    healthCheckPath: /api/auth-check
+    region: ohio
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
-        value: false
+        value: "false"
       - key: APP_KEY
-        generateValue: true # Generates a secure random key
-      - key: PORT
-        value: 80
+        generateValue: true
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: sankara-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: sankara-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: sankara-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: sankara-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: sankara-db
+          property: password
+
+databases:
+  # --- Managed PostgreSQL ---
+  - name: sankara-db
+    plan: free
+    region: ohio
+    databaseName: sankara_prod
+    user: sankara_admin
