@@ -90,7 +90,14 @@ export function renderAdminProducts() {
             <input type="file" name="image[]" accept="image/*" multiple style="width: 100%; padding: 10px; background: var(--admin-bg); color: var(--admin-text); border: 1px dashed var(--admin-border); border-radius: 8px; cursor: pointer;">
           </div>
 
+          <div class="form-group-v2" style="display: flex; align-items: center; gap: 10px; background: rgba(59, 130, 246, 0.05); padding: 15px; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.2);">
+            <input type="checkbox" name="is_new_arrival" id="is_new_arrival_input" style="width: 20px; height: 20px; cursor: pointer;">
+            <label for="is_new_arrival_input" style="cursor: pointer; font-weight: 600; color: var(--admin-text);">Mark as "New Arrival"</label>
+            <span style="font-size: 0.8rem; color: var(--admin-text-muted); margin-left: auto;">Displays a badge on the site</span>
+          </div>
+
           <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 15px; border-top: 1px solid var(--admin-border); padding-top: 20px;">
+
             <button type="button" id="closeModalBtn" style="padding: 12px 25px; background: none; border: 1px solid var(--admin-border); color: var(--admin-text); border-radius: 8px; cursor: pointer; font-weight: 600;">Cancel</button>
             <button type="submit" class="btn-primary" style="padding: 12px 30px; border-radius: 8px; font-weight: 700;">COMMIT CHANGES</button>
           </div>
@@ -167,6 +174,7 @@ export function renderAdminProducts() {
     addForm.specs.value = (product.specs || []).join(', ');
     addForm.task.value = product.task || '';
     addForm.description.value = product.description || '';
+    addForm.is_new_arrival.checked = !!product.is_new_arrival;
     addForm.elements['image[]'].required = false; 
     modal.style.display = 'flex';
   };
@@ -188,6 +196,8 @@ export function renderAdminProducts() {
     submitBtn.disabled = true;
 
     const formData = new FormData(addForm);
+    // Explicitly set boolean string for backend compatibility
+    formData.set('is_new_arrival', addForm.is_new_arrival.checked ? '1' : '0');
     
     // In case we want to support PUT/PATCH via FormData (Laravel convention)
     // if (currentEditId) formData.append('_method', 'POST'); 

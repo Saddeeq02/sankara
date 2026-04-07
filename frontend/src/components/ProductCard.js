@@ -17,10 +17,19 @@ export function renderProductCard(product) {
   card.innerHTML = `
     <div style="height: 280px; position: relative; overflow: hidden; border-bottom: 1px solid var(--glass-border);">
       <img src="${mainImage}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease;" class="card-img-v2">
-      <div style="position: absolute; top: 15px; right: 15px; background: var(--primary-color); color: white; padding: 6px 16px; border-radius: 100px; font-size: 0.7rem; font-weight: 800; z-index: 10; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(0, 21, 91, 0.2);">
+      
+      ${product.is_new_arrival ? `
+        <div class="new-arrival-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          NEW ARRIVAL
+        </div>
+      ` : ''}
+
+      <div style="position: absolute; top: 15px; left: 15px; background: var(--primary-color); color: white; padding: 6px 16px; border-radius: 100px; font-size: 0.7rem; font-weight: 800; z-index: 10; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(0, 21, 91, 0.2);">
         ${product.category || 'Machinery'}
       </div>
       <div class="card-overlay-v2">
+
         <span style="font-weight: 800; font-size: 0.9rem; letter-spacing: 1px;">VIEW TECHNICAL SPECS</span>
       </div>
     </div>

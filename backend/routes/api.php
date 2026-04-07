@@ -22,17 +22,23 @@ $verifyToken = function(Request $request) {
 // PUBLIC ENDPOINTS
 Route::get('products', function(Request $request) {
     $showAll = $request->query('all') === '1';
+    $isNewArrival = $request->query('new_arrival') === '1';
     
     $query = Product::query();
+    
     if (!$showAll) {
         $query->where('status', 'Active');
     }
     
-    $products = $query->get();
+    if ($isNewArrival) {
+        $query->where('is_new_arrival', true);
+    }
     
-    // Auto-Fix Logic for Images is now handled by Eloquent Casts
+    $products = $query->orderBy('created_at', 'desc')->get();
+    
     return response()->json($products);
 });
+
 
 Route::get('gallery', function() {
     return response()->json(GalleryItem::all());
@@ -61,6 +67,7 @@ Route::post('products', function(Request $request) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
     $data = $request->only(['name', 'category', 'price', 'description', 'task']);
+    $data['is_new_arrival'] = $request->input('is_new_arrival') === 'true' || $request->input('is_new_arrival') === '1';
     
     // Handle Specifications
     $specs = $request->input('specs');
@@ -95,6 +102,9 @@ Route::post('products/{id}', function(Request $request, $id) use ($verifyToken) 
     if (!$product) return response()->json(['error' => 'Not Found'], 404);
     
     $updatedData = $request->only(['name', 'category', 'price', 'description', 'task', 'status']);
+    if ($request->has('is_new_arrival')) {
+        $updatedData['is_new_arrival'] = $request->input('is_new_arrival') === 'true' || $request->input('is_new_arrival') === '1';
+    }
     
     // Handle Specs
     if ($request->has('specs')) {

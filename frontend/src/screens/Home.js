@@ -1,13 +1,14 @@
 import { renderNavbar, renderFooter } from '../components/Navigation';
 import { renderAboutSections } from './About';
+import { renderProductCard } from '../components/ProductCard';
 
 export function renderHomeScreen() {
   const container = document.createElement('div');
 
   // Hero Section
   const hero = document.createElement('section');
+  // ... (Hero logic remains same)
   hero.className = 'hero reveal';
-  // ... (rest of hero logic)
   hero.style.backgroundImage = 'url(/assets/hero.png)';
   hero.style.backgroundSize = 'cover';
   hero.style.backgroundPosition = 'center';
@@ -41,8 +42,40 @@ export function renderHomeScreen() {
         <a href="/contact" class="btn-secondary-outline">Get a Quote</a>
       </div>
     </div>
-
   `;
+
+  // New Arrivals Section (Dynamic)
+  const arrivalsSection = document.createElement('section');
+  arrivalsSection.style.padding = '100px 0 60px';
+  arrivalsSection.style.backgroundColor = 'var(--background-color)';
+  arrivalsSection.innerHTML = `
+    <div class="container text-center">
+      <h2 class="reveal" style="font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: var(--primary-color); margin-bottom: 15px; line-height: 1.1;">Latest Machinery</h2>
+      <p class="reveal" style="color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 50px;">Check out our newest stock of tractors and farm implements ready for deployment.</p>
+      <div id="new-arrivals-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; text-align: left;">
+        <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">Syncing with inventory...</div>
+      </div>
+    </div>
+  `;
+
+  const loadNewArrivals = async () => {
+    try {
+      const res = await fetch('/api/products?new_arrival=1');
+      const products = await res.json();
+      const grid = arrivalsSection.querySelector('#new-arrivals-grid');
+      
+      if (products.length > 0) {
+        grid.innerHTML = '';
+        products.slice(0, 3).forEach(p => grid.appendChild(renderProductCard(p)));
+      } else {
+        arrivalsSection.style.display = 'none'; // Hide if no new arrivals
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  loadNewArrivals();
+
 
   // System Count / Stats Section (V2 Redesign)
   const stats = document.createElement('section');
@@ -181,10 +214,12 @@ export function renderHomeScreen() {
 
   container.appendChild(renderNavbar());
   container.appendChild(hero);
+  container.appendChild(arrivalsSection);
   container.appendChild(stats);
   container.appendChild(servicesGrid);
   container.appendChild(aboutWrapper);
   container.appendChild(renderFooter());
+
 
   // Trigger animations after insertion
   setTimeout(() => {
