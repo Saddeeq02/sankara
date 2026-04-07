@@ -16,10 +16,11 @@ fi
 echo "Mapping Nginx to listen on PORT: $PORT"
 sed -i "s/listen 80;/listen $PORT;/g" /etc/nginx/http.d/default.conf
 
-# 🚀 Run Database Migrations
+# 🚀 Run Database Migrations & Seeders
 # ---------------------------------------------------------
-echo "Running database migrations..."
-cd /var/www/backend && php artisan migrate --force
+echo "Running database migrations and seeders..."
+cd /var/www/backend && php artisan migrate --seed --force
+
 
 # 🚀 Start PHP-FPM in background
 # ---------------------------------------------------------
