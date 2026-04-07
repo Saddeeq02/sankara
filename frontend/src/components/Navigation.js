@@ -15,6 +15,9 @@ export function renderNavbar() {
       </div>
 
       <ul class="nav-links" id="nav-menu">
+        <div class="mobile-nav-header" style="padding: 30px 20px; border-bottom: 1px solid var(--glass-border); margin-bottom: 20px; display: none; align-items: center; justify-content: center;">
+          <img src="/assets/logo.png" alt="Sankara Logo" style="height: 35px; object-fit: contain;">
+        </div>
         <li><a href="/" data-route="home" class="nav-link-item">Home</a></li>
         <li><a href="#about" data-route="about" class="nav-link-item">About</a></li>
         <li><a href="/products" data-route="products" class="nav-link-item">Products</a></li>
@@ -22,11 +25,14 @@ export function renderNavbar() {
         <li><a href="/gallery" data-route="gallery" class="nav-link-item">Gallery</a></li>
         <li><a href="/activities" data-route="activities" class="nav-link-item">Activities</a></li>
         <li><a href="/portfolio" data-route="portfolio" class="nav-link-item">Portfolio</a></li>
-        <li><a href="/contact" data-route="contact" class="btn-primary contact-nav-btn">Contact</a></li>
+        <li style="margin-top: auto; padding-top: 20px;">
+          <a href="/contact" data-route="contact" class="btn-primary contact-nav-btn">Contact Us</a>
+        </li>
         <li>
-          <button id="theme-toggle" class="theme-btn">🌙</button>
+          <button id="theme-toggle" class="theme-btn">🌙 Dark Mode</button>
         </li>
       </ul>
+
     </div>
   `;
 
