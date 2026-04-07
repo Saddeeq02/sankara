@@ -31,16 +31,17 @@ export function renderHomeScreen() {
 
   hero.innerHTML = `
     <div class="hero-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1;"></div>
-    <div class="hero-content" style="position: relative; z-index: 2; color: white;">
-      <h1 style="color: white; -webkit-text-fill-color: white;">Driving Agricultural Growth With <br>  Reliable Machinery</h1>
-      <p style="font-size: 1.25rem; font-weight: 500; margin-bottom: 40px; color: #eee;">
+    <div class="hero-content container" style="position: relative; z-index: 2; color: white;">
+      <h1 class="hero-title" style="color: white; -webkit-text-fill-color: white;">Driving Agricultural Growth With <br> Reliable Machinery</h1>
+      <p class="hero-subtitle" style="font-size: 1.25rem; font-weight: 500; margin-bottom: 40px; color: #eee;">
         Empowering Nigerian farmers with premium tractors and high-performance agricultural machinery.
       </p>
-      <div style="display: flex; gap: 20px; justify-content: center;">
+      <div class="hero-btns" style="display: flex; gap: 20px; justify-content: center;">
         <a href="/products" class="btn-primary">Explore Machinery</a>
-        <a href="/contact" style="padding: 12px 30px; border: 2px solid var(--primary-color); border-radius: 50px; text-decoration: none; color: var(--primary-color); font-weight: 600;">Get a Quote</a>
+        <a href="/contact" class="btn-secondary-outline">Get a Quote</a>
       </div>
     </div>
+
   `;
 
   // System Count / Stats Section (V2 Redesign)

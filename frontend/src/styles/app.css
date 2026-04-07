@@ -1122,12 +1122,83 @@ input.theme-input:focus, select.theme-input:focus, textarea.theme-input:focus {
   transform: translateY(-3px);
 }
 
-/* --- Responsive Navigation (Premium Mobile Menu) --- */
-.nav-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 25px;
+/* --- Global Responsiveness Fixes --- */
+html, body {
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hero & Heading Scaling */
+.hero-title {
+  font-size: clamp(2.4rem, 8vw, 4.5rem) !important;
+  line-height: 1.1 !important;
+  margin-bottom: 20px !important;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 4vw, 1.25rem) !important;
+}
+
+/* Force Horizontal Scrolling for Product Filters */
+#category-filters-v2 {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  gap: 12px !important;
+  padding: 10px 5px !important;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+/* Secondary Button Contrast */
+.btn-secondary-outline {
+  padding: 12px 30px;
+  border: 2px solid white;
+  border-radius: 50px;
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+  transition: all 0.3s;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.btn-secondary-outline:hover {
+  background: white;
+  color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .hero-btns {
+    flex-direction: column !important;
+    gap: 15px !important;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .hero-btns a {
+    width: 100% !important;
+    text-align: center;
+  }
+  
+  .premium-glass-card {
+    padding: 25px 20px !important;
+  }
+
+  /* Fix for overlapping cards in other sections */
+  [style*="display: grid"] {
+    gap: 20px !important;
+  }
 }
 
 .nav-logo {
