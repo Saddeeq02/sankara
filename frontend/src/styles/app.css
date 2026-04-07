@@ -113,22 +113,21 @@ section {
   padding: 80px 0;
 }
 
-/* Glassmorphism for Navbar and Cards */
+/* Premium Glass Navbar (Refined) */
 .glass-navbar {
   position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 1200px;
+  top: 0;
+  left: 0;
+  width: 100%;
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   z-index: 1000;
-  border-radius: 50px;
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   transition: all var(--transition-speed);
 }
+
 
 .hero {
   min-height: 100vh;

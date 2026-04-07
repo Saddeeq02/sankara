@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Helpers\JsonDB;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -13,13 +14,9 @@ class AuthController extends Controller
     {
         $credentials = $request->only(['email', 'password']);
         
-        // Find user by email (For now, we compare passwords directly to match current JsonDB behavior)
-        // In a real app, use Hash::check()
-        $user = User::where('email', $credentials['email'])
-                    ->where('password', $credentials['password'])
-                    ->first();
+        $user = User::where('email', $credentials['email'])->first();
 
-        if ($user) {
+        if ($user && Hash::check($credentials['password'], $user->password)) {
             return response()->json([
                 'success' => true, 
                 'api_token' => $user->api_token,
@@ -28,6 +25,7 @@ class AuthController extends Controller
                 ]
             ]);
         }
+
         
         return response()->json(['success' => false, 'message' => 'Invalid credentials'], 401);
     }
