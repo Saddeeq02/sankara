@@ -137,7 +137,8 @@ function createTeamSection() {
         <h2 class="reveal" style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; margin: 15px 0;">Executive Leadership</h2>
         <p class="reveal" style="color: var(--text-muted); font-size: 1.2rem; max-width: 650px; margin: 0 auto;">Visionary professionals driving our decade-long commitment to Nigerian agricultural excellence.</p>
       </div>
-      <div id="team-grid-modern" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px;"></div>
+      <div id="team-grid-modern" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px;"></div>
+
     </div>
   `;
 
@@ -161,11 +162,11 @@ function createTeamSection() {
         <div class="reveal team-card-v3" style="animation-delay: ${index * 0.15}s;">
           <div class="team-img-container-v3">
              <img src="${member.image}" alt="${member.name}" class="team-img-v3">
-             <div class="team-name-badge-v3 ${currentTheme}">${member.name}</div>
           </div>
           <div class="team-content-v3">
-            <h3 class="team-role-v3">${member.role}</h3>
-            <p class="team-phone-v3">${member.phone || 'Representative'}</p>
+            <h3 class="team-role-v3" style="font-size: 1.4rem; color: var(--primary-color); margin-bottom: 5px;">${member.name}</h3>
+            <p class="team-phone-v3" style="text-transform: uppercase; font-size: 0.85rem; font-weight: 800; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px;">${member.role}</p>
+            <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-main); margin-bottom: 20px;">${member.phone || 'Representative'}</div>
             
             <div class="team-icons-v3">
               <span title="Call">${Phone}</span>
@@ -175,6 +176,7 @@ function createTeamSection() {
           </div>
         </div>
       `}).join('');
+
       
       if (window.initAnimations) window.initAnimations();
     } catch (err) { console.error(err); }
