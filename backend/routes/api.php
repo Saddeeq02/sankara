@@ -79,9 +79,8 @@ Route::post('products', function(Request $request) use ($verifyToken) {
         $files = $request->file('image');
         if (!is_array($files)) $files = [$files];
         foreach ($files as $file) {
-            $filename = time() . '_' . uniqid() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
-            $file->move(public_path('uploads'), $filename);
-            $data['images'][] = '/uploads/' . $filename;
+            $base64 = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
+            $data['images'][] = $base64;
         }
         $data['image'] = $data['images'][0]; // Compatibility
     } else {
@@ -118,9 +117,7 @@ Route::post('products/{id}', function(Request $request, $id) use ($verifyToken) 
         $files = $request->file('image');
         if (!is_array($files)) $files = [$files];
         foreach ($files as $file) {
-            $filename = time() . '_' . uniqid() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
-            $file->move(public_path('uploads'), $filename);
-            $newImages[] = '/uploads/' . $filename;
+            $newImages[] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
         }
         $updatedData['images'] = $newImages;
         $updatedData['image'] = $newImages[0]; // Compatibility
@@ -158,9 +155,7 @@ Route::post('gallery', function(Request $request) use ($verifyToken) {
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');
-        $filename = 'gallery_' . time() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
-        $file->move(public_path('uploads'), $filename);
-        $data['image'] = '/uploads/' . $filename;
+        $data['image'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
     } else {
         return response()->json(['error' => 'Image is required'], 422);
     }
@@ -187,9 +182,7 @@ Route::post('portfolio', function(Request $request) use ($verifyToken) {
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');
-        $filename = 'portfolio_' . time() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
-        $file->move(public_path('uploads'), $filename);
-        $data['image'] = '/uploads/' . $filename;
+        $data['image'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
     } else {
         return response()->json(['error' => 'Image is required'], 422);
     }
@@ -216,9 +209,7 @@ Route::post('activities', function(Request $request) use ($verifyToken) {
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');
-        $filename = 'activity_' . time() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
-        $file->move(public_path('uploads'), $filename);
-        $data['image'] = '/uploads/' . $filename;
+        $data['image'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
     }
     
     $activity = Activity::create($data);
@@ -271,9 +262,7 @@ Route::post('team', function(Request $request) use ($verifyToken) {
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');
-        $filename = 'team_' . time() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
-        $file->move(public_path('uploads'), $filename);
-        $data['image'] = '/uploads/' . $filename;
+        $data['image'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
     } else {
         return response()->json(['error' => 'Photo is required'], 422);
     }
@@ -321,11 +310,8 @@ Route::get('admin/health', function(Request $request) use ($verifyToken) {
         $dbMsg = 'Database Connection Error: ' . $e->getMessage();
     }
     
-    // 2. File System Health
-    if (!file_exists($uploadsPath)) {
-        mkdir($uploadsPath, 0755, true);
-    }
-    $uploadsStatus = is_writable($uploadsPath);
+    // 2. File System Health (Bypassed since uploads use database storage)
+    $uploadsStatus = true;
     
     // 3. System Context
     return response()->json([

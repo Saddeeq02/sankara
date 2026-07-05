@@ -6,10 +6,6 @@
             "use": "vercel-php@0.9.0"
         },
         {
-            "src": "api/db_test.php",
-            "use": "vercel-php@0.9.0"
-        },
-        {
             "src": "public/**",
             "use": "@vercel/static"
         }
@@ -18,10 +14,6 @@
         {
             "src": "/build/(.*)",
             "dest": "/public/build/$1"
-        },
-        {
-            "src": "/db-test",
-            "dest": "/api/db_test.php"
         },
         {
             "src": "/(.*)",
