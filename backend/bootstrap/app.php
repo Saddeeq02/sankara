@@ -15,5 +15,12 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->report(function (\Throwable $e) {
+            echo "<h1>ORIGINAL EXCEPTION</h1>";
+            echo "<p><b>Class:</b> " . get_class($e) . "</p>";
+            echo "<p><b>Message:</b> " . $e->getMessage() . "</p>";
+            echo "<p><b>File:</b> " . $e->getFile() . " on line " . $e->getLine() . "</p>";
+            echo "<pre>" . $e->getTraceAsString() . "</pre>";
+            exit;
+        });
     })->create();
