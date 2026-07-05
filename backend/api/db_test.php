@@ -2,31 +2,16 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-echo "PHP Version: " . phpversion() . "<br>";
-echo "Available PDO Drivers: " . implode(', ', PDO::getAvailableDrivers()) . "<br><br>";
-
 try {
-    $host = 'aws-0-eu-central-1.pooler.supabase.com';
-    $port = '6543';
-    $db   = 'postgres';
-    $user = 'postgres.mfbljuhpnkmeckmtxlkn';
-    $pass = "Sankara'website1";
-    $charset = 'utf8';
-
-    $dsn = "pgsql:host=$host;port=$port;dbname=$db";
-    echo "Connecting to DSN: $dsn ...<br>";
-    
-    $pdo = new PDO($dsn, $user, $pass, [
-        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ]);
-    
-    echo "SUCCESS! Connected to Supabase PostgreSQL database successfully.<br>";
-    
-    $stmt = $pdo->query('SELECT version()');
-    $row = $stmt->fetch();
-    echo "Database Version: " . $row['version'] . "<br>";
-    
-} catch (PDOException $e) {
-    echo "CONNECTION FAILED: " . $e->getMessage() . "<br>";
+    if (!defined('LARAVEL_START')) {
+        define('LARAVEL_START', microtime(true));
+    }
+    require __DIR__.'/../vendor/autoload.php';
+    $app = require_once __DIR__.'/../bootstrap/app.php';
+    $app->handleRequest(\Illuminate\Http\Request::capture());
+} catch (\Throwable $e) {
+    echo "<h1>Laravel Boot Exception</h1>";
+    echo "<p><b>Message:</b> " . $e->getMessage() . "</p>";
+    echo "<p><b>File:</b> " . $e->getFile() . " on line " . $e->getLine() . "</p>";
+    echo "<pre>" . $e->getTraceAsString() . "</pre>";
 }
