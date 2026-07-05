@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://sankara-two.vercel.app/api/:path*"
+    }
+  ]
+}
