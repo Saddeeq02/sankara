@@ -13,16 +13,6 @@ use App\Models\TeamMember;
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/auth-check', [AuthController::class, 'check']);
 
-Route::get('/migrate-db', function() {
-    try {
-        // Try simple DB query first
-        \Illuminate\Support\Facades\DB::select('SELECT 1');
-        return response()->json(['success' => true, 'message' => 'DB connected successfully, but migration is manual']);
-    } catch (\Throwable $e) { // Catch Throwable to catch Fatal Errors
-        return response()->json(['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
-    }
-});
-
 // Token Middleware Helper function (Updated for DB)
 $verifyToken = function(Request $request) {
     if (!$request->bearerToken()) return false;
