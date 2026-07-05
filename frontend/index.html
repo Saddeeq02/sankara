@@ -42,11 +42,9 @@
       }
       .splash-tractor {
         position: absolute;
-        width: 80px;
-        height: 80px;
-        color: #ffffff;
+        width: 120px;
+        height: 120px;
         z-index: 10;
-        filter: drop-shadow(0 0 20px rgba(0, 210, 255, 0.5));
         animation: float-tractor 3s ease-in-out infinite;
       }
       .splash-brand {
@@ -124,14 +122,94 @@
           </defs>
         </svg>
 
-        <!-- Clean Tractor Vector SVG -->
-        <svg class="splash-tractor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="6" cy="18" r="4" />
-          <circle cx="18" cy="19" r="2.5" />
-          <path d="M6 14h12l-1.5-6h-6.5L8 14Z" />
-          <path d="M10 8V5h3v3" />
-          <path d="M8 8V6h3.5" />
-          <path d="M16 8V4h1" />
+        <!-- High-Fidelity Blueprint Tractor SVG -->
+        <svg class="splash-tractor" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- Gradients -->
+            <linearGradient id="body-gradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#3b82f6" />
+              <stop offset="100%" stop-color="#00d2ff" />
+            </linearGradient>
+            <linearGradient id="wheel-gradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1e293b" />
+              <stop offset="100%" stop-color="#0f172a" />
+            </linearGradient>
+            <linearGradient id="glow-gradient" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#00d2ff" stop-opacity="0.8" />
+              <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.0" />
+            </linearGradient>
+            
+            <!-- Glow filter -->
+            <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="2.5" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          <!-- Ground Shadow -->
+          <ellipse cx="50" cy="84" rx="30" ry="4" fill="#00d2ff" opacity="0.2" filter="url(#glow)" />
+
+          <!-- Rear Wheel (Big, detailed) -->
+          <g class="rear-wheel">
+            <!-- Outer tire -->
+            <circle cx="32" cy="64" r="18" fill="url(#wheel-gradient)" stroke="#00d2ff" stroke-width="1.5" />
+            <!-- Treads -->
+            <g stroke="#00d2ff" stroke-width="1.2" opacity="0.6">
+              <line x1="32" y1="46" x2="32" y2="49" />
+              <line x1="32" y1="79" x2="32" y2="82" />
+              <line x1="14" y1="64" x2="17" y2="64" />
+              <line x1="47" y1="64" x2="50" y2="64" />
+              <line x1="19" y1="51" x2="22" y2="54" />
+              <line x1="45" y1="77" x2="42" y2="74" />
+              <line x1="45" y1="51" x2="42" y2="54" />
+              <line x1="19" y1="77" x2="22" y2="74" />
+            </g>
+            <!-- Inner Hub -->
+            <circle cx="32" cy="64" r="8" fill="#0f172a" stroke="#00d2ff" stroke-width="1.5" />
+            <circle cx="32" cy="64" r="3.5" fill="#00d2ff" />
+          </g>
+
+          <!-- Front Wheel (Small, detailed) -->
+          <g class="front-wheel">
+            <circle cx="76" cy="70" r="11" fill="url(#wheel-gradient)" stroke="#00d2ff" stroke-width="1.5" />
+            <!-- Hub -->
+            <circle cx="76" cy="70" r="4.5" fill="#0f172a" stroke="#00d2ff" stroke-width="1.5" />
+            <circle cx="76" cy="70" r="1.8" fill="#00d2ff" />
+          </g>
+
+          <!-- Rear Mudguard / Fender -->
+          <path d="M14 64 C14 49, 27 41, 43 45 L41 49 C28 46, 19 52, 19 64 Z" fill="url(#body-gradient)" opacity="0.8" stroke="#00d2ff" stroke-width="1" />
+
+          <!-- Main Body / Engine Hood -->
+          <path d="M41 48 L74 48 L76 58 L76 70 L60 70 L41 58 Z" fill="url(#body-gradient)" stroke="#00d2ff" stroke-width="1.5" />
+          <!-- Engine Hood Details (Grills) -->
+          <g stroke="#050b1e" stroke-width="1.2" opacity="0.6">
+            <line x1="62" y1="53" x2="70" y2="53" />
+            <line x1="60" y1="57" x2="70" y2="57" />
+            <line x1="58" y1="61" x2="70" y2="61" />
+          </g>
+          <!-- Brand stripe/highlight -->
+          <path d="M43 50 L73 50 L74 51.5 L43 51.5 Z" fill="#ffffff" opacity="0.9" />
+
+          <!-- Cabin / ROPS (Canopy support frame) -->
+          <!-- Pillars -->
+          <line x1="33" y1="48" x2="36" y2="24" stroke="#00d2ff" stroke-width="2.2" />
+          <line x1="48" y1="48" x2="48" y2="24" stroke="#00d2ff" stroke-width="1.8" />
+          <line x1="56" y1="48" x2="56" y2="24" stroke="#00d2ff" stroke-width="1.5" />
+          <!-- Roof / Canopy -->
+          <path d="M31 24 L59 23 L57 19 L29 20 Z" fill="url(#body-gradient)" stroke="#00d2ff" stroke-width="1.5" />
+          <!-- Windshield reflection -->
+          <path d="M49 26 L55 26 L55 38 L49 38 Z" fill="#00d2ff" opacity="0.15" />
+
+          <!-- Exhaust Pipe -->
+          <path d="M66 48 L66 26 L69 24" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" />
+          <!-- Exhaust Heat/Smoke Glow -->
+          <circle cx="69" cy="19" r="1.5" fill="#00d2ff" opacity="0.8" filter="url(#glow)" />
+          <circle cx="72" cy="14" r="2.5" fill="#00d2ff" opacity="0.4" filter="url(#glow)" />
+
+          <!-- Front Lights (Glowing) -->
+          <polygon points="74,54 81,52 81,57" fill="#ffffff" filter="url(#glow)" />
+          <path d="M81 50 L95 45 L95 62 Z" fill="url(#glow-gradient)" />
         </svg>
       </div>
 
