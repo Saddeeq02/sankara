@@ -15,10 +15,11 @@ Route::get('/auth-check', [AuthController::class, 'check']);
 
 Route::get('/migrate-db', function() {
     try {
-        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
-        return response()->json(['success' => true, 'output' => \Illuminate\Support\Facades\Artisan::output()]);
-    } catch (\Exception $e) {
-        return response()->json(['error' => $e->getMessage()]);
+        // Try simple DB query first
+        \Illuminate\Support\Facades\DB::select('SELECT 1');
+        return response()->json(['success' => true, 'message' => 'DB connected successfully, but migration is manual']);
+    } catch (\Throwable $e) { // Catch Throwable to catch Fatal Errors
+        return response()->json(['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
     }
 });
 
