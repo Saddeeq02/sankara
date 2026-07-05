@@ -13,6 +13,15 @@ use App\Models\TeamMember;
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/auth-check', [AuthController::class, 'check']);
 
+Route::get('/migrate-db', function() {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        return response()->json(['success' => true, 'output' => \Illuminate\Support\Facades\Artisan::output()]);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()]);
+    }
+});
+
 // Token Middleware Helper function (Updated for DB)
 $verifyToken = function(Request $request) {
     if (!$request->bearerToken()) return false;
