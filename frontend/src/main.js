@@ -179,3 +179,13 @@ const getInitialRoute = () => {
 
 navigate(getInitialRoute());
 
+// Dismiss the Splash Screen after initial load
+const splash = document.getElementById('splash-screen');
+if (splash) {
+  setTimeout(() => {
+    splash.classList.add('fade-out');
+    setTimeout(() => splash.remove(), 600);
+  }, 1000); // 1.0s delay for high-end aesthetic transition
+}
+
+
