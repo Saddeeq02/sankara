@@ -19,6 +19,39 @@ $verifyToken = function(Request $request) {
     return User::where('api_token', $request->bearerToken())->exists();
 };
 
+$uploadToSupabase = function($file) {
+    $projectRef = 'mfbljuhpnkmeckmtxlkn';
+    $anonKey = env('SUPABASE_ANON_KEY');
+    
+    if (!$anonKey) {
+        return 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
+    }
+    
+    $filename = time() . '_' . uniqid() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
+    $url = "https://{$projectRef}.supabase.co/storage/v1/object/uploads/{$filename}";
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, file_get_contents($file->getRealPath()));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        "apikey: {$anonKey}",
+        "Authorization: Bearer {$anonKey}",
+        "Content-Type: " . $file->getMimeType()
+    ]);
+    
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    
+    if ($httpCode === 200 || $httpCode === 201) {
+        return "https://{$projectRef}.supabase.co/storage/v1/object/public/uploads/{$filename}";
+    }
+    
+    return 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
+};
+
 // PUBLIC ENDPOINTS
 Route::get('products', function(Request $request) {
     $showAll = $request->query('all') === '1';
@@ -63,7 +96,7 @@ Route::post('inquiries', function(Request $request) {
 
 
 // PROTECTED ADMIN ENDPOINTS
-Route::post('products', function(Request $request) use ($verifyToken) {
+Route::post('products', function(Request $request) use ($verifyToken, $uploadToSupabase) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
     $data = $request->only(['name', 'category', 'price', 'description', 'task']);
@@ -79,8 +112,7 @@ Route::post('products', function(Request $request) use ($verifyToken) {
         $files = $request->file('image');
         if (!is_array($files)) $files = [$files];
         foreach ($files as $file) {
-            $base64 = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
-            $data['images'][] = $base64;
+            $data['images'][] = $uploadToSupabase($file);
         }
         $data['image'] = $data['images'][0]; // Compatibility
     } else {
@@ -94,7 +126,7 @@ Route::post('products', function(Request $request) use ($verifyToken) {
     return response()->json($product, 201);
 });
 
-Route::post('products/{id}', function(Request $request, $id) use ($verifyToken) {
+Route::post('products/{id}', function(Request $request, $id) use ($verifyToken, $uploadToSupabase) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
     $product = Product::find($id);
@@ -117,7 +149,7 @@ Route::post('products/{id}', function(Request $request, $id) use ($verifyToken) 
         $files = $request->file('image');
         if (!is_array($files)) $files = [$files];
         foreach ($files as $file) {
-            $newImages[] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
+            $newImages[] = $uploadToSupabase($file);
         }
         $updatedData['images'] = $newImages;
         $updatedData['image'] = $newImages[0]; // Compatibility
@@ -148,14 +180,14 @@ Route::delete('products/{id}', function(Request $request, $id) use ($verifyToken
 });
 
 // GALLERY MANAGEMENT
-Route::post('gallery', function(Request $request) use ($verifyToken) {
+Route::post('gallery', function(Request $request) use ($verifyToken, $uploadToSupabase) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
     $data = $request->only(['title', 'category', 'video_url']);
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');
-        $data['image'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
+        $data['image'] = $uploadToSupabase($file);
     } else {
         return response()->json(['error' => 'Image is required'], 422);
     }
@@ -174,7 +206,7 @@ Route::delete('gallery/{id}', function(Request $request, $id) use ($verifyToken)
 
 
 // PORTFOLIO MANAGEMENT
-Route::post('portfolio', function(Request $request) use ($verifyToken) {
+Route::post('portfolio', function(Request $request) use ($verifyToken, $uploadToSupabase) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
     $data = $request->only(['title', 'client', 'year', 'description']);
@@ -182,7 +214,7 @@ Route::post('portfolio', function(Request $request) use ($verifyToken) {
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');
-        $data['image'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
+        $data['image'] = $uploadToSupabase($file);
     } else {
         return response()->json(['error' => 'Image is required'], 422);
     }
@@ -200,7 +232,7 @@ Route::delete('portfolio/{id}', function(Request $request, $id) use ($verifyToke
 });
 
 // ACTIVITIES MANAGEMENT
-Route::post('activities', function(Request $request) use ($verifyToken) {
+Route::post('activities', function(Request $request) use ($verifyToken, $uploadToSupabase) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
     $data = $request->only(['title', 'date', 'summary']);
@@ -209,7 +241,7 @@ Route::post('activities', function(Request $request) use ($verifyToken) {
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');
-        $data['image'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
+        $data['image'] = $uploadToSupabase($file);
     }
     
     $activity = Activity::create($data);
@@ -255,14 +287,14 @@ Route::get('team', function() {
     return response()->json(TeamMember::all());
 });
 
-Route::post('team', function(Request $request) use ($verifyToken) {
+Route::post('team', function(Request $request) use ($verifyToken, $uploadToSupabase) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
     $data = $request->only(['name', 'role', 'phone']);
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');
-        $data['image'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
+        $data['image'] = $uploadToSupabase($file);
     } else {
         return response()->json(['error' => 'Photo is required'], 422);
     }
