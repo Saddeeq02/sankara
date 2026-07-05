@@ -3,531 +3,460 @@ import { renderProductCard } from '../components/ProductCard';
 
 export function renderHomeScreen() {
   const container = document.createElement('div');
-  container.style.backgroundColor = '#030712';
-  container.style.minHeight = '100vh';
+  container.style.backgroundColor = '#ffffff'; // Professional light background for main content
+  container.style.color = '#1e293b';
+  container.style.fontFamily = "'Inter', system-ui, sans-serif";
 
-  // Inject Custom Styles for Bento Grid
+  // Custom Corporate Styles
   const styleTag = document.createElement('style');
   styleTag.textContent = `
-    .bento-layout {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 140px 20px 80px;
-      display: grid;
-      grid-template-columns: 360px 1fr;
-      gap: 30px;
-    }
-    
-    @media (max-width: 1024px) {
-      .bento-layout {
-        grid-template-columns: 1fr;
-        padding-top: 100px;
-      }
-    }
-    
-    /* Branding Panel */
-    .brand-panel {
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.1) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 32px;
-      padding: 45px 35px;
+    /* Hero Section */
+    .corp-hero {
+      position: relative;
+      height: 85vh;
+      min-height: 600px;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      backdrop-filter: blur(20px);
-      position: sticky;
-      top: 120px;
-      height: calc(100vh - 180px);
-      min-height: 500px;
+      align-items: center;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+      overflow: hidden;
     }
     
-    @media (max-width: 1024px) {
-      .brand-panel {
-        position: relative;
-        top: 0;
-        height: auto;
-        min-height: auto;
-        gap: 40px;
-      }
-    }
-    
-    .brand-glow {
+    .corp-hero-overlay {
       position: absolute;
-      top: -100px;
-      left: -100px;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0) 70%);
-      pointer-events: none;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(10, 25, 47, 0.9) 0%, rgba(10, 25, 47, 0.4) 100%);
+      z-index: 1;
     }
     
-    /* Bento Grid */
-    .bento-grid {
+    .corp-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    
+    .corp-hero-title {
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      font-weight: 850;
+      line-height: 1.1;
+      margin-bottom: 25px;
+      color: #ffffff;
+      letter-spacing: -1px;
+    }
+    
+    .corp-hero-subtitle {
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      line-height: 1.6;
+      color: #cbd5e1;
+      margin-bottom: 40px;
+      font-weight: 400;
+    }
+    
+    /* Buttons */
+    .btn-corp-primary {
+      background-color: #ff9f00;
+      color: #0a192f;
+      padding: 16px 36px;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(255, 159, 0, 0.3);
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+    
+    .btn-corp-primary:hover {
+      background-color: #e08b00;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 159, 0, 0.4);
+    }
+    
+    .btn-corp-secondary {
+      background: transparent;
+      color: #ffffff;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      padding: 14px 34px;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      margin-left: 15px;
+    }
+    
+    .btn-corp-secondary:hover {
+      border-color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    /* Floating Stats Bar */
+    .stats-bar {
+      position: relative;
+      margin-top: -60px;
+      z-index: 10;
+      background: #0a192f;
+      color: #fff;
+      border-radius: 8px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: minmax(180px, auto);
-      gap: 25px;
+      gap: 30px;
+      border-bottom: 4px solid #ff9f00;
     }
     
-    @media (max-width: 1200px) {
-      .bento-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    
-    @media (max-width: 640px) {
-      .bento-grid {
+    @media (max-width: 768px) {
+      .stats-bar {
         grid-template-columns: 1fr;
+        margin-top: -20px;
+        padding: 30px;
       }
     }
     
-    /* Card Styles */
-    .bento-card {
-      background: rgba(15, 23, 42, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      border-radius: 28px;
-      padding: 30px;
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(15px);
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                  border-color 0.4s ease, 
-                  box-shadow 0.4s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .stat-item {
+      text-align: center;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
     }
     
-    .bento-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(0, 210, 255, 0.25);
-      box-shadow: 0 20px 40px -20px rgba(0, 210, 255, 0.2);
+    .stat-item:last-child {
+      border-right: none;
     }
     
-    /* Card Sizes */
-    .col-span-2 { grid-column: span 2; }
-    .row-span-2 { grid-row: span 2; }
-    
-    @media (max-width: 1200px) {
-      .col-span-2 { grid-column: span 2; }
-      .row-span-2 { grid-row: span 1; }
+    @media (max-width: 768px) {
+      .stat-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 20px;
+      }
+      .stat-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
     }
     
-    @media (max-width: 640px) {
-      .col-span-2 { grid-column: span 1; }
-      .row-span-2 { grid-row: span 1; }
+    .stat-number {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #ff9f00;
+      line-height: 1;
+      margin-bottom: 5px;
     }
     
-    /* Custom Scrollbar for list card */
-    .bento-list {
-      max-height: 250px;
-      overflow-y: auto;
-      padding-right: 5px;
-    }
-    
-    .bento-list::-webkit-scrollbar {
-      width: 4px;
-    }
-    
-    .bento-list::-webkit-scrollbar-track {
-      background: rgba(255,255,255,0.02);
-    }
-    
-    .bento-list::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.1);
-      border-radius: 4px;
-    }
-    
-    .bento-list::-webkit-scrollbar-thumb:hover {
-      background: rgba(0, 210, 255, 0.3);
-    }
-    
-    /* Interactive Tabs */
-    .bento-tab-btn {
-      background: none;
-      border: none;
-      color: rgba(255, 255, 255, 0.5);
+    .stat-label {
       font-size: 0.85rem;
       font-weight: 700;
-      letter-spacing: 1px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    
+    /* Section Headings */
+    .section-title-corp {
+      font-size: 2.5rem;
+      font-weight: 850;
+      color: #0a192f;
+      margin-bottom: 15px;
+      letter-spacing: -0.5px;
+    }
+    
+    .section-subtitle-corp {
+      font-size: 1.1rem;
+      color: #64748b;
+      max-width: 600px;
+      margin: 0 auto 50px;
+      line-height: 1.6;
+    }
+    
+    /* Fleet Grid */
+    .fleet-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    
+    .fleet-tab-btn {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      color: #475569;
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.9rem;
       cursor: pointer;
-      padding: 6px 12px;
-      border-radius: 8px;
       transition: all 0.3s ease;
     }
     
-    .bento-tab-btn.active {
-      background: rgba(59, 130, 246, 0.1);
-      color: #00d2ff;
+    .fleet-tab-btn.active, .fleet-tab-btn:hover {
+      background: #0a192f;
+      color: #fff;
+      border-color: #0a192f;
     }
     
-    /* Stats */
-    .bento-stat-num {
-      font-size: 3.5rem;
-      font-weight: 900;
-      line-height: 1;
-      background: linear-gradient(135deg, #00d2ff 0%, #3b82f6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 5px;
+    /* Service Card Grid */
+    .service-corp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 50px;
+    }
+    
+    @media (max-width: 968px) {
+      .service-corp-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .service-corp-card {
+      background: #ffffff;
+      border-top: 4px solid #0a192f;
+      padding: 40px 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+      border-radius: 0 0 8px 8px;
+      transition: all 0.3s ease;
+      border-left: 1px solid #f1f5f9;
+      border-right: 1px solid #f1f5f9;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    
+    .service-corp-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      border-top-color: #ff9f00;
+    }
+    
+    .service-num {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #ff9f00;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      display: block;
+    }
+    
+    .service-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #0a192f;
+      margin-bottom: 15px;
+    }
+    
+    .service-desc {
+      font-size: 0.95rem;
+      color: #64748b;
+      line-height: 1.6;
+    }
+    
+    /* Partner CTA Banner */
+    .partner-banner {
+      background: linear-gradient(135deg, #0a192f 0%, #00155b 100%);
+      color: #fff;
+      padding: 80px 60px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 100px;
+    }
+    
+    @media (max-width: 968px) {
+      .partner-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        padding: 60px 30px;
+      }
     }
   `;
   container.appendChild(styleTag);
 
-  // Layout Node
-  const layout = document.createElement('div');
-  layout.className = 'bento-layout';
+  // HERO SECTION (Professional background slider)
+  const hero = document.createElement('section');
+  hero.className = 'corp-hero';
+  hero.style.backgroundImage = 'url(/assets/hero.png)';
+  
+  const bgImages = [
+    '/assets/hero.png',
+    '/assets/gallery_farmers.png',
+    '/assets/portfolio_aerial.png'
+  ];
+  let currentBgIndex = 0;
 
-  // BRAND PANEL (LEFT SIDEBAR)
-  const sidebar = document.createElement('div');
-  sidebar.className = 'brand-panel';
-  sidebar.innerHTML = `
-    <div class="brand-glow"></div>
-    <div>
-      <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(59, 130, 246, 0.1); padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(59, 130, 246, 0.15); margin-bottom: 30px;">
-        <span style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;"></span>
-        <span style="font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; color: rgba(255,255,255,0.7); text-transform: uppercase;">Direct CDN Upload Active</span>
-      </div>
-      <h1 style="font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 950; line-height: 1.05; color: #fff; margin-bottom: 20px;">
-        SANKARA<br><span style="background: linear-gradient(135deg, #00d2ff 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">NIGERIA</span>
-      </h1>
-      <p style="color: rgba(255,255,255,0.55); font-size: 1.05rem; line-height: 1.6; margin-bottom: 30px;">
-        Empowering large-scale agricultural projects with heavy-duty mechanization infrastructure since 1986.
-      </p>
-    </div>
-    
-    <div>
-      <div style="display: flex; gap: 15px; margin-bottom: 25px;">
-        <a href="/products" class="btn-primary" style="flex: 1; text-align: center; font-weight: 700; padding: 14px 20px;">Explore Fleet</a>
-      </div>
-      <div style="font-size: 0.8rem; color: rgba(255,255,255,0.3); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
-        Authorized Massey Ferguson Dealer & Support Network.
-      </div>
-    </div>
-  `;
-
-  // BENTO GRID (RIGHT CONTENT)
-  const grid = document.createElement('div');
-  grid.className = 'bento-grid';
-
-  // 1. Featured Equipment Card (span 2-2)
-  const featuredCard = document.createElement('div');
-  featuredCard.className = 'bento-card col-span-2 row-span-2';
-  featuredCard.style.minHeight = '480px';
-  featuredCard.innerHTML = `
-    <div style="position: absolute; inset: 0; background: radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 60%); pointer-events: none;"></div>
-    <div id="featured-loader" style="position: absolute; inset: 0; background: #0b1120; z-index: 20; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s;">
-      <div style="text-align: center;">
-        <svg class="splash-gear" style="width: 50px; height: 50px; animation: spin 4s linear infinite; opacity: 0.5; margin-bottom: 15px;" viewBox="0 0 100 100" fill="none"><path d="M50 25C36.19 25 25 36.19 25 50C25 63.81 36.19 75 50 75C63.81 75 75 63.81 75 50C75 36.19 63.81 25 50 25ZM50 67C40.61 67 33 59.39 33 50C33 40.61 40.61 33 50 33C59.39 33 67 40.61 67 50C67 59.39 59.39 67 50 67Z" fill="#00d2ff"/></svg>
-        <div style="font-size: 0.85rem; font-weight: 700; color: rgba(255,255,255,0.4); letter-spacing: 1px;">LOADING FLEET...</div>
-      </div>
-    </div>
-    <div id="featured-content" style="opacity: 0; transition: opacity 0.5s; display: flex; flex-direction: column; justify-content: space-between; height: 100%; z-index: 10;">
-      <!-- Header -->
-      <div class="flex-between" style="width:100%;">
-        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; color: #00d2ff; text-transform: uppercase;">FLAGSHIP MACHINERY</span>
-        <div style="display: flex; gap: 5px;">
-          <button class="bento-tab-btn active" data-tab="specs">SPECS</button>
-          <button class="bento-tab-btn" data-tab="task">CAPABILITY</button>
-        </div>
-      </div>
-      
-      <!-- Visuals & Specs -->
-      <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; margin: 30px 0; align-items: center;">
-        <div style="position: relative; border-radius: 20px; overflow: hidden; height: 220px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05);">
-          <img id="featured-img" src="" alt="Featured Machinery" style="width: 100%; height: 100%; object-fit: cover;">
-          <div style="position: absolute; inset:0; background: linear-gradient(to top, rgba(15,23,42,0.8), transparent)"></div>
-        </div>
-        <div>
-          <h2 id="featured-name" style="font-size: 1.8rem; font-weight: 850; color: #fff; margin-bottom: 15px; line-height: 1.1;">-</h2>
-          <div id="featured-tab-content" style="color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.6;">
-            <!-- Dynamic spec table -->
-          </div>
-        </div>
-      </div>
-      
-      <!-- Action -->
-      <div class="flex-between" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
-        <div>
-          <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Estimated Investment</div>
-          <div id="featured-price" style="font-size: 1.35rem; font-weight: 850; color: #10b981;">-</div>
-        </div>
-        <button id="featured-inquire-btn" class="btn-primary" style="padding: 10px 25px; border-radius: 12px; font-weight: 700;">Secure Quote</button>
-      </div>
-    </div>
-  `;
-
-  // 2. Interactive Direct Inquiry Card (span 1-2)
-  const inquiryCard = document.createElement('div');
-  inquiryCard.className = 'bento-card row-span-2';
-  inquiryCard.innerHTML = `
-    <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
-      <div>
-        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; color: #10b981; text-transform: uppercase;">Direct Line</span>
-        <h3 style="font-size: 1.35rem; font-weight: 850; color: #fff; margin: 10px 0 20px;">Instant Quotation</h3>
-        <form id="bento-inquiry-form" style="display: flex; flex-direction: column; gap: 15px;">
-          <input type="text" name="name" placeholder="Your Name" required style="width:100%; padding: 12px; background: rgba(0,0,0,0.25); color:#fff; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; outline:none; font-size: 0.85rem;">
-          <input type="email" name="email" placeholder="Your Email" required style="width:100%; padding: 12px; background: rgba(0,0,0,0.25); color:#fff; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; outline:none; font-size: 0.85rem;">
-          <input type="text" id="inquiry-machinery" name="machinery" placeholder="Machinery Selected" style="width:100%; padding: 12px; background: rgba(0,0,0,0.25); color:#fff; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; outline:none; font-size: 0.85rem;">
-          <textarea name="message" placeholder="Message or specifications required..." required style="width:100%; padding: 12px; height: 110px; background: rgba(0,0,0,0.25); color:#fff; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; outline:none; font-size: 0.85rem; resize:none;"></textarea>
-          <button type="submit" class="btn-primary" style="width:100%; padding:14px; border-radius:10px; font-weight:700; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border:none; box-shadow: 0 4px 15px rgba(16,185,129,0.2);">Transmit Request</button>
-        </form>
-      </div>
-    </div>
-  `;
-
-  // 3. Category Filter Card (span 1-1)
-  const categoryCard = document.createElement('div');
-  categoryCard.className = 'bento-card';
-  categoryCard.innerHTML = `
-    <div>
-      <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; color: rgba(255,255,255,0.4); text-transform: uppercase;">FILTER INVENTORY</span>
-      <h3 style="font-size: 1.2rem; font-weight: 850; color: #fff; margin: 8px 0 20px;">Category Selector</h3>
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <button class="bento-tab-btn active category-btn" data-cat="All" style="text-align: left; padding: 10px 15px; border-radius: 10px; width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); color: #fff;">All Machinery</button>
-        <button class="bento-tab-btn category-btn" data-cat="Tractors" style="text-align: left; padding: 10px 15px; border-radius: 10px; width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); color: #fff;">Tractors</button>
-        <button class="bento-tab-btn category-btn" data-cat="Farm Implements" style="text-align: left; padding: 10px 15px; border-radius: 10px; width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); color: #fff;">Implements</button>
-      </div>
-    </div>
-  `;
-
-  // 4. Logistics & Distribution Card (span 1-1)
-  const logisticsCard = document.createElement('div');
-  logisticsCard.className = 'bento-card';
-  logisticsCard.innerHTML = `
-    <div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
-      <div>
-        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; color: rgba(255,255,255,0.4); text-transform: uppercase;">SUPPORT NETWORK</span>
-        <h3 style="font-size: 1.2rem; font-weight: 850; color: #fff; margin: 8px 0 10px;">Nationwide Reach</h3>
-        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.5;">
-          Strategically deployed hubs in Kano, Abuja, and Lagos to guarantee immediate technical support.
-        </p>
-      </div>
-      <div style="background: rgba(0,210,255,0.05); border: 1px solid rgba(0,210,255,0.1); border-radius: 12px; padding: 10px 15px; display: flex; align-items: center; gap: 10px;">
-        <span style="width: 8px; height: 8px; background: #00d2ff; border-radius: 50%; animation: pulse-text 1.5s infinite;"></span>
-        <span style="font-size: 0.8rem; font-weight: 800; color: #00d2ff;">SPARES ON-DEMAND</span>
-      </div>
-    </div>
-  `;
-
-  // 5. Impact Metrics Card (span 1-1)
-  const impactCard = document.createElement('div');
-  impactCard.className = 'bento-card';
-  impactCard.innerHTML = `
-    <div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
-      <div>
-        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; color: rgba(255,255,255,0.4); text-transform: uppercase;">OUR METRICS</span>
-        <h3 style="font-size: 1.2rem; font-weight: 850; color: #fff; margin: 8px 0 15px;">Proven Performance</h3>
-      </div>
-      <div style="display: flex; gap: 20px; align-items: baseline;">
-        <div>
-          <div class="bento-stat-num">40+</div>
-          <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4); font-weight: 700;">YEARS</div>
-        </div>
-        <div>
-          <div class="bento-stat-num">500+</div>
-          <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4); font-weight: 700;">DELIVERED</div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  // 6. Our Heritage / About Card (span 3-1 or 2-1)
-  const heritageCard = document.createElement('div');
-  heritageCard.className = 'bento-card col-span-2';
-  heritageCard.id = 'about';
-  heritageCard.innerHTML = `
-    <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
-      <div>
-        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; color: #3b82f6; text-transform: uppercase;">Our Legacy</span>
-        <h3 style="font-size: 1.4rem; font-weight: 850; color: #fff; margin: 8px 0 15px;">Building Agricultural Strength</h3>
-        <p style="font-size: 0.95rem; color: rgba(255,255,255,0.55); line-height: 1.6;">
-          Since our inception in 1986, Sankara Nigeria Limited has partnered with corporate farming ventures, government schemes, and smallholders to deliver durable Massey Ferguson machinery and custom technical configurations suited to Nigerian soil conditions.
-        </p>
-      </div>
-      <div style="display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap;">
-        <div style="display:flex; align-items:center; gap: 8px; font-size:0.85rem; font-weight:700; color: #fff;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Genuine Parts Only
-        </div>
-        <div style="display:flex; align-items:center; gap: 8px; font-size:0.85rem; font-weight:700; color: #fff;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Expert Field Operators
-        </div>
-      </div>
-    </div>
-  `;
-
-  // 7. Mini team preview card
-  const teamPreviewCard = document.createElement('div');
-  teamPreviewCard.className = 'bento-card';
-  teamPreviewCard.innerHTML = `
-    <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
-      <div>
-        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; color: rgba(255,255,255,0.4); text-transform: uppercase;">MEET LEADERSHIP</span>
-        <h3 style="font-size: 1.2rem; font-weight: 850; color: #fff; margin: 8px 0 12px;">Executive Board</h3>
-        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.5;">
-          Our leadership board consists of veteran agronomists and mechanical specialists.
-        </p>
-      </div>
-      <a href="/about" class="bento-tab-btn" style="text-align: left; padding:0; color:#3b82f6; font-weight:700; display: inline-flex; align-items: center; gap: 5px;">
-        View Executive Profiles
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </div>
-  `;
-
-  // Assemble Bento
-  grid.appendChild(featuredCard);
-  grid.appendChild(inquiryCard);
-  grid.appendChild(categoryCard);
-  grid.appendChild(logisticsCard);
-  grid.appendChild(impactCard);
-  grid.appendChild(heritageCard);
-  grid.appendChild(teamPreviewCard);
-
-  layout.appendChild(sidebar);
-  layout.appendChild(grid);
-
-  container.appendChild(renderNavbar());
-  container.appendChild(layout);
-  container.appendChild(renderFooter());
-
-  // Interactive Logic
-  let activeCategory = 'All';
-  let activeTab = 'specs';
-  let productsData = [];
-  let featuredIndex = 0;
-
-  const loadBentoProducts = async () => {
-    try {
-      const res = await fetch('/api/products');
-      productsData = await res.json();
-      updateFeaturedProduct();
-      
-      const loader = featuredCard.querySelector('#featured-loader');
-      const content = featuredCard.querySelector('#featured-content');
-      if (loader) loader.style.opacity = '0';
-      if (content) content.style.opacity = '1';
-      setTimeout(() => loader && loader.remove(), 500);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const updateFeaturedProduct = () => {
-    const filtered = activeCategory === 'All' 
-      ? productsData 
-      : productsData.filter(p => p.category === activeCategory);
-
-    const fContent = featuredCard.querySelector('#featured-content');
-    if (filtered.length === 0) {
-      featuredCard.querySelector('#featured-name').textContent = "No stock available";
-      featuredCard.querySelector('#featured-price').textContent = "-";
-      featuredCard.querySelector('#featured-img').src = "https://images.unsplash.com/photo-1594411139708-ba98d5f30e06?auto=format&fit=crop&q=80&w=800";
-      featuredCard.querySelector('#featured-tab-content').innerHTML = "Check back soon for available equipment in this category.";
+  const bgInterval = setInterval(() => {
+    if (!document.body.contains(hero)) {
+      clearInterval(bgInterval);
       return;
     }
+    currentBgIndex = (currentBgIndex + 1) % bgImages.length;
+    hero.style.backgroundImage = `url(${bgImages[currentBgIndex]})`;
+  }, 5000);
 
-    const prod = filtered[featuredIndex % filtered.length] || filtered[0];
+  hero.innerHTML = `
+    <div class="corp-hero-overlay"></div>
+    <div class="container corp-hero-content">
+      <h1 class="corp-hero-title">Pioneering Modern Agricultural Infrastructure</h1>
+      <p class="corp-hero-subtitle">
+        Sankara Nigeria Limited delivers high-performance Massey Ferguson tractors, customized implements, and genuine support network to empower commercial agricultural projects nationwide.
+      </p>
+      <div>
+        <a href="/products" class="btn-corp-primary">View Machinery Fleet</a>
+        <a href="/contact" class="btn-corp-secondary">Request Consultation</a>
+      </div>
+    </div>
+  `;
+
+  // MAIN LAYOUT SECTION (To sit below Hero)
+  const contentSection = document.createElement('div');
+  contentSection.className = 'container';
+  contentSection.style.paddingBottom = '100px';
+
+  // FLOATING STATS BAR
+  const statsBar = document.createElement('div');
+  statsBar.className = 'stats-bar';
+  statsBar.innerHTML = `
+    <div class="stat-item">
+      <div class="stat-number">40+</div>
+      <div class="stat-label">Years of Operation</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">500+</div>
+      <div class="stat-label">Machineries Supplied</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Genuine OEM Parts</div>
+    </div>
+  `;
+  contentSection.appendChild(statsBar);
+
+  // SECTION: LATEST MACHINERY (Clean corporate layout)
+  const fleetSection = document.createElement('section');
+  fleetSection.style.marginTop = '100px';
+  fleetSection.innerHTML = `
+    <div style="text-align: center;">
+      <span style="font-size: 0.85rem; font-weight: 800; color: #ff9f00; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block;">INVENTORY</span>
+      <h2 class="section-title-corp">Featured Equipment</h2>
+      <p class="section-subtitle-corp">Browse our lineup of tractors and heavy machinery currently available for commercial deployment.</p>
+    </div>
     
-    // Update fields
-    featuredCard.querySelector('#featured-name').textContent = prod.name;
-    featuredCard.querySelector('#featured-price').textContent = prod.price || 'Contact for price';
-    featuredCard.querySelector('#featured-img').src = prod.image || "https://images.unsplash.com/photo-1594411139708-ba98d5f30e06?auto=format&fit=crop&q=80&w=800";
+    <div class="fleet-tabs">
+      <button class="fleet-tab-btn active" data-cat="All">All Fleet</button>
+      <button class="fleet-tab-btn" data-cat="Tractors">Tractors</button>
+      <button class="fleet-tab-btn" data-cat="Farm Implements">Implements</button>
+      <button class="fleet-tab-btn" data-cat="Spare Parts">Spare Parts</button>
+    </div>
     
-    // Auto fill inquiry form when featured machinery changes
-    const inquiryField = inquiryCard.querySelector('#inquiry-machinery');
-    if (inquiryField) {
-      inquiryField.value = prod.name;
-    }
+    <div id="fleet-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px;">
+      <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #64748b;">Loading machinery data...</div>
+    </div>
+  `;
+  contentSection.appendChild(fleetSection);
 
-    const specContent = featuredCard.querySelector('#featured-tab-content');
-    if (activeTab === 'specs') {
-      const specsList = prod.specs || [];
-      if (specsList.length > 0) {
-        specContent.innerHTML = `<ul style="padding-left: 20px; margin: 0; display:flex; flex-direction:column; gap: 8px;">
-          ${specsList.map(s => `<li>${s}</li>`).join('')}
-        </ul>`;
-      } else {
-        specContent.innerHTML = `<p style="margin:0;">No technical specifications defined for this equipment model.</p>`;
-      }
-    } else {
-      specContent.innerHTML = `<p style="margin:0; font-style: italic;">"${prod.task || 'Heavy-duty agricultural mechanization support.'}"</p>`;
-    }
-  };
+  // SECTION: PARTNER SERVICES (Grid columns)
+  const servicesSection = document.createElement('section');
+  servicesSection.style.marginTop = '120px';
+  servicesSection.innerHTML = `
+    <div style="text-align: center;">
+      <span style="font-size: 0.85rem; font-weight: 800; color: #ff9f00; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block;">OUR CAPABILITIES</span>
+      <h2 class="section-title-corp">Commercial Mechanization Support</h2>
+      <p class="section-subtitle-corp">We offer end-to-end support to ensure your fleet maintains maximum operational uptime.</p>
+    </div>
+    
+    <div class="service-corp-grid">
+      <div class="service-corp-card">
+        <span class="service-num">01 / FLEET PROCUREMENT</span>
+        <h4 class="service-title">Tractor Sales</h4>
+        <p class="service-desc">Providing certified Massey Ferguson tractors equipped with customized field accessories for optimal output.</p>
+      </div>
+      <div class="service-corp-card">
+        <span class="service-num">02 / SPARE PARTS NETWORK</span>
+        <h4 class="service-title">Genuine OEM Parts</h4>
+        <p class="service-desc">Preventing field downtime with our direct distribution chain of certified replacement filters, tires, and mechanical spares.</p>
+      </div>
+      <div class="service-corp-card">
+        <span class="service-num">03 / TELEMATICS & SUPPORT</span>
+        <h4 class="service-title">Mechanical Training</h4>
+        <p class="service-desc">Deploying on-site mechanics and operators to train local teams and run automated engine checks.</p>
+      </div>
+    </div>
+  `;
+  contentSection.appendChild(servicesSection);
 
-  // Bind category filters
-  categoryCard.querySelectorAll('.category-btn').forEach(btn => {
-    btn.onclick = (e) => {
-      categoryCard.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-      e.target.classList.add('active');
-      activeCategory = e.target.getAttribute('data-cat');
-      featuredIndex = 0;
-      updateFeaturedProduct();
-    };
-  });
+  // SECTION: PARTNERSHIP CTA BANNER
+  const partnerBanner = document.createElement('div');
+  partnerBanner.className = 'partner-banner';
+  partnerBanner.innerHTML = `
+    <div style="max-width: 600px;">
+      <h3 style="font-size: 2rem; font-weight: 850; margin-bottom: 15px; line-height: 1.2;">Discuss Fleet Requirements</h3>
+      <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.6; margin: 0;">
+        Partner with Sankara Nigeria Limited to scale your agricultural infrastructure. Let's arrange a consultation.
+      </p>
+    </div>
+    <div>
+      <a href="/contact" class="btn-corp-primary" style="white-space: nowrap;">Contact Corporate Office</a>
+    </div>
+  `;
+  contentSection.appendChild(partnerBanner);
 
-  // Bind tabs
-  featuredCard.querySelectorAll('.bento-tab-btn').forEach(btn => {
-    btn.onclick = (e) => {
-      featuredCard.querySelectorAll('.bento-tab-btn').forEach(b => b.classList.remove('active'));
-      e.target.classList.add('active');
-      activeTab = e.target.getAttribute('data-tab');
-      updateFeaturedProduct();
-    };
-  });
+  // Assemble Main Page
+  container.appendChild(renderNavbar());
+  container.appendChild(hero);
+  container.appendChild(contentSection);
+  container.appendChild(renderFooter());
 
-  // Inquire button focus
-  featuredCard.querySelector('#featured-inquire-btn').onclick = () => {
-    const form = inquiryCard.querySelector('#bento-inquiry-form');
-    if (form) {
-      form.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      form.name.focus();
-      // Visual feedback
-      inquiryCard.style.borderColor = 'rgba(16, 185, 129, 0.6)';
-      setTimeout(() => {
-        inquiryCard.style.borderColor = 'rgba(255, 255, 255, 0.04)';
-      }, 2000);
-    }
-  };
-
-  // Inquiry Form Submission
-  const inquiryForm = inquiryCard.querySelector('#bento-inquiry-form');
-  inquiryForm.onsubmit = async (e) => {
-    e.preventDefault();
-    const btn = inquiryForm.querySelector('button[type="submit"]');
-    btn.disabled = true;
-    btn.textContent = 'Transmitting...';
-
-    const payload = {
-      name: inquiryForm.name.value,
-      email: inquiryForm.email.value,
-      machinery: inquiryForm.machinery.value,
-      message: inquiryForm.message.value
-    };
-
+  // Interactive Product Fetch and Filtering
+  let allProducts = [];
+  const loadFleetData = async () => {
     try {
-      const res = await fetch('/api/inquiries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if (res.ok) {
-        alert('Your inquiry has been logged! Our sales representatives will reach out shortly.');
-        inquiryForm.reset();
-      } else {
-        alert('Failed to submit inquiry. Please try again.');
-      }
+      const res = await fetch('/api/products');
+      allProducts = await res.json();
+      renderFilteredFleet('All');
     } catch (err) {
-      alert('Connection error.');
-    } finally {
-      btn.disabled = false;
-      btn.textContent = 'Transmit Request';
+      console.error("Failed to load products: ", err);
     }
   };
 
-  loadBentoProducts();
+  const renderFilteredFleet = (cat) => {
+    const grid = fleetSection.querySelector('#fleet-grid');
+    const filtered = cat === 'All' 
+      ? allProducts.slice(0, 6) 
+      : allProducts.filter(p => p.category === cat).slice(0, 6);
+      
+    if (filtered.length > 0) {
+      grid.innerHTML = '';
+      filtered.forEach(p => grid.appendChild(renderProductCard(p)));
+    } else {
+      grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: #64748b; border: 1px dashed #e2e8f0; border-radius: 8px;">No machinery in this category is currently listed.</div>`;
+    }
+  };
+
+  // Bind Fleet Tab Filter Buttons
+  fleetSection.querySelectorAll('.fleet-tab-btn').forEach(btn => {
+    btn.onclick = (e) => {
+      fleetSection.querySelectorAll('.fleet-tab-btn').forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      const cat = e.target.getAttribute('data-cat');
+      renderFilteredFleet(cat);
+    };
+  });
+
+  loadFleetData();
+
+  // Trigger animations after insertion
+  setTimeout(() => {
+    if (window.initAnimations) {
+      window.initAnimations();
+    }
+  }, 100);
 
   return container;
 }
