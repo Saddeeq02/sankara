@@ -23,8 +23,76 @@ $uploadToSupabase = function($file) {
     $projectRef = 'mfbljuhpnkmeckmtxlkn';
     $anonKey = env('SUPABASE_ANON_KEY');
     
+    // Server-side Image Compression
+    $compressImage = function($filePath, $mimeType) {
+        list($width, $height) = getimagesize($filePath);
+        if (!$width || !$height) return file_get_contents($filePath);
+        
+        $maxDim = 1000;
+        if ($width > $maxDim || $height > $maxDim) {
+            $ratio = $width / $height;
+            if ($ratio > 1) {
+                $newWidth = $maxDim;
+                $newHeight = $maxDim / $ratio;
+            } else {
+                $newHeight = $maxDim;
+                $newWidth = $maxDim * $ratio;
+            }
+        } else {
+            $newWidth = $width;
+            $newHeight = $height;
+        }
+        
+        $src = null;
+        if ($mimeType === 'image/jpeg' || $mimeType === 'image/jpg') {
+            $src = @imagecreatefromjpeg($filePath);
+        } elseif ($mimeType === 'image/png') {
+            $src = @imagecreatefrompng($filePath);
+        } elseif ($mimeType === 'image/gif') {
+            $src = @imagecreatefromgif($filePath);
+        } elseif ($mimeType === 'image/webp') {
+            $src = @imagecreatefromwebp($filePath);
+        }
+        
+        if (!$src) return file_get_contents($filePath);
+        
+        $dst = imagecreatetruecolor($newWidth, $newHeight);
+        
+        if ($mimeType === 'image/png' || $mimeType === 'image/gif') {
+            imagealphablending($dst, false);
+            imagesavealpha($dst, true);
+            $transparent = imagecolorallocatealpha($dst, 255, 255, 255, 127);
+            imagefilledrectangle($dst, 0, 0, $newWidth, $newHeight, $transparent);
+        }
+        
+        imagecopyresampled($dst, $src, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        
+        ob_start();
+        if ($mimeType === 'image/png') {
+            imagepng($dst, null, 7);
+        } elseif ($mimeType === 'image/gif') {
+            imagegif($dst);
+        } elseif ($mimeType === 'image/webp') {
+            imagewebp($dst, null, 75);
+        } else {
+            imagejpeg($dst, null, 75);
+        }
+        $compressedData = ob_get_clean();
+        
+        imagedestroy($src);
+        imagedestroy($dst);
+        
+        return $compressedData;
+    };
+
+    try {
+        $fileData = $compressImage($file->getRealPath(), $file->getMimeType());
+    } catch (\Exception $e) {
+        $fileData = file_get_contents($file->getRealPath());
+    }
+
     if (!$anonKey) {
-        return 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
+        return 'data:' . $file->getMimeType() . ';base64,' . base64_encode($fileData);
     }
     
     $filename = time() . '_' . uniqid() . '_' . str_replace(' ', '_', $file->getClientOriginalName());
@@ -34,7 +102,7 @@ $uploadToSupabase = function($file) {
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-    curl_setopt($ch, CURLOPT_POSTFIELDS, file_get_contents($file->getRealPath()));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fileData);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         "apikey: {$anonKey}",
         "Authorization: Bearer {$anonKey}",
@@ -49,7 +117,7 @@ $uploadToSupabase = function($file) {
         return "https://{$projectRef}.supabase.co/storage/v1/object/public/uploads/{$filename}";
     }
     
-    return 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
+    return 'data:' . $file->getMimeType() . ';base64,' . base64_encode($fileData);
 };
 
 // PUBLIC ENDPOINTS
