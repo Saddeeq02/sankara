@@ -477,6 +477,79 @@ export function renderHomeScreen() {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    /* Partner logos redesign */
+    .partner-logos-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin: 40px auto 30px;
+      max-width: 1100px;
+    }
+    
+    @media (max-width: 968px) {
+      .partner-logos-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .partner-logos-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .partner-card {
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 20px;
+      padding: 35px 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.015);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      min-height: 130px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .partner-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.02) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .partner-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05), 0 0 15px rgba(16, 185, 129, 0.05);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .partner-card:hover::before {
+      opacity: 1;
+    }
+
+    .partner-card img {
+      max-height: 50px;
+      width: auto;
+      max-width: 90%;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.65;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .partner-card:hover img {
+      filter: grayscale(0%);
+      opacity: 1;
+      transform: scale(1.05);
+    }
   `;
   container.appendChild(styleTag);
 
@@ -869,22 +942,18 @@ export function renderHomeScreen() {
           Sankara Nigeria Limited is proud to collaborate with global leaders in agricultural machinery and industrial power. As authorized distributors and engineering partners, we deliver genuine products, specialized maintenance support, and custom-fit parts supply chains across the region.
         </p>
 
-        <div class="partner-logos-grid" style="display: flex; justify-content: center; align-items: center; gap: 70px; flex-wrap: wrap; margin-bottom: 30px; padding: 40px 20px; background: rgba(248, 250, 252, 0.6); border: 1px solid rgba(226, 232, 240, 0.8); border-radius: 24px; backdrop-filter: blur(10px);">
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 140px;">
-            <img src="/assets/brand_lovol.png" alt="Lovol" style="height: 60px; object-fit: contain; transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-            <span style="font-size: 0.75rem; font-weight: 700; color: #64748b; letter-spacing: 1px; text-transform: uppercase;">Official Distributor</span>
+        <div class="partner-logos-grid">
+          <div class="partner-card">
+            <img src="/assets/brand_lovol.png" alt="Lovol">
           </div>
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 140px;">
-            <img src="/assets/brand_zoomlion.png" alt="Zoomlion" style="height: 60px; object-fit: contain; transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-            <span style="font-size: 0.75rem; font-weight: 700; color: #64748b; letter-spacing: 1px; text-transform: uppercase;">Machinery Partner</span>
+          <div class="partner-card">
+            <img src="/assets/brand_zoomlion.png" alt="Zoomlion">
           </div>
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 140px;">
-            <img src="/assets/brand_senci.png" alt="Senci" style="height: 60px; object-fit: contain; transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-            <span style="font-size: 0.75rem; font-weight: 700; color: #64748b; letter-spacing: 1px; text-transform: uppercase;">Power Systems</span>
+          <div class="partner-card">
+            <img src="/assets/brand_senci.png" alt="Senci">
           </div>
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 140px;">
-            <img src="/assets/brand_massey.png" alt="Massey Ferguson" style="height: 70px; object-fit: contain; transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-            <span style="font-size: 0.75rem; font-weight: 700; color: #64748b; letter-spacing: 1px; text-transform: uppercase;">Tractor Sourcing</span>
+          <div class="partner-card">
+            <img src="/assets/brand_massey.png" alt="Massey Ferguson">
           </div>
         </div>
       </div>
