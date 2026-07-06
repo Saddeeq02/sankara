@@ -112,17 +112,15 @@ export function renderHomeScreen() {
       height: auto;
       object-fit: contain;
       opacity: 0;
-      transform: translateX(40px) scale(0.95);
-      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), 
-                  transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-      mix-blend-mode: screen;
+      transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(0.95);
+      transition: opacity 0.8s ease-in-out, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
       z-index: 2;
       pointer-events: none;
     }
     
     .visual-slide.active {
       opacity: 1;
-      transform: translateX(0) scale(1);
+      transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1);
       pointer-events: auto;
     }
     
@@ -380,7 +378,28 @@ export function renderHomeScreen() {
   const heroSec = document.createElement('section');
   heroSec.className = 'hero-sec';
   
-  // Slideshow Logic for the 3D Machinery
+  // Dynamic Background Images fading behind the green gradient overlay
+  const bgImages = [
+    '/assets/hero.png',
+    '/assets/gallery_farmers.png',
+    '/assets/portfolio_aerial.png'
+  ];
+  let currentBgIndex = 0;
+  heroSec.style.backgroundImage = `url(${bgImages[currentBgIndex]})`;
+  heroSec.style.backgroundSize = 'cover';
+  heroSec.style.backgroundPosition = 'center';
+  heroSec.style.transition = 'background-image 1.5s ease-in-out';
+  
+  const bgInterval = setInterval(() => {
+    if (!document.body.contains(heroSec)) {
+      clearInterval(bgInterval);
+      return;
+    }
+    currentBgIndex = (currentBgIndex + 1) % bgImages.length;
+    heroSec.style.backgroundImage = `url(${bgImages[currentBgIndex]})`;
+  }, 5000);
+
+  // Slideshow Logic for the 3D Lovol Machinery
   let currentSlide = 0;
   const slideshowInterval = setInterval(() => {
     if (!document.body.contains(heroSec)) {
@@ -390,6 +409,10 @@ export function renderHomeScreen() {
     const tractor = heroSec.querySelector('#hero-tractor');
     const harvester = heroSec.querySelector('#hero-harvester');
     
+    // Reset transforms before toggling slide
+    if (tractor) tractor.style.transform = '';
+    if (harvester) harvester.style.transform = '';
+
     if (currentSlide === 0) {
       if (tractor) tractor.classList.remove('active');
       if (harvester) harvester.classList.add('active');
@@ -399,19 +422,90 @@ export function renderHomeScreen() {
       if (tractor) tractor.classList.add('active');
       currentSlide = 0;
     }
-  }, 4500);
+  }, 5000);
+
+  // Canvas transparentizer helper
+  const makeImageTransparent = (imgElement, srcUrl) => {
+    const img = new Image();
+    img.src = srcUrl;
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      
+      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imgData.data;
+      
+      // Filter white background pixels
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i];
+        const g = data[i+1];
+        const b = data[i+2];
+        if (r > 240 && g > 240 && b > 240) {
+          data[i+3] = 0; // Transparent
+        }
+      }
+      ctx.putImageData(imgData, 0, 0);
+      imgElement.src = canvas.toDataURL();
+    };
+  };
+
+  // Bind transparency and 3D touch/hover rotate
+  setTimeout(() => {
+    const tractorImg = heroSec.querySelector('#hero-tractor');
+    const harvesterImg = heroSec.querySelector('#hero-harvester');
+    if (tractorImg) makeImageTransparent(tractorImg, '/assets/lovol_tractor_754h.png');
+    if (harvesterImg) makeImageTransparent(harvesterImg, '/assets/lovol_harvester_rg109plus.png');
+
+    const container = heroSec.querySelector('.hero-visual');
+    if (!container) return;
+
+    const handleMove = (e) => {
+      const rect = container.getBoundingClientRect();
+      const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+      const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+      
+      if (!clientX || !clientY) return;
+
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      
+      // Rotate between -15deg and +15deg
+      const rotateX = -((y / rect.height) - 0.5) * 30;
+      const rotateY = ((x / rect.width) - 0.5) * 30;
+      
+      const activeSlide = container.querySelector('.visual-slide.active');
+      if (activeSlide) {
+        activeSlide.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.08)`;
+      }
+    };
+
+    const handleReset = () => {
+      const activeSlide = container.querySelector('.visual-slide.active');
+      if (activeSlide) {
+        activeSlide.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+      }
+    };
+
+    container.addEventListener('mousemove', handleMove);
+    container.addEventListener('mouseleave', handleReset);
+    container.addEventListener('touchmove', handleMove, { passive: true });
+    container.addEventListener('touchend', handleReset);
+  }, 100);
 
   heroSec.innerHTML = `
-    <div class="corp-hero-overlay" style="background: linear-gradient(135deg, rgba(2, 44, 34, 0.95) 0%, rgba(2, 44, 34, 0.75) 100%);"></div>
+    <div class="corp-hero-overlay" style="background: linear-gradient(135deg, rgba(2, 44, 34, 0.88) 0%, rgba(2, 44, 34, 0.72) 100%);"></div>
     <div class="container hero-grid">
       <div class="hero-content-block">
         <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.15); padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(16, 185, 129, 0.2); margin-bottom: 25px;">
           <span style="width: 8px; height: 8px; background: #34d399; border-radius: 50%; box-shadow: 0 0 10px #34d399;"></span>
           <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; color: #34d399; text-transform: uppercase;">Heavy-Duty Mechanization</span>
         </div>
-        <h1 class="hero-title-main">Driving Growth With <span>Reliable Machinery</span></h1>
+        <h1 class="hero-title-main">Driving Growth With <span>Lovol Machinery</span></h1>
         <p class="hero-desc">
-          Sankara Nigeria Limited is a certified distributor of high-performance Massey Ferguson tractors and farm implements, engineering durable mechanization models for corporate and smallholder farms across Nigeria.
+          Sankara Nigeria Limited is a certified distributor of high-performance Lovol tractors (754-H) and Lovol combine harvesters (RG109Plus), engineering durable mechanization models for corporate and smallholder farms across Nigeria.
         </p>
         <div style="display: flex; flex-wrap: wrap; gap: 15px;">
           <a href="/products" class="btn-main-green">
@@ -422,13 +516,13 @@ export function renderHomeScreen() {
         </div>
       </div>
       
-      <div class="hero-visual">
+      <div class="hero-visual" style="cursor: grab;">
         <svg class="floating-gear-bg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="top:-50px; right:-20px; width:180px; height:180px;">
           <path d="M50 25C36.19 25 25 36.19 25 50C25 63.81 36.19 75 50 75C63.81 75 75 63.81 75 50C75 36.19 63.81 25 50 25ZM50 67C40.61 67 33 59.39 33 50C33 40.61 40.61 33 50 33C59.39 33 67 40.61 67 50C67 59.39 59.39 67 50 67Z" fill="#34d399"/>
         </svg>
         <div class="machinery-shadow"></div>
-        <img id="hero-tractor" class="visual-slide active" src="/assets/3d_red_tractor.png" alt="3D Massey Ferguson Tractor">
-        <img id="hero-harvester" class="visual-slide" src="/assets/3d_combine_harvester.png" alt="3D Combine Harvester">
+        <img id="hero-tractor" class="visual-slide active" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Tractor 754-H">
+        <img id="hero-harvester" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Combine Harvester RG109Plus">
       </div>
     </div>
   `;
