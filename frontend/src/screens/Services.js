@@ -1,73 +1,669 @@
 import { renderNavbar, renderFooter } from '../components/Navigation';
-import { Settings, Wrench, Package, Truck, GraduationCap, Phone, Zap, ShieldCheck, ArrowRight } from 'lucide-static';
 
 export function renderServicesScreen() {
   const container = document.createElement('div');
+  container.className = 'services-root';
 
-  // 1. Hero Section (Premium V2)
-  const hero = document.createElement('header');
-  hero.style.padding = '180px 0 100px';
-  hero.style.textAlign = 'center';
-  hero.style.background = 'var(--background-color)';
-  hero.innerHTML = `
-    <div class="container">
-      <span class="reveal" style="color: var(--primary-color); font-weight: 800; text-transform: uppercase; letter-spacing: 4px; display: block; margin-bottom: 20px;">Precision Engineering</span>
-      <h1 class="reveal" style="font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 25px;">Sustaining <br><span style="color: var(--primary-color);">Agricultural Assets</span></h1>
-      <p class="reveal" style="color: var(--text-muted); font-size: 1.25rem; max-width: 700px; margin: 0 auto; line-height: 1.8;">
-        From factory-backed maintenance to nationwide parts delivery, we provide the technical foundation for Nigeria's largest mechanized farms.
-      </p>
+  // Inject Custom Stylesheet
+  const styleTag = document.createElement('style');
+  styleTag.textContent = `
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
+    
+    .services-root {
+      font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+      overflow-x: hidden;
+      background: #ffffff;
+      color: #0f172a;
+    }
+    
+    .services-hero {
+      background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #022c22 100%);
+      color: #ffffff;
+      padding: 180px 0 130px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+    }
+    
+    .services-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.18), transparent 70%),
+                  radial-gradient(circle at bottom left, rgba(52, 211, 153, 0.12), transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .services-hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 3;
+    }
+
+    @media (max-width: 968px) {
+      .services-hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+
+    .services-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.15);
+      padding: 8px 16px;
+      border-radius: 100px;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      margin-bottom: 25px;
+      color: #34d399;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .services-hero-title {
+      font-size: clamp(2.8rem, 5.5vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      margin-bottom: 25px;
+      color: #ffffff;
+    }
+
+    .services-hero-title span {
+      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .services-hero-desc {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #d1fae5;
+      margin-bottom: 40px;
+      max-width: 620px;
+    }
+
+    @media (max-width: 968px) {
+      .services-hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .hero-graphic-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-glowing-circle {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.14) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(30px);
+      z-index: 1;
+    }
+
+    .hero-abstract-svg {
+      position: relative;
+      z-index: 2;
+      animation: float-slow-serv 6s ease-in-out infinite;
+      filter: drop-shadow(0 15px 35px rgba(2, 44, 34, 0.4));
+      max-width: 100%;
+    }
+
+    @keyframes float-slow-serv {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(4deg); }
+    }
+
+    /* Core Services Grid Layout */
+    .services-showcase {
+      padding: 120px 0;
+      background: #ffffff;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-badge {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #059669;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-weight: 850;
+      color: #0f172a;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+      line-height: 1.15;
+    }
+
+    .section-desc {
+      color: #475569;
+      font-size: 1.1rem;
+      max-width: 750px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .services-grid-9 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    @media (max-width: 1024px) {
+      .services-grid-9 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .services-grid-9 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Service Card Styling */
+    .service-premium-card {
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 24px;
+      padding: 45px 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.015);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-premium-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #10b981, #34d399);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .service-premium-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.05), 0 0 25px rgba(16, 185, 129, 0.02);
+      border-color: rgba(16, 185, 129, 0.25);
+    }
+
+    .service-premium-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .service-card-icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: rgba(16, 185, 129, 0.08);
+      color: #059669;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .service-premium-card:hover .service-card-icon-box {
+      background: #059669;
+      color: #ffffff;
+      transform: scale(1.08) rotate(5deg);
+      box-shadow: 0 5px 15px rgba(5, 150, 105, 0.2);
+    }
+
+    .service-card-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .service-card-desc {
+      font-size: 0.96rem;
+      line-height: 1.6;
+      color: #475569;
+      margin-bottom: 25px;
+      flex-grow: 1;
+    }
+
+    .service-card-points {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 20px;
+    }
+
+    .service-card-point {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .service-card-point-dot {
+      width: 6px;
+      height: 6px;
+      background: #34d399;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #34d399;
+    }
+
+    /* Why Choose Us Section */
+    .sec-why-choose {
+      padding: 120px 0;
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .why-choose-layout {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    @media (max-width: 968px) {
+      .why-choose-layout {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+    }
+
+    .why-choose-feature {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 24px;
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 20px;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
+      transition: all 0.3s ease;
+    }
+
+    .why-choose-feature:hover {
+      transform: translateX(6px);
+      border-color: rgba(16, 185, 129, 0.25);
+    }
+
+    .why-choose-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-weight: bold;
+    }
+
+    .why-choose-feat-title {
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+
+    .why-choose-feat-desc {
+      font-size: 0.94rem;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    /* Stats Grid */
+    .why-choose-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .why-stat-card {
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      border-radius: 24px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.01);
+      transition: all 0.3s ease;
+    }
+    
+    .why-stat-card:hover {
+      border-color: rgba(16, 185, 129, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .why-stat-num {
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: #059669;
+      line-height: 1;
+      margin-bottom: 10px;
+      letter-spacing: -1px;
+    }
+
+    .why-stat-label {
+      font-size: 0.85rem;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #64748b;
+    }
+
+    /* Training Programs Section */
+    .sec-training {
+      padding: 120px 0;
+      background: #022c22;
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sec-training::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+      top: -200px;
+      right: -200px;
+      pointer-events: none;
+    }
+
+    .training-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 60px;
+    }
+
+    @media (max-width: 968px) {
+      .training-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .training-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      border-radius: 24px;
+      padding: 45px 35px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .training-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.04) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .training-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(16, 185, 129, 0.35);
+      background: rgba(255, 255, 255, 0.035);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .training-card:hover::before {
+      opacity: 1;
+    }
+
+    .training-card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: rgba(16, 185, 129, 0.12);
+      color: #34d399;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+      transition: all 0.4s ease;
+    }
+
+    .training-card:hover .training-card-icon {
+      background: #10b981;
+      color: #ffffff;
+      transform: scale(1.08) rotate(5deg);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .training-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 15px;
+    }
+
+    .training-desc {
+      font-size: 1.02rem;
+      line-height: 1.6;
+      color: #d1fae5;
+      margin-bottom: 30px;
+      flex-grow: 1;
+    }
+
+    .training-points {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border-top: 1px solid rgba(16, 185, 129, 0.15);
+      padding-top: 25px;
+    }
+
+    .training-point {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #a7f3d0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Premium CTA */
+    .sec-cta-serv {
+      padding: 120px 0 140px;
+      background: #ffffff;
+    }
+
+    .cta-card-serv {
+      background: linear-gradient(135deg, #022c22 0%, #064e3b 100%);
+      border-radius: 32px;
+      padding: 80px;
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0 40px 80px -20px rgba(2, 44, 34, 0.3);
+    }
+
+    .cta-card-serv::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1), transparent 70%);
+      pointer-events: none;
+    }
+
+    @media (max-width: 968px) {
+      .cta-card-serv {
+        padding: 50px 30px;
+      }
+    }
+  `;
+  container.appendChild(styleTag);
+
+  // 1. HERO SECTION
+  const heroSec = document.createElement('header');
+  heroSec.className = 'services-hero';
+  heroSec.innerHTML = `
+    <div class="container services-hero-grid">
+      <div>
+        <div class="services-hero-badge">Premium Agricultural Services</div>
+        <h1 class="services-hero-title">Expert Solutions for <span>Modern Farming</span></h1>
+        <p class="services-hero-desc">
+          From maintenance to training, we deliver comprehensive agricultural services that keep your operations running smoothly and efficiently.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+          <a href="/contact" class="btn-main-green" data-route="contact">Get Started</a>
+          <a href="/products" class="btn-main-outline" data-route="products" style="border-color: #ffffff; color: #ffffff;">View Products</a>
+        </div>
+      </div>
+      <div class="hero-graphic-wrapper">
+        <div class="hero-glowing-circle"></div>
+        <svg class="hero-abstract-svg" width="340" height="340" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer Gear -->
+          <path d="M100 35C64.1 35 35 64.1 35 100C35 135.9 64.1 165 100 165C135.9 165 165 135.9 165 100C165 64.1 135.9 35 100 35ZM100 148C73.5 148 52 126.5 52 100C52 73.5 73.5 52 100 52C126.5 52 148 73.5 148 100C148 126.5 126.5 148 100 148Z" fill="#34d399" opacity="0.8"/>
+          <!-- Inner Planet Grid -->
+          <circle cx="100" cy="100" r="32" stroke="#10b981" stroke-width="2.5" stroke-dasharray="6 4"/>
+          <!-- Orbit nodes -->
+          <circle cx="100" cy="68" r="6" fill="#34d399"/>
+          <circle cx="132" cy="100" r="4" fill="#10b981"/>
+          <circle cx="100" cy="132" r="5" fill="#34d399"/>
+          <circle cx="68" cy="100" r="6.5" fill="#10b981"/>
+          <!-- Central core -->
+          <circle cx="100" cy="100" r="14" fill="#ffffff"/>
+          <circle cx="100" cy="100" r="8" fill="#10b981"/>
+        </svg>
+      </div>
     </div>
   `;
 
-  // 2. Core Service Grid (V2 Glassmorphism)
+  // 2. CORE SERVICE GRID (9 services)
   const serviceGrid = document.createElement('section');
-  serviceGrid.style.padding = '100px 0';
-  serviceGrid.style.background = 'var(--background-color)';
+  serviceGrid.className = 'services-showcase';
   
   const services = [
     {
-      icon: Settings,
-      title: 'Technical Maintenance',
-      desc: 'Full-service maintenance, engine diagnostics, and major overhauls by certified factory technicians using the latest calibration tools.',
-      features: ['Diagnostics', 'Engine Overhaual', 'System Calibration']
+      title: 'Tractor Maintenance & Repairs',
+      desc: 'Professional maintenance and repair services by certified technicians. Keep your tractors running at peak performance with scheduled maintenance and emergency repairs.',
+      points: ['24/7 Emergency Support', 'Certified Technicians', 'Genuine Parts Only'],
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`
     },
     {
-      icon: Package,
-      title: 'Genuine OEM Parts',
-      desc: '100% authentic Massey Ferguson and OEM parts distribution with a nationwide logistics network for mission-critical delivery.',
-      features: ['Nationwide Delivery', 'Authentic OEM', 'Bulk Supply']
+      title: 'Farm Implements Installation',
+      desc: 'Expert installation and setup of all farm implements including ploughs, harrows, sprayers, and cultivation equipment. Proper installation ensures optimal performance.',
+      points: ['Professional Setup', 'Performance Testing', 'Usage Training'],
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`
     },
     {
-      icon: Wrench,
-      title: 'Implements Installation',
-      desc: 'Expert setup and field calibration of ploughs, harrows, and specialized cultivation equipment for optimal field energy efficiency.',
-      features: ['Field Calibration', 'Mounting', 'Optimal Setup']
+      title: 'Agricultural Training Sessions',
+      desc: 'Comprehensive training programs for farmers and operators on modern agricultural techniques, machinery operation, and maintenance. Hands-on sessions to maximize productivity and safety.',
+      points: ['Hands-On Training', 'Expert Instructors', 'Certification Provided'],
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2.5 3 6 3s6-1 6-3v-5"/></svg>`
     },
     {
-      icon: GraduationCap,
-      title: 'Operator Training',
-      desc: 'Comprehensive safety and operation programs to maximize machinery lifecycle and ensure operator safety across all conditions.',
-      features: ['Safety Protocols', 'Operation Skills', 'Daily Maintenance']
+      title: 'Genuine Spare Parts Supply',
+      desc: '100% authentic OEM spare parts ensuring optimal performance and longevity. Extensive inventory for all brands with fast nationwide delivery.',
+      points: ['100% Authentic OEM', 'Fast Delivery', 'Extensive Inventory'],
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`
+    },
+    {
+      title: 'Hydraulics & Transmission Service',
+      desc: 'Specialized service for hydraulic systems and transmission components. Expert diagnostics, repairs, and replacements to keep your machinery operating smoothly.',
+      points: ['Advanced Diagnostics', 'Expert Repairs', 'Quality Guaranteed'],
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-4.3-7-11-7-11S5 10.7 5 15a7 7 0 0 0 7 7z"/></svg>`
+    },
+    {
+      title: 'On-Site Farm Machinery Support',
+      desc: 'Mobile service team available for on-site repairs and maintenance. We come to your farm to minimize downtime and keep your operations running.',
+      points: ['Mobile Service', 'Quick Response', 'Minimize Downtime'],
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`
+    },
+    {
+      title: 'Engine Overhaul & Diagnostics',
+      desc: 'Comprehensive engine diagnostics and complete overhaul services. Expert technicians use advanced equipment to identify and fix engine issues efficiently.',
+      points: ['Complete Overhaul', 'Advanced Equipment', 'Efficient Service'],
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`
+    },
+    {
+      title: 'Harvesting Equipment Services',
+      desc: 'Specialized maintenance and repair services for harvesting equipment. Keep your harvesters, combines, and related machinery in perfect working condition.',
+      points: ['Specialized Service', 'Peak Season Ready', 'Expert Maintenance'],
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`
+    },
+    {
+      title: 'Scheduled Preventive Maintenance',
+      desc: 'Proactive maintenance programs designed to prevent breakdowns and extend equipment lifespan. Regular servicing keeps your machinery reliable and efficient.',
+      points: ['Prevent Breakdowns', 'Extend Lifespan', 'Regular Servicing'],
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`
     }
   ];
 
   serviceGrid.innerHTML = `
     <div class="container">
-      <div style="text-align: center; margin-bottom: 80px;">
-        <h2 class="reveal" style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 900; margin-bottom: 15px;">Industrial Support Lifecycle</h2>
-        <p class="reveal" style="color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto;">We don't just sell machines; we ensure they never stop driving your success.</p>
+      <div class="section-header">
+        <span class="section-badge">Our Services</span>
+        <h2 class="section-title">Peak Operational Efficiency</h2>
+        <p class="section-desc">
+          Comprehensive solutions designed to keep your agricultural operations running at peak efficiency day in, day out.
+        </p>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
-        ${services.map((s, i) => `
-          <div class="premium-glass-card reveal" style="padding: 50px; border-radius: 32px; animation-delay: ${i * 0.1}s;">
-            <div style="width: 60px; height: 60px; background: rgba(59, 130, 246, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--primary-color); margin-bottom: 30px;">
+      <div class="services-grid-9">
+        ${services.map(s => `
+          <div class="service-premium-card">
+            <div class="service-card-icon-box">
               ${s.icon}
             </div>
-            <h3 style="font-size: 1.7rem; font-weight: 900; margin-bottom: 15px;">${s.title}</h3>
-            <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 30px;">${s.desc}</p>
-            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--glass-border); padding-top: 25px;">
-              ${s.features.map(f => `<li style="font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 10px; color: var(--text-main);"><span style="color: var(--primary-color); font-size: 1.1rem;">⚡</span> ${f}</li>`).join('')}
+            <h3 class="service-card-title">${s.title}</h3>
+            <p class="service-card-desc">${s.desc}</p>
+            <ul class="service-card-points">
+              ${s.points.map(p => `
+                <li class="service-card-point">
+                  <span class="service-card-point-dot"></span>
+                  ${p}
+                </li>
+              `).join('')}
             </ul>
           </div>
         `).join('')}
@@ -75,84 +671,160 @@ export function renderServicesScreen() {
     </div>
   `;
 
-  // 3. Mobile Response Team (Feature Row)
-  const mobileSupport = document.createElement('section');
-  mobileSupport.style.padding = '140px 0';
-  mobileSupport.style.background = '#0b1120'; // Deep Slate for premium contrast
-  mobileSupport.style.color = 'white';
-  mobileSupport.style.overflow = 'hidden';
-  mobileSupport.style.position = 'relative';
+  // 3. WHY CHOOSE US & STATS SECTION
+  const whyChooseSec = document.createElement('section');
+  whyChooseSec.className = 'sec-why-choose';
   
-  mobileSupport.innerHTML = `
-    <div class="container">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
-        <div class="reveal">
-          <div style="display: inline-flex; align-items: center; gap: 12px; background: rgba(59, 130, 246, 0.15); padding: 10px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--primary-color); margin-bottom: 30px;">
-            <span class="pulse-dot"></span>
-            Live Regional Response Units
-          </div>
-          <h2 style="font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; line-height: 1.05; margin-bottom: 35px; color: white;">Rapid Response <br>Mobile Engineering</h2>
-          <p style="font-size: 1.25rem; color: rgba(255,255,255,0.7); line-height: 1.9; margin-bottom: 45px;">
-            Mechanical failures shouldn't stop your harvest. Our specialized mobile technicians bring factory-level expertise directly to your field, anywhere in the federation.
-          </p>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; border-left: 3px solid var(--primary-color); padding-left: 30px;">
-            <div>
-              <h4 style="font-size: 1.2rem; font-weight: 900; margin-bottom: 10px; color: #fff;">On-Farm Overhaul</h4>
-              <p style="font-size: 0.95rem; color: rgba(255,255,255,0.5); line-height: 1.6;">Major system repairs handled on-site to minimize downtime and maximize yield.</p>
-            </div>
-            <div>
-              <h4 style="font-size: 1.2rem; font-weight: 900; margin-bottom: 10px; color: #fff;">24/7 Logistics</h4>
-              <p style="font-size: 0.95rem; color: rgba(255,255,255,0.5); line-height: 1.6;">Critical seasonal support during planting and harvest windows nationwide.</p>
-            </div>
-          </div>
-        </div>
-        <div class="reveal" style="position: relative; animation-delay: 0.2s;">
-          <div class="premium-glass-card" style="padding: 10px; border-radius: 40px;">
-             <img src="/assets/services_mobile_team.png" alt="Mobile Support" style="width: 100%; border-radius: 30px; display: block;">
-          </div>
-          <div style="position: absolute; -right: 20%; -top: 20%; width: 400px; height: 400px; background: var(--primary-color); border-radius: 50%; opacity: 0.15; filter: blur(120px); z-index: -1;"></div>
-        </div>
-      </div>
-    </div>
-    <style>
-      .pulse-dot { width: 10px; height: 10px; background: var(--primary-color); border-radius: 50%; animation: pulse-v2 2s infinite; box-shadow: 0 0 10px var(--primary-color); }
-      @keyframes pulse-v2 {
-        0% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.4); opacity: 0.4; }
-        100% { transform: scale(1); opacity: 1; }
-      }
-    </style>
-  `;
+  const reasons = [
+    {
+      title: 'Certified Technicians',
+      desc: 'Expert team with direct industry manufacturer training and specialized diagnostics toolkits.',
+      num: '01'
+    },
+    {
+      title: '24/7 Support',
+      desc: 'Round-the-clock emergency assistance lines and immediate dispatch logistics to keep you running.',
+      num: '02'
+    },
+    {
+      title: 'Quality Guaranteed',
+      desc: '100% satisfaction assurance on all service contracts, replacement tasks, and field adjustments.',
+      num: '03'
+    },
+    {
+      title: 'Fast Response',
+      desc: 'Quick on-site service delivery powered by a dedicated regional fleet of support vans.',
+      num: '04'
+    }
+  ];
 
-  // 4. CTA (Premium)
-  const cta = document.createElement('section');
-  cta.style.padding = '100px 0 140px';
-  cta.innerHTML = `
-    <div class="container reveal">
-      <div class="premium-glass-card" style="padding: 80px; border-radius: 40px; text-align: center; background: linear-gradient(135deg, var(--surface-color) 0%, var(--background-color) 100%);">
-        <span style="color: var(--primary-color); font-weight: 800; text-transform: uppercase; letter-spacing: 3px; display: block; margin-bottom: 20px;">Ready to Scale?</span>
-        <h2 style="font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; margin-bottom: 25px; line-height: 1.1;">Optimize Your Fleet Architecture</h2>
-        <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 50px; line-height: 1.8;">
-          Connect with our technical executives today for comprehensive quotes on service contracts, technical audits, or bulk OEM part supplies.
+  const stats = [
+    { num: '500+', label: 'Happy Clients' },
+    { num: '15+', label: 'Years Experience' },
+    { num: '9+', label: 'Services Offered' },
+    { num: '98%', label: 'Success Rate' }
+  ];
+
+  whyChooseSec.innerHTML = `
+    <div class="container why-choose-layout">
+      <div>
+        <span class="section-badge">Why Choose Us</span>
+        <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">Your Trusted Agricultural Partner</h2>
+        <p style="color: #475569; font-size: 1.1rem; line-height: 1.7; margin-bottom: 45px;">
+          With over 15 years of industry excellence, we've built a solid reputation for robust agricultural support. Our commitment to high quality standards, speed, and customer satisfaction sets us apart as a premier partner in mechanization.
         </p>
-        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-          <button data-route="contact" class="btn-primary" style="padding: 18px 45px; font-weight: 800; border-radius: 12px; font-size: 1.1rem; display: flex; align-items: center; gap: 15px;">
-            Consult with Engineering ${ArrowRight}
-          </button>
-          <a href="tel:+2348026487775" style="padding: 18px 45px; border: 2px solid var(--primary-color); color: var(--primary-color); text-decoration: none; border-radius: 12px; font-weight: 800; font-size: 1.1rem; transition: all 0.3s;" onmouseover="this.style.background='var(--primary-color)'; this.style.color='white';" onmouseout="this.style.background='none'; this.style.color='var(--primary-color)';">Direct Technical Line</a>
+        
+        <div>
+          ${reasons.map(r => `
+            <div class="why-choose-feature">
+              <div class="why-choose-icon-box">${r.num}</div>
+              <div>
+                <h4 class="why-choose-feat-title">${r.title}</h4>
+                <p class="why-choose-feat-desc">${r.desc}</p>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      
+      <div class="why-choose-stats">
+        ${stats.map(st => `
+          <div class="why-stat-card">
+            <div class="why-stat-num">${st.num}</div>
+            <div class="why-stat-label">${st.label}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  // 4. TRAINING & EDUCATION SECTION (Premium Dark Row)
+  const trainingSec = document.createElement('section');
+  trainingSec.className = 'sec-training';
+  
+  const trainingPrograms = [
+    {
+      title: 'Machinery Operation',
+      desc: 'Master tractor and implement operation with hands-on training directly on the field.',
+      points: ['Safety Protocols', 'Implement Usage', 'Field Techniques'],
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`
+    },
+    {
+      title: 'Maintenance & Repair',
+      desc: 'Learn essential machinery maintenance and hardware troubleshooting skills for operators.',
+      points: ['Preventive Care', 'Troubleshooting', 'Parts Replacement'],
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`
+    },
+    {
+      title: 'Modern Techniques',
+      desc: 'Stay updated with the latest precision agricultural practices, sustainability, and soil tools.',
+      points: ['Precision Farming', 'Sustainability', 'Soil Management'],
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2.5 3 6 3s6-1 6-3v-5"/></svg>`
+    }
+  ];
+
+  trainingSec.innerHTML = `
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <span class="section-badge" style="color: #34d399;">Training & Education</span>
+        <h2 class="section-title" style="color: #ffffff;">Agricultural Training Programs</h2>
+        <p style="color: #a7f3d0; font-size: 1.1rem; max-width: 650px; margin: 0 auto;">
+          Empower your farming crew with expert technical knowledge and hands-on operational routines to maximize output.
+        </p>
+      </div>
+
+      <div class="training-grid">
+        ${trainingPrograms.map(tp => `
+          <div class="training-card">
+            <div class="training-card-icon">
+              ${tp.icon}
+            </div>
+            <h3 class="training-title">${tp.title}</h3>
+            <p class="training-desc">${tp.desc}</p>
+            <ul class="training-points">
+              ${tp.points.map(pt => `
+                <li class="training-point">
+                  <span class="service-card-point-dot"></span>
+                  ${pt}
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  // 5. CALL TO ACTION SECTION
+  const ctaSec = document.createElement('section');
+  ctaSec.className = 'sec-cta-serv';
+  ctaSec.innerHTML = `
+    <div class="container">
+      <div class="cta-card-serv">
+        <span style="font-size: 0.8rem; font-weight: 800; color: #34d399; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block;">GET IN TOUCH</span>
+        <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; line-height: 1.2; margin-bottom: 25px; color: #ffffff;">Ready to Mechanize Your Operations?</h2>
+        <p style="color: #d1fae5; font-size: 1.1rem; line-height: 1.7; max-width: 680px; margin: 0 auto 40px;">
+          Partner with Sankara Nigeria Limited to secure robust agricultural machinery, spare parts supply lines, and dedicated field maintenance support.
+        </p>
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+          <a href="/contact" class="btn-main-green" data-route="contact" style="background: #ffffff; color: #022c22; box-shadow: 0 4px 20px rgba(255,255,255,0.15);">
+            Contact Corporate Office
+          </a>
         </div>
       </div>
     </div>
   `;
 
+  // Assemble Elements
   container.appendChild(renderNavbar());
-  container.appendChild(hero);
+  container.appendChild(heroSec);
   container.appendChild(serviceGrid);
-  container.appendChild(mobileSupport);
-  container.appendChild(cta);
+  container.appendChild(whyChooseSec);
+  container.appendChild(trainingSec);
+  container.appendChild(ctaSec);
   container.appendChild(renderFooter());
 
-  // Setup event delegation for internal links
+  // Setup routing delegation
   container.querySelectorAll('[data-route]').forEach(el => {
     el.onclick = (e) => {
       e.preventDefault();
@@ -160,6 +832,7 @@ export function renderServicesScreen() {
     };
   });
 
+  // Retrigger transitions if global scroll trigger is active
   if (window.initAnimations) {
     setTimeout(window.initAnimations, 100);
   }
