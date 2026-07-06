@@ -363,16 +363,56 @@ export function renderGalleryScreen() {
     </div>
   `;
 
+const fallbackGalleryItems = [
+  {
+    id: 'gb-1',
+    title: 'Agricultural Science Student Tour & Field Excursion',
+    category: 'Student Visit',
+    image: '/assets/about_hero.png'
+  },
+  {
+    id: 'gb-2',
+    title: 'Lovol Tractor Performance Demonstration for Farming Cooperatives',
+    category: 'Excursion',
+    image: '/assets/gallery_farmers.png'
+  },
+  {
+    id: 'gb-3',
+    title: 'Regional Mechanization Dialogue with ECOWAS Delegates',
+    category: 'ECOWAS Visit',
+    image: '/assets/portfolio_aerial.png'
+  },
+  {
+    id: 'gb-4',
+    title: 'Technical Operator Training & Precision Service Workshop',
+    category: 'Workshop',
+    image: '/assets/gallery_workshop.png'
+  },
+  {
+    id: 'gb-5',
+    title: 'Field Maintenance and Diagnostics Workshop',
+    category: 'Workshop',
+    image: '/assets/services_mobile_team.png'
+  }
+];
+
   let filteredItems = [];
   let activeIndex = 0;
 
   const loadGallery = async () => {
     try {
       const res = await fetch('/api/gallery');
-      allItems = await res.json();
+      const dbItems = await res.json();
+      
+      const dbTitles = new Set(dbItems.map(i => i.title.toLowerCase()));
+      const uniqueFallbacks = fallbackGalleryItems.filter(i => !dbTitles.has(i.title.toLowerCase()));
+      
+      allItems = [...dbItems, ...uniqueFallbacks];
       renderItems();
     } catch (err) {
-      console.error('Error loading gallery API:', err);
+      console.error('Error loading gallery API, using fallbacks:', err);
+      allItems = [...fallbackGalleryItems];
+      renderItems();
     }
   };
 
