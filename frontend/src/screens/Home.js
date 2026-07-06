@@ -445,7 +445,6 @@ export function renderHomeScreen() {
     { id: 'harvester-top', src: '/assets/lovol_harvester_rg109plus_top.png', label: 'HV-TOP' },
     { id: 'fleet-lovol-754h', src: '/assets/fleet_lovol_754h.png', label: 'LOVOL 754H' },
     { id: 'fleet-mf-375', src: '/assets/fleet_mf_375.png', label: 'MF 375' },
-    { id: 'fleet-mf-385', src: '/assets/fleet_mf_385.png', label: 'MF 385' },
     { id: 'fleet-lovol-rg109plus', src: '/assets/fleet_lovol_rg109plus.png', label: 'RG109+' },
     { id: 'fleet-lovol-af108', src: '/assets/fleet_lovol_af108.png', label: 'AF108' }
   ];
@@ -620,7 +619,6 @@ export function renderHomeScreen() {
         <!-- Uploaded Vehicles (New 5) -->
         <img id="fleet-lovol-754h" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol 754-H Blue Tractor">
         <img id="fleet-mf-375" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Massey Ferguson 375 Tractor">
-        <img id="fleet-mf-385" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Massey Ferguson 385 Tractor">
         <img id="fleet-lovol-rg109plus" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol RG109Plus Harvester">
         <img id="fleet-lovol-af108" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol AF108 Harvester">
 
@@ -633,7 +631,6 @@ export function renderHomeScreen() {
           <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">HV-TOP</span>
           <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">LOVOL-754H</span>
           <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">MF-375</span>
-          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">MF-385</span>
           <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">RG109+</span>
           <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">AF108</span>
         </div>
