@@ -503,13 +503,13 @@ export function renderHomeScreen() {
       background: #ffffff;
       border: 1px solid rgba(226, 232, 240, 0.9);
       border-radius: 20px;
-      padding: 35px 25px;
+      padding: 30px 20px;
       display: flex;
       justify-content: center;
       align-items: center;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.015);
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      min-height: 130px;
+      min-height: 145px;
       cursor: pointer;
       position: relative;
       overflow: hidden;
@@ -536,19 +536,15 @@ export function renderHomeScreen() {
     }
 
     .partner-card img {
-      max-height: 50px;
+      max-height: 80px;
       width: auto;
       max-width: 90%;
       object-fit: contain;
-      filter: grayscale(100%);
-      opacity: 0.65;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .partner-card:hover img {
-      filter: grayscale(0%);
-      opacity: 1;
-      transform: scale(1.05);
+      transform: scale(1.06);
     }
   `;
   container.appendChild(styleTag);
