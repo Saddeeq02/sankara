@@ -802,12 +802,105 @@ export function renderHomeScreen() {
     </div>
   `;
 
+  // 6. ABOUT US SECTION (Right below Strategic Partnerships)
+  const aboutSec = document.createElement('section');
+  aboutSec.className = 'sec-about-us';
+  aboutSec.style.padding = '100px 0 140px';
+  aboutSec.style.background = '#f8fafc'; // Subtle light background to separate from footer
+  aboutSec.innerHTML = `
+    <div class="container" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: start;">
+      
+      <!-- Left Column: Company Story -->
+      <div class="reveal" style="animation-delay: 0.1s;">
+        <span style="font-size: 0.85rem; font-weight: 800; color: #059669; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">OUR LEGACY</span>
+        <h2 style="font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 850; color: #0f172a; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 30px;">Powering Nigeria's <br><span style="color: #059669;">Modern Farming</span></h2>
+        
+        <p style="color: #334155; font-size: 1.15rem; font-weight: 600; line-height: 1.7; margin-bottom: 20px;">
+          Since 1986, Sankara Nigeria Limited has been Nigeria's trusted partner in agricultural mechanization, delivering quality machinery and exceptional service nationwide.
+        </p>
+        
+        <p style="color: #475569; font-size: 1.05rem; line-height: 1.8; margin-bottom: 20px;">
+          Built on a foundation of integrity, innovation, and dedicated service, we have led the advancement of mechanized and sustainable farming for nearly four decades. Our impact spans the entire Nigerian landscape and extends into neighbouring countries such as Niger, Chad, Cameroon, and Benin.
+        </p>
+        
+        <p style="color: #475569; font-size: 1.05rem; line-height: 1.8; margin-bottom: 35px;">
+          At Sankara, we don't just supply equipment; we provide complete agricultural solutions that empower farmers, agribusinesses, and institutions to achieve greater productivity, efficiency, and long-term growth.
+        </p>
+        
+        <div style="display: flex; gap: 30px; border-top: 1px solid #e2e8f0; padding-top: 30px;">
+          <div>
+            <h4 style="font-size: 2.2rem; font-weight: 900; color: #0f172a; margin-bottom: 5px;">40+</h4>
+            <span style="font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">Years of Excellence</span>
+          </div>
+          <div>
+            <h4 style="font-size: 2.2rem; font-weight: 900; color: #059669; margin-bottom: 5px;">1200+</h4>
+            <span style="font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">Tractors Delivered</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Mission, Vision, Values Stack -->
+      <div style="display: flex; flex-direction: column; gap: 30px;">
+        
+        <!-- Mission Card -->
+        <div class="reveal premium-glass-card" style="padding: 35px; border-radius: 24px; background: #ffffff; border: 1px solid #e2e8f0; animation-delay: 0.2s; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.02);" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 12px; margin-bottom: 20px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+          <h3 style="font-size: 1.3rem; font-weight: 850; color: #0f172a; margin-bottom: 12px;">Our Mission</h3>
+          <p style="color: #475569; font-size: 0.98rem; line-height: 1.6; margin: 0;">
+            To empower Nigerian farmers with world-class agricultural machinery that enhances productivity, reduces labor costs, and drives sustainable agricultural growth across the nation.
+          </p>
+        </div>
+
+        <!-- Vision Card -->
+        <div class="reveal premium-glass-card" style="padding: 35px; border-radius: 24px; background: #ffffff; border: 1px solid #e2e8f0; animation-delay: 0.3s; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.02);" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 12px; margin-bottom: 20px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3 style="font-size: 1.3rem; font-weight: 850; color: #0f172a; margin-bottom: 12px;">Our Vision</h3>
+          <p style="color: #475569; font-size: 0.98rem; line-height: 1.6; margin: 0;">
+            Driven by passion and purpose, our vision is to become the most recognized and trusted agricultural machinery partner across West Africa; championing modern farming, strengthening partnerships, and transforming communities.
+          </p>
+        </div>
+
+        <!-- Core Values Card -->
+        <div class="reveal premium-glass-card" style="padding: 35px; border-radius: 24px; background: #ffffff; border: 1px solid #e2e8f0; animation-delay: 0.4s; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.02);" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 12px; margin-bottom: 20px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+          </div>
+          <h3 style="font-size: 1.3rem; font-weight: 850; color: #0f172a; margin-bottom: 12px;">Our Values</h3>
+          <p style="color: #475569; font-size: 0.98rem; line-height: 1.6; margin: 0;">
+            Integrity, excellence, and customer satisfaction guide everything we do. We believe in building lasting relationships through honest dealings, reliability, and superior service.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+  // Inject responsive stylesheet for About Us section
+  const aboutStyle = document.createElement('style');
+  aboutStyle.innerHTML = `
+    @media (max-width: 991px) {
+      .sec-about-us .container {
+        grid-template-columns: 1fr !important;
+        gap: 50px !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+      }
+    }
+  `;
+  document.head.appendChild(aboutStyle);
+
   // Append everything
   homeRoot.appendChild(heroSec);
   homeRoot.appendChild(featuresSec);
   homeRoot.appendChild(fleetSec);
   homeRoot.appendChild(statsSec);
   homeRoot.appendChild(ctaSec);
+  homeRoot.appendChild(aboutSec);
 
   container.appendChild(renderNavbar());
   container.appendChild(homeRoot);
