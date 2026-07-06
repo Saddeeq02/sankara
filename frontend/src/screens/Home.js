@@ -588,9 +588,9 @@ export function renderHomeScreen() {
           <span style="width: 8px; height: 8px; background: #34d399; border-radius: 50%; box-shadow: 0 0 10px #34d399;"></span>
           <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; color: #34d399; text-transform: uppercase;">Heavy-Duty Mechanization</span>
         </div>
-        <h1 class="hero-title-main">Driving Growth With <span>Lovol Machinery</span></h1>
+        <h1 class="hero-title-main">Engineering the Future of <span>Mechanized Farming</span></h1>
         <p class="hero-desc">
-          Sankara Nigeria Limited is a certified distributor of high-performance Lovol tractors (754-H) and Lovol combine harvesters (RG109Plus), engineering durable mechanization models for corporate and smallholder farms across Nigeria.
+          We equip corporate agribusinesses and smallholder farms with robust machinery, high-capacity implements, and comprehensive after-sales services to modernize agricultural production.
         </p>
         <div style="display: flex; flex-wrap: wrap; gap: 15px;">
           <a href="/products" class="btn-main-green">
