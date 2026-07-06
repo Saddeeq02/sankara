@@ -435,14 +435,10 @@ export function renderHomeScreen() {
     heroSec.style.backgroundImage = `url(${bgImages[currentBgIndex]})`;
   }, 5000);
 
-  // Slideshow Logic for the 3D Lovol Machinery (Side, Front, Top views)
+  // Slideshow Logic for the Lovol Machinery (Tractor and Harvester)
   const machinerySlides = [
-    { id: 'tractor-side', src: '/assets/lovol_tractor_754h.png', label: 'SIDE VIEW' },
-    { id: 'tractor-front', src: '/assets/lovol_tractor_754h_front.png', label: 'FRONT VIEW' },
-    { id: 'tractor-top', src: '/assets/lovol_tractor_754h_top.png', label: 'TOP VIEW' },
-    { id: 'harvester-side', src: '/assets/lovol_harvester_rg109plus.png', label: 'SIDE VIEW' },
-    { id: 'harvester-front', src: '/assets/lovol_harvester_rg109plus_front.png', label: 'FRONT VIEW' },
-    { id: 'harvester-top', src: '/assets/lovol_harvester_rg109plus_top.png', label: 'TOP VIEW' }
+    { id: 'tractor', src: '/assets/lovol_tractor_754h.png', label: 'TRACTOR' },
+    { id: 'harvester', src: '/assets/lovol_harvester_rg109plus.png', label: 'HARVESTER' }
   ];
   
   let currentSlide = 0;
@@ -464,8 +460,7 @@ export function renderHomeScreen() {
     // Update active label dot
     const dots = heroSec.querySelectorAll('.view-dot');
     dots.forEach((dot, idx) => {
-      const normalizedIdx = currentSlide % 3;
-      if (idx === normalizedIdx) {
+      if (idx === currentSlide) {
         dot.classList.add('active');
       } else {
         dot.classList.remove('active');
@@ -525,7 +520,7 @@ export function renderHomeScreen() {
 
   // Bind transparency, interactivity, and selectors
   setTimeout(() => {
-    // Process transparency on all 6 perspective views
+    // Process transparency on slides
     machinerySlides.forEach(slide => {
       const img = heroSec.querySelector(`#${slide.id}`);
       if (img) makeImageTransparent(img, slide.src);
@@ -539,10 +534,7 @@ export function renderHomeScreen() {
     dots.forEach((dot, idx) => {
       dot.onclick = (e) => {
         e.stopPropagation();
-        // Determine whether we are currently viewing Tractor (0, 1, 2) or Harvester (3, 4, 5)
-        const isHarvester = currentSlide >= 3;
-        const targetIdx = idx + (isHarvester ? 3 : 0);
-        updateActiveSlide(targetIdx);
+        updateActiveSlide(idx);
       };
     });
 
@@ -606,20 +598,15 @@ export function renderHomeScreen() {
         </svg>
         <div class="machinery-shadow"></div>
         
-        <!-- Lovol Tractor Views -->
-        <img id="tractor-side" class="visual-slide active" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Tractor 754-H Side View">
-        <img id="tractor-front" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Tractor 754-H Front View">
-        <img id="tractor-top" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Tractor 754-H Top View">
+        <!-- Lovol Tractor -->
+        <img id="tractor" class="visual-slide active" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Tractor 754-H">
         
-        <!-- Lovol Harvester Views -->
-        <img id="harvester-side" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Harvester RG109Plus Side View">
-        <img id="harvester-front" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Harvester RG109Plus Front View">
-        <img id="harvester-top" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Harvester RG109Plus Top View">
+        <!-- Lovol Harvester -->
+        <img id="harvester" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Harvester RG109Plus">
 
         <div class="machinery-view-selector">
-          <span class="view-dot active">SIDE</span>
-          <span class="view-dot">FRONT</span>
-          <span class="view-dot">TOP</span>
+          <span class="view-dot active">Tractor</span>
+          <span class="view-dot">Harvester</span>
         </div>
       </div>
     </div>
