@@ -84,31 +84,46 @@ export function renderHomeScreen() {
       }
     }
     
-    /* Interactive Image frame */
+    /* Interactive 3D Machinery Slider */
     .hero-visual {
       position: relative;
+      width: 100%;
+      height: 420px;
       display: flex;
       justify-content: center;
       align-items: center;
     }
     
-    .visual-frame {
-      position: relative;
-      width: 100%;
-      max-width: 460px;
-      height: 380px;
-      border-radius: 24px;
-      padding: 10px;
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.4), rgba(52, 211, 153, 0.05));
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.3);
+    .machinery-shadow {
+      position: absolute;
+      bottom: 25px;
+      width: 85%;
+      height: 25px;
+      background: radial-gradient(ellipse, rgba(52, 211, 153, 0.45) 0%, rgba(2, 44, 34, 0) 70%);
+      filter: blur(8px);
+      z-index: 1;
+      pointer-events: none;
     }
     
-    .visual-image {
+    .visual-slide {
+      position: absolute;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 18px;
+      max-width: 520px;
+      height: auto;
+      object-fit: contain;
+      opacity: 0;
+      transform: translateX(40px) scale(0.95);
+      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), 
+                  transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+      mix-blend-mode: screen;
+      z-index: 2;
+      pointer-events: none;
+    }
+    
+    .visual-slide.active {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
     }
     
     .floating-gear-bg {
@@ -365,23 +380,26 @@ export function renderHomeScreen() {
   const heroSec = document.createElement('section');
   heroSec.className = 'hero-sec';
   
-  // Dynamic Background Images
-  const bgImages = [
-    '/assets/hero.png',
-    '/assets/gallery_farmers.png',
-    '/assets/portfolio_aerial.png'
-  ];
-  let currentBgIndex = 0;
-  
-  const bgInterval = setInterval(() => {
+  // Slideshow Logic for the 3D Machinery
+  let currentSlide = 0;
+  const slideshowInterval = setInterval(() => {
     if (!document.body.contains(heroSec)) {
-      clearInterval(bgInterval);
+      clearInterval(slideshowInterval);
       return;
     }
-    currentBgIndex = (currentBgIndex + 1) % bgImages.length;
-    // Set a smooth CSS transition effect on background
-    heroVisualImg.src = bgImages[currentBgIndex];
-  }, 4000);
+    const tractor = heroSec.querySelector('#hero-tractor');
+    const harvester = heroSec.querySelector('#hero-harvester');
+    
+    if (currentSlide === 0) {
+      if (tractor) tractor.classList.remove('active');
+      if (harvester) harvester.classList.add('active');
+      currentSlide = 1;
+    } else {
+      if (harvester) harvester.classList.remove('active');
+      if (tractor) tractor.classList.add('active');
+      currentSlide = 0;
+    }
+  }, 4500);
 
   heroSec.innerHTML = `
     <div class="corp-hero-overlay" style="background: linear-gradient(135deg, rgba(2, 44, 34, 0.95) 0%, rgba(2, 44, 34, 0.75) 100%);"></div>
@@ -405,16 +423,15 @@ export function renderHomeScreen() {
       </div>
       
       <div class="hero-visual">
-        <svg class="floating-gear-bg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="floating-gear-bg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="top:-50px; right:-20px; width:180px; height:180px;">
           <path d="M50 25C36.19 25 25 36.19 25 50C25 63.81 36.19 75 50 75C63.81 75 75 63.81 75 50C75 36.19 63.81 25 50 25ZM50 67C40.61 67 33 59.39 33 50C33 40.61 40.61 33 50 33C59.39 33 67 40.61 67 50C67 59.39 59.39 67 50 67Z" fill="#34d399"/>
         </svg>
-        <div class="visual-frame">
-          <img id="hero-visual-img" class="visual-image" src="/assets/hero.png" alt="Sankara Tractor Showcase">
-        </div>
+        <div class="machinery-shadow"></div>
+        <img id="hero-tractor" class="visual-slide active" src="/assets/3d_red_tractor.png" alt="3D Massey Ferguson Tractor">
+        <img id="hero-harvester" class="visual-slide" src="/assets/3d_combine_harvester.png" alt="3D Combine Harvester">
       </div>
     </div>
   `;
-  const heroVisualImg = heroSec.querySelector('#hero-visual-img');
 
   // 2. FEATURE / CAPABILITIES SECTION (With Star Badges)
   const featuresSec = document.createElement('section');
