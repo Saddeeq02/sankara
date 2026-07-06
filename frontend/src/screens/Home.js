@@ -26,6 +26,13 @@ export function renderHomeScreen() {
       overflow: hidden;
     }
     
+    .corp-hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
     .hero-sec::after {
       content: '';
       position: absolute;
@@ -489,13 +496,26 @@ export function renderHomeScreen() {
       const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const data = imgData.data;
       
-      // Filter white background pixels
+      // Filter white background pixels with saturation checking and edge feathering
       for (let i = 0; i < data.length; i += 4) {
         const r = data[i];
         const g = data[i+1];
         const b = data[i+2];
-        if (r > 240 && g > 240 && b > 240) {
-          data[i+3] = 0; // Transparent
+        
+        const maxVal = Math.max(r, g, b);
+        const minVal = Math.min(r, g, b);
+        const saturation = maxVal - minVal;
+        
+        // Only process neutral/gray/white backdrop pixels
+        if (saturation < 35) {
+          const brightness = (r + g + b) / 3;
+          if (brightness > 235) {
+            data[i+3] = 0; // Completely transparent
+          } else if (brightness > 190) {
+            // Smoothly feather anti-aliased edge values
+            const alpha = (brightness - 190) / 45; // 0 to 1
+            data[i+3] = Math.min(data[i+3], Math.round((1 - alpha) * 255));
+          }
         }
       }
       ctx.putImageData(imgData, 0, 0);
