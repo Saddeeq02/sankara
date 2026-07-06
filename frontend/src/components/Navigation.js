@@ -14,24 +14,25 @@ export function renderNavbar() {
         <span></span>
       </div>
 
-      <ul class="nav-links" id="nav-menu">
-        <div class="mobile-nav-header" style="padding: 30px 20px; border-bottom: 1px solid var(--glass-border); margin-bottom: 20px; display: none; align-items: center; justify-content: center;">
+      <!-- Navigation Menu Wrapper -->
+      <div class="nav-menu-wrapper" id="nav-menu">
+        <div class="mobile-nav-header">
           <img src="/assets/logo.png" alt="Sankara Logo" style="height: 35px; object-fit: contain;">
         </div>
-        <li><a href="/" data-route="home" class="nav-link-item">Home</a></li>
-        <li><a href="/about" data-route="about" class="nav-link-item">About Us</a></li>
-        <li><a href="/products" data-route="products" class="nav-link-item">Products</a></li>        <li><a href="/services" data-route="services" class="nav-link-item">Services</a></li>
-        <li><a href="/gallery" data-route="gallery" class="nav-link-item">Gallery</a></li>
-        <li><a href="/activities" data-route="activities" class="nav-link-item">Activities</a></li>
-        <li><a href="/portfolio" data-route="portfolio" class="nav-link-item">Portfolio</a></li>
-        <li style="margin-top: auto; padding-top: 20px;">
-          <a href="/contact" data-route="contact" class="btn-primary contact-nav-btn">Contact Us</a>
-        </li>
-        <li>
-          <button id="theme-toggle" class="theme-btn">🌙 Dark Mode</button>
-        </li>
-      </ul>
-
+        <ul class="nav-links">
+          <li><a href="/" data-route="home" class="nav-link-item">Home</a></li>
+          <li><a href="/about" data-route="about" class="nav-link-item">About Us</a></li>
+          <li><a href="/products" data-route="products" class="nav-link-item">Products</a></li>
+          <li><a href="/services" data-route="services" class="nav-link-item">Services</a></li>
+          <li><a href="/gallery" data-route="gallery" class="nav-link-item">Gallery</a></li>
+          <li><a href="/activities" data-route="activities" class="nav-link-item">Activities</a></li>
+          <li><a href="/portfolio" data-route="portfolio" class="nav-link-item">Portfolio</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button id="theme-toggle" class="theme-btn">🌙</button>
+          <a href="/contact" data-route="contact" class="btn-primary contact-nav-btn" style="padding: 10px 24px; font-size: 0.9rem; text-decoration: none; border-radius: 50px;">Contact Us</a>
+        </div>
+      </div>
     </div>
   `;
 
@@ -45,9 +46,11 @@ export function renderNavbar() {
     toggle.classList.toggle('toggle-active');
   };
 
-  // Close menu when clicking a link
-  menu.querySelectorAll('a').forEach(link => {
-    link.onclick = () => {
+  // Close menu when clicking a link or button
+  menu.querySelectorAll('a, button').forEach(link => {
+    link.onclick = (e) => {
+      // Don't close if theme toggle is clicked
+      if (link.id === 'theme-toggle') return;
       menu.classList.remove('mobile-active');
       toggle.classList.remove('toggle-active');
     }
@@ -58,7 +61,8 @@ export function renderNavbar() {
   if (currentTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
   themeBtn.innerHTML = currentTheme === 'dark' ? '☀️' : '🌙';
 
-  themeBtn.onclick = () => {
+  themeBtn.onclick = (e) => {
+    e.stopPropagation();
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const newTheme = isDark ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', newTheme);
@@ -68,7 +72,6 @@ export function renderNavbar() {
 
   return nav;
 }
-
 
 export function renderFooter() {
   const footer = document.createElement('footer');
