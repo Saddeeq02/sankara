@@ -812,11 +812,11 @@ export function renderHomeScreen() {
           We equip corporate agribusinesses and smallholder farms with robust machinery, high-capacity implements, and comprehensive after-sales services to modernize agricultural production.
         </p>
         <div style="display: flex; flex-wrap: wrap; gap: 15px;">
-          <a href="/products" class="btn-main-green">
+          <a href="/product" data-route="products" class="btn-main-green">
             Explore Machinery
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
-          <a href="/contact" class="btn-main-outline">Get a Quote</a>
+          <a href="/contact" data-route="contact" class="btn-main-outline">Get a Quote</a>
         </div>
       </div>
       
@@ -1001,7 +1001,7 @@ export function renderHomeScreen() {
           </p>
         </div>
         <div>
-          <a href="/contact" class="btn-main-green" style="background: #ffffff; color: #022c22; box-shadow: 0 4px 20px rgba(255,255,255,0.15); white-space: nowrap;">
+          <a href="/contact" data-route="contact" class="btn-main-green" style="background: #ffffff; color: #022c22; box-shadow: 0 4px 20px rgba(255,255,255,0.15); white-space: nowrap;">
             Contact Corporate Office
           </a>
         </div>

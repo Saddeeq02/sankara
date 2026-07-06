@@ -60,6 +60,43 @@ const metaData = {
   'admin-login': { title: 'Admin Access | Sankara', desc: 'Secure login for Sankara Nigeria Limited management system.' },
 };
 
+const routeToPath = {
+  home: '/home',
+  about: '/about',
+  products: '/product',
+  services: '/service',
+  contact: '/contact',
+  gallery: '/gallery',
+  activities: '/activities',
+  portfolio: '/portfolio',
+  'admin-login': '/admin/login',
+  'admin-dashboard': '/admin',
+  'admin-products': '/admin/products',
+  'admin-content': '/admin/content',
+  'admin-inquiries': '/admin/inquiries',
+  'admin-health': '/admin/health'
+};
+
+const pathToRoute = {
+  '/': 'home',
+  '/home': 'home',
+  '/about': 'about',
+  '/product': 'products',
+  '/products': 'products',
+  '/service': 'services',
+  '/services': 'services',
+  '/contact': 'contact',
+  '/gallery': 'gallery',
+  '/activities': 'activities',
+  '/portfolio': 'portfolio',
+  '/admin': 'admin-dashboard',
+  '/admin/login': 'admin-login',
+  '/admin/products': 'admin-products',
+  '/admin/content': 'admin-content',
+  '/admin/inquiries': 'admin-inquiries',
+  '/admin/health': 'admin-health'
+};
+
 function updateMeta(routeName) {
   const meta = metaData[routeName] || { title: 'Sankara Nigeria Limited', desc: 'Premium Machinery & Mechanization Solutions.' };
   document.title = meta.title;
@@ -67,26 +104,11 @@ function updateMeta(routeName) {
   if (descTag) descTag.setAttribute('content', meta.desc);
 }
 
-window.navigate = function(routeName) {
+window.navigate = function(routeName, pushState = true) {
   if (!appRoot) return;
-  
-  updateMeta(routeName);
-  
-  // Special Handling for 'Home' (Clear hash and scroll to top)
-  if (routeName === 'home') {
-    if (window.location.hash) {
-      window.history.pushState({ route: 'home' }, '', '/');
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  if (!routeName.startsWith('admin-')) {
-    document.body.classList.remove('admin-mode');
-  }
 
   // Auth Guard
   const token = localStorage.getItem('admin_token');
-  
   if (routeName.startsWith('admin-')) {
     if (routeName === 'admin-login' && token) {
       routeName = 'admin-dashboard';
@@ -95,14 +117,14 @@ window.navigate = function(routeName) {
     }
   }
 
-  // Push State logic
-  let urlPath = `/${routeName === 'home' ? '' : routeName}`;
-  if (routeName.startsWith('admin-')) {
-    urlPath = `/${routeName.replace('-', '/')}`; // /admin/dashboard
-    if (routeName === 'admin-dashboard') urlPath = '/admin';
-    if (routeName === 'admin-login') urlPath = '/admin/login';
-  }
+  updateMeta(routeName);
   
+  if (!routeName.startsWith('admin-')) {
+    document.body.classList.remove('admin-mode');
+  }
+
+  const urlPath = routeToPath[routeName] || '/home';
+
   // Render the screen if it's new, OR if we are showing home on the root URL
   const screenPathChanged = window.location.pathname !== urlPath;
   const isTargetHomeOnRoot = routeName === 'home' && (window.location.pathname === '/' || window.location.pathname === '/home');
@@ -112,6 +134,14 @@ window.navigate = function(routeName) {
     const screenRenderer = routes[routeName] || renderHomeScreen;
     appRoot.appendChild(screenRenderer());
   }
+
+  // Update history state
+  if (pushState) {
+    window.history.pushState({ route: routeName }, '', urlPath);
+  }
+
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 
   // Attach event listeners to new navigation links
   document.querySelectorAll('[data-route]').forEach(link => {
@@ -130,32 +160,19 @@ window.navigate = function(routeName) {
 
 // Initial Navigation
 window.addEventListener('popstate', (e) => {
-  const route = (e.state && e.state.route) || 'home';
-  navigate(route);
+  const path = window.location.pathname;
+  const route = pathToRoute[path] || 'home';
+  window.navigate(route, false);
 });
 
 // Start the app (Parse initial URL) - Robust for Production
-const getInitialRoute = () => {
-    const path = window.location.pathname;
-    
-    // 1. Root and explicit home
-    if (path === '/' || path === '/home') return 'home';
-    
-    // 2. Admin routes
-    if (path.startsWith('/admin')) {
-      if (path === '/admin') return 'admin-dashboard';
-      if (path === '/admin/login') return 'admin-login';
-      return path.replace('/admin/', 'admin-');
-    }
-    
-    // 3. Other clean routes (e.g. /products)
-    const cleanPath = path.replace(/^\/+|\/+$/g, ''); // Remove trailing/leading slashes
-    if (routes[cleanPath]) return cleanPath;
-    
-    return 'home'; // Default
-};
-
-navigate(getInitialRoute());
+const initialPath = window.location.pathname;
+const initialRoute = pathToRoute[initialPath] || 'home';
+if (initialPath === '/') {
+  window.navigate('home', true);
+} else {
+  window.navigate(initialRoute, false);
+}
 
 // Dismiss the Splash Screen after initial load
 const splash = document.getElementById('splash-screen');

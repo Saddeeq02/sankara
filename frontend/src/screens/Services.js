@@ -555,7 +555,7 @@ export function renderServicesScreen() {
         </p>
         <div style="display: flex; flex-wrap: wrap; gap: 15px;">
           <a href="/contact" class="btn-main-green" data-route="contact">Get Started</a>
-          <a href="/products" class="btn-main-outline" data-route="products" style="border-color: #ffffff; color: #ffffff;">View Products</a>
+          <a href="/product" class="btn-main-outline" data-route="products" style="border-color: #ffffff; color: #ffffff;">View Products</a>
         </div>
       </div>
       <div class="hero-graphic-wrapper">
