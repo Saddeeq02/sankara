@@ -1,201 +1,504 @@
 import { renderNavbar, renderFooter } from '../components/Navigation';
-import { Play, X, ChevronLeft, ChevronRight } from 'lucide-static';
 
 export function renderGalleryScreen() {
   const container = document.createElement('div');
+  container.className = 'gallery-root';
+
   let allItems = [];
   let currentFilter = 'All';
 
-  // 1. Hero Section (Premium V2)
-  const hero = document.createElement('header');
-  hero.style.padding = '180px 0 80px';
-  hero.style.textAlign = 'center';
-  hero.style.background = 'var(--background-color)';
-  hero.innerHTML = `
+  // Inject Stylesheet
+  const styleTag = document.createElement('style');
+  styleTag.textContent = `
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
+    
+    .gallery-root {
+      font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+      background: #ffffff;
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+
+    .gallery-hero {
+      background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #022c22 100%);
+      color: #ffffff;
+      padding: 180px 0 110px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+      text-align: center;
+    }
+
+    .gallery-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(16, 185, 129, 0.15), transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .gallery-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.15);
+      padding: 8px 16px;
+      border-radius: 100px;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      margin-bottom: 25px;
+      color: #34d399;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .gallery-hero-title {
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    .gallery-hero-title span {
+      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gallery-hero-desc {
+      font-size: 1.15rem;
+      line-height: 1.6;
+      color: #d1fae5;
+      max-width: 650px;
+      margin: 0 auto 45px;
+    }
+
+    /* Filter Pills */
+    .filter-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    .filter-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      color: #a7f3d0;
+      padding: 10px 24px;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .filter-pill:hover {
+      background: rgba(16, 185, 129, 0.12);
+      color: #ffffff;
+      border-color: rgba(16, 185, 129, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .filter-pill.active {
+      background: #10b981;
+      color: #ffffff;
+      border-color: #10b981;
+      box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+    }
+
+    /* Gallery Grid */
+    .gallery-section {
+      padding: 100px 0 130px;
+      background: #ffffff;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .gallery-item-card {
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.015);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .gallery-item-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+      border-color: rgba(16, 185, 129, 0.25);
+    }
+
+    .card-img-wrapper {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: #f1f5f9;
+    }
+
+    .card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gallery-item-card:hover .card-img-wrapper img {
+      transform: scale(1.08);
+    }
+
+    /* Video Play Overlay Badge */
+    .video-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(2, 44, 34, 0.85);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      backdrop-filter: blur(10px);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #34d399;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Text info under image card */
+    .card-body-info {
+      padding: 24px 20px;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .card-meta-tag {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #059669;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .card-title-text {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.3;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Lightbox Modal */
+    .lb-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 28, 21, 0.95);
+      backdrop-filter: blur(25px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .lb-wrapper {
+      max-width: 90%;
+      max-height: 80%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+    }
+
+    .lb-image {
+      max-width: 100%;
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 16px;
+      border: 1px solid rgba(16, 185, 129, 0.15);
+    }
+
+    .lb-close-btn {
+      position: absolute;
+      top: 40px;
+      right: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .lb-close-btn:hover {
+      background: #10b981;
+      transform: scale(1.08) rotate(90deg);
+      border-color: #10b981;
+    }
+
+    .lb-info-box {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      width: 90%;
+      max-width: 700px;
+      color: #ffffff;
+      z-index: 10000;
+    }
+
+    .lb-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 10000;
+    }
+
+    .lb-nav-btn:hover {
+      background: #10b981;
+      border-color: #10b981;
+      transform: translateY(-50%) scale(1.06);
+    }
+
+    .lb-prev { left: 40px; }
+    .lb-next { right: 40px; }
+
+    @media (max-width: 768px) {
+      .lb-prev { left: 15px; }
+      .lb-next { right: 15px; }
+      .lb-close-btn { top: 20px; right: 20px; }
+    }
+  `;
+  container.appendChild(styleTag);
+
+  // 1. HERO SECTION
+  const heroSec = document.createElement('header');
+  heroSec.className = 'gallery-hero';
+  heroSec.innerHTML = `
     <div class="container">
-      <span class="reveal" style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 4px; display: block; margin-bottom: 20px;">Capturing Excellence</span>
-      <h1 class="reveal" style="font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; line-height: 1.05; margin-bottom: 25px;">Moments & <br><span style="color: var(--primary-color);">Movements</span></h1>
-      <p class="reveal" style="color: var(--text-muted); font-size: 1.25rem; max-width: 700px; margin: 0 auto 60px; line-height: 1.8;">
-        Explore our visual journey of agricultural innovation, community impact, and regional partnerships across Nigeria.
+      <div class="gallery-hero-badge">Exhibition Highlights</div>
+      <h1 class="gallery-hero-title">Browse Our <span>Photo Gallery</span></h1>
+      <p class="gallery-hero-desc">
+        Relive the highlights from our exhibitions. Browse through memorable moments showcasing our products, services, and vibrant community.
       </p>
       
-      <!-- Filters (Modern Pill Design) -->
-      <div class="reveal" id="gallery-filters" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
-        <button class="gallery-filter-pill active" data-filter="All">All Projects</button>
-        <button class="gallery-filter-pill" data-filter="Exhibition">Exhibitions</button>
-        <button class="gallery-filter-pill" data-filter="Workshop">Workshops</button>
-        <button class="gallery-filter-pill" data-filter="Visit">Field Visits</button>
-        <button class="gallery-filter-pill" data-filter="Excursion">Excursions</button>
+      <div class="filter-wrapper" id="gallery-filters-bar">
+        <button class="filter-pill active" data-filter="All">All Photos</button>
+        <button class="filter-pill" data-filter="Student Visit">Student Visit</button>
+        <button class="filter-pill" data-filter="Excursion">Excursion</button>
+        <button class="filter-pill" data-filter="ECOWAS Visit">ECOWAS Visit</button>
+        <button class="filter-pill" data-filter="Workshop">Workshop</button>
       </div>
     </div>
   `;
 
-  // 2. Gallery Grid Section
-  const gridSection = document.createElement('section');
-  gridSection.style.paddingBottom = '140px';
-  gridSection.innerHTML = `
+  // 2. GRID SECTION
+  const gridSec = document.createElement('section');
+  gridSec.className = 'gallery-section';
+  gridSec.innerHTML = `
     <div class="container">
-      <div id="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px;">
-        <!-- Items injected via JS -->
+      <div class="gallery-grid" id="gallery-items-grid">
+        <!-- Rendered via JS -->
       </div>
     </div>
   `;
 
-  // 3. Lightbox (Refined Architecture)
-  const lightbox = document.createElement('div');
-  lightbox.id = 'lightbox';
-  lightbox.style.cssText = `
-    position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(15px); z-index: 9999;
-    display: none; align-items: center; justify-content: center; opacity: 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  `;
-  lightbox.innerHTML = `
-    <button id="closeLightbox" style="position: absolute; top: 40px; right: 40px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); color: white; width: 56px; height: 56px; border-radius: 50%; cursor: pointer; z-index: 10; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='scale(1)';">${X}</button>
-    
-    <div id="lightboxContent" style="max-width: 85%; max-height: 80%; position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.5);">
-      <!-- DYNAMIC CONTENT -->
-    </div>
-    
-    <div style="position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); color: white; text-align: center; width: 90%; max-width: 700px;">
-      <span id="lb-cat" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: var(--primary-color); font-weight: 800; display: block; margin-bottom: 12px;"></span>
-      <h3 id="lb-title" style="margin: 0; font-size: 2rem; font-weight: 900; line-height: 1.2;"></h3>
+  // 3. LIGHTBOX MODAL
+  const lightboxOverlay = document.createElement('div');
+  lightboxOverlay.className = 'lb-overlay';
+  lightboxOverlay.innerHTML = `
+    <button class="lb-close-btn" id="lbClose">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button class="lb-nav-btn lb-prev" id="lbPrev">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="lb-nav-btn lb-next" id="lbNext">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="lb-wrapper" id="lbContent"></div>
+    <div class="lb-info-box">
+      <span id="lbCategory" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #34d399; font-weight: 800; display: block; margin-bottom: 10px;"></span>
+      <h3 id="lbTitle" style="margin: 0; font-size: 1.6rem; font-weight: 900; line-height: 1.2;"></h3>
     </div>
   `;
 
-  const loadData = async () => {
+  let filteredItems = [];
+  let activeIndex = 0;
+
+  const loadGallery = async () => {
     try {
       const res = await fetch('/api/gallery');
       allItems = await res.json();
       renderItems();
-    } catch (err) { console.error(err); }
+    } catch (err) {
+      console.error('Error loading gallery API:', err);
+    }
   };
 
   const renderItems = () => {
-    const grid = gridSection.querySelector('#gallery-grid');
-    const filtered = currentFilter === 'All' ? allItems : allItems.filter(i => i.category === currentFilter);
-    
-    if (filtered.length === 0) {
+    const grid = gridSec.querySelector('#gallery-items-grid');
+    filteredItems = currentFilter === 'All' ? allItems : allItems.filter(i => i.category === currentFilter);
+
+    if (filteredItems.length === 0) {
       grid.innerHTML = `
-        <div style="grid-column: 1/-1; text-align: center; padding: 140px 0; background: var(--surface-color); border: 1px solid var(--glass-border); border-radius: 32px;">
-          <p style="color: var(--text-muted); font-size: 1.2rem;">Our media archive for this category is currently being updated.</p>
+        <div style="grid-column: 1/-1; text-align: center; padding: 100px 0; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 24px;">
+          <p style="color: #64748b; font-size: 1.1rem; font-weight: 600;">Our media archive for this category is currently being updated.</p>
         </div>
       `;
       return;
     }
 
-    grid.innerHTML = filtered.map((item, idx) => `
-      <div class="gallery-card-v2 reveal premium-glass-card" data-idx="${idx}" style="animation-delay: ${idx * 0.05}s;">
-        <div class="card-inner" style="position: relative; aspect-ratio: 4/5; overflow: hidden; border-radius: 20px;">
-          <img src="${item.image}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.2, 0, 0.2, 1);">
-          <div class="card-overlay-v2">
-            <span class="cat-tag">${item.category}</span>
-            <h3 class="title-tag">${item.title}</h3>
-            <div class="cta-tag">View Presentation →</div>
-          </div>
-          ${item.video_url ? `<div class="play-icon-v2">${Play}</div>` : ''}
+    grid.innerHTML = filteredItems.map((item, idx) => `
+      <div class="gallery-item-card" data-idx="${idx}">
+        <div class="card-img-wrapper">
+          <img src="${item.image}" alt="${item.title}" loading="lazy">
+          ${item.video_url ? `
+            <div class="video-badge">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          ` : ''}
+        </div>
+        <div class="card-body-info">
+          <span class="card-meta-tag">${item.category}</span>
+          <h4 class="card-title-text">${item.title}</h4>
         </div>
       </div>
     `).join('');
 
-    if (window.initAnimations) window.initAnimations();
-
-    grid.querySelectorAll('.gallery-card-v2').forEach((el, index) => {
-      el.onclick = () => openLightbox(filtered[index]);
+    // Attach click listeners to cards
+    grid.querySelectorAll('.gallery-item-card').forEach(el => {
+      el.onclick = () => {
+        const idx = parseInt(el.dataset.idx);
+        openLightbox(idx);
+      };
     });
+
+    if (window.initAnimations) {
+      setTimeout(window.initAnimations, 100);
+    }
   };
 
-  const openLightbox = (item) => {
-    const content = lightbox.querySelector('#lightboxContent');
-    const title = lightbox.querySelector('#lb-title');
-    const category = lightbox.querySelector('#lb-cat');
+  // Lightbox Operations
+  const openLightbox = (index) => {
+    activeIndex = index;
+    const item = filteredItems[activeIndex];
+    const content = lightboxOverlay.querySelector('#lbContent');
+    const title = lightboxOverlay.querySelector('#lbTitle');
+    const category = lightboxOverlay.querySelector('#lbCategory');
 
     if (item.video_url) {
-      // Basic YouTube Embed
       let vidId = '';
       if (item.video_url.includes('youtube.com/watch?v=')) vidId = item.video_url.split('v=')[1].split('&')[0];
       else if (item.video_url.includes('youtu.be/')) vidId = item.video_url.split('be/')[1].split('?')[0];
 
       if (vidId) {
-        content.innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}?autoplay=1" style="width: 85vw; height: 48vw; max-height: 75vh; border: none;" allow="autoplay; fullscreen"></iframe>`;
+        content.innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}?autoplay=1" style="width: 80vw; height: 45vw; max-height: 70vh; border: none; border-radius: 16px;" allow="autoplay; fullscreen"></iframe>`;
       } else {
-        content.innerHTML = `<video src="${item.video_url}" controls autoplay style="max-width: 100%; max-height: 80vh;"></video>`;
+        content.innerHTML = `<video src="${item.video_url}" controls autoplay style="max-width: 100%; max-height: 70vh; border-radius: 16px;"></video>`;
       }
     } else {
-      content.innerHTML = `<img src="${item.image}" style="max-width: 100%; max-height: 80vh; object-fit: contain;">`;
+      content.innerHTML = `<img src="${item.image}" class="lb-image" alt="${item.title}">`;
     }
-    
+
     title.textContent = item.title;
     category.textContent = item.category;
 
-    lightbox.style.display = 'flex';
-    setTimeout(() => lightbox.style.opacity = '1', 10);
+    lightboxOverlay.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      lightboxOverlay.style.opacity = '1';
+    }, 10);
   };
 
-  lightbox.querySelector('#closeLightbox').onclick = () => {
-    lightbox.style.opacity = '0';
+  const closeLightbox = () => {
+    lightboxOverlay.style.opacity = '0';
     setTimeout(() => {
-      lightbox.style.display = 'none';
-      lightbox.querySelector('#lightboxContent').innerHTML = '';
-      document.body.style.overflow = 'auto';
+      lightboxOverlay.style.display = 'none';
+      lightboxOverlay.querySelector('#lbContent').innerHTML = '';
+      document.body.style.overflow = '';
     }, 400);
   };
 
-  // Component Styles Refinement
-  const style = document.createElement('style');
-  style.innerHTML = `
-    .gallery-filter-pill {
-      padding: 12px 28px; border-radius: 100px; border: 1px solid var(--glass-border);
-      background: var(--surface-color); color: var(--text-muted); font-weight: 700;
-      font-size: 0.95rem; cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-    }
-    .gallery-filter-pill:hover { transform: translateY(-3px); color: var(--primary-color); border-color: var(--primary-color); }
-    .gallery-filter-pill.active {
-      background: var(--primary-color); color: white; border-color: var(--primary-color);
-      box-shadow: 0 12px 24px rgba(0, 21, 91, 0.25);
-    }
+  const navigateLightbox = (dir) => {
+    let nextIdx = activeIndex + dir;
+    if (nextIdx < 0) nextIdx = filteredItems.length - 1;
+    if (nextIdx >= filteredItems.length) nextIdx = 0;
+    openLightbox(nextIdx);
+  };
 
-    .gallery-card-v2:hover img { transform: scale(1.1); }
-    .card-overlay-v2 {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 40px; opacity: 0; transition: all 0.5s ease; transform: translateY(30px);
-    }
-    .gallery-card-v2:hover .card-overlay-v2 { opacity: 1; transform: translateY(0); }
-    
-    .cat-tag { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--primary-color); font-weight: 800; margin-bottom: 12px; }
-    .title-tag { color: white; font-size: 1.6rem; font-weight: 900; margin-bottom: 15px; line-height: 1.1; }
-    .cta-tag { color: rgba(255,255,255,0.7); font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-    
-    .play-icon-v2 {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 70px; height: 70px; background: white; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; color: var(--primary-color);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3); z-index: 5; font-size: 1.5rem;
-    }
-  `;
-  document.head.appendChild(style);
+  // Bind Lightbox Event Handlers
+  lightboxOverlay.querySelector('#lbClose').onclick = closeLightbox;
+  lightboxOverlay.querySelector('#lbPrev').onclick = () => navigateLightbox(-1);
+  lightboxOverlay.querySelector('#lbNext').onclick = () => navigateLightbox(1);
 
-  // Setup Filtering Logic
-  setTimeout(() => {
-    hero.onclick = (e) => {
-      const btn = e.target.closest('.gallery-filter-pill');
-      if (btn) {
-        hero.querySelectorAll('.gallery-filter-pill').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentFilter = btn.dataset.filter;
-        renderItems();
-      }
-    };
-  }, 100);
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (lightboxOverlay.style.display === 'flex') {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigateLightbox(-1);
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+    }
+  });
 
+  // Filter Pill Listeners
+  heroSec.querySelector('#gallery-filters-bar').onclick = (e) => {
+    const pill = e.target.closest('.filter-pill');
+    if (pill) {
+      heroSec.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+      pill.classList.add('active');
+      currentFilter = pill.dataset.filter;
+      renderItems();
+    }
+  };
+
+  // Assemble Page
   container.appendChild(renderNavbar());
-  container.appendChild(hero);
-  container.appendChild(gridSection);
-  container.appendChild(lightbox);
+  container.appendChild(heroSec);
+  container.appendChild(gridSec);
+  container.appendChild(lightboxOverlay);
   container.appendChild(renderFooter());
 
-  loadData();
+  loadGallery();
   return container;
 }

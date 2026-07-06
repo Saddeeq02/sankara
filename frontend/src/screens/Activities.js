@@ -1,158 +1,368 @@
 import { renderNavbar, renderFooter } from '../components/Navigation';
-import { Calendar, MapPin, ArrowRight, Newspaper, ChevronRight } from 'lucide-static';
 
 export function renderActivitiesScreen() {
   const container = document.createElement('div');
+  container.className = 'activities-root';
+
   let events = [];
 
-  // 1. Header (Premium V2)
-  const header = document.createElement('header');
-  header.style.padding = '180px 0 80px';
-  header.style.textAlign = 'center';
-  header.style.background = 'var(--background-color)';
-  header.innerHTML = `
+  // Inject Stylesheet
+  const styleTag = document.createElement('style');
+  styleTag.textContent = `
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
+    
+    .activities-root {
+      font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+      background: #ffffff;
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+
+    .activities-hero {
+      background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #022c22 100%);
+      color: #ffffff;
+      padding: 180px 0 110px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+      text-align: center;
+    }
+
+    .activities-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(16, 185, 129, 0.15), transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .activities-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.15);
+      padding: 8px 16px;
+      border-radius: 100px;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      margin-bottom: 25px;
+      color: #34d399;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .activities-hero-title {
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    .activities-hero-title span {
+      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .activities-hero-desc {
+      font-size: 1.15rem;
+      line-height: 1.6;
+      color: #d1fae5;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* Timeline Container */
+    .timeline-section {
+      padding: 100px 0 130px;
+      background: #ffffff;
+      position: relative;
+    }
+
+    .timeline-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, #10b981 0%, #34d399 80%, transparent 100%);
+      transform: translateX(-50%);
+    }
+
+    .timeline-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 80px;
+      position: relative;
+    }
+
+    .timeline-row:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .timeline-col-card {
+      width: 45%;
+    }
+
+    .timeline-col-date {
+      width: 45%;
+      text-align: right;
+    }
+
+    .timeline-row:nth-child(even) .timeline-col-date {
+      text-align: left;
+    }
+
+    .timeline-node {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      background: #10b981;
+      border: 4px solid #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+      z-index: 10;
+    }
+
+    /* Card styling */
+    .timeline-card {
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 24px;
+      padding: 35px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.015);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(16, 185, 129, 0.25);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+    }
+
+    .timeline-card-image {
+      width: 100%;
+      height: 230px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f1f5f9;
+    }
+
+    .timeline-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .timeline-card:hover .timeline-card-image img {
+      transform: scale(1.05);
+    }
+
+    .timeline-card-title {
+      font-size: 1.5rem;
+      font-weight: 850;
+      color: #0f172a;
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    .timeline-card-desc {
+      font-size: 0.98rem;
+      color: #475569;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .timeline-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 20px;
+      margin-top: 5px;
+    }
+
+    .timeline-card-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.08);
+      color: #059669;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .timeline-card-location {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #64748b;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    /* Date column styles */
+    .timeline-date-val {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #022c22;
+      letter-spacing: -0.5px;
+    }
+
+    .timeline-date-label {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #059669;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .timeline-line {
+        left: 20px;
+        transform: none;
+      }
+      .timeline-row {
+        flex-direction: column !important;
+        align-items: flex-start;
+        padding-left: 45px;
+        margin-bottom: 50px;
+      }
+      .timeline-col-card, .timeline-col-date {
+        width: 100%;
+        text-align: left !important;
+      }
+      .timeline-col-date {
+        margin-bottom: 15px;
+      }
+      .timeline-node {
+        left: 20px;
+        top: 20px;
+        transform: translate(-50%, -50%);
+      }
+      .timeline-date-val {
+        font-size: 1.4rem;
+      }
+    }
+  `;
+  container.appendChild(styleTag);
+
+  // 1. HERO SECTION
+  const heroSec = document.createElement('header');
+  heroSec.className = 'activities-hero';
+  heroSec.innerHTML = `
     <div class="container">
-      <div class="reveal" style="display: inline-flex; align-items: center; gap: 10px; background: rgba(59, 130, 246, 0.1); color: var(--primary-color); padding: 10px 20px; border-radius: 100px; font-size: 0.9rem; font-weight: 800; margin-bottom: 25px; letter-spacing: 1px;">
-        ${Newspaper} CORPORATE JOURNAL 2026
-      </div>
-      <h1 class="reveal" style="font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; line-height: 1.05; margin-bottom: 25px;">Driving Innovation <br><span style="color: var(--primary-color);">In The Field</span></h1>
-      <p class="reveal" style="color: var(--text-muted); font-size: 1.25rem; max-width: 700px; margin: 0 auto; line-height: 1.8;">
+      <div class="activities-hero-badge">Corporate Journal</div>
+      <h1 class="activities-hero-title">Driving Innovation <span>In The Field</span></h1>
+      <p class="activities-hero-desc">
         Tracking our journey across Nigeria through specialized workshops, government partnerships, and community-shifting mechanization events.
       </p>
     </div>
   `;
 
-  // 2. Timeline Grid Section
-  const timelineSection = document.createElement('section');
-  timelineSection.style.paddingBottom = '140px';
-  timelineSection.style.background = 'var(--background-color)';
-  timelineSection.innerHTML = `
-    <div class="container" style="max-width: 1100px; position: relative;">
-      <div id="activities-timeline-line"></div>
-      <div id="events-loader-v2" style="display: flex; flex-direction: column; gap: 80px;">
-        <!-- Events injected via JS -->
+  // 2. TIMELINE SECTION
+  const timelineSec = document.createElement('section');
+  timelineSec.className = 'timeline-section';
+  timelineSec.innerHTML = `
+    <div class="container timeline-container">
+      <div class="timeline-line"></div>
+      <div id="timeline-events-grid">
+        <!-- Rendered via JS -->
       </div>
     </div>
   `;
 
-  const loadData = async () => {
+  const loadActivities = async () => {
     try {
       const res = await fetch('/api/activities');
       events = await res.json();
-      // Sort newest at the top
-      events.sort((a,b) => b.id - a.id);
+      // Sort descending by id (newest first)
+      events.sort((a, b) => b.id - a.id);
       renderEvents();
-    } catch (err) { console.error(err); }
+    } catch (err) {
+      console.error('Error loading activities:', err);
+    }
   };
 
   const renderEvents = () => {
-    const list = timelineSection.querySelector('#events-loader-v2');
-    
+    const list = timelineSec.querySelector('#timeline-events-grid');
+
     if (events.length === 0) {
-      list.innerHTML = `<div style="text-align: center; padding: 100px 0; background: var(--surface-color); border: 1px solid var(--glass-border); border-radius: 32px; color: var(--text-muted); font-size: 1.1rem;">Our technical activity log is currently being updated. Check back shortly.</div>`;
+      list.innerHTML = `
+        <div style="text-align: center; padding: 100px 0; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 24px;">
+          <p style="color: #64748b; font-size: 1.1rem; font-weight: 600;">Our technical activity log is currently being updated. Check back shortly.</p>
+        </div>
+      `;
       return;
     }
 
     list.innerHTML = events.map((event, idx) => `
-      <div class="activity-block reveal" style="animation-delay: ${idx * 0.15}s;">
-        <div class="activity-dot-v2">${Calendar}</div>
-        <div class="activity-card-v2 premium-glass-card">
-          <div class="activity-top">
-            <span class="activity-date-v2">${event.date}</span>
-            <span class="activity-tag-v2"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--primary-color); display: inline-block;"></span> Recent Fieldwork</span>
-          </div>
-          
-          <div class="activity-content-grid">
+      <div class="timeline-row">
+        <div class="timeline-node"></div>
+        
+        <div class="timeline-col-date">
+          <div class="timeline-date-val">${event.date}</div>
+          <div class="timeline-date-label">Field Activity</div>
+        </div>
+
+        <div class="timeline-col-card">
+          <div class="timeline-card">
             ${event.image ? `
-              <div class="activity-image-v2">
+              <div class="timeline-card-image">
                 <img src="${event.image}" alt="${event.title}" loading="lazy">
               </div>
             ` : ''}
-            <div class="activity-text-v2">
-              <h2 style="font-size: 2.2rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; color: var(--primary-color);">${event.title}</h2>
-              <p style="color: var(--text-muted); line-height: 1.8; font-size: 1.15rem; margin-bottom: 30px;">${event.summary}</p>
-              
-              <div style="display: flex; gap: 20px; align-items: center; border-top: 1px solid var(--glass-border); padding-top: 25px;">
-                <button class="activity-cta-btn">
-                  Read Full Entry <span style="margin-left: 10px;">${ArrowRight}</span>
-                </button>
-                <div style="display: flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.9rem; font-weight: 600;">
-                  ${MapPin} Lagos, Nigeria
-                </div>
-              </div>
+            <h3 class="timeline-card-title">${event.title}</h3>
+            <p class="timeline-card-desc">${event.summary}</p>
+            <div class="timeline-card-footer">
+              <span class="timeline-card-tag">
+                <span style="width: 5px; height: 5px; border-radius: 50%; background: #059669; display: inline-block;"></span>
+                Recent Fieldwork
+              </span>
+              <span class="timeline-card-location">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+                Nigeria
+              </span>
             </div>
           </div>
         </div>
       </div>
     `).join('');
 
-    if (window.initAnimations) window.initAnimations();
+    if (window.initAnimations) {
+      setTimeout(window.initAnimations, 100);
+    }
   };
 
+  // Assemble Page
   container.appendChild(renderNavbar());
-  container.appendChild(header);
-  container.appendChild(timelineSection);
+  container.appendChild(heroSec);
+  container.appendChild(timelineSec);
   container.appendChild(renderFooter());
 
-  // Component Custom Styles (Scoped)
-  const style = document.createElement('style');
-  style.innerHTML = `
-    #activities-timeline-line {
-      position: absolute; left: 40px; top: 0; bottom: 0; width: 4px;
-      background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color) 40%, transparent);
-      border-radius: 50px; opacity: 0.3;
-    }
-    .activity-block {
-      position: relative; padding-left: 100px; width: 100%;
-    }
-    .activity-dot-v2 {
-      position: absolute; left: 24px; top: 40px; width: 36px; height: 36px;
-      background: var(--primary-color); border: 4px solid var(--background-color);
-      border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center;
-      z-index: 5; box-shadow: 0 0 20px var(--stats-glow-color);
-    }
-    .activity-card-v2 {
-      padding: 50px; border-radius: 32px; overflow: hidden;
-    }
-    .activity-top {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px;
-    }
-    .activity-date-v2 {
-      padding: 8px 20px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.1);
-      border-radius: 100px; color: var(--primary-color); font-weight: 800; font-size: 0.95rem;
-    }
-    .activity-tag-v2 {
-      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); font-weight: 700;
-      display: flex; align-items: center; gap: 8px;
-    }
-
-    .activity-content-grid {
-      display: grid; grid-template-columns: 320px 1fr; gap: 60px; align-items: start;
-    }
-    .activity-image-v2 {
-      width: 100%; height: 300px; border-radius: 20px; overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
-    .activity-image-v2 img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-    .activity-card-v2:hover .activity-image-v2 img { transform: scale(1.08); }
-
-    .activity-cta-btn {
-      background: none; border: none; padding: 0; color: var(--primary-color); font-weight: 800; cursor: pointer;
-      display: flex; align-items: center; font-size: 1.05rem; transition: all 0.3s ease;
-    }
-    .activity-cta-btn:hover { letter-spacing: 0.5px; opacity: 0.8; }
-
-    @media (max-width: 968px) {
-      .activity-content-grid { grid-template-columns: 1fr; gap: 30px; }
-      .activity-block { padding-left: 60px; }
-      #activities-timeline-line { left: 20px; }
-      .activity-dot-v2 { left: 4px; }
-      .activity-card-v2 { padding: 30px; }
-      .activity-image-v2 { height: 240px; }
-    }
-  `;
-  document.head.appendChild(style);
-
-  loadData();
+  loadActivities();
   return container;
 }
