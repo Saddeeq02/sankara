@@ -19,7 +19,6 @@ export function renderNavbar() {
           <img src="/assets/logo.png" alt="Sankara Logo" style="height: 35px; object-fit: contain;">
         </div>
         <li><a href="/" data-route="home" class="nav-link-item">Home</a></li>
-        <li><a href="#about" data-route="about" class="nav-link-item">About</a></li>
         <li><a href="/products" data-route="products" class="nav-link-item">Products</a></li>
         <li><a href="/services" data-route="services" class="nav-link-item">Services</a></li>
         <li><a href="/gallery" data-route="gallery" class="nav-link-item">Gallery</a></li>
@@ -101,7 +100,6 @@ export function renderFooter() {
         <div class="reveal" style="animation-delay: 0.2s">
           <h4 style="margin-bottom: 25px; font-size: 1.1rem; font-weight: 600;">Company</h4>
           <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 15px;">
-            <li><a href="#about" data-route="about" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">About Us</a></li>
             <li><a href="/services" data-route="services" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">Services</a></li>
             <li><a href="/products" data-route="products" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">Products</a></li>
             <li><a href="/contact" data-route="contact" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">Contact</a></li>

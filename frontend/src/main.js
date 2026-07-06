@@ -69,23 +69,6 @@ window.navigate = function(routeName) {
   
   updateMeta(routeName);
   
-  // Special Handling for 'About' (Scroll to section on Home)
-  if (routeName === 'about') {
-    const isHome = window.location.pathname === '/' || window.location.pathname === '/home';
-    
-    if (isHome) {
-      const el = document.getElementById('about');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-        window.history.pushState({ route: 'home' }, '', '/#about');
-        return;
-      }
-    }
-    // If not on home, or section missing, navigate to home then scroll
-    routeName = 'home';
-    window.location.hash = 'about';
-  }
-
   // Special Handling for 'Home' (Clear hash and scroll to top)
   if (routeName === 'home') {
     if (window.location.hash) {
@@ -125,14 +108,6 @@ window.navigate = function(routeName) {
     appRoot.innerHTML = '';
     const screenRenderer = routes[routeName] || renderHomeScreen;
     appRoot.appendChild(screenRenderer());
-  }
-
-  // Handle post-render scroll if hash exists
-  if (window.location.hash === '#about') {
-    setTimeout(() => {
-      const el = document.getElementById('about');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 150);
   }
 
   // Attach event listeners to new navigation links

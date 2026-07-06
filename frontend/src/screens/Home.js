@@ -789,6 +789,9 @@ export function renderHomeScreen() {
     if (filtered.length > 0) {
       grid.innerHTML = '';
       filtered.forEach(p => grid.appendChild(renderProductCard(p)));
+      if (window.initAnimations) {
+        window.initAnimations();
+      }
     } else {
       grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: #64748b; border: 1px dashed #e2e8f0; border-radius: 12px; background: #f8fafc;">No products listed in this category currently.</div>`;
     }
