@@ -435,14 +435,19 @@ export function renderHomeScreen() {
     heroSec.style.backgroundImage = `url(${bgImages[currentBgIndex]})`;
   }, 5000);
 
-  // Slideshow Logic for the 3D Lovol Machinery (Side, Front, Top views)
+  // Slideshow Logic for the 11 Lovol and Massey Ferguson Machinery Slides
   const machinerySlides = [
-    { id: 'tractor-side', src: '/assets/lovol_tractor_754h.png', label: 'SIDE VIEW' },
-    { id: 'tractor-front', src: '/assets/lovol_tractor_754h_front.png', label: 'FRONT VIEW' },
-    { id: 'tractor-top', src: '/assets/lovol_tractor_754h_top.png', label: 'TOP VIEW' },
-    { id: 'harvester-side', src: '/assets/lovol_harvester_rg109plus.png', label: 'SIDE VIEW' },
-    { id: 'harvester-front', src: '/assets/lovol_harvester_rg109plus_front.png', label: 'FRONT VIEW' },
-    { id: 'harvester-top', src: '/assets/lovol_harvester_rg109plus_top.png', label: 'TOP VIEW' }
+    { id: 'tractor-side', src: '/assets/lovol_tractor_754h.png', label: 'TR-SIDE' },
+    { id: 'tractor-front', src: '/assets/lovol_tractor_754h_front.png', label: 'TR-FRONT' },
+    { id: 'tractor-top', src: '/assets/lovol_tractor_754h_top.png', label: 'TR-TOP' },
+    { id: 'harvester-side', src: '/assets/lovol_harvester_rg109plus.png', label: 'HV-SIDE' },
+    { id: 'harvester-front', src: '/assets/lovol_harvester_rg109plus_front.png', label: 'HV-FRONT' },
+    { id: 'harvester-top', src: '/assets/lovol_harvester_rg109plus_top.png', label: 'HV-TOP' },
+    { id: 'fleet-lovol-754h', src: '/assets/fleet_lovol_754h.png', label: 'LOVOL 754H' },
+    { id: 'fleet-mf-375', src: '/assets/fleet_mf_375.png', label: 'MF 375' },
+    { id: 'fleet-mf-385', src: '/assets/fleet_mf_385.png', label: 'MF 385' },
+    { id: 'fleet-lovol-rg109plus', src: '/assets/fleet_lovol_rg109plus.png', label: 'RG109+' },
+    { id: 'fleet-lovol-af108', src: '/assets/fleet_lovol_af108.png', label: 'AF108' }
   ];
   
   let currentSlide = 0;
@@ -460,12 +465,11 @@ export function renderHomeScreen() {
         }
       }
     });
-
+ 
     // Update active label dot
     const dots = heroSec.querySelectorAll('.view-dot');
     dots.forEach((dot, idx) => {
-      const normalizedIdx = currentSlide % 3;
-      if (idx === normalizedIdx) {
+      if (idx === currentSlide) {
         dot.classList.add('active');
       } else {
         dot.classList.remove('active');
@@ -525,7 +529,7 @@ export function renderHomeScreen() {
 
   // Bind transparency, interactivity, and selectors
   setTimeout(() => {
-    // Process transparency on all 6 perspective views
+    // Process transparency on all 11 slides
     machinerySlides.forEach(slide => {
       const img = heroSec.querySelector(`#${slide.id}`);
       if (img) makeImageTransparent(img, slide.src);
@@ -539,10 +543,7 @@ export function renderHomeScreen() {
     dots.forEach((dot, idx) => {
       dot.onclick = (e) => {
         e.stopPropagation();
-        // Determine whether we are currently viewing Tractor (0, 1, 2) or Harvester (3, 4, 5)
-        const isHarvester = currentSlide >= 3;
-        const targetIdx = idx + (isHarvester ? 3 : 0);
-        updateActiveSlide(targetIdx);
+        updateActiveSlide(idx);
       };
     });
 
@@ -606,20 +607,35 @@ export function renderHomeScreen() {
         </svg>
         <div class="machinery-shadow"></div>
         
-        <!-- Lovol Tractor Views -->
+        <!-- Lovol Tractor Views (Original 3D) -->
         <img id="tractor-side" class="visual-slide active" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Tractor 754-H Side View">
         <img id="tractor-front" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Tractor 754-H Front View">
         <img id="tractor-top" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Tractor 754-H Top View">
         
-        <!-- Lovol Harvester Views -->
+        <!-- Lovol Harvester Views (Original 3D) -->
         <img id="harvester-side" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Harvester RG109Plus Side View">
         <img id="harvester-front" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Harvester RG109Plus Front View">
         <img id="harvester-top" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Harvester RG109Plus Top View">
 
-        <div class="machinery-view-selector">
-          <span class="view-dot active">SIDE</span>
-          <span class="view-dot">FRONT</span>
-          <span class="view-dot">TOP</span>
+        <!-- Uploaded Vehicles (New 5) -->
+        <img id="fleet-lovol-754h" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol 754-H Blue Tractor">
+        <img id="fleet-mf-375" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Massey Ferguson 375 Tractor">
+        <img id="fleet-mf-385" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Massey Ferguson 385 Tractor">
+        <img id="fleet-lovol-rg109plus" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol RG109Plus Harvester">
+        <img id="fleet-lovol-af108" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol AF108 Harvester">
+
+        <div class="machinery-view-selector" style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 95%; margin: 15px auto 0;">
+          <span class="view-dot active" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">TR-SIDE</span>
+          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">TR-FRONT</span>
+          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">TR-TOP</span>
+          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">HV-SIDE</span>
+          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">HV-FRONT</span>
+          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">HV-TOP</span>
+          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">LOVOL-754H</span>
+          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">MF-375</span>
+          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">MF-385</span>
+          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">RG109+</span>
+          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">AF108</span>
         </div>
       </div>
     </div>
@@ -756,13 +772,31 @@ export function renderHomeScreen() {
       </div>
 
       <!-- Partner Brands Section -->
-      <div class="reveal" style="margin-top: 80px; text-align: center; animation-delay: 0.2s;">
-        <h5 style="color: #64748b; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 35px;">Our Trusted Partners & Brands</h5>
-        <div class="partner-logos-grid" style="display: flex; justify-content: center; align-items: center; gap: 60px; flex-wrap: wrap;">
-          <img src="/assets/brand_lovol.png" alt="Lovol" style="height: 45px; object-fit: contain; filter: grayscale(100%) opacity(0.5); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.filter='none'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%) opacity(0.5)'">
-          <img src="/assets/brand_zoomlion.png" alt="Zoomlion" style="height: 45px; object-fit: contain; filter: grayscale(100%) opacity(0.5); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.filter='none'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%) opacity(0.5)'">
-          <img src="/assets/brand_senci.png" alt="Senci" style="height: 45px; object-fit: contain; filter: grayscale(100%) opacity(0.5); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.filter='none'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%) opacity(0.5)'">
-          <img src="/assets/brand_massey.png" alt="Massey Ferguson" style="height: 50px; object-fit: contain; filter: grayscale(100%) opacity(0.5); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.filter='none'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%) opacity(0.5)'">
+      <div class="reveal" style="margin-top: 90px; text-align: center; animation-delay: 0.2s;">
+        <h5 style="color: #059669; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">STRATEGIC PARTNERSHIPS</h5>
+        <h2 style="font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 850; color: #0f172a; letter-spacing: -1px; margin-bottom: 25px;">Our Trusted Partners & Brands</h2>
+        
+        <p style="color: #475569; font-size: 1.1rem; max-width: 800px; margin: 0 auto 50px; line-height: 1.8;">
+          Sankara Nigeria Limited is proud to collaborate with global leaders in agricultural machinery and industrial power. As authorized distributors and engineering partners, we deliver genuine products, specialized maintenance support, and custom-fit parts supply chains across the region.
+        </p>
+
+        <div class="partner-logos-grid" style="display: flex; justify-content: center; align-items: center; gap: 70px; flex-wrap: wrap; margin-bottom: 30px; padding: 40px 20px; background: rgba(248, 250, 252, 0.6); border: 1px solid rgba(226, 232, 240, 0.8); border-radius: 24px; backdrop-filter: blur(10px);">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 140px;">
+            <img src="/assets/brand_lovol.png" alt="Lovol" style="height: 60px; object-fit: contain; transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <span style="font-size: 0.75rem; font-weight: 700; color: #64748b; letter-spacing: 1px; text-transform: uppercase;">Official Distributor</span>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 140px;">
+            <img src="/assets/brand_zoomlion.png" alt="Zoomlion" style="height: 60px; object-fit: contain; transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <span style="font-size: 0.75rem; font-weight: 700; color: #64748b; letter-spacing: 1px; text-transform: uppercase;">Machinery Partner</span>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 140px;">
+            <img src="/assets/brand_senci.png" alt="Senci" style="height: 60px; object-fit: contain; transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <span style="font-size: 0.75rem; font-weight: 700; color: #64748b; letter-spacing: 1px; text-transform: uppercase;">Power Systems</span>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 140px;">
+            <img src="/assets/brand_massey.png" alt="Massey Ferguson" style="height: 70px; object-fit: contain; transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <span style="font-size: 0.75rem; font-weight: 700; color: #64748b; letter-spacing: 1px; text-transform: uppercase;">Tractor Sourcing</span>
+          </div>
         </div>
       </div>
     </div>
@@ -779,58 +813,14 @@ export function renderHomeScreen() {
   container.appendChild(homeRoot);
   container.appendChild(renderFooter());
 
-  // Dynamic Product Fetch & Tab Filtering Logic
-  const defaultProducts = [
-    {
-      id: 'p-lovol-754h',
-      name: 'Lovol 754-H Blue Tractor',
-      category: 'Tractors',
-      image: '/assets/fleet_lovol_754h.png',
-      description: 'High-performance Lovol 754-H utility tractor, featuring heavy-duty 4WD, ergonomic controls, and optimized fuel efficiency for all soil conditions.'
-    },
-    {
-      id: 'p-mf-375',
-      name: 'Massey Ferguson 375',
-      category: 'Tractors',
-      image: '/assets/fleet_mf_375.png',
-      description: 'Rugged and reliable Massey Ferguson 375 utility tractor, built for durability, ease of maintenance, and high torque output in demanding tasks.'
-    },
-    {
-      id: 'p-mf-385',
-      name: 'Massey Ferguson 385',
-      category: 'Tractors',
-      image: '/assets/fleet_mf_385.png',
-      description: 'The agricultural powerhouse Massey Ferguson 385 tractor. Delivers exceptional pulling power, robust design, and maximum efficiency for large-scale operations.'
-    },
-    {
-      id: 'p-lovol-rg109plus',
-      name: 'Lovol RG109Plus Harvester',
-      category: 'Farm Implements',
-      image: '/assets/fleet_lovol_rg109plus.png',
-      description: 'Advanced Lovol RG108/RG109 Plus combine harvester, designed for high capacity, clean threshing, and minimal grain loss in diverse crop types.'
-    },
-    {
-      id: 'p-lovol-af108',
-      name: 'Lovol AF108 Harvester',
-      category: 'Farm Implements',
-      image: '/assets/fleet_lovol_af108.png',
-      description: 'Reliable Lovol AF108 combine harvester, built for efficient harvesting operations, easy servicing, and excellent grain quality.'
-    }
-  ];
-
-  let productsList = [...defaultProducts];
+  let productsList = [];
   const loadFleet = async () => {
     try {
       const res = await fetch('/api/products');
-      const apiProducts = await res.json();
-      const existingNames = new Set(defaultProducts.map(p => p.name.toLowerCase()));
-      const uniqueApiProducts = apiProducts.filter(p => !existingNames.has(p.name.toLowerCase()));
-      productsList = [...defaultProducts, ...uniqueApiProducts];
+      productsList = await res.json();
       renderFleet('All');
     } catch (err) {
       console.error(err);
-      productsList = [...defaultProducts];
-      renderFleet('All');
     }
   };
 
