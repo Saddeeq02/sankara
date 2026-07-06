@@ -802,25 +802,27 @@ export function renderHomeScreen() {
     </div>
   `;
 
+
+
   // 6. ABOUT US SECTION (Right below Strategic Partnerships)
   const aboutSec = document.createElement('section');
   aboutSec.className = 'sec-about-us';
   aboutSec.style.padding = '100px 0 140px';
   aboutSec.style.background = '#f8fafc'; // Subtle light background to separate from footer
   aboutSec.innerHTML = `
-    <div class="container" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: start;">
-      
+    <!-- Part 1: Company Profile & Core Pillars -->
+    <div class="container" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: start; margin-bottom: 120px;">
       <!-- Left Column: Company Story -->
       <div class="reveal" style="animation-delay: 0.1s;">
         <span style="font-size: 0.85rem; font-weight: 800; color: #059669; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">OUR LEGACY</span>
         <h2 style="font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 850; color: #0f172a; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 30px;">Powering Nigeria's <br><span style="color: #059669;">Modern Farming</span></h2>
         
         <p style="color: #334155; font-size: 1.15rem; font-weight: 600; line-height: 1.7; margin-bottom: 20px;">
-          Since 1986, Sankara Nigeria Limited has been Nigeria's trusted partner in agricultural mechanization, delivering quality machinery and exceptional service nationwide.
+          Since its establishment in 1986, Sankara Nigeria Limited has remained a trusted force in agricultural transformation across Nigeria and the wider region.
         </p>
         
         <p style="color: #475569; font-size: 1.05rem; line-height: 1.8; margin-bottom: 20px;">
-          Built on a foundation of integrity, innovation, and dedicated service, we have led the advancement of mechanized and sustainable farming for nearly four decades. Our impact spans the entire Nigerian landscape and extends into neighbouring countries such as Niger, Chad, Cameroon, and Benin.
+          Built on a foundation of integrity, innovation, and dedicated service, we have led the advancement of mechanized and sustainable farming for nearly four decades. Our impact spans the entire Nigerian landscape and extends into neighbouring countries such as Niger, Chad, Cameroon, and Benin, as well as customers all over the world, delivering reliable machinery, genuine spare parts, and expert technical support wherever farmers need us.
         </p>
         
         <p style="color: #475569; font-size: 1.05rem; line-height: 1.8; margin-bottom: 35px;">
@@ -830,7 +832,7 @@ export function renderHomeScreen() {
         <div style="display: flex; gap: 30px; border-top: 1px solid #e2e8f0; padding-top: 30px;">
           <div>
             <h4 style="font-size: 2.2rem; font-weight: 900; color: #0f172a; margin-bottom: 5px;">40+</h4>
-            <span style="font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">Years of Excellence</span>
+            <span style="font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">Years of Experience</span>
           </div>
           <div>
             <h4 style="font-size: 2.2rem; font-weight: 900; color: #059669; margin-bottom: 5px;">1200+</h4>
@@ -839,7 +841,7 @@ export function renderHomeScreen() {
         </div>
       </div>
 
-      <!-- Right Column: Mission, Vision, Values Stack -->
+      <!-- Right Column: Mission & Vision Cards Stack -->
       <div style="display: flex; flex-direction: column; gap: 30px;">
         
         <!-- Mission Card -->
@@ -860,23 +862,236 @@ export function renderHomeScreen() {
           </div>
           <h3 style="font-size: 1.3rem; font-weight: 850; color: #0f172a; margin-bottom: 12px;">Our Vision</h3>
           <p style="color: #475569; font-size: 0.98rem; line-height: 1.6; margin: 0;">
-            Driven by passion and purpose, our vision is to become the most recognized and trusted agricultural machinery partner across West Africa; championing modern farming, strengthening partnerships, and transforming communities.
+            Driven by passion and purpose, our vision is to become the most recognized and trusted agricultural machinery partner across West Africa; championing modern farming, strengthening partnerships, and delivering innovations that transform communities and protect the environment.
           </p>
         </div>
 
-        <!-- Core Values Card -->
+        <!-- Values Card -->
         <div class="reveal premium-glass-card" style="padding: 35px; border-radius: 24px; background: #ffffff; border: 1px solid #e2e8f0; animation-delay: 0.4s; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.02);" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
           <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 12px; margin-bottom: 20px;">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
           </div>
-          <h3 style="font-size: 1.3rem; font-weight: 850; color: #0f172a; margin-bottom: 12px;">Our Values</h3>
+          <h3 style="font-size: 1.3rem; font-weight: 850; color: #0f172a; margin-bottom: 12px;">Our Core Values</h3>
           <p style="color: #475569; font-size: 0.98rem; line-height: 1.6; margin: 0;">
-            Integrity, excellence, and customer satisfaction guide everything we do. We believe in building lasting relationships through honest dealings, reliability, and superior service.
+            Integrity, excellence, and customer satisfaction guide everything we do. We believe in building lasting relationships through honest dealings and superior service.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Part 2: Why Choose Us Section -->
+    <div class="container" style="margin-bottom: 120px;">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <span style="font-size: 0.85rem; font-weight: 800; color: #059669; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">UNCOMPROMISING SERVICE</span>
+        <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; color: #0f172a; letter-spacing: -1px; margin-bottom: 20px;">Why Choose Us</h2>
+        <p style="color: #475569; font-size: 1.1rem; max-width: 700px; margin: 0 auto; line-height: 1.7;">
+          We go beyond selling machinery. We provide comprehensive solutions, unwavering support, and genuine commitment to your agricultural success.
+        </p>
+      </div>
+
+      <div class="about-why-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;">
+        <!-- Card 1: Support -->
+        <div class="reveal premium-glass-card" style="padding: 30px; border-radius: 20px; background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 10px; margin-bottom: 20px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <h4 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 12px;">24/7 Support</h4>
+          <p style="color: #475569; font-size: 0.92rem; line-height: 1.5; margin: 0;">
+            Round-the-clock assistance for all your queries, technical support, and emergency services. We're always here when you need us.
           </p>
         </div>
 
+        <!-- Card 2: OEM Parts -->
+        <div class="reveal premium-glass-card" style="padding: 30px; border-radius: 20px; background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s; animation-delay: 0.1s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 10px; margin-bottom: 20px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <h4 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 12px;">Genuine Spare Parts</h4>
+          <p style="color: #475569; font-size: 0.92rem; line-height: 1.5; margin: 0;">
+            100% authentic OEM parts ensuring optimal performance, longevity, and warranty compliance for all your machinery needs.
+          </p>
+        </div>
+
+        <!-- Card 3: Delivery -->
+        <div class="reveal premium-glass-card" style="padding: 30px; border-radius: 20px; background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s; animation-delay: 0.2s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 10px; margin-bottom: 20px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <h4 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 12px;">Nationwide Delivery</h4>
+          <p style="color: #475569; font-size: 0.92rem; line-height: 1.5; margin: 0;">
+            Reliable delivery services covering all 36 states of Nigeria. Your equipment reaches you safely and on time, anywhere in the country.
+          </p>
+        </div>
+
+        <!-- Card 4: Experts -->
+        <div class="reveal premium-glass-card" style="padding: 30px; border-radius: 20px; background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s; animation-delay: 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 10px; margin-bottom: 20px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h4 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 12px;">Trained Experts</h4>
+          <p style="color: #475569; font-size: 0.92rem; line-height: 1.5; margin: 0;">
+            Certified technicians with extensive training and experience. Expert maintenance, repairs, and consultation services you can trust.
+          </p>
+        </div>
+
+        <!-- Card 5: Maintenance -->
+        <div class="reveal premium-glass-card" style="padding: 30px; border-radius: 20px; background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s; animation-delay: 0.4s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 10px; margin-bottom: 20px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h4 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 12px;">After-Sales Service</h4>
+          <p style="color: #475569; font-size: 0.92rem; line-height: 1.5; margin: 0;">
+            Comprehensive maintenance programs, scheduled servicing, and emergency repairs to keep your machinery running at peak performance.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Part 3: Why Manufacturers Choose Sankara -->
+    <div class="container" style="margin-bottom: 120px;">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <span style="font-size: 0.85rem; font-weight: 800; color: #059669; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">B2B TRUST & AUTHORITY</span>
+        <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; color: #0f172a; letter-spacing: -1px; margin-bottom: 20px;">Why Manufacturers Choose Sankara</h2>
+        <p style="color: #475569; font-size: 1.1rem; max-width: 700px; margin: 0 auto; line-height: 1.7;">
+          Global heavy agricultural brands select Sankara Nigeria Limited to manage their market deployment due to our long-standing authority and reliable support.
+        </p>
       </div>
 
+      <div class="about-why-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px;">
+        <!-- Fact 1 -->
+        <div class="reveal" style="padding: 30px; border-left: 4px solid #059669; background: rgba(248, 250, 252, 0.5);">
+          <h4 style="font-size: 1.15rem; font-weight: 850; color: #0f172a; margin-bottom: 10px;">Proven Track Record</h4>
+          <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
+            Nearly 40 years of successful operations and customer satisfaction in the Nigerian agricultural market.
+          </p>
+        </div>
+
+        <!-- Fact 2 -->
+        <div class="reveal" style="padding: 30px; border-left: 4px solid #059669; background: rgba(248, 250, 252, 0.5); animation-delay: 0.1s;">
+          <h4 style="font-size: 1.15rem; font-weight: 850; color: #0f172a; margin-bottom: 10px;">Extensive Network</h4>
+          <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
+            Nationwide presence covering all 36 states with reliable delivery and service infrastructure.
+          </p>
+        </div>
+
+        <!-- Fact 3 -->
+        <div class="reveal" style="padding: 30px; border-left: 4px solid #059669; background: rgba(248, 250, 252, 0.5); animation-delay: 0.2s;">
+          <h4 style="font-size: 1.15rem; font-weight: 850; color: #0f172a; margin-bottom: 10px;">Technical Expertise</h4>
+          <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
+            Certified technicians and comprehensive after-sales support capabilities.
+          </p>
+        </div>
+
+        <!-- Fact 4 -->
+        <div class="reveal" style="padding: 30px; border-left: 4px solid #059669; background: rgba(248, 250, 252, 0.5); animation-delay: 0.3s;">
+          <h4 style="font-size: 1.15rem; font-weight: 850; color: #0f172a; margin-bottom: 10px;">Market Leadership</h4>
+          <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
+            Leading position in agricultural machinery sales with over 1200 tractors delivered.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Part 4: Milestones Timeline Section -->
+    <div class="container" style="margin-bottom: 40px;">
+      <div style="text-align: center; margin-bottom: 80px;">
+        <span style="font-size: 0.85rem; font-weight: 800; color: #059669; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">OUR MILESTONES</span>
+        <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; color: #0f172a; letter-spacing: -1px; margin-bottom: 20px;">Milestones of Excellence</h2>
+        <p style="color: #475569; font-size: 1.1rem; max-width: 700px; margin: 0 auto; line-height: 1.7;">
+          Tracing our transformative impact on Nigerian agriculture through nearly four decades of dedication.
+        </p>
+      </div>
+
+      <!-- Vertical Timeline Wrapper -->
+      <div style="position: relative; max-width: 900px; margin: 0 auto; padding: 20px 0;">
+        <!-- Timeline Line -->
+        <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 4px; background: #e2e8f0; transform: translateX(-50%);"></div>
+
+        <!-- Node 1: Founding (1986) -->
+        <div class="reveal timeline-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 50px; position: relative;">
+          <div class="timeline-pane" style="width: 44%; text-align: right; padding-right: 30px;">
+            <span style="font-size: 1.25rem; font-weight: 900; color: #059669;">1986</span>
+            <h4 style="font-size: 1.2rem; font-weight: 850; color: #0f172a; margin: 5px 0 10px;">Company Founded</h4>
+            <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              Sankara Nigeria Limited was established with a vision to transform Nigerian agriculture through reliable machinery.
+            </p>
+          </div>
+          <!-- Center Dot -->
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #059669; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(5,150,105,0.15); z-index: 2;"></div>
+          <div style="width: 44%;"></div>
+        </div>
+
+        <!-- Node 2: First Major Partnership -->
+        <div class="reveal timeline-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 50px; position: relative;">
+          <div style="width: 44%;"></div>
+          <!-- Center Dot -->
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #059669; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(5,150,105,0.15); z-index: 2;"></div>
+          <div class="timeline-pane" style="width: 44%; text-align: left; padding-left: 30px;">
+            <span style="font-size: 1.25rem; font-weight: 900; color: #059669;">Dealer Certification</span>
+            <h4 style="font-size: 1.2rem; font-weight: 850; color: #0f172a; margin: 5px 0 10px;">First Major Partnership</h4>
+            <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              Became authorized dealer for Massey Ferguson, establishing our reputation for quality and reliability.
+            </p>
+          </div>
+        </div>
+
+        <!-- Node 3: Nationwide Expansion -->
+        <div class="reveal timeline-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 50px; position: relative;">
+          <div class="timeline-pane" style="width: 44%; text-align: right; padding-right: 30px;">
+            <span style="font-size: 1.25rem; font-weight: 900; color: #059669;">Logistics Scale</span>
+            <h4 style="font-size: 1.2rem; font-weight: 850; color: #0f172a; margin: 5px 0 10px;">Nationwide Expansion</h4>
+            <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              Expanded operations to serve farmers across all 36 states of Nigeria with a comprehensive delivery network.
+            </p>
+          </div>
+          <!-- Center Dot -->
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #059669; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(5,150,105,0.15); z-index: 2;"></div>
+          <div style="width: 44%;"></div>
+        </div>
+
+        <!-- Node 4: 500+ Tractors -->
+        <div class="reveal timeline-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 50px; position: relative;">
+          <div style="width: 44%;"></div>
+          <!-- Center Dot -->
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #059669; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(5,150,105,0.15); z-index: 2;"></div>
+          <div class="timeline-pane" style="width: 44%; text-align: left; padding-left: 30px;">
+            <span style="font-size: 1.25rem; font-weight: 900; color: #059669;">Sales Milestone</span>
+            <h4 style="font-size: 1.2rem; font-weight: 850; color: #0f172a; margin: 5px 0 10px;">500+ Tractors Delivered</h4>
+            <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              Reached milestone of delivering over 500 tractors, becoming one of Nigeria's leading agricultural machinery suppliers.
+            </p>
+          </div>
+        </div>
+
+        <!-- Node 5: Parts Network -->
+        <div class="reveal timeline-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 50px; position: relative;">
+          <div class="timeline-pane" style="width: 44%; text-align: right; padding-right: 30px;">
+            <span style="font-size: 1.25rem; font-weight: 900; color: #059669;">Supply Chain</span>
+            <h4 style="font-size: 1.2rem; font-weight: 850; color: #0f172a; margin: 5px 0 10px;">Genuine Parts Network</h4>
+            <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              Established nationwide spare parts distribution network ensuring authentic OEM parts availability.
+            </p>
+          </div>
+          <!-- Center Dot -->
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #059669; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(5,150,105,0.15); z-index: 2;"></div>
+          <div style="width: 44%;"></div>
+        </div>
+
+        <!-- Node 6: 1200+ Tractors & 24/7 Support -->
+        <div class="reveal timeline-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; position: relative;">
+          <div style="width: 44%;"></div>
+          <!-- Center Dot -->
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #059669; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(5,150,105,0.15); z-index: 2;"></div>
+          <div class="timeline-pane" style="width: 44%; text-align: left; padding-left: 30px;">
+            <span style="font-size: 1.25rem; font-weight: 900; color: #059669;">Current Legacy</span>
+            <h4 style="font-size: 1.2rem; font-weight: 850; color: #0f172a; margin: 5px 0 10px;">1200+ Tractors Delivered</h4>
+            <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              Achieved milestone of delivering over 1200 tractors, supporting 5000+ farmers across Nigeria with 24/7 assistance and training programs.
+            </p>
+          </div>
+        </div>
+
+      </div>
     </div>
   `;
 
@@ -889,6 +1104,25 @@ export function renderHomeScreen() {
         gap: 50px !important;
         padding-left: 20px !important;
         padding-right: 20px !important;
+      }
+      .sec-about-us .timeline-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        margin-bottom: 40px !important;
+      }
+      .sec-about-us .timeline-pane {
+        width: 100% !important;
+        text-align: left !important;
+        padding-left: 40px !important;
+        padding-right: 0 !important;
+      }
+      .sec-about-us div[style*="left: 50%"] {
+        left: 15px !important;
+        transform: none !important;
+      }
+      .sec-about-us div[style*="width: 4px"] {
+        left: 15px !important;
+        transform: none !important;
       }
     }
   `;
