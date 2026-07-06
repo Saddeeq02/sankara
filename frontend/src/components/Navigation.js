@@ -129,17 +129,6 @@ export function renderFooter() {
         </div>
       </div>
 
-      <!-- Partner Brands Section -->
-      <div class="reveal" style="border-top: 1px solid rgba(125,125,125,0.1); padding: 40px 0; margin-bottom: 20px; animation-delay: 0.45s;">
-        <h5 style="text-align: center; color: var(--footer-link); font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px;">Our Trusted Partners & Brands</h5>
-        <div class="partner-logos-grid" style="display: flex; justify-content: center; align-items: center; gap: 60px; flex-wrap: wrap;">
-          <img src="/assets/brand_lovol.png" alt="Lovol" style="height: 40px; object-fit: contain; filter: brightness(0) invert(1) opacity(0.7); transition: all 0.3s;" onmouseover="this.style.filter='none'; this.style.opacity='1'" onmouseout="this.style.filter='brightness(0) invert(1) opacity(0.7)'; this.style.opacity='0.7'">
-          <img src="/assets/brand_zoomlion.png" alt="Zoomlion" style="height: 40px; object-fit: contain; filter: brightness(0) invert(1) opacity(0.7); transition: all 0.3s;" onmouseover="this.style.filter='none'; this.style.opacity='1'" onmouseout="this.style.filter='brightness(0) invert(1) opacity(0.7)'; this.style.opacity='0.7'">
-          <img src="/assets/brand_senci.png" alt="Senci" style="height: 40px; object-fit: contain; filter: brightness(0) invert(1) opacity(0.7); transition: all 0.3s;" onmouseover="this.style.filter='none'; this.style.opacity='1'" onmouseout="this.style.filter='brightness(0) invert(1) opacity(0.7)'; this.style.opacity='0.7'">
-          <img src="/assets/brand_massey.png" alt="Massey Ferguson" style="height: 45px; object-fit: contain; filter: brightness(0) invert(1) opacity(0.7); transition: all 0.3s;" onmouseover="this.style.filter='none'; this.style.opacity='1'" onmouseout="this.style.filter='brightness(0) invert(1) opacity(0.7)'; this.style.opacity='0.7'">
-        </div>
-      </div>
-
       <!-- Copyright Bottom Bar -->
       <div class="reveal" style="border-top: 1px solid rgba(125,125,125,0.2); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; color: var(--footer-link); font-size: 0.9rem; animation-delay: 0.5s;">
         <div>© 2026 Sankara Nigeria Limited. All rights reserved.</div>

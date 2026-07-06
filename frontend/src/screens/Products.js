@@ -125,15 +125,58 @@ export function renderProductsScreen() {
     });
   };
 
+  const defaultProducts = [
+    {
+      id: 'p-lovol-754h',
+      name: 'Lovol 754-H Blue Tractor',
+      category: 'Tractors',
+      image: '/assets/fleet_lovol_754h.png',
+      description: 'High-performance Lovol 754-H utility tractor, featuring heavy-duty 4WD, ergonomic controls, and optimized fuel efficiency for all soil conditions.'
+    },
+    {
+      id: 'p-mf-375',
+      name: 'Massey Ferguson 375',
+      category: 'Tractors',
+      image: '/assets/fleet_mf_375.png',
+      description: 'Rugged and reliable Massey Ferguson 375 utility tractor, built for durability, ease of maintenance, and high torque output in demanding tasks.'
+    },
+    {
+      id: 'p-mf-385',
+      name: 'Massey Ferguson 385',
+      category: 'Tractors',
+      image: '/assets/fleet_mf_385.png',
+      description: 'The agricultural powerhouse Massey Ferguson 385 tractor. Delivers exceptional pulling power, robust design, and maximum efficiency for large-scale operations.'
+    },
+    {
+      id: 'p-lovol-rg109plus',
+      name: 'Lovol RG109Plus Harvester',
+      category: 'Farm Implements',
+      image: '/assets/fleet_lovol_rg109plus.png',
+      description: 'Advanced Lovol RG108/RG109 Plus combine harvester, designed for high capacity, clean threshing, and minimal grain loss in diverse crop types.'
+    },
+    {
+      id: 'p-lovol-af108',
+      name: 'Lovol AF108 Harvester',
+      category: 'Farm Implements',
+      image: '/assets/fleet_lovol_af108.png',
+      description: 'Reliable Lovol AF108 combine harvester, built for efficient harvesting operations, easy servicing, and excellent grain quality.'
+    }
+  ];
+
   const loadPublicProducts = async () => {
     try {
       const response = await fetch('/api/products');
-      allProducts = await response.json();
+      const apiProducts = await response.json();
+      const existingNames = new Set(defaultProducts.map(p => p.name.toLowerCase()));
+      const uniqueApiProducts = apiProducts.filter(p => !existingNames.has(p.name.toLowerCase()));
+      allProducts = [...defaultProducts, ...uniqueApiProducts];
       applyFilters();
       setupEventListeners();
     } catch (err) {
       console.error(err);
-      productsContainer.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 100px; color: #ef4444; font-weight: 700;">Connection Error: Database currently unavailable.</div>';
+      allProducts = [...defaultProducts];
+      applyFilters();
+      setupEventListeners();
     }
   };
 

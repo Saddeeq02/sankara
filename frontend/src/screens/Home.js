@@ -435,10 +435,14 @@ export function renderHomeScreen() {
     heroSec.style.backgroundImage = `url(${bgImages[currentBgIndex]})`;
   }, 5000);
 
-  // Slideshow Logic for the Lovol Machinery (Tractor and Harvester)
+  // Slideshow Logic for the 3D Lovol Machinery (Side, Front, Top views)
   const machinerySlides = [
-    { id: 'tractor', src: '/assets/lovol_tractor_754h.png', label: 'TRACTOR' },
-    { id: 'harvester', src: '/assets/lovol_harvester_rg109plus.png', label: 'HARVESTER' }
+    { id: 'tractor-side', src: '/assets/lovol_tractor_754h.png', label: 'SIDE VIEW' },
+    { id: 'tractor-front', src: '/assets/lovol_tractor_754h_front.png', label: 'FRONT VIEW' },
+    { id: 'tractor-top', src: '/assets/lovol_tractor_754h_top.png', label: 'TOP VIEW' },
+    { id: 'harvester-side', src: '/assets/lovol_harvester_rg109plus.png', label: 'SIDE VIEW' },
+    { id: 'harvester-front', src: '/assets/lovol_harvester_rg109plus_front.png', label: 'FRONT VIEW' },
+    { id: 'harvester-top', src: '/assets/lovol_harvester_rg109plus_top.png', label: 'TOP VIEW' }
   ];
   
   let currentSlide = 0;
@@ -460,7 +464,8 @@ export function renderHomeScreen() {
     // Update active label dot
     const dots = heroSec.querySelectorAll('.view-dot');
     dots.forEach((dot, idx) => {
-      if (idx === currentSlide) {
+      const normalizedIdx = currentSlide % 3;
+      if (idx === normalizedIdx) {
         dot.classList.add('active');
       } else {
         dot.classList.remove('active');
@@ -520,7 +525,7 @@ export function renderHomeScreen() {
 
   // Bind transparency, interactivity, and selectors
   setTimeout(() => {
-    // Process transparency on slides
+    // Process transparency on all 6 perspective views
     machinerySlides.forEach(slide => {
       const img = heroSec.querySelector(`#${slide.id}`);
       if (img) makeImageTransparent(img, slide.src);
@@ -534,7 +539,10 @@ export function renderHomeScreen() {
     dots.forEach((dot, idx) => {
       dot.onclick = (e) => {
         e.stopPropagation();
-        updateActiveSlide(idx);
+        // Determine whether we are currently viewing Tractor (0, 1, 2) or Harvester (3, 4, 5)
+        const isHarvester = currentSlide >= 3;
+        const targetIdx = idx + (isHarvester ? 3 : 0);
+        updateActiveSlide(targetIdx);
       };
     });
 
@@ -598,15 +606,20 @@ export function renderHomeScreen() {
         </svg>
         <div class="machinery-shadow"></div>
         
-        <!-- Lovol Tractor -->
-        <img id="tractor" class="visual-slide active" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Tractor 754-H">
+        <!-- Lovol Tractor Views -->
+        <img id="tractor-side" class="visual-slide active" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Tractor 754-H Side View">
+        <img id="tractor-front" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Tractor 754-H Front View">
+        <img id="tractor-top" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Tractor 754-H Top View">
         
-        <!-- Lovol Harvester -->
-        <img id="harvester" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Harvester RG109Plus">
+        <!-- Lovol Harvester Views -->
+        <img id="harvester-side" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Harvester RG109Plus Side View">
+        <img id="harvester-front" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Harvester RG109Plus Front View">
+        <img id="harvester-top" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Harvester RG109Plus Top View">
 
         <div class="machinery-view-selector">
-          <span class="view-dot active">Tractor</span>
-          <span class="view-dot">Harvester</span>
+          <span class="view-dot active">SIDE</span>
+          <span class="view-dot">FRONT</span>
+          <span class="view-dot">TOP</span>
         </div>
       </div>
     </div>
@@ -741,6 +754,17 @@ export function renderHomeScreen() {
           </a>
         </div>
       </div>
+
+      <!-- Partner Brands Section -->
+      <div class="reveal" style="margin-top: 80px; text-align: center; animation-delay: 0.2s;">
+        <h5 style="color: #64748b; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 35px;">Our Trusted Partners & Brands</h5>
+        <div class="partner-logos-grid" style="display: flex; justify-content: center; align-items: center; gap: 60px; flex-wrap: wrap;">
+          <img src="/assets/brand_lovol.png" alt="Lovol" style="height: 45px; object-fit: contain; filter: grayscale(100%) opacity(0.5); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.filter='none'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%) opacity(0.5)'">
+          <img src="/assets/brand_zoomlion.png" alt="Zoomlion" style="height: 45px; object-fit: contain; filter: grayscale(100%) opacity(0.5); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.filter='none'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%) opacity(0.5)'">
+          <img src="/assets/brand_senci.png" alt="Senci" style="height: 45px; object-fit: contain; filter: grayscale(100%) opacity(0.5); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.filter='none'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%) opacity(0.5)'">
+          <img src="/assets/brand_massey.png" alt="Massey Ferguson" style="height: 50px; object-fit: contain; filter: grayscale(100%) opacity(0.5); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.filter='none'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%) opacity(0.5)'">
+        </div>
+      </div>
     </div>
   `;
 
@@ -756,14 +780,57 @@ export function renderHomeScreen() {
   container.appendChild(renderFooter());
 
   // Dynamic Product Fetch & Tab Filtering Logic
-  let productsList = [];
+  const defaultProducts = [
+    {
+      id: 'p-lovol-754h',
+      name: 'Lovol 754-H Blue Tractor',
+      category: 'Tractors',
+      image: '/assets/fleet_lovol_754h.png',
+      description: 'High-performance Lovol 754-H utility tractor, featuring heavy-duty 4WD, ergonomic controls, and optimized fuel efficiency for all soil conditions.'
+    },
+    {
+      id: 'p-mf-375',
+      name: 'Massey Ferguson 375',
+      category: 'Tractors',
+      image: '/assets/fleet_mf_375.png',
+      description: 'Rugged and reliable Massey Ferguson 375 utility tractor, built for durability, ease of maintenance, and high torque output in demanding tasks.'
+    },
+    {
+      id: 'p-mf-385',
+      name: 'Massey Ferguson 385',
+      category: 'Tractors',
+      image: '/assets/fleet_mf_385.png',
+      description: 'The agricultural powerhouse Massey Ferguson 385 tractor. Delivers exceptional pulling power, robust design, and maximum efficiency for large-scale operations.'
+    },
+    {
+      id: 'p-lovol-rg109plus',
+      name: 'Lovol RG109Plus Harvester',
+      category: 'Farm Implements',
+      image: '/assets/fleet_lovol_rg109plus.png',
+      description: 'Advanced Lovol RG108/RG109 Plus combine harvester, designed for high capacity, clean threshing, and minimal grain loss in diverse crop types.'
+    },
+    {
+      id: 'p-lovol-af108',
+      name: 'Lovol AF108 Harvester',
+      category: 'Farm Implements',
+      image: '/assets/fleet_lovol_af108.png',
+      description: 'Reliable Lovol AF108 combine harvester, built for efficient harvesting operations, easy servicing, and excellent grain quality.'
+    }
+  ];
+
+  let productsList = [...defaultProducts];
   const loadFleet = async () => {
     try {
       const res = await fetch('/api/products');
-      productsList = await res.json();
+      const apiProducts = await res.json();
+      const existingNames = new Set(defaultProducts.map(p => p.name.toLowerCase()));
+      const uniqueApiProducts = apiProducts.filter(p => !existingNames.has(p.name.toLowerCase()));
+      productsList = [...defaultProducts, ...uniqueApiProducts];
       renderFleet('All');
     } catch (err) {
       console.error(err);
+      productsList = [...defaultProducts];
+      renderFleet('All');
     }
   };
 
