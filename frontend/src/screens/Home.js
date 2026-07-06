@@ -316,60 +316,133 @@ export function renderHomeScreen() {
     
     /* Stats Section */
     .sec-stats {
-      background: #022c22;
+      background: radial-gradient(circle at center, #023c2d 0%, #011c15 100%);
       color: #ffffff;
       padding: 100px 0;
       position: relative;
       overflow: hidden;
+      border-top: 1px solid rgba(16, 185, 129, 0.15);
+      border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+    }
+    
+    .sec-stats::before {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+      top: -100px;
+      left: -100px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .sec-stats::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(52, 211, 153, 0.05) 0%, transparent 70%);
+      bottom: -100px;
+      right: -100px;
+      pointer-events: none;
+      z-index: 1;
     }
     
     .stats-layout {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
-      text-align: center;
+      gap: 30px;
+      position: relative;
+      z-index: 2;
     }
     
-    @media (max-width: 768px) {
+    @media (max-width: 968px) {
       .stats-layout {
         grid-template-columns: repeat(2, 1fr);
       }
     }
+
+    @media (max-width: 576px) {
+      .stats-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stats-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(16, 185, 129, 0.12);
+      border-radius: 24px;
+      padding: 40px 25px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .stats-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.04) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .stats-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(16, 185, 129, 0.35);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), 0 0 25px rgba(16, 185, 129, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .stats-card:hover::before {
+      opacity: 1;
+    }
+
+    .stats-card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: rgba(16, 185, 129, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #34d399;
+      margin-bottom: 22px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .stats-card:hover .stats-card-icon {
+      background: #10b981;
+      color: #ffffff;
+      transform: scale(1.1) rotate(6deg);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    }
     
     .stat-num-val {
-      font-size: 4rem;
+      font-size: 3.5rem;
       font-weight: 900;
-      color: #10b981;
-      margin-bottom: 10px;
+      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
       line-height: 1;
+      letter-spacing: -1px;
     }
     
     .stat-lbl-val {
-      font-size: 0.9rem;
-      font-weight: 700;
+      font-size: 0.85rem;
+      font-weight: 750;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
       color: #a7f3d0;
-    }
-    
-    /* Custom Wave SVG shapes */
-    .wave-top {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 80px;
-      transform: rotate(180deg);
-      fill: #ffffff;
-    }
-    
-    .wave-bottom {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 80px;
-      fill: #ffffff;
+      text-align: center;
     }
     
     /* Partner banner curves */
@@ -716,36 +789,55 @@ export function renderHomeScreen() {
   const statsSec = document.createElement('section');
   statsSec.className = 'sec-stats';
   statsSec.innerHTML = `
-    <!-- Top SVG Wave -->
-    <svg class="wave-top" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 100 C150 0, 300 0, 450 100 C600 200, 750 200, 900 100 C1050 0, 1200 0, 1440 100 L1440 0 L0 0 Z" fill="#ffffff"/>
-    </svg>
-    
-    <div class="container" style="position: relative; z-index: 5; padding: 40px 0;">
+    <div class="container" style="position: relative; z-index: 5;">
       <div class="stats-layout">
-        <div>
+        <!-- Card 1: Experience -->
+        <div class="stats-card">
+          <div class="stats-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="6"/>
+              <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+            </svg>
+          </div>
           <div class="stat-num-val">40+</div>
           <div class="stat-lbl-val">Years Experience</div>
         </div>
-        <div>
+        
+        <!-- Card 2: Deployed -->
+        <div class="stats-card">
+          <div class="stats-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <polyline points="9 11 11 13 15 9"/>
+            </svg>
+          </div>
           <div class="stat-num-val">500+</div>
           <div class="stat-lbl-val">Machines Deployed</div>
         </div>
-        <div>
+        
+        <!-- Card 3: Support -->
+        <div class="stats-card">
+          <div class="stats-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+          </div>
           <div class="stat-num-val">100%</div>
           <div class="stat-lbl-val">Support Rating</div>
         </div>
-        <div>
+        
+        <!-- Card 4: Operations -->
+        <div class="stats-card">
+          <div class="stats-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </div>
           <div class="stat-num-val">24/7</div>
           <div class="stat-lbl-val">Parts Operations</div>
         </div>
       </div>
     </div>
-    
-    <!-- Bottom SVG Wave -->
-    <svg class="wave-bottom" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 0 C150 100, 300 100, 450 0 C600 -100, 750 -100, 900 0 C1050 100, 1200 100, 1440 0 L1440 100 L0 100 Z" fill="#ffffff"/>
-    </svg>
   `;
 
   // 5. PARTNERSHIP / CALL TO ACTION BANNER SECTION
