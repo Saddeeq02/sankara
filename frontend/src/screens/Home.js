@@ -546,6 +546,84 @@ export function renderHomeScreen() {
     .partner-card:hover img {
       transform: scale(1.06);
     }
+
+    /* Team Section CSS styling */
+    .team-member-card {
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      border-radius: 24px;
+      padding: 35px 30px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.01);
+    }
+
+    .team-member-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(16, 185, 129, 0.25);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+    }
+
+    .team-member-img-box {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 25px;
+      border: 3px solid #10b981;
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15);
+      transition: all 0.4s ease;
+    }
+
+    .team-member-card:hover .team-member-img-box {
+      transform: scale(1.05) rotate(3deg);
+      border-color: #34d399;
+      box-shadow: 0 12px 30px rgba(52, 211, 153, 0.3);
+    }
+
+    .team-member-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .team-member-name {
+      font-size: 1.3rem;
+      font-weight: 850;
+      color: #0f172a;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .team-member-role {
+      font-size: 0.95rem;
+      font-weight: 750;
+      color: #059669;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .team-member-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f8fafc;
+      color: #64748b;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .team-member-card:hover .team-member-phone {
+      background: rgba(16, 185, 129, 0.08);
+      color: #059669;
+      border-color: rgba(16, 185, 129, 0.15);
+    }
   `;
   container.appendChild(styleTag);
 
@@ -1282,6 +1360,69 @@ export function renderHomeScreen() {
   `;
   document.head.appendChild(aboutStyle);
 
+  // Section 7: Team Section (After Milestones of Excellence)
+  const teamSec = document.createElement('section');
+  teamSec.className = 'sec-team';
+  teamSec.style.padding = '120px 0';
+  teamSec.style.background = '#ffffff';
+  teamSec.style.borderTop = '1px solid #e2e8f0';
+  teamSec.innerHTML = `
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 70px;">
+        <span class="reveal" style="font-size: 0.85rem; font-weight: 800; color: #059669; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">Our Team</span>
+        <h2 class="reveal" style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; color: #0f172a; letter-spacing: -1px; margin-bottom: 20px;">The Leadership & Technical Experts</h2>
+        <p class="reveal" style="color: #475569; font-size: 1.1rem; max-width: 750px; margin: 0 auto; line-height: 1.7;">
+          The dedicated professionals working round the clock to power modern agriculture and customer success across Nigeria.
+        </p>
+      </div>
+
+      <div class="team-grid" id="home-team-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px;">
+        <div style="grid-column: 1/-1; text-align: center; padding: 40px 0; color: #64748b;">Loading team profiles...</div>
+      </div>
+    </div>
+  `;
+
+  const loadTeam = async () => {
+    try {
+      const res = await fetch('/api/team');
+      const team = await res.json();
+      const grid = teamSec.querySelector('#home-team-grid');
+      
+      if (team.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 60px 0; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 24px;">
+            <p style="color: #64748b; font-size: 1.1rem; font-weight: 600;">Meet our team soon! Our member profile listings are being updated.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = team.map((member, idx) => `
+        <div class="reveal team-member-card" style="animation-delay: ${idx * 0.1}s;">
+          <div class="team-member-img-box">
+            <img src="${member.image}" alt="${member.name}" loading="lazy">
+          </div>
+          <h3 class="team-member-name">${member.name}</h3>
+          <div class="team-member-role">${member.role}</div>
+          ${member.phone ? `
+            <div class="team-member-phone">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>${member.phone}</span>
+            </div>
+          ` : ''}
+        </div>
+      `).join('');
+
+      if (window.initAnimations) {
+        setTimeout(window.initAnimations, 100);
+      }
+    } catch (err) {
+      console.error('Error loading team data:', err);
+    }
+  };
+
+  loadTeam();
+
   // Append everything
   homeRoot.appendChild(heroSec);
   homeRoot.appendChild(featuresSec);
@@ -1289,6 +1430,7 @@ export function renderHomeScreen() {
   homeRoot.appendChild(statsSec);
   homeRoot.appendChild(ctaSec);
   homeRoot.appendChild(aboutSec);
+  homeRoot.appendChild(teamSec);
 
   container.appendChild(renderNavbar());
   container.appendChild(homeRoot);
