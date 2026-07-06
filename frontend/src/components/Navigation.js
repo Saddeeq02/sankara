@@ -17,7 +17,7 @@ export function renderNavbar() {
       <!-- Navigation Menu Wrapper -->
       <div class="nav-menu-wrapper" id="nav-menu">
         <div class="mobile-nav-header">
-          <img src="/assets/logo.png" alt="Sankara Logo" style="height: 35px; object-fit: contain;">
+          <img src="/assets/logo.png" alt="Sankara Logo" style="height: 50px; object-fit: contain;">
         </div>
         <ul class="nav-links">
           <li><a href="/" data-route="home" class="nav-link-item">Home</a></li>
@@ -26,10 +26,8 @@ export function renderNavbar() {
           <li><a href="/services" data-route="services" class="nav-link-item">Services</a></li>
           <li><a href="/gallery" data-route="gallery" class="nav-link-item">Gallery</a></li>
           <li><a href="/activities" data-route="activities" class="nav-link-item">Activities</a></li>
-          <li><a href="/portfolio" data-route="portfolio" class="nav-link-item">Portfolio</a></li>
         </ul>
         <div class="nav-actions">
-          <button id="theme-toggle" class="theme-btn">🌙</button>
           <a href="/contact" data-route="contact" class="btn-primary contact-nav-btn" style="padding: 10px 24px; font-size: 0.9rem; text-decoration: none; border-radius: 50px;">Contact Us</a>
         </div>
       </div>
@@ -38,7 +36,6 @@ export function renderNavbar() {
 
   const toggle = nav.querySelector('#nav-toggle');
   const menu = nav.querySelector('#nav-menu');
-  const themeBtn = nav.querySelector('#theme-toggle');
 
   // Mobile Menu Toggle
   toggle.onclick = () => {
@@ -49,26 +46,14 @@ export function renderNavbar() {
   // Close menu when clicking a link or button
   menu.querySelectorAll('a, button').forEach(link => {
     link.onclick = (e) => {
-      // Don't close if theme toggle is clicked
-      if (link.id === 'theme-toggle') return;
       menu.classList.remove('mobile-active');
       toggle.classList.remove('toggle-active');
     }
   });
 
-  // Theme Toggle Logic
+  // Apply saved theme preference silently
   const currentTheme = localStorage.getItem('theme') || 'light';
   if (currentTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-  themeBtn.innerHTML = currentTheme === 'dark' ? '☀️' : '🌙';
-
-  themeBtn.onclick = (e) => {
-    e.stopPropagation();
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const newTheme = isDark ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    themeBtn.innerHTML = newTheme === 'dark' ? '☀️' : '🌙';
-  };
 
   return nav;
 }
@@ -86,7 +71,7 @@ export function renderFooter() {
         <!-- Column 1: Info and Socials -->
         <div class="reveal" style="animation-delay: 0.1s">
           <a href="/" data-route="home" style="display: inline-block; margin-bottom: 20px;">
-            <img src="/assets/logo.png" alt="Sankara Logo" style="height: 45px; object-fit: contain;">
+            <img src="/assets/logo.png" alt="Sankara Logo" style="height: 60px; object-fit: contain;">
           </a>
           <p style="color: var(--footer-link); font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px;">
             Sankara Nigeria Limited is your trusted partner for premium heavy-duty tractors, farm implements, and genuine spare parts across Nigeria.
