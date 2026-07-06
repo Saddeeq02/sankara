@@ -1,6 +1,7 @@
 import './styles/app.css';
 import './styles/admin.css';
 import { renderHomeScreen } from './screens/Home';
+import { renderAboutScreen } from './screens/About';
 import { renderProductsScreen } from './screens/Products';
 import { renderContactScreen } from './screens/Contact';
 import { renderServicesScreen } from './screens/Services';
@@ -32,6 +33,7 @@ window.initAnimations = function() {
 
 const routes = {
   home: renderHomeScreen,
+  about: renderAboutScreen,
   products: renderProductsScreen,
   contact: renderContactScreen,
   services: renderServicesScreen,
@@ -48,6 +50,7 @@ const routes = {
 
 const metaData = {
   home: { title: 'Home | Sankara Nigeria Limited', desc: 'Premium agricultural machinery, tractors, and mechanization solutions.' },
+  about: { title: 'About Us | Sankara Nigeria Limited', desc: 'Powering Nigeria\'s modern farming with premium agricultural machinery since 1986.' },
   products: { title: 'Our Equipment-Line | Sankara', desc: 'Browse our high-performance Massey Ferguson tractors and farm implements.' },
   contact: { title: 'Get in Touch | Sankara Nigeria Limited', desc: 'Contact our sales and support teams for machinery inquiries and partnerships.' },
   services: { title: 'Professional Services | Sankara', desc: 'Training, maintenance, and technical support for large-scale agricultural projects.' },
