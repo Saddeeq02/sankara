@@ -1,4 +1,17 @@
 export function renderLogin() {
+  // Secure autologin check
+  const urlParams = new URLSearchParams(window.location.search);
+  const autologinToken = urlParams.get('token');
+  if (autologinToken) {
+    localStorage.setItem('admin_token', autologinToken);
+    // Clear query parameter from browser address bar
+    window.history.replaceState({}, document.title, window.location.pathname);
+    setTimeout(() => {
+      window.navigate('admin-dashboard');
+    }, 0);
+    return document.createElement('div');
+  }
+
   const container = document.createElement('div');
   container.className = 'admin-login-v2';
   container.style.minHeight = '100vh';
