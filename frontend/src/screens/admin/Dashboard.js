@@ -78,48 +78,28 @@ export function renderAdminDashboard() {
       </div>
     </div>
 
-    <!-- Details Grid -->
-    <div style="display: grid; grid-template-columns: 2.2fr 1fr; gap: 32px; align-items: start;">
-      <!-- Recent Inquiries Section -->
-      <div class="admin-card" style="margin-bottom: 0;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-          <h3 style="font-size: 1.35rem; font-weight: 800; margin: 0; letter-spacing: -0.02em; color: var(--admin-text);">Recent Inquiries</h3>
-          <button data-route="admin-inquiries" style="font-size: 0.85rem; font-weight: 700; color: var(--admin-primary); background: var(--admin-primary-light); border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
-            View All &rarr;
-          </button>
-        </div>
-        <div class="admin-table-container">
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th>Customer</th>
-                <th>Subject</th>
-                <th>Status</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody id="inquiries-tbody">
-              <tr><td colspan="4" style="text-align: center; padding: 40px; color: var(--admin-text-muted);">Loading system assets...</td></tr>
-            </tbody>
-          </table>
-        </div>
+    <!-- Recent Inquiries Section -->
+    <div class="admin-card" style="margin-bottom: 0; width: 100%; box-sizing: border-box;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+        <h3 style="font-size: 1.35rem; font-weight: 800; margin: 0; letter-spacing: -0.02em; color: var(--admin-text);">Recent Inquiries</h3>
+        <button data-route="admin-inquiries" style="font-size: 0.85rem; font-weight: 700; color: var(--admin-primary); background: var(--admin-primary-light); border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+          View All &rarr;
+        </button>
       </div>
-
-      <!-- System Activity Section -->
-      <div class="admin-card" style="margin-bottom: 0;">
-        <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 24px; letter-spacing: -0.02em; color: var(--admin-text);">System Feed</h3>
-        <div style="border-left: 2px solid var(--admin-border); margin-left: 14px; padding-left: 24px; display: flex; flex-direction: column; gap: 24px;">
-          <div style="position: relative;">
-            <div style="position: absolute; left: -31px; top: 3px; width: 12px; height: 12px; border-radius: 50%; background: #10b981; border: 3px solid var(--admin-surface); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);"></div>
-            <p style="margin: 0; font-weight: 700; font-size: 0.95rem; color: var(--admin-text);">System Online</p>
-            <p style="margin: 4px 0 0; font-size: 0.85rem; color: var(--admin-text-muted);">API Bindings verified successfully.</p>
-          </div>
-          <div style="position: relative;">
-            <div style="position: absolute; left: -31px; top: 3px; width: 12px; height: 12px; border-radius: 50%; background: #3b82f6; border: 3px solid var(--admin-surface); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);"></div>
-            <p style="margin: 0; font-weight: 700; font-size: 0.95rem; color: var(--admin-text);">Security Hardened</p>
-            <p style="margin: 4px 0 0; font-size: 0.85rem; color: var(--admin-text-muted);">Credential store migrated to Vercel environment.</p>
-          </div>
-        </div>
+      <div class="admin-table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Subject</th>
+              <th>Status</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="inquiries-tbody">
+            <tr><td colspan="4" style="text-align: center; padding: 40px; color: var(--admin-text-muted);">Loading system assets...</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   `;
