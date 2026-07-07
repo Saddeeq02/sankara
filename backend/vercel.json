@@ -28,17 +28,10 @@
         "CACHE_DRIVER": "file",
         "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "cookie",
-        "DB_CONNECTION": "pgsql",
-        "DB_HOST": "aws-0-eu-central-1.pooler.supabase.com",
-        "DB_PORT": "6543",
-        "DB_DATABASE": "postgres",
-        "DB_USERNAME": "postgres.mfbljuhpnkmeckmtxlkn",
-        "DB_PASSWORD": "Sankara'website1",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
         "APP_PACKAGES_CACHE": "/tmp/packages.php",
         "APP_ROUTES_CACHE": "/tmp/routes.php",
-        "APP_SERVICES_CACHE": "/tmp/services.php",
-        "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1mYmxqdWhwbmttZWNrbXR4bGtuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyNDc0MjEsImV4cCI6MjA5ODgyMzQyMX0.VkKkGrmvHoEV6hmZK1Zao3H8g3Htf0wCFVU_DNNKx5Q"
+        "APP_SERVICES_CACHE": "/tmp/services.php"
     }
 }
