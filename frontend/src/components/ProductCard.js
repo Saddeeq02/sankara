@@ -100,7 +100,6 @@ function openProductModal(product) {
         <div class="modal-info-v2">
           <span style="color: var(--primary-color); text-transform: uppercase; font-size: 0.85rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 12px; display: block;">${product.category || 'Machinery'}</span>
           <h1 style="font-size: 2.8rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; color: var(--text-main);">${product.name}</h1>
-          <div style="font-size: 1.8rem; font-weight: 900; color: var(--primary-color); margin-bottom: 30px;">${product.price || 'Price on Request'}</div>
           
           <div style="margin-bottom: 30px; border-top: 1px solid var(--glass-border); padding-top: 30px;">
             <h4 style="margin-bottom: 12px; font-size: 0.9rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Primary Task / Capability</h4>

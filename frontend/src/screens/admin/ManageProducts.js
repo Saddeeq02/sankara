@@ -1,5 +1,5 @@
 import { renderAdminLayout } from '../../components/AdminLayout';
-import { Plus, Edit, Trash2, Search, Filter } from 'lucide-static';
+import { Plus, Edit, Trash2, Search, Box } from 'lucide-static';
 
 export function renderAdminProducts() {
   const content = document.createElement('div');
@@ -8,113 +8,132 @@ export function renderAdminProducts() {
   let currentCategory = 'All';
 
   content.innerHTML = `
-    <div class="flex-between" style="margin-bottom: 24px; flex-wrap: wrap; gap: 15px;">
-      <h1 class="admin-page-title" style="margin-bottom: 0;">Manage Products</h1>
-      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-        <div style="position: relative;">
-          <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--admin-text-muted); pointer-events: none;">${Search}</span>
-          <input type="text" id="adminSearchInput" placeholder="Search product name..." style="padding: 10px 15px 10px 40px; background: var(--admin-surface); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 8px; font-size: 0.9rem; min-width: 250px; outline: none;">
+    <!-- Top Action Bar -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 20px;">
+      <div>
+        <h1 class="admin-page-title" style="margin-bottom: 6px;">Manage Machinery</h1>
+        <p style="margin: 0; color: var(--admin-text-muted); font-size: 0.95rem; font-weight: 500;">Add, update, and manage your public product catalog.</p>
+      </div>
+      
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+        <!-- Search -->
+        <div style="position: relative; min-width: 280px;">
+          <span style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--admin-text-muted); pointer-events: none; display: flex; align-items: center;">
+            ${Search}
+          </span>
+          <input type="text" id="adminSearchInput" placeholder="Search equipment catalog..." style="width: 100%; padding: 12px 16px 12px 48px; background: var(--admin-surface); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 14px; font-size: 0.9rem; font-weight: 500; outline: none; transition: all 0.2s; box-sizing: border-box;" onfocus="this.style.borderColor='var(--admin-primary)'; this.style.boxShadow='var(--shadow-sm)';" onblur="this.style.borderColor='var(--admin-border)';" />
         </div>
-        <select id="adminCategoryFilter" style="padding: 10px 15px; background: var(--admin-surface); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 8px; font-size: 0.9rem; outline: none; cursor: pointer;">
+        
+        <!-- Category Dropdown -->
+        <select id="adminCategoryFilter" style="padding: 12px 20px; background: var(--admin-surface); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 14px; font-size: 0.9rem; font-weight: 600; outline: none; cursor: pointer; transition: all 0.2s;">
           <option value="All">All Categories</option>
           <option value="Tractors">Tractors</option>
           <option value="Farm Implements">Farm Implements</option>
           <option value="Spare Parts">Spare Parts</option>
         </select>
-        <button id="openModalBtn" class="btn-primary" style="display: flex; align-items: center; gap: 8px; padding: 10px 20px;">
-          ${Plus} Add Product
+        
+        <!-- Add Machinery Button -->
+        <button id="openModalBtn" style="display: flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--admin-primary); color: white; border: none; border-radius: 14px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow-sm);" onmouseover="this.style.transform='translateY(-1px)';" onmouseout="this.style.transform='none';">
+          ${Plus} Add Equipment
         </button>
       </div>
     </div>
 
-    <div class="admin-card">
+    <!-- Product Catalog List Card -->
+    <div class="admin-card" style="padding: 0; overflow: hidden; border-radius: 20px;">
       <div class="admin-table-container">
         <table class="admin-table">
           <thead>
             <tr>
-              <th>Product Name</th>
+              <th>Equipment Name</th>
               <th>Category</th>
-              <th>Price</th>
               <th>Status</th>
-              <th style="text-align: right;">Actions</th>
+              <th style="text-align: right; padding-right: 32px;">Actions</th>
             </tr>
           </thead>
           <tbody id="products-tbody">
-            <tr><td colspan="5" style="text-align: center; padding: 20px;">Loading from API...</td></tr>
+            <tr>
+              <td colspan="4" style="text-align: center; padding: 48px; color: var(--admin-text-muted);">
+                <div style="font-weight: 500;">Establishing secure database link...</div>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <div id="addProductModal" class="admin-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
-      <div style="background: var(--admin-surface); padding: 30px; border-radius: 12px; width: 500px; max-width: 90%; border: 1px solid var(--admin-border);">
-        <h2 style="margin-top: 0; margin-bottom: 20px; font-size: 1.25rem;">Add New Product</h2>
-        <form id="addProductForm" style="display: flex; flex-direction: column; gap: 18px;">
+    <!-- Premium Modal Dialogue Overlay -->
+    <div id="addProductModal" class="admin-confirm-overlay">
+      <div class="admin-confirm-modal" style="max-width: 600px; text-align: left; padding: 36px; border-radius: 24px; max-height: 90vh; overflow-y: auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid var(--admin-border); padding-bottom: 16px;">
+          <h2 id="modalTitle" style="margin: 0; font-size: 1.45rem; font-weight: 800; color: var(--admin-text); letter-spacing: -0.02em;">Add New Equipment</h2>
+          <button type="button" id="closeModalCross" style="background: none; border: none; font-size: 1.75rem; color: var(--admin-text-muted); cursor: pointer; line-height: 1; padding: 0;">&times;</button>
+        </div>
+        
+        <form id="addProductForm" style="display: flex; flex-direction: column; gap: 20px;">
           <div class="form-group-v2">
-            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; margin-bottom: 5px; display: block;">EQUIPMENT NAME</label>
-            <input type="text" name="name" placeholder="e.g. Massey Ferguson 385" required style="width: 100%; padding: 12px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 8px; outline: none;">
+            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; font-weight: 700; margin-bottom: 6px; display: block; letter-spacing: 0.05em; text-transform: uppercase;">Equipment Name</label>
+            <input type="text" name="name" placeholder="e.g. Lovol 754-H Utility Tractor" required style="width: 100%; padding: 12px 16px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 12px; font-weight: 500; outline: none; box-sizing: border-box; transition: all 0.2s;" onfocus="this.style.borderColor='var(--admin-primary)';" onblur="this.style.borderColor='var(--admin-border)';" />
           </div>
           
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-            <div class="form-group-v2">
-              <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; margin-bottom: 5px; display: block;">CATEGORY</label>
-              <select name="category" required style="width: 100%; padding: 12px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 8px; outline: none; cursor: pointer;">
-                <option value="Tractors">Tractors</option>
-                <option value="Farm Implements">Farm Implements</option>
-                <option value="Spare Parts">Spare Parts</option>
-              </select>
+          <div class="form-group-v2">
+            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; font-weight: 700; margin-bottom: 6px; display: block; letter-spacing: 0.05em; text-transform: uppercase;">Category</label>
+            <select name="category" required style="width: 100%; padding: 12px 16px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 12px; font-weight: 600; outline: none; cursor: pointer; box-sizing: border-box; transition: all 0.2s;" onfocus="this.style.borderColor='var(--admin-primary)';" onblur="this.style.borderColor='var(--admin-border)';">
+              <option value="Tractors">Tractors</option>
+              <option value="Farm Implements">Farm Implements</option>
+              <option value="Spare Parts">Spare Parts</option>
+            </select>
+          </div>
+
+          <div class="form-group-v2">
+            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; font-weight: 700; margin-bottom: 6px; display: block; letter-spacing: 0.05em; text-transform: uppercase;">Technical Specifications (Comma Separated)</label>
+            <input type="text" name="specs" placeholder="75 HP, 4WD Engine, Dual-Stage Clutch" style="width: 100%; padding: 12px 16px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 12px; font-weight: 500; outline: none; box-sizing: border-box; transition: all 0.2s;" onfocus="this.style.borderColor='var(--admin-primary)';" onblur="this.style.borderColor='var(--admin-border)';" />
+          </div>
+
+          <div class="form-group-v2">
+            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; font-weight: 700; margin-bottom: 6px; display: block; letter-spacing: 0.05em; text-transform: uppercase;">Primary Capability / Task</label>
+            <textarea name="task" placeholder="e.g. Optimized for seed bed preparation, soil tillage, and general utility haulage operations." style="width: 100%; padding: 12px 16px; min-height: 60px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 12px; font-weight: 500; outline: none; resize: vertical; box-sizing: border-box; transition: all 0.2s;" onfocus="this.style.borderColor='var(--admin-primary)';" onblur="this.style.borderColor='var(--admin-border)';"></textarea>
+          </div>
+
+          <div class="form-group-v2">
+            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; font-weight: 700; margin-bottom: 6px; display: block; letter-spacing: 0.05em; text-transform: uppercase;">Detailed Overview</label>
+            <textarea name="description" placeholder="Provide comprehensive technical specifications, usage recommendations, and durability features..." style="width: 100%; padding: 12px 16px; min-height: 90px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 12px; font-weight: 500; outline: none; resize: vertical; box-sizing: border-box; transition: all 0.2s;" onfocus="this.style.borderColor='var(--admin-primary)';" onblur="this.style.borderColor='var(--admin-border)';"></textarea>
+          </div>
+
+          <div class="form-group-v2">
+            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; font-weight: 700; margin-bottom: 6px; display: block; letter-spacing: 0.05em; text-transform: uppercase;">Marketing Assets (Images)</label>
+            <input type="file" name="image[]" accept="image/*" multiple style="width: 100%; padding: 12px; background: var(--admin-bg); color: var(--admin-text); border: 2px dashed var(--admin-border); border-radius: 12px; cursor: pointer; box-sizing: border-box;" />
+            <span style="font-size: 0.75rem; color: var(--admin-text-muted); margin-top: 4px; display: block;">Select one or multiple photos to showcase.</span>
+          </div>
+
+          <div class="form-group-v2" style="display: flex; align-items: center; gap: 12px; background: rgba(59, 130, 246, 0.04); padding: 16px; border-radius: 12px; border: 1px solid rgba(59, 130, 246, 0.15);">
+            <input type="checkbox" name="is_new_arrival" id="is_new_arrival_input" style="width: 20px; height: 20px; cursor: pointer; accent-color: var(--admin-primary);" />
+            <div>
+              <label for="is_new_arrival_input" style="cursor: pointer; font-weight: 700; color: var(--admin-text); font-size: 0.9rem;">Mark as "New Arrival"</label>
+              <span style="font-size: 0.75rem; color: var(--admin-text-muted); display: block; margin-top: 2px;">Will feature a prominent glowing label on the main website portal.</span>
             </div>
-            <div class="form-group-v2">
-              <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; margin-bottom: 5px; display: block;">ESTIMATED PRICE / TAG</label>
-              <input type="text" name="price" placeholder="e.g. ₦15,000,000" required style="width: 100%; padding: 12px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 8px; outline: none;">
-            </div>
           </div>
 
-          <div class="form-group-v2">
-            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; margin-bottom: 5px; display: block;">TECHNICAL SPECIFICATIONS (COMMA SEPARATED)</label>
-            <input type="text" name="specs" placeholder="75 HP, 2WD, Fuel Efficient, Direct Injection" style="width: 100%; padding: 12px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 8px; outline: none;">
-          </div>
-
-          <div class="form-group-v2">
-            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; margin-bottom: 5px; display: block;">PRIMARY CAPABILITY / TASK</label>
-            <textarea name="task" placeholder="Ideal for large-scale plowing, heavy-duty hauling, and intensive soil preparation." style="width: 100%; padding: 12px; min-height: 70px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 8px; outline: none; resize: vertical;"></textarea>
-          </div>
-
-          <div class="form-group-v2">
-            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; margin-bottom: 5px; display: block;">DETAILED OVERVIEW</label>
-            <textarea name="description" placeholder="Provide a comprehensive breakdown of the equipment's history, condition, and value proposition." style="width: 100%; padding: 12px; min-height: 100px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 8px; outline: none; resize: vertical;"></textarea>
-          </div>
-
-          <div class="form-group-v2">
-            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; margin-bottom: 5px; display: block;">MARKETING ASSETS (MAX 5 IMAGES)</label>
-            <input type="file" name="image[]" accept="image/*" multiple style="width: 100%; padding: 10px; background: var(--admin-bg); color: var(--admin-text); border: 1px dashed var(--admin-border); border-radius: 8px; cursor: pointer;">
-          </div>
-
-          <div class="form-group-v2" style="display: flex; align-items: center; gap: 10px; background: rgba(59, 130, 246, 0.05); padding: 15px; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.2);">
-            <input type="checkbox" name="is_new_arrival" id="is_new_arrival_input" style="width: 20px; height: 20px; cursor: pointer;">
-            <label for="is_new_arrival_input" style="cursor: pointer; font-weight: 600; color: var(--admin-text);">Mark as "New Arrival"</label>
-            <span style="font-size: 0.8rem; color: var(--admin-text-muted); margin-left: auto;">Displays a badge on the site</span>
-          </div>
-
-          <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 15px; border-top: 1px solid var(--admin-border); padding-top: 20px;">
-
-            <button type="button" id="closeModalBtn" style="padding: 12px 25px; background: none; border: 1px solid var(--admin-border); color: var(--admin-text); border-radius: 8px; cursor: pointer; font-weight: 600;">Cancel</button>
-            <button type="submit" class="btn-primary" style="padding: 12px 30px; border-radius: 8px; font-weight: 700;">COMMIT CHANGES</button>
+          <!-- Modal Footer Controls -->
+          <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 10px; border-top: 1px solid var(--admin-border); padding-top: 20px;">
+            <button type="button" id="closeModalBtn" style="padding: 12px 24px; background: none; border: 1px solid var(--admin-border); color: var(--admin-text); border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.background='var(--admin-hover)';" onmouseout="this.style.background='none';">Cancel</button>
+            <button type="submit" id="submitFormBtn" style="padding: 12px 28px; background: var(--admin-primary); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-1px)';" onmouseout="this.style.transform='none';">Save Equipment</button>
           </div>
         </form>
       </div>
     </div>
-
   `;
 
   let currentEditId = null;
 
   const modal = content.querySelector('#addProductModal');
-  const modalTitle = modal.querySelector('h2');
+  const modalContainer = modal.querySelector('.admin-confirm-modal');
+  const modalTitle = modal.querySelector('#modalTitle');
   const openModalBtn = content.querySelector('#openModalBtn');
   const closeModalBtn = content.querySelector('#closeModalBtn');
+  const closeModalCross = content.querySelector('#closeModalCross');
   const addForm = content.querySelector('#addProductForm');
-  const submitBtn = addForm.querySelector('button[type="submit"]');
+  const submitBtn = content.querySelector('#submitFormBtn');
   const tbody = content.querySelector('#products-tbody');
   const searchInput = content.querySelector('#adminSearchInput');
   const categoryFilter = content.querySelector('#adminCategoryFilter');
@@ -123,22 +142,31 @@ export function renderAdminProducts() {
     if (dataToRender.length > 0) {
       tbody.innerHTML = dataToRender.map(product => `
         <tr>
-          <td><strong>${product.name}</strong></td>
-          <td>${product.category || 'Tractors'}</td>
-          <td>${product.price}</td>
           <td>
-            <button class="status-btn" data-id="${product.id}" title="Click to toggle status" style="border: none; background: none; cursor: pointer;">
+            <div style="font-weight: 700; color: var(--admin-text);">${escapeHTML(product.name)}</div>
+          </td>
+          <td style="font-weight: 600; color: var(--admin-text-muted);">${escapeHTML(product.category || 'Tractors')}</td>
+          <td>
+            <button class="status-btn" data-id="${product.id}" title="Toggle Availability Status" style="border: none; background: none; padding: 0; cursor: pointer;">
               <span class="badge ${product.status === 'Active' ? 'badge-success' : 'badge-pending'}">${product.status}</span>
             </button>
           </td>
-          <td style="text-align: right;">
-            <button class="edit-btn" data-id="${product.id}" style="background: none; border: none; cursor: pointer; color: var(--admin-text-muted); margin-right: 12px;">${Edit}</button>
-            <button class="delete-btn" data-id="${product.id}" style="background: none; border: none; cursor: pointer; color: #ef4444;">${Trash2}</button>
+          <td style="text-align: right; padding-right: 32px;">
+            <button class="edit-btn" data-id="${product.id}" style="background: none; border: none; cursor: pointer; color: var(--admin-text-muted); padding: 6px; border-radius: 8px; transition: all 0.2s; margin-right: 8px;" onmouseover="this.style.color='var(--admin-primary)';" onmouseout="this.style.color='var(--admin-text-muted)';">${Edit}</button>
+            <button class="delete-btn" data-id="${product.id}" style="background: none; border: none; cursor: pointer; color: #ef4444; padding: 6px; border-radius: 8px; transition: all 0.2s;" onmouseover="this.style.backgroundColor='rgba(239, 68, 68, 0.08)';" onmouseout="this.style.backgroundColor='transparent';">${Trash2}</button>
           </td>
         </tr>
       `).join('');
     } else {
-      tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--admin-text-muted); padding: 40px;">No matching products found.</td></tr>';
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="4" style="text-align: center; color: var(--admin-text-muted); padding: 64px 20px;">
+            <div style="font-size: 2.5rem; opacity: 0.15; margin-bottom: 12px;">${Box}</div>
+            <div style="font-weight: 600; font-size: 1.1rem; margin-bottom: 4px;">No Machinery Found</div>
+            <div style="font-size: 0.9rem;">Try adjusting your filters or add a new equipment item above.</div>
+          </td>
+        </tr>
+      `;
     }
   };
 
@@ -167,28 +195,39 @@ export function renderAdminProducts() {
   const openEditModal = (product) => {
     currentEditId = product.id;
     modalTitle.textContent = 'Refine Equipment Details';
-    submitBtn.textContent = 'UPDATE RECODRD';
+    submitBtn.textContent = 'Update Record';
     addForm.name.value = product.name;
     addForm.category.value = product.category || 'Tractors';
-    addForm.price.value = product.price;
     addForm.specs.value = (product.specs || []).join(', ');
     addForm.task.value = product.task || '';
     addForm.description.value = product.description || '';
     addForm.is_new_arrival.checked = !!product.is_new_arrival;
     addForm.elements['image[]'].required = false; 
-    modal.style.display = 'flex';
+    
+    // Open modal with smooth animation
+    modal.classList.add('active');
   };
 
   openModalBtn.onclick = () => {
     currentEditId = null;
-    modalTitle.textContent = 'Add New Product';
-    submitBtn.textContent = 'Save Product';
+    modalTitle.textContent = 'Add New Machinery';
+    submitBtn.textContent = 'Save Equipment';
     addForm.reset();
     addForm.elements['image[]'].required = true;
-    modal.style.display = 'flex';
+    
+    // Open modal with smooth animation
+    modal.classList.add('active');
   };
 
-  closeModalBtn.onclick = () => modal.style.display = 'none';
+  const hideModal = () => {
+    modal.classList.remove('active');
+  };
+
+  closeModalBtn.onclick = hideModal;
+  closeModalCross.onclick = hideModal;
+  modal.onclick = (e) => {
+    if (e.target === modal) hideModal();
+  };
 
   addForm.onsubmit = async (e) => {
     e.preventDefault();
@@ -196,11 +235,10 @@ export function renderAdminProducts() {
     submitBtn.disabled = true;
 
     const formData = new FormData(addForm);
-    // Explicitly set boolean string for backend compatibility
     formData.set('is_new_arrival', addForm.is_new_arrival.checked ? '1' : '0');
     
-    // In case we want to support PUT/PATCH via FormData (Laravel convention)
-    // if (currentEditId) formData.append('_method', 'POST'); 
+    // Explicitly set price to null or empty string since field is removed
+    formData.set('price', '');
     
     const url = currentEditId 
       ? `/api/products/${currentEditId}` 
@@ -220,10 +258,9 @@ export function renderAdminProducts() {
       const result = await response.json();
       
       if (response.ok) {
-        modal.style.display = 'none';
+        hideModal();
         addForm.reset();
         loadProducts();
-        alert(currentEditId ? 'Product updated successfully!' : 'Product added successfully!');
       } else {
         console.error('Server Error:', result);
         alert(`Error: ${result.error || 'Failed to process request'}`);
