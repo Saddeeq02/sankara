@@ -1,6 +1,16 @@
 import { renderAdminLayout } from '../../components/AdminLayout';
 import { Mail, Search, Trash2, CheckCircle, Clock, Eye, X } from 'lucide-static';
 
+const escapeHTML = (str) => {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
 export function renderAdminInquiries() {
   const content = document.createElement('div');
   let inquiries = [];
@@ -61,16 +71,16 @@ export function renderAdminInquiries() {
     tbody.innerHTML = filtered.map(item => `
       <tr style="border-bottom: 1px solid var(--admin-border);">
         <td style="padding: 15px 20px;">
-          <div style="font-weight: 700;">${item.name}</div>
-          <div style="font-size: 0.8rem; color: var(--admin-text-muted);">${item.email}</div>
+          <div style="font-weight: 700;">${escapeHTML(item.name)}</div>
+          <div style="font-size: 0.8rem; color: var(--admin-text-muted);">${escapeHTML(item.email)}</div>
         </td>
         <td style="padding: 15px 20px;">
-          <div style="font-weight: 500;">${item.subject}</div>
+          <div style="font-weight: 500;">${escapeHTML(item.subject)}</div>
         </td>
-        <td style="padding: 15px 20px; font-size: 0.9rem;">${item.date}</td>
+        <td style="padding: 15px 20px; font-size: 0.9rem;">${escapeHTML(item.date)}</td>
         <td style="padding: 15px 20px; text-align: center;">
-          <span class="status-badge" data-status="${item.status}" style="padding: 5px 12px; border-radius: 100px; font-size: 0.75rem; font-weight: 700; background: ${item.status === 'Resolved' ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)'}; color: ${item.status === 'Resolved' ? '#22c55e' : '#ef4444'}; border: 1px solid ${item.status === 'Resolved' ? '#22c55e' : '#ef4444'};">
-            ${item.status}
+          <span class="status-badge" data-status="${escapeHTML(item.status)}" style="padding: 5px 12px; border-radius: 100px; font-size: 0.75rem; font-weight: 700; background: ${item.status === 'Resolved' ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)'}; color: ${item.status === 'Resolved' ? '#22c55e' : '#ef4444'}; border: 1px solid ${item.status === 'Resolved' ? '#22c55e' : '#ef4444'};">
+            ${escapeHTML(item.status)}
           </span>
         </td>
         <td style="padding: 15px 20px; text-align: right;">
@@ -129,35 +139,41 @@ export function renderAdminInquiries() {
   const openMessageModal = (inquiry) => {
     if (!inquiry) return;
     const portal = content.querySelector('#modal-portal');
+    const safeSubject = escapeHTML(inquiry.subject);
+    const safeName = escapeHTML(inquiry.name);
+    const safeEmail = escapeHTML(inquiry.email);
+    const safeMessage = escapeHTML(inquiry.message);
+    const firstChar = safeName ? safeName.charAt(0).toUpperCase() : '?';
+
     portal.innerHTML = `
       <div style="position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:2000; display:flex; align-items:center; justify-content:center; backdrop-filter: blur(5px);">
         <div style="background:var(--admin-surface); border:1px solid var(--admin-border); border-radius:20px; width:600px; max-width:95%; padding:40px; position:relative;">
           <button id="closeInqModal" style="position:absolute; top:20px; right:20px; background:none; border:none; color:white; cursor:pointer;">${X}</button>
           <div style="margin-bottom:30px;">
              <div style="color:var(--primary-color); font-weight:800; text-transform:uppercase; font-size:0.8rem; letter-spacing:1px; margin-bottom:10px;">Customer Message</div>
-             <h2 style="margin:0; font-size:2rem; font-weight:900;">${inquiry.subject}</h2>
+             <h2 style="margin:0; font-size:2rem; font-weight:900;">${safeSubject}</h2>
           </div>
           <div style="display:flex; gap:20px; margin-bottom:30px; align-items:center;">
-             <div style="width:50px; height:50px; border-radius:50%; background:var(--primary-color); display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.2rem;">${inquiry.name[0]}</div>
+             <div style="width:50px; height:50px; border-radius:50%; background:var(--primary-color); display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.2rem;">${firstChar}</div>
              <div>
-                <div style="font-weight:700;">${inquiry.name}</div>
-                <div style="color:var(--admin-text-muted);">${inquiry.email}</div>
+                <div style="font-weight:700;">${safeName}</div>
+                <div style="color:var(--admin-text-muted);">${safeEmail}</div>
              </div>
           </div>
           <div style="background:var(--admin-bg); padding:30px; border-radius:15px; border:1px solid var(--admin-border); margin-bottom:30px; font-size:1.1rem; line-height:1.8; max-height:300px; overflow-y:auto;">
-             ${inquiry.message || 'No message content available.'}
+             ${safeMessage || 'No message content available.'}
           </div>
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 20px;">
-             <div style="color:var(--admin-text-muted); font-size:0.9rem;">Received on ${inquiry.date}</div>
+             <div style="color:var(--admin-text-muted); font-size:0.9rem;">Received on ${escapeHTML(inquiry.date)}</div>
              <div style="display:flex; gap:12px; flex-wrap: wrap;">
                 <button id="cancelModalBtn" style="padding:10px 20px; background:var(--admin-bg); border:1px solid var(--admin-border); color:white; border-radius:8px; cursor:pointer; font-weight:600;">Close</button>
                 
                 <div style="display:flex; gap:8px; background:rgba(255,255,255,0.05); padding:5px; border-radius:10px; border:1px solid var(--admin-border);">
                    <button id="copyEmailBtn" title="Copy Email" style="padding:8px; background:none; border:none; color:var(--admin-text-muted); cursor:pointer;">${Search}</button>
-                   <a href="https://mail.google.com/mail/?view=cm&fs=1&to=${inquiry.email}&su=Re: ${encodeURIComponent(inquiry.subject)}&body=Hello ${encodeURIComponent(inquiry.name)},%0D%0A%0D%0A" target="_blank" title="Reply via Gmail" style="padding:8px; background:none; border:none; color:#ea4335; cursor:pointer; display:flex;">
+                   <a href="https://mail.google.com/mail/?view=cm&fs=1&to=${safeEmail}&su=Re: ${encodeURIComponent(inquiry.subject)}&body=Hello ${encodeURIComponent(inquiry.name)},%0D%0A%0D%0A" target="_blank" title="Reply via Gmail" style="padding:8px; background:none; border:none; color:#ea4335; cursor:pointer; display:flex;">
                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h9"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/><path d="M18 15v6"/><path d="M15 18h6"/></svg>
                    </a>
-                   <a href="mailto:${inquiry.email}?subject=Re: ${encodeURIComponent(inquiry.subject)}" class="btn-primary" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:8px 15px; font-size:0.9rem;">
+                   <a href="mailto:${safeEmail}?subject=Re: ${encodeURIComponent(inquiry.subject)}" class="btn-primary" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:8px 15px; font-size:0.9rem;">
                      ${Mail} Default Mail App
                    </a>
                 </div>

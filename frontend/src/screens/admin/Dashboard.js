@@ -1,6 +1,16 @@
 import { renderAdminLayout } from '../../components/AdminLayout';
 import { PackageOpen, Users, PhoneCall, TrendingUp } from 'lucide-static';
 
+const escapeHTML = (str) => {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
 export function renderAdminDashboard() {
   const content = document.createElement('div');
   
@@ -108,10 +118,10 @@ export function renderAdminDashboard() {
       if (data.recent_inquiries.length > 0) {
         tbody.innerHTML = data.recent_inquiries.map(inquiry => `
           <tr>
-            <td><strong>${inquiry.name}</strong><br><span style="color: var(--admin-text-muted); font-size: 0.85rem;">${inquiry.email}</span></td>
-            <td>${inquiry.subject}</td>
-            <td><span class="badge badge-pending">${inquiry.status}</span></td>
-            <td>${inquiry.date}</td>
+            <td><strong>${escapeHTML(inquiry.name)}</strong><br><span style="color: var(--admin-text-muted); font-size: 0.85rem;">${escapeHTML(inquiry.email)}</span></td>
+            <td>${escapeHTML(inquiry.subject)}</td>
+            <td><span class="badge badge-pending">${escapeHTML(inquiry.status)}</span></td>
+            <td>${escapeHTML(inquiry.date)}</td>
           </tr>
         `).join('');
       } else {

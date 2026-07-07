@@ -49,14 +49,14 @@ export function renderLogin() {
       
       <div class="input-group-v2">
         <label style="display: block; font-size: 0.85rem; font-weight: 800; color: var(--primary-color); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; margin-left: 5px;">Secure Identifier</label>
-        <input type="email" id="email" required value="admin@sankara.com" 
+        <input type="email" id="email" required placeholder="admin@sankara.com" 
           style="width: 100%; padding: 15px 20px; border-radius: 16px; border: 1px solid var(--glass-border); background: var(--background-color); color: var(--text-main); font-size: 1rem; outline: none; transition: all 0.3s;"
           class="login-field">
       </div>
       
       <div class="input-group-v2">
         <label style="display: block; font-size: 0.85rem; font-weight: 800; color: var(--primary-color); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; margin-left: 5px;">Access Key</label>
-        <input type="password" id="password" required value="sankara2026"
+        <input type="password" id="password" required placeholder="••••••••"
           style="width: 100%; padding: 15px 20px; border-radius: 16px; border: 1px solid var(--glass-border); background: var(--background-color); color: var(--text-main); font-size: 1rem; outline: none; transition: all 0.3s;"
           class="login-field">
       </div>
