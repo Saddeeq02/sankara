@@ -1,5 +1,6 @@
 {
     "version": 2,
+    "regions": ["fra1"],
     "builds": [
         {
             "src": "api/index.php",
@@ -22,9 +23,9 @@
     ],
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "true",
+        "APP_DEBUG": "false",
         "VIEW_COMPILED_PATH": "/tmp",
-        "CACHE_DRIVER": "array",
+        "CACHE_DRIVER": "file",
         "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "cookie",
         "DB_CONNECTION": "pgsql",

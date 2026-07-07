@@ -13,10 +13,14 @@ use App\Models\TeamMember;
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/auth-check', [AuthController::class, 'check']);
 
-// Token Middleware Helper function (Updated for DB)
+// Token Middleware Helper function (Updated for DB with caching)
 $verifyToken = function(Request $request) {
-    if (!$request->bearerToken()) return false;
-    return User::where('api_token', $request->bearerToken())->exists();
+    $token = $request->bearerToken();
+    if (!$token) return false;
+    
+    return \Illuminate\Support\Facades\Cache::remember('verify_token_' . md5($token), 60, function() use ($token) {
+        return User::where('api_token', $token)->exists();
+    });
 };
 
 $uploadToSupabase = function($file) {
@@ -383,13 +387,24 @@ Route::delete('team/{id}', function(Request $request, $id) use ($verifyToken) {
 Route::get('metrics', function(Request $request) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
+    // Combine count queries into a single database roundtrip
+    $counts = \DB::selectOne("
+        SELECT 
+            (SELECT COUNT(*) FROM products) as total_products,
+            (SELECT COUNT(*) FROM inquiries) as total_inquiries,
+            (SELECT COUNT(*) FROM gallery_items) as total_gallery,
+            (SELECT COUNT(*) FROM portfolio_projects) as total_portfolio,
+            (SELECT COUNT(*) FROM activities) as total_activities,
+            (SELECT COUNT(*) FROM team_members) as total_team
+    ");
+
     return response()->json([
-        'total_products' => Product::count(),
-        'total_inquiries' => Inquiry::count(),
-        'total_gallery' => GalleryItem::count(),
-        'total_portfolio' => PortfolioProject::count(),
-        'total_activities' => Activity::count(),
-        'total_team' => TeamMember::count(),
+        'total_products' => (int) ($counts->total_products ?? 0),
+        'total_inquiries' => (int) ($counts->total_inquiries ?? 0),
+        'total_gallery' => (int) ($counts->total_gallery ?? 0),
+        'total_portfolio' => (int) ($counts->total_portfolio ?? 0),
+        'total_activities' => (int) ($counts->total_activities ?? 0),
+        'total_team' => (int) ($counts->total_team ?? 0),
         'recent_inquiries' => Inquiry::latest()->limit(5)->get()
     ]);
 });
