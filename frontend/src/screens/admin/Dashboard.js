@@ -14,56 +14,79 @@ const escapeHTML = (str) => {
 export function renderAdminDashboard() {
   const content = document.createElement('div');
   
+  // Dynamic Greeting based on time of day
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good Morning, Sir ☀️';
+    if (hour < 17) return 'Good Afternoon, Sir 🌤️';
+    return 'Good Evening, Sir 🌙';
+  };
+
   content.innerHTML = `
-    <h1 class="admin-page-title">Dashboard Overview</h1>
+    <!-- Welcome Banner Widget -->
+    <div class="welcome-banner">
+      <div class="welcome-banner-glow"></div>
+      <h1 style="font-size: 2.2rem; font-weight: 800; margin: 0 0 8px; letter-spacing: -0.03em;">${getGreeting()}</h1>
+      <p style="font-size: 1.05rem; font-weight: 500; margin: 0; opacity: 0.85;">Welcome to the Sankara Control Hub. Here is your overview for today.</p>
+    </div>
+
+    <h2 class="admin-page-title">Operational Statistics</h2>
     
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-bottom: 30px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-bottom: 40px;">
+      <!-- Stats Card 1 -->
       <div class="admin-card" style="display: flex; align-items: center; gap: 20px;">
-        <div style="width: 50px; height: 50px; border-radius: 12px; background: #e0e7ff; color: #4338ca; display: flex; align-items: center; justify-content: center;">
+        <div style="width: 56px; height: 56px; border-radius: 16px; background: rgba(59, 130, 246, 0.1); color: #3b82f6; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);">
           ${PackageOpen}
         </div>
         <div>
-          <div style="color: var(--admin-text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Total Products</div>
-          <div id="stat-products" style="font-size: 1.8rem; font-weight: 700;">...</div>
+          <div style="color: var(--admin-text-muted); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Total Products</div>
+          <div id="stat-products" style="font-size: 2rem; font-weight: 800; color: var(--admin-text); line-height: 1.1;">...</div>
         </div>
       </div>
 
+      <!-- Stats Card 2 -->
       <div class="admin-card" style="display: flex; align-items: center; gap: 20px;">
-        <div style="width: 50px; height: 50px; border-radius: 12px; background: #dcfce7; color: #15803d; display: flex; align-items: center; justify-content: center;">
+        <div style="width: 56px; height: 56px; border-radius: 16px; background: rgba(16, 185, 129, 0.1); color: #10b981; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);">
           ${PhoneCall}
         </div>
         <div>
-          <div style="color: var(--admin-text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">New Inquiries</div>
-          <div id="stat-inquiries" style="font-size: 1.8rem; font-weight: 700;">...</div>
+          <div style="color: var(--admin-text-muted); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">New Inquiries</div>
+          <div id="stat-inquiries" style="font-size: 2rem; font-weight: 800; color: var(--admin-text); line-height: 1.1;">...</div>
         </div>
       </div>
 
+      <!-- Stats Card 3 -->
       <div class="admin-card" style="display: flex; align-items: center; gap: 20px;">
-        <div style="width: 50px; height: 50px; border-radius: 12px; background: #fef3c7; color: #b45309; display: flex; align-items: center; justify-content: center;">
+        <div style="width: 56px; height: 56px; border-radius: 16px; background: rgba(245, 158, 11, 0.1); color: #f59e0b; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);">
           ${Users}
         </div>
         <div>
-          <div style="color: var(--admin-text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Active Clients</div>
-          <div style="font-size: 1.8rem; font-weight: 700;">124</div>
+          <div style="color: var(--admin-text-muted); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Active Clients</div>
+          <div style="font-size: 2rem; font-weight: 800; color: var(--admin-text); line-height: 1.1;">124</div>
         </div>
       </div>
 
+      <!-- Stats Card 4 -->
       <div class="admin-card" style="display: flex; align-items: center; gap: 20px;">
-        <div style="width: 50px; height: 50px; border-radius: 12px; background: #fae8ff; color: #a21caf; display: flex; align-items: center; justify-content: center;">
-          ${Users}
+        <div style="width: 56px; height: 56px; border-radius: 16px; background: rgba(139, 92, 246, 0.1); color: #8b5cf6; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);">
+          ${TrendingUp}
         </div>
         <div>
-          <div style="color: var(--admin-text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Total Team</div>
-          <div id="stat-team" style="font-size: 1.8rem; font-weight: 700;">...</div>
+          <div style="color: var(--admin-text-muted); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Total Team</div>
+          <div id="stat-team" style="font-size: 2rem; font-weight: 800; color: var(--admin-text); line-height: 1.1;">...</div>
         </div>
       </div>
     </div>
 
-    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
-      <div class="admin-card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-          <h2 style="font-size: 1.25rem; margin: 0;">Recent Inquiries</h2>
-          <button data-route="admin-inquiries" style="font-size: 0.85rem; font-weight: 700; color: var(--primary-color); background: none; border: none; cursor: pointer;">View All &rarr;</button>
+    <!-- Details Grid -->
+    <div style="display: grid; grid-template-columns: 2.2fr 1fr; gap: 32px; align-items: start;">
+      <!-- Recent Inquiries Section -->
+      <div class="admin-card" style="margin-bottom: 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+          <h3 style="font-size: 1.35rem; font-weight: 800; margin: 0; letter-spacing: -0.02em; color: var(--admin-text);">Recent Inquiries</h3>
+          <button data-route="admin-inquiries" style="font-size: 0.85rem; font-weight: 700; color: var(--admin-primary); background: var(--admin-primary-light); border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+            View All &rarr;
+          </button>
         </div>
         <div class="admin-table-container">
           <table class="admin-table">
@@ -76,19 +99,25 @@ export function renderAdminDashboard() {
               </tr>
             </thead>
             <tbody id="inquiries-tbody">
-              <tr><td colspan="4" style="text-align: center; padding: 20px;">Loading from API...</td></tr>
+              <tr><td colspan="4" style="text-align: center; padding: 40px; color: var(--admin-text-muted);">Loading system assets...</td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <div class="admin-card">
-        <h2 style="font-size: 1.25rem; margin-bottom: 20px;">System Activity</h2>
-        <div style="border-left: 2px solid var(--admin-border); margin-left: 10px; padding-left: 20px; display: flex; flex-direction: column; gap: 20px;">
+      <!-- System Activity Section -->
+      <div class="admin-card" style="margin-bottom: 0;">
+        <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 24px; letter-spacing: -0.02em; color: var(--admin-text);">System Feed</h3>
+        <div style="border-left: 2px solid var(--admin-border); margin-left: 14px; padding-left: 24px; display: flex; flex-direction: column; gap: 24px;">
           <div style="position: relative;">
-            <div style="position: absolute; left: -26px; top: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--primary-color);"></div>
-            <p style="margin: 0; font-weight: 500;">System Online</p>
-            <p style="margin: 5px 0 0; font-size: 0.85rem; color: var(--admin-text-muted);">API Binding initialized</p>
+            <div style="position: absolute; left: -31px; top: 3px; width: 12px; height: 12px; border-radius: 50%; background: #10b981; border: 3px solid var(--admin-surface); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);"></div>
+            <p style="margin: 0; font-weight: 700; font-size: 0.95rem; color: var(--admin-text);">System Online</p>
+            <p style="margin: 4px 0 0; font-size: 0.85rem; color: var(--admin-text-muted);">API Bindings verified successfully.</p>
+          </div>
+          <div style="position: relative;">
+            <div style="position: absolute; left: -31px; top: 3px; width: 12px; height: 12px; border-radius: 50%; background: #3b82f6; border: 3px solid var(--admin-surface); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);"></div>
+            <p style="margin: 0; font-weight: 700; font-size: 0.95rem; color: var(--admin-text);">Security Hardened</p>
+            <p style="margin: 4px 0 0; font-size: 0.85rem; color: var(--admin-text-muted);">Credential store migrated to Vercel environment.</p>
           </div>
         </div>
       </div>
@@ -117,14 +146,19 @@ export function renderAdminDashboard() {
       if (data.recent_inquiries.length > 0) {
         tbody.innerHTML = data.recent_inquiries.map(inquiry => `
           <tr>
-            <td><strong>${escapeHTML(inquiry.name)}</strong><br><span style="color: var(--admin-text-muted); font-size: 0.85rem;">${escapeHTML(inquiry.email)}</span></td>
-            <td>${escapeHTML(inquiry.subject)}</td>
+            <td>
+              <div style="display: flex; flex-direction: column;">
+                <span style="font-weight: 700; color: var(--admin-text);">${escapeHTML(inquiry.name)}</span>
+                <span style="color: var(--admin-text-muted); font-size: 0.8rem;">${escapeHTML(inquiry.email)}</span>
+              </div>
+            </td>
+            <td style="font-weight: 500;">${escapeHTML(inquiry.subject)}</td>
             <td><span class="badge badge-pending">${escapeHTML(inquiry.status)}</span></td>
-            <td>${escapeHTML(inquiry.date)}</td>
+            <td style="color: var(--admin-text-muted); font-size: 0.9rem;">${escapeHTML(inquiry.date)}</td>
           </tr>
         `).join('');
       } else {
-        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: var(--admin-text-muted);">No inquiries found.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 40px; color: var(--admin-text-muted);">No inquiries found.</td></tr>';
       }
     } catch (err) {
       console.error('Failed to load metrics:', err);
