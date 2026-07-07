@@ -95,8 +95,7 @@ export function renderAdminDashboard() {
     </div>
   `;
 
-  // Fetch logic
-  setTimeout(async () => {
+  const loadMetrics = async () => {
     try {
       const response = await fetch('/api/metrics', {
         headers: {
@@ -130,7 +129,9 @@ export function renderAdminDashboard() {
     } catch (err) {
       console.error('Failed to load metrics:', err);
     }
-  }, 100);
+  };
+
+  loadMetrics();
 
   return renderAdminLayout(content, 'admin-dashboard');
 }
