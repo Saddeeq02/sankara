@@ -107,6 +107,8 @@ function updateMeta(routeName) {
 window.navigate = function(routeName, pushState = true) {
   if (!appRoot) return;
 
+  const originalRoute = routeName;
+
   // Auth Guard
   const token = localStorage.getItem('admin_token');
   if (routeName.startsWith('admin-')) {
@@ -138,6 +140,8 @@ window.navigate = function(routeName, pushState = true) {
   // Update history state
   if (pushState) {
     window.history.pushState({ route: routeName }, '', urlPath);
+  } else if (originalRoute !== routeName) {
+    window.history.replaceState({ route: routeName }, '', urlPath);
   }
 
   // Scroll to top

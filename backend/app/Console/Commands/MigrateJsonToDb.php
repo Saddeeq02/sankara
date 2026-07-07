@@ -65,7 +65,7 @@ class MigrateJsonToDb extends Command
                     'name' => $i['name'],
                     'email' => $i['email'],
                     'subject' => $i['subject'] ?? '',
-                    'message' => $i['message'],
+                    'message' => $i['message'] ?? 'No message provided',
                     'status' => $i['status'] ?? 'Pending',
                     'date' => $i['date'] ?? null,
                 ]

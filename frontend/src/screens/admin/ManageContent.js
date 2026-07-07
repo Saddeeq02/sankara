@@ -6,12 +6,19 @@ export function renderAdminContent() {
   let activeTab = 'gallery';
   let data = { gallery: [], portfolio: [], activities: [], team: [] };
 
+  const tabNameMap = {
+    gallery: 'Gallery Item',
+    portfolio: 'Portfolio Project',
+    activities: 'Activity',
+    team: 'Team Member'
+  };
+
   const renderContainer = () => {
     content.innerHTML = `
       <div class="flex-between" style="margin-bottom: 24px;">
         <h1 class="admin-page-title" style="margin-bottom: 0;">Content Manager</h1>
         <button id="addBtn" class="btn-primary" style="display: flex; align-items: center; gap: 8px; padding: 10px 20px;">
-          ${Plus} Add ${activeTab === 'activities' ? 'Activity' : activeTab === 'team' ? 'Member' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1, -1)}
+          ${Plus} Add ${tabNameMap[activeTab]}
         </button>
       </div>
 
@@ -174,7 +181,7 @@ export function renderAdminContent() {
       <div style="position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; display:flex; align-items:center; justify-content:center;">
         <div style="background:var(--admin-surface); padding:30px; border-radius:12px; width:450px; border:1px solid var(--admin-border);">
           <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
-            <h3 style="margin:0; color: var(--admin-text);">Add New ${activeTab === 'activities' ? 'Activity' : activeTab === 'team' ? 'Member' : activeTab.slice(0,-1)}</h3>
+            <h3 style="margin:0; color: var(--admin-text);">Add New ${tabNameMap[activeTab]}</h3>
             <button id="closeModal" style="background:none; border:none; cursor:pointer; color: var(--admin-text);">${X}</button>
           </div>
           <form id="addForm" style="display:flex; flex-direction:column; gap:15px;">
