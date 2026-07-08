@@ -1,0 +1,7 @@
+Name: Tata Rice Transplanter
+
+Specs: Mechanized Row Planting Fingers, Uniform Seedling Spacing, Low-Compaction Paddy Wheels, High-Speed Float Board.
+
+Task: Mechanized, high-speed transplanting of young rice seedlings into flooded paddy fields.
+
+Description: This specialized machine replaces intensive manual labor by automatically planting young rice seedlings into wet paddies. It places seedlings at precise, uniform depths and intervals, ensuring optimal crop spacing that maximizes field yields while significantly lowering manual labor costs.

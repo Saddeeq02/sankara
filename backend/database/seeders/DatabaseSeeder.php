@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
                 'api_token' => 'sankara_super_secret_token_123'
             ]
         );
+
+        $this->call(ProductSeeder::class);
     }
 
 }
