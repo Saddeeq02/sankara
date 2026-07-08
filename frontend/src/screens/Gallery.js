@@ -325,10 +325,11 @@ export function renderGalleryScreen() {
       <div class="filter-wrapper" id="gallery-filters-bar">
         <button class="filter-pill active" data-filter="All">All Photos</button>
         <button class="filter-pill" data-filter="Exhibition">Exhibition</button>
+        <button class="filter-pill" data-filter="Workshop">Workshop</button>
+        <button class="filter-pill" data-filter="Our Company">Our Company</button>
         <button class="filter-pill" data-filter="Student Visit">Student Visit</button>
         <button class="filter-pill" data-filter="Excursion">Excursion</button>
         <button class="filter-pill" data-filter="ECOWAS Visit">ECOWAS Visit</button>
-        <button class="filter-pill" data-filter="Workshop">Workshop</button>
       </div>
     </div>
   `;
@@ -366,28 +367,412 @@ export function renderGalleryScreen() {
 
 const fallbackGalleryItems = [
   {
-    id: 'gb-ex-1',
-    title: 'Lovol Combine Harvester Demonstration & Technical Briefing (Jigawa State, 2024)',
-    category: 'Exhibition',
-    image: '/assets/gallery_exhibition_jigawa_1.jpg'
+    "id": "gb-st-1",
+    "title": "Lovol Combine Harvester Demonstration (Jigawa State, 2024) - Highlight 1",
+    "category": "Exhibition",
+    "image": "/assets/gallery/gallery_exhibition_ex1_1.jpg"
   },
   {
-    id: 'gb-ex-2',
-    title: 'Farmers and Agribusiness Stakeholders Gathering at Lovol Exhibition',
-    category: 'Exhibition',
-    image: '/assets/gallery_exhibition_jigawa_2.jpg'
+    "id": "gb-st-2",
+    "title": "Lovol Combine Harvester Demonstration (Jigawa State, 2024) - Highlight 2",
+    "category": "Exhibition",
+    "image": "/assets/gallery/gallery_exhibition_ex1_2.jpg"
   },
   {
-    id: 'gb-ex-4',
-    title: 'Discover the Lovol Advantage: Orientation Session and Field Day',
-    category: 'Exhibition',
-    image: '/assets/gallery_exhibition_jigawa_4.jpg'
+    "id": "gb-st-3",
+    "title": "Lovol Combine Harvester Demonstration (Jigawa State, 2024) - Highlight 3",
+    "category": "Exhibition",
+    "image": "/assets/gallery/gallery_exhibition_ex1_3.jpg"
   },
   {
-    id: 'gb-ex-5',
-    title: 'Modern Mechanization Awareness Workshop for Northern Nigeria Agriculture',
-    category: 'Exhibition',
-    image: '/assets/gallery_exhibition_jigawa_5.jpg'
+    "id": "gb-st-4",
+    "title": "Lovol Tractors & Harvesters Unveiling (Kura) - Highlight 1",
+    "category": "Exhibition",
+    "image": "/assets/gallery/gallery_exhibition_ex2_1.jpg"
+  },
+  {
+    "id": "gb-st-5",
+    "title": "Lovol Tractors & Harvesters Unveiling (Kura) - Highlight 2",
+    "category": "Exhibition",
+    "image": "/assets/gallery/gallery_exhibition_ex2_2.jpg"
+  },
+  {
+    "id": "gb-st-6",
+    "title": "Lovol Tractors & Harvesters Unveiling (Kura) - Highlight 3",
+    "category": "Exhibition",
+    "image": "/assets/gallery/gallery_exhibition_ex2_3.jpg"
+  },
+  {
+    "id": "gb-st-7",
+    "title": "Lovol Tractors & Harvesters Unveiling (Kura) - Highlight 4",
+    "category": "Exhibition",
+    "image": "/assets/gallery/gallery_exhibition_ex2_4.jpg"
+  },
+  {
+    "id": "gb-st-8",
+    "title": "Lovol Tractors & Harvesters Unveiling (Kura) - Highlight 5",
+    "category": "Exhibition",
+    "image": "/assets/gallery/gallery_exhibition_ex2_5.jpg"
+  },
+  {
+    "id": "gb-st-9",
+    "title": "Lovol Tractors & Harvesters Unveiling (Kura) - Highlight 6",
+    "category": "Exhibition",
+    "image": "/assets/gallery/gallery_exhibition_ex2_6.jpg"
+  },
+  {
+    "id": "gb-st-10",
+    "title": "Lovol × Sankara Agricultural Workshop - Highlight 1",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w1_1.jpg"
+  },
+  {
+    "id": "gb-st-11",
+    "title": "Lovol × Sankara Agricultural Workshop - Highlight 2",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w1_2.jpg"
+  },
+  {
+    "id": "gb-st-12",
+    "title": "Lovol × Sankara Agricultural Workshop - Highlight 3",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w1_3.jpg"
+  },
+  {
+    "id": "gb-st-13",
+    "title": "Lovol × Sankara Agricultural Workshop - Highlight 4",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w1_4.jpg"
+  },
+  {
+    "id": "gb-st-14",
+    "title": "Lovol × Sankara Agricultural Workshop - Highlight 5",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w1_5.jpg"
+  },
+  {
+    "id": "gb-st-15",
+    "title": "Lovol × Sankara Agricultural Workshop - Highlight 6",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w1_6.jpg"
+  },
+  {
+    "id": "gb-st-16",
+    "title": "Lovol × Sankara Agricultural Workshop - Highlight 7",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w1_7.jpg"
+  },
+  {
+    "id": "gb-st-17",
+    "title": "Lovol × Sankara Agricultural Workshop - Highlight 8",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w1_8.jpg"
+  },
+  {
+    "id": "gb-st-18",
+    "title": "Lovol × Sankara Agricultural Workshop - Highlight 9",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w1_9.jpg"
+  },
+  {
+    "id": "gb-st-19",
+    "title": "Lovol × Sankara Agricultural Workshop - Highlight 10",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w1_10.jpg"
+  },
+  {
+    "id": "gb-st-20",
+    "title": "NIAEXPO 2025 Agricultural Exhibition - Highlight 1",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w2_1.jpg"
+  },
+  {
+    "id": "gb-st-21",
+    "title": "NIAEXPO 2025 Agricultural Exhibition - Highlight 2",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w2_2.jpg"
+  },
+  {
+    "id": "gb-st-22",
+    "title": "NIAEXPO 2025 Agricultural Exhibition - Highlight 3",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w2_3.jpg"
+  },
+  {
+    "id": "gb-st-23",
+    "title": "NIAEXPO 2025 Agricultural Exhibition - Highlight 4",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w2_4.jpg"
+  },
+  {
+    "id": "gb-st-24",
+    "title": "NIAEXPO 2025 Agricultural Exhibition - Highlight 5",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w2_5.jpg"
+  },
+  {
+    "id": "gb-st-25",
+    "title": "NIAEXPO 2025 Agricultural Exhibition - Highlight 6",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w2_6.jpg"
+  },
+  {
+    "id": "gb-st-26",
+    "title": "NIAEXPO 2025 Agricultural Exhibition - Highlight 7",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w2_7.jpg"
+  },
+  {
+    "id": "gb-st-27",
+    "title": "NIAEXPO 2025 Agricultural Exhibition - Highlight 8",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w2_8.jpg"
+  },
+  {
+    "id": "gb-st-28",
+    "title": "NIAEXPO 2025 Agricultural Exhibition - Highlight 9",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w2_9.jpg"
+  },
+  {
+    "id": "gb-st-29",
+    "title": "NIAEXPO 2025 Agricultural Exhibition - Highlight 10",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w2_10.jpg"
+  },
+  {
+    "id": "gb-st-30",
+    "title": "Technical Workshop at Warehouse (Jan 2026) - Highlight 1",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w3_1.jpg"
+  },
+  {
+    "id": "gb-st-31",
+    "title": "Technical Workshop at Warehouse (Jan 2026) - Highlight 2",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w3_2.jpg"
+  },
+  {
+    "id": "gb-st-32",
+    "title": "Technical Workshop at Warehouse (Jan 2026) - Highlight 3",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w3_3.jpg"
+  },
+  {
+    "id": "gb-st-33",
+    "title": "Technical Workshop at Warehouse (Jan 2026) - Highlight 4",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w3_4.jpg"
+  },
+  {
+    "id": "gb-st-34",
+    "title": "Technical Workshop at Warehouse (Jan 2026) - Highlight 5",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w3_5.jpg"
+  },
+  {
+    "id": "gb-st-35",
+    "title": "Technical Workshop at Warehouse (Jan 2026) - Highlight 6",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w3_6.jpg"
+  },
+  {
+    "id": "gb-st-36",
+    "title": "Technical Workshop at Warehouse (Jan 2026) - Highlight 7",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w3_7.jpg"
+  },
+  {
+    "id": "gb-st-37",
+    "title": "Technical Workshop at Warehouse (Jan 2026) - Highlight 8",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w3_8.jpg"
+  },
+  {
+    "id": "gb-st-38",
+    "title": "Technical Workshop at Warehouse (Jan 2026) - Highlight 9",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w3_9.jpg"
+  },
+  {
+    "id": "gb-st-39",
+    "title": "Technical Workshop at Warehouse (Jan 2026) - Highlight 10",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w3_10.jpg"
+  },
+  {
+    "id": "gb-st-40",
+    "title": "Technical Workshop at Warehouse (Jan 2026) - Highlight 11",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w3_11.jpg"
+  },
+  {
+    "id": "gb-st-41",
+    "title": "Technical Workshop at Warehouse (Jan 2026) - Highlight 12",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w3_12.jpg"
+  },
+  {
+    "id": "gb-st-42",
+    "title": "Technical Workshop at Warehouse (Jan 2026) - Highlight 13",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w3_13.jpg"
+  },
+  {
+    "id": "gb-st-43",
+    "title": "Technical Workshop at Warehouse (Jan 2026) - Highlight 14",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w3_14.jpg"
+  },
+  {
+    "id": "gb-st-44",
+    "title": "Technical Workshop at Warehouse (Jan 2026) - Highlight 15",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w3_15.jpg"
+  },
+  {
+    "id": "gb-st-45",
+    "title": "Technical Workshop at Warehouse (Jan 2026) - Highlight 16",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w3_16.jpg"
+  },
+  {
+    "id": "gb-st-46",
+    "title": "Technical Workshop at Zaria - Highlight 1",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w4_1.jpg"
+  },
+  {
+    "id": "gb-st-47",
+    "title": "Technical Workshop at Zaria - Highlight 2",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w4_2.jpg"
+  },
+  {
+    "id": "gb-st-48",
+    "title": "Technical Workshop at Zaria - Highlight 3",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w4_3.jpg"
+  },
+  {
+    "id": "gb-st-49",
+    "title": "Technical Workshop at Zaria - Highlight 4",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w4_4.jpg"
+  },
+  {
+    "id": "gb-st-50",
+    "title": "Technical Workshop at Zaria - Highlight 5",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w4_5.jpg"
+  },
+  {
+    "id": "gb-st-51",
+    "title": "Technical Workshop at Zaria - Highlight 6",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w4_6.jpg"
+  },
+  {
+    "id": "gb-st-52",
+    "title": "Technical Workshop at Zaria - Highlight 7",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w4_7.jpg"
+  },
+  {
+    "id": "gb-st-53",
+    "title": "Technical Workshop at Zaria - Highlight 8",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w4_8.jpg"
+  },
+  {
+    "id": "gb-st-54",
+    "title": "Technical Workshop at Zaria - Highlight 9",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w4_9.jpg"
+  },
+  {
+    "id": "gb-st-55",
+    "title": "Technical Workshop at Zaria - Highlight 10",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w4_10.jpg"
+  },
+  {
+    "id": "gb-st-56",
+    "title": "Technical Workshop at Zaria - Highlight 11",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w4_11.jpg"
+  },
+  {
+    "id": "gb-st-57",
+    "title": "Technical Workshop at Zaria - Highlight 12",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w4_12.jpg"
+  },
+  {
+    "id": "gb-st-58",
+    "title": "Technical Workshop at Zaria - Highlight 13",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w4_13.jpg"
+  },
+  {
+    "id": "gb-st-59",
+    "title": "Technical Workshop at Zaria - Highlight 14",
+    "category": "Workshop",
+    "image": "/assets/gallery/gallery_workshop_w4_14.jpg"
+  },
+  {
+    "id": "gb-st-60",
+    "title": "Sankara Nigeria Team & Office Operations - Highlight 1",
+    "category": "Our Company",
+    "image": "/assets/gallery/gallery_our_comapny_1.jpg"
+  },
+  {
+    "id": "gb-st-61",
+    "title": "Sankara Nigeria Team & Office Operations - Highlight 2",
+    "category": "Our Company",
+    "image": "/assets/gallery/gallery_our_comapny_2.jpg"
+  },
+  {
+    "id": "gb-st-62",
+    "title": "Sankara Nigeria Team & Office Operations - Highlight 3",
+    "category": "Our Company",
+    "image": "/assets/gallery/gallery_our_comapny_3.jpg"
+  },
+  {
+    "id": "gb-st-63",
+    "title": "Sankara Nigeria Team & Office Operations - Highlight 4",
+    "category": "Our Company",
+    "image": "/assets/gallery/gallery_our_comapny_4.jpg"
+  },
+  {
+    "id": "gb-st-64",
+    "title": "Sankara Nigeria Team & Office Operations - Highlight 5",
+    "category": "Our Company",
+    "image": "/assets/gallery/gallery_our_comapny_5.jpg"
+  },
+  {
+    "id": "gb-st-65",
+    "title": "Sankara Nigeria Team & Office Operations - Highlight 6",
+    "category": "Our Company",
+    "image": "/assets/gallery/gallery_our_comapny_6.jpg"
+  },
+  {
+    "id": "gb-st-66",
+    "title": "Sankara Nigeria Team & Office Operations - Highlight 7",
+    "category": "Our Company",
+    "image": "/assets/gallery/gallery_our_comapny_7.jpg"
+  },
+  {
+    "id": "gb-st-67",
+    "title": "Sankara Nigeria Team & Office Operations - Highlight 8",
+    "category": "Our Company",
+    "image": "/assets/gallery/gallery_our_comapny_8.jpg"
+  },
+  {
+    "id": "gb-st-68",
+    "title": "Sankara Nigeria Team & Office Operations - Highlight 9",
+    "category": "Our Company",
+    "image": "/assets/gallery/gallery_our_comapny_9.jpg"
   }
 ];
 
