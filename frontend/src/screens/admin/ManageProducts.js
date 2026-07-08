@@ -1,6 +1,16 @@
 import { renderAdminLayout } from '../../components/AdminLayout';
 import { Plus, Edit, Trash2, Search, Box } from 'lucide-static';
 
+const escapeHTML = (str) => {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
 export function renderAdminProducts() {
   const content = document.createElement('div');
   let allProducts = [];
