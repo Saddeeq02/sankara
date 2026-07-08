@@ -4,6 +4,7 @@ import { Search, Box } from 'lucide-static';
 
 const fallbackProducts = [];
 
+
 export function renderProductsScreen() {
   const container = document.createElement('div');
   container.className = 'products-root';
