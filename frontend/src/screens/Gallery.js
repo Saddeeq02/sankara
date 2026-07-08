@@ -378,12 +378,6 @@ const fallbackGalleryItems = [
     image: '/assets/gallery_exhibition_jigawa_2.jpg'
   },
   {
-    id: 'gb-ex-3',
-    title: 'Sankara Nigeria Team engaging local farming cooperatives in Jigawa',
-    category: 'Exhibition',
-    image: '/assets/gallery_exhibition_jigawa_3.jpg'
-  },
-  {
     id: 'gb-ex-4',
     title: 'Discover the Lovol Advantage: Orientation Session and Field Day',
     category: 'Exhibition',
