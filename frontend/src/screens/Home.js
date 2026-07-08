@@ -653,7 +653,7 @@ export function renderHomeScreen() {
     }
     currentBgIndex = (currentBgIndex + 1) % bgImages.length;
     heroSec.style.backgroundImage = `url(${bgImages[currentBgIndex]})`;
-  }, 5000);
+  }, 1800000); // 30 minutes interval
 
   // Slideshow Logic for the 11 Lovol and Massey Ferguson Machinery Slides
   const machinerySlides = [
