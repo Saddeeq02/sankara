@@ -394,36 +394,6 @@ const fallbackGalleryItems = [
     title: 'Modern Mechanization Awareness Workshop for Northern Nigeria Agriculture',
     category: 'Exhibition',
     image: '/assets/gallery_exhibition_jigawa_5.jpg'
-  },
-  {
-    id: 'gb-1',
-    title: 'Agricultural Science Student Tour & Field Excursion',
-    category: 'Student Visit',
-    image: '/assets/about_hero.png'
-  },
-  {
-    id: 'gb-2',
-    title: 'Lovol Tractor Performance Demonstration for Farming Cooperatives',
-    category: 'Excursion',
-    image: '/assets/gallery_farmers.png'
-  },
-  {
-    id: 'gb-3',
-    title: 'Regional Mechanization Dialogue with ECOWAS Delegates',
-    category: 'ECOWAS Visit',
-    image: '/assets/portfolio_aerial.png'
-  },
-  {
-    id: 'gb-4',
-    title: 'Technical Operator Training & Precision Service Workshop',
-    category: 'Workshop',
-    image: '/assets/gallery_workshop.png'
-  },
-  {
-    id: 'gb-5',
-    title: 'Field Maintenance and Diagnostics Workshop',
-    category: 'Workshop',
-    image: '/assets/services_mobile_team.png'
   }
 ];
 
