@@ -17,7 +17,7 @@ export function renderServicesScreen() {
     }
     
     .services-hero {
-      background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #022c22 100%);
+      background: linear-gradient(135deg, #021a15 0%, #010d0a 100%);
       color: #ffffff;
       padding: 180px 0 130px;
       position: relative;
@@ -85,7 +85,7 @@ export function renderServicesScreen() {
     .services-hero-desc {
       font-size: 1.15rem;
       line-height: 1.7;
-      color: #d1fae5;
+      color: #cbd5e1;
       margin-bottom: 40px;
       max-width: 620px;
     }
@@ -97,34 +97,37 @@ export function renderServicesScreen() {
       }
     }
 
-    .hero-graphic-wrapper {
+    .hero-image-wrapper {
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
-    }
-
-    .hero-glowing-circle {
-      position: absolute;
-      width: 320px;
-      height: 320px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.14) 0%, transparent 70%);
-      border-radius: 50%;
-      filter: blur(30px);
-      z-index: 1;
-    }
-
-    .hero-abstract-svg {
-      position: relative;
       z-index: 2;
-      animation: float-slow-serv 6s ease-in-out infinite;
-      filter: drop-shadow(0 15px 35px rgba(2, 44, 34, 0.4));
-      max-width: 100%;
     }
 
-    @keyframes float-slow-serv {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-15px) rotate(4deg); }
+    .hero-image-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 30px;
+      padding: 12px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(16, 185, 129, 0.1);
+      backdrop-filter: blur(8px);
+      transition: all 0.5s ease;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .hero-image-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(52, 211, 153, 0.4);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 50px rgba(16, 185, 129, 0.15);
+    }
+
+    .hero-image-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      object-fit: cover;
     }
 
     /* Core Services Grid Layout */
@@ -391,7 +394,7 @@ export function renderServicesScreen() {
     /* Training Programs Section */
     .sec-training {
       padding: 120px 0;
-      background: #022c22;
+      background: #021a15;
       color: #ffffff;
       position: relative;
       overflow: hidden;
@@ -484,7 +487,7 @@ export function renderServicesScreen() {
     .training-desc {
       font-size: 1.02rem;
       line-height: 1.6;
-      color: #d1fae5;
+      color: #cbd5e1;
       margin-bottom: 30px;
       flex-grow: 1;
     }
@@ -516,7 +519,7 @@ export function renderServicesScreen() {
     }
 
     .cta-card-serv {
-      background: linear-gradient(135deg, #022c22 0%, #064e3b 100%);
+      background: linear-gradient(135deg, #021a15 0%, #010d0a 100%);
       border-radius: 32px;
       padding: 80px;
       color: #ffffff;
@@ -547,7 +550,7 @@ export function renderServicesScreen() {
   heroSec.className = 'services-hero';
   heroSec.innerHTML = `
     <div class="container services-hero-grid">
-      <div>
+      <div class="reveal">
         <div class="services-hero-badge">Premium Agricultural Services</div>
         <h1 class="services-hero-title">Expert Solutions for <span>Modern Farming</span></h1>
         <p class="services-hero-desc">
@@ -558,22 +561,10 @@ export function renderServicesScreen() {
           <a href="/product" class="btn-main-outline" data-route="products" style="border-color: #ffffff; color: #ffffff;">View Products</a>
         </div>
       </div>
-      <div class="hero-graphic-wrapper">
-        <div class="hero-glowing-circle"></div>
-        <svg class="hero-abstract-svg" width="340" height="340" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Outer Gear -->
-          <path d="M100 35C64.1 35 35 64.1 35 100C35 135.9 64.1 165 100 165C135.9 165 165 135.9 165 100C165 64.1 135.9 35 100 35ZM100 148C73.5 148 52 126.5 52 100C52 73.5 73.5 52 100 52C126.5 52 148 73.5 148 100C148 126.5 126.5 148 100 148Z" fill="#34d399" opacity="0.8"/>
-          <!-- Inner Planet Grid -->
-          <circle cx="100" cy="100" r="32" stroke="#10b981" stroke-width="2.5" stroke-dasharray="6 4"/>
-          <!-- Orbit nodes -->
-          <circle cx="100" cy="68" r="6" fill="#34d399"/>
-          <circle cx="132" cy="100" r="4" fill="#10b981"/>
-          <circle cx="100" cy="132" r="5" fill="#34d399"/>
-          <circle cx="68" cy="100" r="6.5" fill="#10b981"/>
-          <!-- Central core -->
-          <circle cx="100" cy="100" r="14" fill="#ffffff"/>
-          <circle cx="100" cy="100" r="8" fill="#10b981"/>
-        </svg>
+      <div class="hero-image-wrapper reveal">
+        <div class="hero-image-card">
+          <img src="/assets/services_hero_premium.png" alt="Sankara Premium Machinery Support">
+        </div>
       </div>
     </div>
   `;
@@ -651,7 +642,7 @@ export function renderServicesScreen() {
 
       <div class="services-grid-9">
         ${services.map(s => `
-          <div class="service-premium-card">
+          <div class="service-premium-card reveal">
             <div class="service-card-icon-box">
               ${s.icon}
             </div>
@@ -671,7 +662,256 @@ export function renderServicesScreen() {
     </div>
   `;
 
-  // 3. WHY CHOOSE US & STATS SECTION
+  // 3. INTERACTIVE DIAGNOSTIC SIMULATOR (Epic Widget)
+  const simulatorSec = document.createElement('section');
+  simulatorSec.className = 'services-showcase';
+  simulatorSec.style.background = '#f8fafc';
+  simulatorSec.style.borderTop = '1px solid #e2e8f0';
+  simulatorSec.style.padding = '100px 0';
+  
+  simulatorSec.innerHTML = `
+    <div class="container">
+      <div class="section-header" style="margin-bottom: 60px;">
+        <span class="section-badge">Interactive Tools</span>
+        <h2 class="section-title">Virtual Machinery Diagnostics</h2>
+        <p class="section-desc">
+          Select a system module below to run a virtual diagnostics health check and generate a simulated maintenance assessment report.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;">
+        <!-- Left: Diagnostic Control Panel -->
+        <div class="reveal" style="background: #ffffff; border: 1px solid #e2e8f0; padding: 40px; border-radius: 28px; box-shadow: 0 20px 40px rgba(0,0,0,0.02);">
+          <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 25px; color: #0f172a;">Select Machinery Module</h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 15px;">
+            <button class="diag-btn active" data-module="engine">
+              <span class="diag-btn-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+              <div style="text-align: left;">
+                <div class="diag-btn-title">Engine Combustion & Fuel Line</div>
+                <div class="diag-btn-desc">Check cylinder pressure, injector timing & cooling flow.</div>
+              </div>
+            </button>
+            
+            <button class="diag-btn" data-module="hydraulics">
+              <span class="diag-btn-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a7 7 0 0 0 7-7c0-4.3-7-11-7-11S5 10.7 5 15a7 7 0 0 0 7 7z"/></svg></span>
+              <div style="text-align: left;">
+                <div class="diag-btn-title">Hydraulic Lift & Pump Pressure</div>
+                <div class="diag-btn-desc">Check pump efficiency, actuator valves & fluid temperature.</div>
+              </div>
+            </button>
+
+            <button class="diag-btn" data-module="transmission">
+              <span class="diag-btn-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+              <div style="text-align: left;">
+                <div class="diag-btn-title">Gearbox & Differential Linkage</div>
+                <div class="diag-btn-desc">Verify gear sync, clutch play & differential lock feedback.</div>
+              </div>
+            </button>
+
+            <button class="diag-btn" data-module="electrical">
+              <span class="diag-btn-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+              <div style="text-align: left;">
+                <div class="diag-btn-title">Smart Telemetry & Alternator Volt</div>
+                <div class="diag-btn-desc">Audit GPS tracking, battery voltage & digital dashboard metrics.</div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Screen / Results -->
+        <div class="reveal" style="background: #021a15; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 28px; padding: 40px; color: #ffffff; min-height: 380px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 30px 60px rgba(2, 44, 34, 0.25);">
+          <!-- Futuristic background elements -->
+          <div style="position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(52, 211, 153, 0.15), transparent 60%); pointer-events: none;"></div>
+          
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 15px; margin-bottom: 25px;">
+              <span style="font-weight: 900; letter-spacing: 2px; text-transform: uppercase; font-size: 0.75rem; color: #34d399;">System Health Screen</span>
+              <div style="display: flex; gap: 6px; align-items: center;">
+                <span id="diag-indicator-light" style="width: 8px; height: 8px; border-radius: 50%; background: #34d399; display: inline-block; box-shadow: 0 0 10px #34d399;"></span>
+                <span id="diag-status-text" style="font-size: 0.75rem; font-weight: 800; color: #34d399;">SYSTEM: READY</span>
+              </div>
+            </div>
+
+            <div id="diag-results-content" style="transition: all 0.3s ease;">
+              <h4 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 15px; color: #ffffff;">Engine Diagnostics</h4>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 30px; margin-bottom: 25px;">
+                <div>
+                  <div style="font-size: 0.75rem; color: #a7f3d0; text-transform: uppercase; letter-spacing: 0.5px;">Injector Timing</div>
+                  <div style="font-size: 1.1rem; font-weight: 700; color: #ffffff;">0.02ms (Optimal)</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.75rem; color: #a7f3d0; text-transform: uppercase; letter-spacing: 0.5px;">Cylinder Pressure</div>
+                  <div style="font-size: 1.1rem; font-weight: 700; color: #ffffff;">29.4 Bar (Normal)</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.75rem; color: #a7f3d0; text-transform: uppercase; letter-spacing: 0.5px;">Cooling Flow</div>
+                  <div style="font-size: 1.1rem; font-weight: 700; color: #ffffff;">45L/min (Stable)</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.75rem; color: #a7f3d0; text-transform: uppercase; letter-spacing: 0.5px;">Efficiency Ratio</div>
+                  <div style="font-size: 1.1rem; font-weight: 700; color: #ffffff;">98.4% (Excellent)</div>
+                </div>
+              </div>
+              <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.5; margin: 0;">
+                All parameters are within safe factory operational ranges. Scheduled service is recommended in approximately 250 operating hours.
+              </p>
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
+            <span style="font-size: 0.8rem; color: #a7f3d0; font-weight: 600;">Need physical maintenance support?</span>
+            <a href="/contact" data-route="contact" class="btn-main-green" style="padding: 10px 20px; font-size: 0.85rem; border-radius: 50px; background: #34d399; color: #022c22; text-decoration: none;">Book Service</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .diag-btn {
+        width: 100%;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        padding: 18px 24px;
+        border-radius: 18px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .diag-btn:hover {
+        border-color: #10b981;
+        background: rgba(16, 185, 129, 0.02);
+      }
+      .diag-btn.active {
+        border-color: #10b981;
+        background: rgba(16, 185, 129, 0.04);
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.05);
+      }
+      .diag-btn-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: #f1f5f9;
+        color: #64748b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: all 0.3s;
+      }
+      .diag-btn.active .diag-btn-icon {
+        background: #10b981;
+        color: #ffffff;
+        box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+      }
+      .diag-btn-title {
+        font-weight: 800;
+        font-size: 0.95rem;
+        color: #0f172a;
+        margin-bottom: 3px;
+        text-align: left;
+      }
+      .diag-btn-desc {
+        font-size: 0.8rem;
+        color: #64748b;
+        text-align: left;
+      }
+    </style>
+  `;
+
+  // Simulator Interactive Logic
+  const diagData = {
+    engine: {
+      title: 'Engine Combustion & Fuel Line',
+      specs: [
+        { label: 'Injector Timing', val: '0.02ms (Optimal)' },
+        { label: 'Cylinder Pressure', val: '29.4 Bar (Normal)' },
+        { label: 'Cooling Flow', val: '45L/min (Stable)' },
+        { label: 'Efficiency Ratio', val: '98.4% (Excellent)' }
+      ],
+      desc: 'All parameters are within safe factory operational ranges. Scheduled service is recommended in approximately 250 operating hours.'
+    },
+    hydraulics: {
+      title: 'Hydraulic Lift & Pump Pressure',
+      specs: [
+        { label: 'Pump Efficiency', val: '94% (Stable)' },
+        { label: 'Control Valves', val: 'Active (Optimal)' },
+        { label: 'Fluid Temp', val: '64°C (Normal)' },
+        { label: 'Actuator Pressure', val: '185 Bar (Normal)' }
+      ],
+      desc: 'Hydraulic lift cylinder operating within target margins. Secondary filters should be inspected during routine quarterly maintenance.'
+    },
+    transmission: {
+      title: 'Gearbox & Differential Linkage',
+      specs: [
+        { label: 'Gearbox Sync', val: '98% (Perfect)' },
+        { label: 'Clutch Play', val: '12mm (Normal)' },
+        { label: 'Differential Lock', val: 'Engaged (Healthy)' },
+        { label: 'Gear Ratio Feedback', val: 'Instantaneous' }
+      ],
+      desc: 'Gear shifts are responding seamlessly. Transaxle lubrication is adequate. Differential lock telemetry is fully active.'
+    },
+    electrical: {
+      title: 'Smart Telemetry & Alternator Volt',
+      specs: [
+        { label: 'GPS Tracking', val: 'Online (12 Satellites)' },
+        { label: 'Battery Voltage', val: '14.2V (Optimal)' },
+        { label: 'Alternator Load', val: '45 Amps (Stable)' },
+        { label: 'Canbus Link', val: 'Healthy (0 Errors)' }
+      ],
+      desc: 'Smart telematics modules are transmitting real-time tracking coordinates correctly. Alternator charge is stable under load.'
+    }
+  };
+
+  const diagBtns = simulatorSec.querySelectorAll('.diag-btn');
+  const resultsBox = simulatorSec.querySelector('#diag-results-content');
+  const indicatorLight = simulatorSec.querySelector('#diag-indicator-light');
+  const statusText = simulatorSec.querySelector('#diag-status-text');
+
+  diagBtns.forEach(btn => {
+    btn.onclick = () => {
+      diagBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const mod = btn.dataset.module;
+      const data = diagData[mod];
+
+      // Play minor animation
+      resultsBox.style.opacity = '0.3';
+      resultsBox.style.transform = 'translateY(5px)';
+      indicatorLight.style.background = '#f59e0b';
+      indicatorLight.style.boxShadow = '0 0 10px #f59e0b';
+      statusText.style.color = '#f59e0b';
+      statusText.textContent = 'SCANNING...';
+
+      setTimeout(() => {
+        resultsBox.innerHTML = `
+          <h4 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 15px; color: #ffffff;">${data.title}</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 30px; margin-bottom: 25px;">
+            ${data.specs.map(s => `
+              <div>
+                <div style="font-size: 0.75rem; color: #a7f3d0; text-transform: uppercase; letter-spacing: 0.5px;">${s.label}</div>
+                <div style="font-size: 1.1rem; font-weight: 700; color: #ffffff;">${s.val}</div>
+              </div>
+            `).join('')}
+          </div>
+          <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.5; margin: 0;">
+            ${data.desc}
+          </p>
+        `;
+        resultsBox.style.opacity = '1';
+        resultsBox.style.transform = 'none';
+        indicatorLight.style.background = '#34d399';
+        indicatorLight.style.boxShadow = '0 0 10px #34d399';
+        statusText.style.color = '#34d399';
+        statusText.textContent = 'SYSTEM: READY';
+      }, 500);
+    };
+  });
+
+  // 4. WHY CHOOSE US & STATS SECTION
   const whyChooseSec = document.createElement('section');
   whyChooseSec.className = 'sec-why-choose';
   
@@ -707,7 +947,7 @@ export function renderServicesScreen() {
 
   whyChooseSec.innerHTML = `
     <div class="container why-choose-layout">
-      <div>
+      <div class="reveal">
         <span class="section-badge">Why Choose Us</span>
         <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">Your Trusted Agricultural Partner</h2>
         <p style="color: #475569; font-size: 1.1rem; line-height: 1.7; margin-bottom: 45px;">
@@ -727,7 +967,7 @@ export function renderServicesScreen() {
         </div>
       </div>
       
-      <div class="why-choose-stats">
+      <div class="why-choose-stats reveal">
         ${stats.map(st => `
           <div class="why-stat-card">
             <div class="why-stat-num">${st.num}</div>
@@ -738,7 +978,7 @@ export function renderServicesScreen() {
     </div>
   `;
 
-  // 4. TRAINING & EDUCATION SECTION (Premium Dark Row)
+  // 5. TRAINING & EDUCATION SECTION (Premium Dark Row)
   const trainingSec = document.createElement('section');
   trainingSec.className = 'sec-training';
   
@@ -765,17 +1005,17 @@ export function renderServicesScreen() {
 
   trainingSec.innerHTML = `
     <div class="container">
-      <div style="text-align: center; margin-bottom: 60px;">
+      <div style="text-align: center; margin-bottom: 60px;" class="reveal">
         <span class="section-badge" style="color: #34d399;">Training & Education</span>
         <h2 class="section-title" style="color: #ffffff;">Agricultural Training Programs</h2>
-        <p style="color: #a7f3d0; font-size: 1.1rem; max-width: 650px; margin: 0 auto;">
+        <p style="color: #cbd5e1; font-size: 1.1rem; max-width: 650px; margin: 0 auto;">
           Empower your farming crew with expert technical knowledge and hands-on operational routines to maximize output.
         </p>
       </div>
 
       <div class="training-grid">
         ${trainingPrograms.map(tp => `
-          <div class="training-card">
+          <div class="training-card reveal">
             <div class="training-card-icon">
               ${tp.icon}
             </div>
@@ -795,19 +1035,19 @@ export function renderServicesScreen() {
     </div>
   `;
 
-  // 5. CALL TO ACTION SECTION
+  // 6. CALL TO ACTION SECTION
   const ctaSec = document.createElement('section');
   ctaSec.className = 'sec-cta-serv';
   ctaSec.innerHTML = `
     <div class="container">
-      <div class="cta-card-serv">
+      <div class="cta-card-serv reveal">
         <span style="font-size: 0.8rem; font-weight: 800; color: #34d399; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block;">GET IN TOUCH</span>
         <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; line-height: 1.2; margin-bottom: 25px; color: #ffffff;">Ready to Mechanize Your Operations?</h2>
-        <p style="color: #d1fae5; font-size: 1.1rem; line-height: 1.7; max-width: 680px; margin: 0 auto 40px;">
+        <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7; max-width: 680px; margin: 0 auto 40px;">
           Partner with Sankara Nigeria Limited to secure robust agricultural machinery, spare parts supply lines, and dedicated field maintenance support.
         </p>
         <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-          <a href="/contact" class="btn-main-green" data-route="contact" style="background: #ffffff; color: #022c22; box-shadow: 0 4px 20px rgba(255,255,255,0.15);">
+          <a href="/contact" class="btn-main-green" data-route="contact" style="background: #ffffff; color: #021a15; box-shadow: 0 4px 20px rgba(255,255,255,0.15); text-decoration: none;">
             Contact Corporate Office
           </a>
         </div>
@@ -819,6 +1059,7 @@ export function renderServicesScreen() {
   container.appendChild(renderNavbar());
   container.appendChild(heroSec);
   container.appendChild(serviceGrid);
+  container.appendChild(simulatorSec);
   container.appendChild(whyChooseSec);
   container.appendChild(trainingSec);
   container.appendChild(ctaSec);
