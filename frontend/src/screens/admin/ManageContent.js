@@ -194,13 +194,72 @@ export function renderAdminContent() {
 
     container.querySelector('#closeModal').onclick = () => container.innerHTML = '';
     
+    const compressImage = (file, maxWidth = 1200, maxHeight = 1200, quality = 0.7) => {
+      return new Promise((resolve) => {
+        if (!file.type.startsWith('image/')) {
+          return resolve(file);
+        }
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (event) => {
+          const img = new Image();
+          img.src = event.target.result;
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+              if (width > maxWidth) {
+                height = Math.round((height * maxWidth) / width);
+                width = maxWidth;
+              }
+            } else {
+              if (height > maxHeight) {
+                width = Math.round((width * maxHeight) / height);
+                height = maxHeight;
+              }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+
+            canvas.toBlob((blob) => {
+              resolve(new File([blob], file.name, {
+                type: 'image/jpeg',
+                lastModified: Date.now()
+              }));
+            }, 'image/jpeg', quality);
+          };
+          img.onerror = () => resolve(file);
+        };
+        reader.onerror = () => resolve(file);
+      });
+    };
+
     container.querySelector('#addForm').onsubmit = async (e) => {
       e.preventDefault();
       const btn = e.target.querySelector('button');
       btn.textContent = 'Uploading...';
       btn.disabled = true;
 
-      const formData = new FormData(e.target);
+      const formData = new FormData();
+      for (const element of e.target.elements) {
+        if (element.name && element.type !== 'file') {
+          formData.append(element.name, element.value);
+        }
+      }
+      
+      const fileInput = e.target.querySelector('input[type="file"]');
+      if (fileInput && fileInput.files.length > 0) {
+        for (const file of fileInput.files) {
+          const compressedFile = await compressImage(file);
+          formData.append(fileInput.name || 'image', compressedFile);
+        }
+      }
+
       const res = await fetch(`/api/${activeTab}`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` },

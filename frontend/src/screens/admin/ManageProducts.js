@@ -229,16 +229,80 @@ export function renderAdminProducts() {
     if (e.target === modal) hideModal();
   };
 
+  const compressImage = (file, maxWidth = 1200, maxHeight = 1200, quality = 0.7) => {
+    return new Promise((resolve) => {
+      if (!file.type.startsWith('image/')) {
+        return resolve(file);
+      }
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > maxWidth) {
+              height = Math.round((height * maxWidth) / width);
+              width = maxWidth;
+            }
+          } else {
+            if (height > maxHeight) {
+              width = Math.round((width * maxHeight) / height);
+              height = maxHeight;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob((blob) => {
+            resolve(new File([blob], file.name, {
+              type: 'image/jpeg',
+              lastModified: Date.now()
+            }));
+          }, 'image/jpeg', quality);
+        };
+        img.onerror = () => resolve(file);
+      };
+      reader.onerror = () => resolve(file);
+    });
+  };
+
   addForm.onsubmit = async (e) => {
     e.preventDefault();
     submitBtn.textContent = currentEditId ? 'Updating...' : 'Saving...';
     submitBtn.disabled = true;
 
-    const formData = new FormData(addForm);
-    formData.set('is_new_arrival', addForm.is_new_arrival.checked ? '1' : '0');
+    const formData = new FormData();
+    formData.append('name', addForm.name.value);
+    formData.append('category', addForm.category.value);
+    formData.append('description', addForm.description.value);
+    formData.append('task', addForm.task.value);
+    formData.append('is_new_arrival', addForm.is_new_arrival.checked ? '1' : '0');
+    formData.append('price', '');
+    if (currentEditId) {
+      formData.append('status', addForm.status ? addForm.status.value : 'Active');
+    }
     
-    // Explicitly set price to null or empty string since field is removed
-    formData.set('price', '');
+    // Handle Technical Specifications if present
+    if (addForm.specs) {
+      formData.append('specs', addForm.specs.value);
+    }
+    
+    // Compress and append image files
+    const fileInput = addForm.querySelector('input[type="file"]');
+    if (fileInput && fileInput.files.length > 0) {
+      for (const file of fileInput.files) {
+        const compressedFile = await compressImage(file);
+        formData.append('image[]', compressedFile);
+      }
+    }
     
     const url = currentEditId 
       ? `/api/products/${currentEditId}` 
