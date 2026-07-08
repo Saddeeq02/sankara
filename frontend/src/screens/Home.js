@@ -1427,70 +1427,7 @@ export function renderHomeScreen() {
   homeRoot.appendChild(heroSec);
   homeRoot.appendChild(featuresSec);
   homeRoot.appendChild(fleetSec);
-const fallbackProducts = [
-  {
-    id: 'fb-1',
-    name: 'Lovol 754-H Utility Tractor',
-    category: 'Tractors',
-    price: 'Price on Request',
-    image: '/assets/fleet_lovol_754h.png',
-    images: ['/assets/fleet_lovol_754h.png', '/assets/lovol_tractor_754h.png', '/assets/lovol_tractor_754h_front.png'],
-    specs: ['75 HP Engine', 'Heavy-Duty 4WD', 'Synchromesh Transmission', 'Ergonomic Operator Station'],
-    task: 'Highly efficient general utility farming, deep tillage, and cargo transportation.',
-    description: 'The Lovol 754-H is an exceptionally engineered utility tractor designed to withstand challenging soil conditions. Equipped with a high-torque, fuel-efficient engine and a robust synchromesh gearbox, it delivers smooth mechanical power for continuous daily operations.',
-    status: 'Active',
-    is_new_arrival: true
-  },
-  {
-    id: 'fb-2',
-    name: 'Massey Ferguson MF 375',
-    category: 'Tractors',
-    price: 'Price on Request',
-    image: '/assets/fleet_mf_375.png',
-    images: ['/assets/fleet_mf_375.png'],
-    specs: ['75 HP Power', 'Durability Focused', 'High Torque Engine', 'Simplified Maintenance'],
-    task: 'Heavy tillage, disc ploughing, and large-scale industrial haulage.',
-    description: 'The Massey Ferguson MF 375 is a legendary agricultural workhorse built for maximum durability and low operating costs. Featuring a heavy-duty rear axle, high-capacity lift controls, and a robust Perkins engine, it remains the standard for tough agricultural jobs across West Africa.',
-    status: 'Active'
-  },
-  {
-    id: 'fb-3',
-    name: 'Lovol RG109+ Combine Harvester',
-    category: 'Farm Implements',
-    price: 'Price on Request',
-    image: '/assets/fleet_lovol_rg109plus.png',
-    images: ['/assets/fleet_lovol_rg109plus.png', '/assets/lovol_harvester_rg109plus.png', '/assets/lovol_harvester_rg109plus_front.png'],
-    specs: ['109 HP Turbocharged', 'Heavy-Duty Crawler Tracks', 'Clean Threshing System', 'Low Grain Loss Rate'],
-    task: 'High-speed automated rice, wheat, and soy harvesting.',
-    description: 'Designed for optimal paddy and grain field performance, the Lovol RG109+ features advanced crawler tracks for navigating soft, wet mud. With an optimized threshing cylinder and cleaning sieves, it maximizes yield retrieval while keeping grain damage to a absolute minimum.',
-    status: 'Active',
-    is_new_arrival: true
-  },
-  {
-    id: 'fb-4',
-    name: 'Lovol AF108 Combine Harvester',
-    category: 'Farm Implements',
-    price: 'Price on Request',
-    image: '/assets/fleet_lovol_af108.png',
-    images: ['/assets/fleet_lovol_af108.png'],
-    specs: ['108 HP Engine', 'Adjustable Header', 'High Grain Capacity Tank', 'Smart Cabin Interface'],
-    task: 'Automated wheat, corn, and general grain harvesting.',
-    description: 'The Lovol AF108 is a premium multi-crop harvester built for large-scale agricultural contractors and corporate agribusinesses. Featuring a spacious cabin with panoramic visibility, it integrates advanced yield sensors and automated header leveling for maximum harvesting efficiency.',
-    status: 'Active'
-  },
-  {
-    id: 'fb-5',
-    name: 'Genuine Lovol Tractor Filter Kit',
-    category: 'Spare Parts',
-    price: 'Price on Request',
-    image: '/assets/portfolio_aerial.png',
-    images: ['/assets/portfolio_aerial.png'],
-    specs: ['100% Genuine OEM', 'All-in-One Service Kit', 'Enhanced Filtration', 'Extended Maintenance Interval'],
-    task: 'Routine tractor engine servicing and warranty compliance.',
-    description: 'An original OEM spare parts maintenance kit consisting of oil filters, secondary fuel filters, and water separators for Lovol tractor models. Ensures clean engine intake and combustion, safeguarding internal mechanical parts from wear.',
-    status: 'Active'
-  }
-];
+const fallbackProducts = [];
 
   homeRoot.appendChild(statsSec);
   homeRoot.appendChild(ctaSec);
