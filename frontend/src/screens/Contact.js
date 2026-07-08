@@ -436,7 +436,10 @@ export function renderContactScreen() {
           </div>
           <div class="contact-channel-details">
             <h5>Sales Hotline</h5>
-            <p><a href="tel:+2348099933644">+234 809 993 3644</a></p>
+            <p style="display: flex; flex-direction: column; gap: 4px;">
+              <a href="tel:+2348099933644">+234 809 993 3644</a>
+              <a href="tel:+2348038074309">+234 803 807 4309</a>
+            </p>
           </div>
         </div>
 
@@ -445,8 +448,18 @@ export function renderContactScreen() {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </div>
           <div class="contact-channel-details">
-            <h5>Parts & Support</h5>
+            <h5>Spare-parts Hotline</h5>
             <p><a href="tel:+2348026487775">+234 802 648 7775</a></p>
+          </div>
+        </div>
+
+        <div class="contact-channel">
+          <div class="contact-channel-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="contact-channel-details">
+            <h5>Management Hotline</h5>
+            <p><a href="tel:+2347034528752">+234 703 452 8752</a></p>
           </div>
         </div>
 
@@ -483,6 +496,18 @@ export function renderContactScreen() {
           <div class="hours-row">
             <span>Sunday</span>
             <span>Closed</span>
+          </div>
+        </div>
+
+        <div class="hours-block" style="margin-top: 30px; padding-top: 25px;">
+          <h4 class="hours-title">Follow Us</h4>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="https://tinyurl.com/3u7ht39v" target="_blank" style="padding: 8px 14px; background: rgba(52, 211, 153, 0.12); border-radius: 8px; color: #34d399; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(52, 211, 153, 0.25)'" onmouseout="this.style.background='rgba(52, 211, 153, 0.12)'" title="Facebook">Facebook</a>
+            <a href="https://tinyurl.com/529wxjbh" target="_blank" style="padding: 8px 14px; background: rgba(52, 211, 153, 0.12); border-radius: 8px; color: #34d399; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(52, 211, 153, 0.25)'" onmouseout="this.style.background='rgba(52, 211, 153, 0.12)'" title="Instagram">Instagram</a>
+            <a href="https://tinyurl.com/2vx447h9" target="_blank" style="padding: 8px 14px; background: rgba(52, 211, 153, 0.12); border-radius: 8px; color: #34d399; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(52, 211, 153, 0.25)'" onmouseout="this.style.background='rgba(52, 211, 153, 0.12)'" title="Twitter">Twitter</a>
+            <a href="https://tinyurl.com/yc3rknhx" target="_blank" style="padding: 8px 14px; background: rgba(52, 211, 153, 0.12); border-radius: 8px; color: #34d399; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(52, 211, 153, 0.25)'" onmouseout="this.style.background='rgba(52, 211, 153, 0.12)'" title="TikTok">TikTok</a>
+            <a href="https://tinyurl.com/yc3tfjmc" target="_blank" style="padding: 8px 14px; background: rgba(52, 211, 153, 0.12); border-radius: 8px; color: #34d399; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(52, 211, 153, 0.25)'" onmouseout="this.style.background='rgba(52, 211, 153, 0.12)'" title="YouTube">YouTube</a>
+            <a href="https://www.linkedin.com/in/sankaranigerialimited" target="_blank" style="padding: 8px 14px; background: rgba(52, 211, 153, 0.12); border-radius: 8px; color: #34d399; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(52, 211, 153, 0.25)'" onmouseout="this.style.background='rgba(52, 211, 153, 0.12)'" title="LinkedIn">LinkedIn</a>
           </div>
         </div>
 

@@ -76,11 +76,13 @@ export function renderFooter() {
           <p style="color: var(--footer-link); font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px;">
             Sankara Nigeria Limited is your trusted partner for premium heavy-duty tractors, farm implements, and genuine spare parts across Nigeria.
           </p>
-          <div style="display: flex; gap: 15px;">
-            <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">f</div>
-            <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">ig</div>
-            <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">tw</div>
-            <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">in</div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="https://tinyurl.com/3u7ht39v" target="_blank" style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--footer-text); text-decoration: none; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'" title="Facebook">f</a>
+            <a href="https://tinyurl.com/529wxjbh" target="_blank" style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--footer-text); text-decoration: none; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'" title="Instagram">ig</a>
+            <a href="https://tinyurl.com/2vx447h9" target="_blank" style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--footer-text); text-decoration: none; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'" title="Twitter">tw</a>
+            <a href="https://tinyurl.com/yc3rknhx" target="_blank" style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--footer-text); text-decoration: none; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'" title="TikTok">tt</a>
+            <a href="https://tinyurl.com/yc3tfjmc" target="_blank" style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--footer-text); text-decoration: none; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'" title="YouTube">yt</a>
+            <a href="https://www.linkedin.com/in/sankaranigerialimited" target="_blank" style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--footer-text); text-decoration: none; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'" title="LinkedIn">in</a>
           </div>
         </div>
 
@@ -109,11 +111,24 @@ export function renderFooter() {
         <!-- Column 4: Contact Us -->
         <div class="reveal" style="animation-delay: 0.4s">
           <h4 style="margin-bottom: 25px; font-size: 1.1rem; font-weight: 600;">Contact Us</h4>
-          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 15px; color: var(--footer-link);">
-            <li style="display: flex; gap: 10px; align-items: center;">📞 Sales: +234 809 993 3644</li>
-            <li style="display: flex; gap: 10px; align-items: center;">📞 Parts: +234 802 648 7775</li>
-            <li style="display: flex; gap: 10px; align-items: center;">✉️ sankaranigerialimited@gmail.com</li>
-            <li style="display: flex; gap: 10px; align-items: center;">📍 Nigeria</li>
+          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; color: var(--footer-link); font-size: 0.9rem;">
+            <li style="display: flex; gap: 4px; flex-direction: column;">
+              <span style="font-weight: 700; color: var(--footer-text);">Sales Desk:</span>
+              <a href="tel:+2348099933644" style="color: var(--footer-link); text-decoration: none;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">+234 809 993 3644</a>
+              <a href="tel:+2348038074309" style="color: var(--footer-link); text-decoration: none;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">+234 803 807 4309</a>
+            </li>
+            <li style="display: flex; gap: 4px; flex-direction: column;">
+              <span style="font-weight: 700; color: var(--footer-text);">Spare Parts:</span>
+              <a href="tel:+2348026487775" style="color: var(--footer-link); text-decoration: none;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">+234 802 648 7775</a>
+            </li>
+            <li style="display: flex; gap: 4px; flex-direction: column;">
+              <span style="font-weight: 700; color: var(--footer-text);">Management:</span>
+              <a href="tel:+2347034528752" style="color: var(--footer-link); text-decoration: none;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">+234 703 452 8752</a>
+            </li>
+            <li style="display: flex; gap: 4px; flex-direction: column;">
+              <span style="font-weight: 700; color: var(--footer-text);">Email:</span>
+              <a href="mailto:sankaranigerialimited@gmail.com" style="color: var(--footer-link); text-decoration: none; word-break: break-all;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">sankaranigerialimited@gmail.com</a>
+            </li>
           </ul>
         </div>
       </div>
