@@ -91,7 +91,7 @@ $uploadToSupabase = function($file) {
 
     try {
         $fileData = $compressImage($file->getRealPath(), $file->getMimeType());
-    } catch (\Exception $e) {
+    } catch (\Throwable $e) {
         $fileData = file_get_contents($file->getRealPath());
     }
 
@@ -107,6 +107,8 @@ $uploadToSupabase = function($file) {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fileData);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 6);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         "apikey: {$anonKey}",
         "Authorization: Bearer {$anonKey}",
@@ -407,6 +409,23 @@ Route::get('metrics', function(Request $request) use ($verifyToken) {
         'total_team' => (int) ($counts->total_team ?? 0),
         'recent_inquiries' => Inquiry::latest()->limit(5)->get()
     ]);
+});
+
+// System Migration Trigger
+Route::get('admin/migrate', function(Request $request) use ($verifyToken) {
+    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+    try {
+        \Artisan::call('migrate', ['--force' => true]);
+        return response()->json([
+            'status' => 'success',
+            'output' => \Artisan::output()
+        ]);
+    } catch (\Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ], 500);
+    }
 });
 
 // System Health Diagnostics
