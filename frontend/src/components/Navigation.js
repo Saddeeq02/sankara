@@ -60,85 +60,257 @@ export function renderNavbar() {
 
 export function renderFooter() {
   const footer = document.createElement('footer');
-  footer.style.backgroundColor = 'var(--footer-bg)'; 
-  footer.style.color = 'var(--footer-text)';
-  footer.style.padding = '80px 0 30px 0';
-  footer.style.transition = 'background-color var(--transition-speed)';
+  footer.className = 'premium-footer';
   
-  footer.innerHTML = `
+  // Inject style block
+  const styleBlock = document.createElement('style');
+  styleBlock.textContent = `
+    .premium-footer {
+      background: linear-gradient(135deg, #021a15 0%, #010d0a 100%) !important;
+      color: #cbd5e1 !important;
+      padding: 90px 0 45px 0;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(16, 185, 129, 0.15);
+      font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    }
+    .premium-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.4), transparent);
+    }
+    .footer-col-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+    .footer-col-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 35px;
+      height: 3px;
+      background: linear-gradient(90deg, #34d399, #10b981);
+      border-radius: 50px;
+    }
+    .footer-links-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .footer-link-item {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.95rem;
+    }
+    .footer-link-item:hover {
+      color: #34d399;
+      transform: translateX(6px);
+    }
+    .footer-social-btn {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .footer-social-btn:hover {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: #34d399;
+      color: #34d399;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+    }
+    .footer-contact-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .footer-contact-icon {
+      color: #34d399;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .footer-contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .footer-contact-label {
+      font-weight: 800;
+      color: #cbd5e1;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    .footer-contact-value {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      font-size: 0.95rem;
+    }
+    .footer-contact-value:hover {
+      color: #34d399;
+    }
+    .footer-bottom-bar {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 35px;
+      margin-top: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #64748b;
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-bottom-links {
+      display: flex;
+      gap: 25px;
+    }
+    .footer-bottom-link {
+      color: #64748b;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .footer-bottom-link:hover {
+      color: #34d399;
+    }
+  `;
+  footer.appendChild(styleBlock);
+
+  footer.innerHTML += `
     <div class="container">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 60px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-bottom: 60px;">
         <!-- Column 1: Info and Socials -->
         <div class="reveal" style="animation-delay: 0.1s">
-          <a href="/home" data-route="home" style="display: inline-block; margin-bottom: 20px;">
-            <img src="/assets/logo.png" alt="Sankara Logo" style="height: 60px; object-fit: contain;">
+          <a href="/home" data-route="home" style="display: inline-flex; background: #ffffff; padding: 10px; border-radius: 12px; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15); margin-bottom: 25px;">
+            <img src="/assets/logo.png" alt="Sankara Logo" style="height: 50px; object-fit: contain;">
           </a>
-          <p style="color: var(--footer-link); font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px;">
+          <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px;">
             Sankara Nigeria Limited is your trusted partner for premium heavy-duty tractors, farm implements, and genuine spare parts across Nigeria.
           </p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="https://tinyurl.com/3u7ht39v" target="_blank" style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--footer-text); text-decoration: none; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'" title="Facebook">f</a>
-            <a href="https://tinyurl.com/529wxjbh" target="_blank" style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--footer-text); text-decoration: none; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'" title="Instagram">ig</a>
-            <a href="https://tinyurl.com/2vx447h9" target="_blank" style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--footer-text); text-decoration: none; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'" title="Twitter">tw</a>
-            <a href="https://tinyurl.com/yc3rknhx" target="_blank" style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--footer-text); text-decoration: none; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'" title="TikTok">tt</a>
-            <a href="https://tinyurl.com/yc3tfjmc" target="_blank" style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--footer-text); text-decoration: none; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'" title="YouTube">yt</a>
-            <a href="https://www.linkedin.com/in/sankaranigerialimited" target="_blank" style="width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--footer-text); text-decoration: none; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'" title="LinkedIn">in</a>
+            <a href="https://tinyurl.com/3u7ht39v" target="_blank" class="footer-social-btn" title="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://tinyurl.com/529wxjbh" target="_blank" class="footer-social-btn" title="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://tinyurl.com/2vx447h9" target="_blank" class="footer-social-btn" title="Twitter">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://tinyurl.com/yc3rknhx" target="_blank" class="footer-social-btn" title="TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+            </a>
+            <a href="https://tinyurl.com/yc3tfjmc" target="_blank" class="footer-social-btn" title="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/sankaranigerialimited" target="_blank" class="footer-social-btn" title="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
           </div>
         </div>
 
         <!-- Column 2: Company -->
         <div class="reveal" style="animation-delay: 0.2s">
-          <h4 style="margin-bottom: 25px; font-size: 1.1rem; font-weight: 600;">Company</h4>
-          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 15px;">
-            <li><a href="/about" data-route="about" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">About Us</a></li>
-            <li><a href="/service" data-route="services" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">Services</a></li>
-            <li><a href="/product" data-route="products" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">Products</a></li>
-            <li><a href="/contact" data-route="contact" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">Contact</a></li>
+          <h4 class="footer-col-title">Company</h4>
+          <ul class="footer-links-list">
+            <li><a href="/about" data-route="about" class="footer-link-item"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 9l4-4-4-4"/></svg> About Us</a></li>
+            <li><a href="/service" data-route="services" class="footer-link-item"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 9l4-4-4-4"/></svg> Services</a></li>
+            <li><a href="/product" data-route="products" class="footer-link-item"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 9l4-4-4-4"/></svg> Products</a></li>
+            <li><a href="/contact" data-route="contact" class="footer-link-item"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 9l4-4-4-4"/></svg> Contact Us</a></li>
           </ul>
         </div>
+
         <!-- Column 3: Products -->
         <div class="reveal" style="animation-delay: 0.3s">
-          <h4 style="margin-bottom: 25px; font-size: 1.1rem; font-weight: 600;">Products</h4>
-          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 15px;">
-            <li><a href="/product" data-route="products" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">Massey Ferguson Tractors</a></li>
-            <li><a href="/product" data-route="products" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">Lovol Tractors</a></li>
-            <li><a href="/product" data-route="products" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">Zoomlion Tractors</a></li>
-            <li><a href="/product" data-route="products" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">Farm Implements</a></li>
-            <li><a href="/product" data-route="products" style="color: var(--footer-link); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">Spare Parts</a></li>
+          <h4 class="footer-col-title">Products</h4>
+          <ul class="footer-links-list">
+            <li><a href="/product" data-route="products" class="footer-link-item"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 9l4-4-4-4"/></svg> Massey Ferguson</a></li>
+            <li><a href="/product" data-route="products" class="footer-link-item"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 9l4-4-4-4"/></svg> Lovol Tractors</a></li>
+            <li><a href="/product" data-route="products" class="footer-link-item"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 9l4-4-4-4"/></svg> Zoomlion Tractors</a></li>
+            <li><a href="/product" data-route="products" class="footer-link-item"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 9l4-4-4-4"/></svg> Farm Implements</a></li>
+            <li><a href="/product" data-route="products" class="footer-link-item"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 9l4-4-4-4"/></svg> Spare Parts</a></li>
           </ul>
         </div>
 
         <!-- Column 4: Contact Us -->
         <div class="reveal" style="animation-delay: 0.4s">
-          <h4 style="margin-bottom: 25px; font-size: 1.1rem; font-weight: 600;">Contact Us</h4>
-          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; color: var(--footer-link); font-size: 0.9rem;">
-            <li style="display: flex; gap: 4px; flex-direction: column;">
-              <span style="font-weight: 700; color: var(--footer-text);">Sales Desk:</span>
-              <a href="tel:+2348099933644" style="color: var(--footer-link); text-decoration: none;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">+234 809 993 3644</a>
-              <a href="tel:+2348038074309" style="color: var(--footer-link); text-decoration: none;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">+234 803 807 4309</a>
-            </li>
-            <li style="display: flex; gap: 4px; flex-direction: column;">
-              <span style="font-weight: 700; color: var(--footer-text);">Spare Parts:</span>
-              <a href="tel:+2348026487775" style="color: var(--footer-link); text-decoration: none;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">+234 802 648 7775</a>
-            </li>
-            <li style="display: flex; gap: 4px; flex-direction: column;">
-              <span style="font-weight: 700; color: var(--footer-text);">Management:</span>
-              <a href="tel:+2347034528752" style="color: var(--footer-link); text-decoration: none;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">+234 703 452 8752</a>
-            </li>
-            <li style="display: flex; gap: 4px; flex-direction: column;">
-              <span style="font-weight: 700; color: var(--footer-text);">Email:</span>
-              <a href="mailto:sankaranigerialimited@gmail.com" style="color: var(--footer-link); text-decoration: none; word-break: break-all;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--footer-link)'">sankaranigerialimited@gmail.com</a>
-            </li>
-          </ul>
+          <h4 class="footer-col-title">Contact Us</h4>
+          
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="footer-contact-info">
+              <span class="footer-contact-label">Sales Desk</span>
+              <a href="tel:+2348099933644" class="footer-contact-value">+234 809 993 3644</a>
+              <a href="tel:+2348038074309" class="footer-contact-value">+234 803 807 4309</a>
+            </div>
+          </div>
+
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="footer-contact-info">
+              <span class="footer-contact-label">Spare Parts</span>
+              <a href="tel:+2348026487775" class="footer-contact-value">+234 802 648 7775</a>
+            </div>
+          </div>
+
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 .7 2.81A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="footer-contact-info">
+              <span class="footer-contact-label">Management</span>
+              <a href="tel:+2347034528752" class="footer-contact-value">+234 703 452 8752</a>
+            </div>
+          </div>
+
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="footer-contact-info">
+              <span class="footer-contact-label">Email Strategy</span>
+              <a href="mailto:sankaranigerialimited@gmail.com" class="footer-contact-value" style="word-break: break-all;">sankaranigerialimited@gmail.com</a>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Copyright Bottom Bar -->
-      <div class="reveal" style="border-top: 1px solid rgba(125,125,125,0.2); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; color: var(--footer-link); font-size: 0.9rem; animation-delay: 0.5s;">
+      <div class="footer-bottom-bar reveal" style="animation-delay: 0.5s;">
         <div>© 2026 Sankara Nigeria Limited. All rights reserved.</div>
-        <div style="display: flex; gap: 20px;">
-          <a href="#" style="color: var(--footer-link); text-decoration: none;">Privacy Policy</a>
-          <a href="#" style="color: var(--footer-link); text-decoration: none;">Terms of Service</a>
+        <div class="footer-bottom-links">
+          <a href="#" class="footer-bottom-link">Privacy Policy</a>
+          <a href="#" class="footer-bottom-link">Terms of Service</a>
         </div>
       </div>
     </div>
