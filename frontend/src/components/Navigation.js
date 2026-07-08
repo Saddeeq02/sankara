@@ -207,8 +207,8 @@ export function renderFooter() {
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-bottom: 60px;">
         <!-- Column 1: Info and Socials -->
         <div class="reveal" style="animation-delay: 0.1s">
-          <a href="/home" data-route="home" style="display: inline-flex; background: #ffffff; padding: 10px; border-radius: 12px; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15); margin-bottom: 25px;">
-            <img src="/assets/logo.png" alt="Sankara Logo" style="height: 50px; object-fit: contain;">
+          <a href="/home" data-route="home" style="display: inline-flex; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 12px; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.05); margin-bottom: 25px;">
+            <img src="/assets/logo.png" alt="Sankara Logo" style="height: 50px; object-fit: contain; filter: brightness(0) invert(1);">
           </a>
           <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px;">
             Sankara Nigeria Limited is your trusted partner for premium heavy-duty tractors, farm implements, and genuine spare parts across Nigeria.

@@ -1,68 +1,67 @@
 :root {
-  /* LIGHT MODE (Default) */
-  --primary-color: #00155b;   /* Sankara Navy Blue */
-  --secondary-color: #3b82f6; /* Lighter Blue Accent */
-  --accent-color: #000c3b;    /* Darker Blue for depth */
-  --background-color: #fdfdfd;
-  --surface-color: #ffffff;
-  --text-main: #263238;
-  --text-muted: #546e7a;
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-blur: blur(10px);
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  /* PREMIUM DARK EMERALD DESIGN SYSTEM (Default) */
+  --primary-color: #10b981;   /* Brand Emerald Green */
+  --secondary-color: #34d399; /* Mint Green Accent */
+  --accent-color: #059669;    /* Deep Forest Green */
+  --background-color: #010d0a; /* Premium Dark Background */
+  --surface-color: #021a15;    /* Premium Glass/Card Surface */
+  --text-main: #f8fafc;        /* Off-white Text */
+  --text-muted: #94a3b8;       /* Slate Muted Text */
+  --glass-bg: rgba(2, 26, 21, 0.8);
+  --glass-blur: blur(12px);
+  --glass-border: rgba(16, 185, 129, 0.15);
+  --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
   --transition-speed: 0.3s;
   --border-radius: 12px;
   
-  /* Contact V2 Redesign Tokens (Reference Image) */
-  --contact-accent: #de1c3b; /* Red/Pink from Image */
-  --contact-navy-frame: #0e1b26; /* Dark Navy for Border */
-  --contact-input-bg: #ffffff;
-  --contact-text-dark: #333333;
+  /* Contact Redesign Tokens */
+  --contact-accent: #10b981;
+  --contact-navy-frame: #021a15;
+  --contact-input-bg: #010d0a;
+  --contact-text-dark: #f8fafc;
   
-  --stats-bg: var(--primary-color);
+  --stats-bg: #010d0a;
   --stats-text-primary: #ffffff;
-  --stats-text-muted: #cbd5e1;
-  --stats-accent: #3b82f6;
-  --stats-card-bg: rgba(255, 255, 255, 0.05);
+  --stats-text-muted: #94a3b8;
+  --stats-accent: #10b981;
+  --stats-card-bg: rgba(255, 255, 255, 0.02);
   
-  --footer-bg: #000836;
-  --footer-text: #e2e8f0;
+  --footer-bg: #010d0a;
+  --footer-text: #cbd5e1;
   --footer-link: #94a3b8;
 
   /* Stats Redesign Extra Tokens */
-  --stats-glow-color: rgba(59, 130, 246, 0.3);
-  --glass-card-bg: rgba(255, 255, 255, 0.03);
-  --glass-card-border: rgba(255, 255, 255, 0.1);
+  --stats-glow-color: rgba(16, 185, 129, 0.15);
+  --glass-card-bg: rgba(255, 255, 255, 0.02);
+  --glass-card-border: rgba(16, 185, 129, 0.1);
 }
 
 [data-theme="dark"] {
-  /* DARK MODE */
-  --primary-color: #60a5fa;   /* Brighter Blue for Dark Mode Visibility */
-  --secondary-color: #93c5fd; 
-  --accent-color: #2563eb;    
-  --background-color: #0f172a; /* Slate 900 */
-  --surface-color: #1e293b;    /* Slate 800 */
+  /* Retain exact premium dark values */
+  --primary-color: #10b981;
+  --secondary-color: #34d399; 
+  --accent-color: #059669;    
+  --background-color: #010d0a;
+  --surface-color: #021a15;    
   --text-main: #f8fafc;
-  --text-muted: #cbd5e1;
-  --glass-bg: rgba(30, 41, 59, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  --text-muted: #94a3b8;
+  --glass-bg: rgba(2, 26, 21, 0.8);
+  --glass-border: rgba(16, 185, 129, 0.15);
+  --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
   
-  --stats-bg: #0f172a;
+  --stats-bg: #010d0a;
   --stats-text-primary: #f8fafc;
   --stats-text-muted: #94a3b8;
-  --stats-accent: #60a5fa;
+  --stats-accent: #10b981;
   --stats-card-bg: rgba(255, 255, 255, 0.02);
   
-  --footer-bg: #0b1120;
+  --footer-bg: #010d0a;
   --footer-text: #cbd5e1;
   --footer-link: #64748b;
 
-  /* Stats Redesign Extra Tokens (Dark Mode) */
-  --stats-glow-color: rgba(96, 165, 250, 0.2);
-  --glass-card-bg: rgba(255, 255, 255, 0.01);
-  --glass-card-border: rgba(255, 255, 255, 0.05);
+  --stats-glow-color: rgba(16, 185, 129, 0.15);
+  --glass-card-bg: rgba(255, 255, 255, 0.02);
+  --glass-card-border: rgba(16, 185, 129, 0.1);
 }
 
 * {
@@ -1213,7 +1212,8 @@ html, body {
 .nav-logo {
   height: 65px;
   object-fit: contain;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: brightness(0) invert(1);
 }
 
 .nav-row {
