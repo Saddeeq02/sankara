@@ -324,6 +324,7 @@ export function renderGalleryScreen() {
       
       <div class="filter-wrapper" id="gallery-filters-bar">
         <button class="filter-pill active" data-filter="All">All Photos</button>
+        <button class="filter-pill" data-filter="Exhibition">Exhibition</button>
         <button class="filter-pill" data-filter="Student Visit">Student Visit</button>
         <button class="filter-pill" data-filter="Excursion">Excursion</button>
         <button class="filter-pill" data-filter="ECOWAS Visit">ECOWAS Visit</button>
@@ -364,6 +365,36 @@ export function renderGalleryScreen() {
   `;
 
 const fallbackGalleryItems = [
+  {
+    id: 'gb-ex-1',
+    title: 'Lovol Combine Harvester Demonstration & Technical Briefing (Jigawa State, 2024)',
+    category: 'Exhibition',
+    image: '/assets/gallery_exhibition_jigawa_1.jpg'
+  },
+  {
+    id: 'gb-ex-2',
+    title: 'Farmers and Agribusiness Stakeholders Gathering at Lovol Exhibition',
+    category: 'Exhibition',
+    image: '/assets/gallery_exhibition_jigawa_2.jpg'
+  },
+  {
+    id: 'gb-ex-3',
+    title: 'Sankara Nigeria Team engaging local farming cooperatives in Jigawa',
+    category: 'Exhibition',
+    image: '/assets/gallery_exhibition_jigawa_3.jpg'
+  },
+  {
+    id: 'gb-ex-4',
+    title: 'Discover the Lovol Advantage: Orientation Session and Field Day',
+    category: 'Exhibition',
+    image: '/assets/gallery_exhibition_jigawa_4.jpg'
+  },
+  {
+    id: 'gb-ex-5',
+    title: 'Modern Mechanization Awareness Workshop for Northern Nigeria Agriculture',
+    category: 'Exhibition',
+    image: '/assets/gallery_exhibition_jigawa_5.jpg'
+  },
   {
     id: 'gb-1',
     title: 'Agricultural Science Student Tour & Field Excursion',
