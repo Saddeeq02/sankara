@@ -17,7 +17,7 @@ export function renderAdminDashboard() {
   // Dynamic Greeting based on time of day
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return 'Good Morning, Sir ☀️';
+    if (hour < 12) return 'Welcome Back, Sir ☀️';
     if (hour < 17) return 'Good Afternoon, Sir 🌤️';
     return 'Good Evening, Sir 🌙';
   };
