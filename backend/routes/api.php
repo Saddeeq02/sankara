@@ -364,7 +364,7 @@ Route::get('team', function() {
 Route::post('team', function(Request $request) use ($verifyToken, $uploadToSupabase) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $data = $request->only(['name', 'role', 'phone']);
+    $data = $request->only(['name', 'role']);
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');

@@ -81,7 +81,6 @@ class MigrateJsonToDb extends Command
                     [
                         'name' => $tm['name'],
                         'role' => $tm['role'],
-                        'phone' => $tm['phone'] ?? null,
                         'image' => $tm['image'] ?? null,
                     ]
                 );
