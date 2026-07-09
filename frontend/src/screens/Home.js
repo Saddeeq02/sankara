@@ -804,15 +804,36 @@ export function renderHomeScreen() {
   };
 
   // Bind transparency, interactivity, and selectors dynamically
-  const initHeroSlideshow = async () => {
+  const initHeroSlideshow = () => {
     try {
-      const res = await fetch('/api/hero-slides');
-      const dynamicSlides = await res.json();
-      if (dynamicSlides && dynamicSlides.length > 0) {
-        machinerySlides = dynamicSlides;
+      const modules = import.meta.glob('../../public/assets/hero_slides/*.{png,jpg,jpeg,webp}', { eager: true });
+      const globSlides = Object.keys(modules).map((path) => {
+        const file = path.split('/').pop();
+        const filename = file.substring(0, file.lastIndexOf('.'));
+        
+        // Clean label names
+        const label = filename.replace(/^\d+[_-]/, '').replace(/[_-]/g, ' ').trim().toUpperCase();
+        
+        // Resolve dynamic hashed image path from Vite module import
+        const resolvedSrc = (modules[path] && typeof modules[path] === 'object' && 'default' in modules[path])
+          ? modules[path].default
+          : modules[path];
+
+        return {
+          id: 'hero-slide-' + filename.replace(/[^a-zA-Z0-9]/g, ''),
+          src: resolvedSrc || ('/assets/hero_slides/' + file),
+          label: label,
+          isNewHero: true
+        };
+      });
+
+      if (globSlides && globSlides.length > 0) {
+        // Sort slides to maintain alphabetical/numerical order (e.g. if prefixed)
+        globSlides.sort((a, b) => a.src.localeCompare(b.src, undefined, { numeric: true, sensitivity: 'base' }));
+        machinerySlides = globSlides;
       }
     } catch (err) {
-      console.error('Error loading dynamic hero slides:', err);
+      console.error('Error loading glob hero slides:', err);
     }
 
     const container = heroSec.querySelector('.hero-visual');
@@ -842,7 +863,7 @@ export function renderHomeScreen() {
     machinerySlides.forEach(slide => {
       const img = container.querySelector(`#${slide.id}`);
       if (img) {
-        if (slide.src.includes('hero_slides')) {
+        if (slide.isNewHero) {
           img.src = slide.src;
         } else {
           makeImageTransparent(img, slide.src);
