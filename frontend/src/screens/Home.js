@@ -95,7 +95,7 @@ export function renderHomeScreen() {
     .hero-visual {
       position: relative;
       width: 100%;
-      height: 480px;
+      height: 420px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -103,8 +103,8 @@ export function renderHomeScreen() {
     
     .machinery-shadow {
       position: absolute;
-      bottom: 10px;
-      width: 90%;
+      bottom: 25px;
+      width: 85%;
       height: 25px;
       background: radial-gradient(ellipse, rgba(59, 130, 246, 0.45) 0%, rgba(3, 7, 18, 0) 70%);
       filter: blur(8px);
@@ -114,8 +114,8 @@ export function renderHomeScreen() {
     
     .visual-slide {
       position: absolute;
-      width: 110%;
-      max-width: 640px;
+      width: 100%;
+      max-width: 520px;
       height: auto;
       object-fit: contain;
       opacity: 0;
@@ -167,8 +167,8 @@ export function renderHomeScreen() {
     }
     
     .view-dot:hover, .view-dot.active {
-      color: #dc2626;
-      text-shadow: 0 0 8px rgba(220, 38, 38, 0.6);
+      color: #3b82f6;
+      text-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
     }
     
     /* Action Buttons */
@@ -690,6 +690,27 @@ export function renderHomeScreen() {
   // 1. HERO SECTION
   const heroSec = document.createElement('section');
   heroSec.className = 'hero-sec';
+  
+  // Dynamic Background Images fading behind the green gradient overlay
+  const bgImages = [
+    '/assets/hero.png',
+    '/assets/gallery_farmers.png',
+    '/assets/portfolio_aerial.png'
+  ];
+  let currentBgIndex = 0;
+  heroSec.style.backgroundImage = `url(${bgImages[currentBgIndex]})`;
+  heroSec.style.backgroundSize = 'cover';
+  heroSec.style.backgroundPosition = 'center';
+  heroSec.style.transition = 'background-image 1.5s ease-in-out';
+  
+  const bgInterval = setInterval(() => {
+    if (!document.body.contains(heroSec)) {
+      clearInterval(bgInterval);
+      return;
+    }
+    currentBgIndex = (currentBgIndex + 1) % bgImages.length;
+    heroSec.style.backgroundImage = `url(${bgImages[currentBgIndex]})`;
+  }, 1800000); // 30 minutes interval
 
   // Slideshow Logic for the Lovol and Massey Ferguson Machinery Slides
   let machinerySlides = [
@@ -894,6 +915,7 @@ export function renderHomeScreen() {
   setTimeout(initHeroSlideshow, 100);
 
   heroSec.innerHTML = `
+    <div class="corp-hero-overlay" style="background: linear-gradient(135deg, rgba(3, 7, 18, 0.85) 0%, rgba(3, 7, 18, 0.75) 100%);"></div>
     <div class="container hero-grid">
       <div class="hero-content-block">
         <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(220, 38, 38, 0.15); padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(220, 38, 38, 0.2); margin-bottom: 25px;">
