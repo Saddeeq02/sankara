@@ -485,30 +485,39 @@ export function renderAboutScreen() {
     .team-member-img-box {
       width: 100%;
       height: 280px;
-      border-radius: 20px;
-      overflow: hidden;
       margin: 0 auto 20px;
-      border: 1px solid var(--glass-border, rgba(226, 232, 240, 0.85));
-      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
-    }
-
-    [data-theme="dark"] .team-member-img-box {
-      border-color: rgba(255, 255, 255, 0.08);
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      overflow: visible;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .team-member-card:hover .team-member-img-box {
-      transform: scale(1.02);
-      border-color: #34d399;
-      box-shadow: 0 12px 30px rgba(52, 211, 153, 0.2);
+      transform: scale(1.06) translateY(-4px);
     }
 
     .team-member-img-box img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      object-position: bottom;
       display: block;
+      filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.08));
+      transition: filter 0.4s ease;
+    }
+
+    [data-theme="dark"] .team-member-img-box img {
+      filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.3));
+    }
+
+    .team-member-card:hover .team-member-img-box img {
+      filter: drop-shadow(0 20px 35px rgba(5, 150, 105, 0.18));
+    }
+
+    [data-theme="dark"] .team-member-card:hover .team-member-img-box img {
+      filter: drop-shadow(0 20px 35px rgba(52, 211, 153, 0.25));
     }
 
     .team-member-name {
