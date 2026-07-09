@@ -690,27 +690,6 @@ export function renderHomeScreen() {
   // 1. HERO SECTION
   const heroSec = document.createElement('section');
   heroSec.className = 'hero-sec';
-  
-  // Dynamic Background Images fading behind the gradient overlay
-  const bgImages = [
-    '/assets/portfolio_aerial.png',
-    '/assets/gallery_farmers.png',
-    '/assets/about_hero.png'
-  ];
-  let currentBgIndex = 0;
-  heroSec.style.backgroundImage = `url(${bgImages[currentBgIndex]})`;
-  heroSec.style.backgroundSize = 'cover';
-  heroSec.style.backgroundPosition = 'center';
-  heroSec.style.transition = 'background-image 1.5s ease-in-out';
-  
-  const bgInterval = setInterval(() => {
-    if (!document.body.contains(heroSec)) {
-      clearInterval(bgInterval);
-      return;
-    }
-    currentBgIndex = (currentBgIndex + 1) % bgImages.length;
-    heroSec.style.backgroundImage = `url(${bgImages[currentBgIndex]})`;
-  }, 1800000); // 30 minutes interval
 
   // Slideshow Logic for the Lovol and Massey Ferguson Machinery Slides
   let machinerySlides = [
@@ -915,7 +894,6 @@ export function renderHomeScreen() {
   setTimeout(initHeroSlideshow, 100);
 
   heroSec.innerHTML = `
-    <div class="corp-hero-overlay" style="background: linear-gradient(135deg, rgba(3, 7, 18, 0.85) 0%, rgba(3, 7, 18, 0.75) 100%);"></div>
     <div class="container hero-grid">
       <div class="hero-content-block">
         <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(220, 38, 38, 0.15); padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(220, 38, 38, 0.2); margin-bottom: 25px;">
