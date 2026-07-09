@@ -64,7 +64,7 @@ export function renderGalleryScreen() {
     }
 
     .gallery-hero-title span {
-      background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #fca5a5 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -72,7 +72,7 @@ export function renderGalleryScreen() {
     .gallery-hero-desc {
       font-size: 1.15rem;
       line-height: 1.6;
-      color: #d1fae5;
+      color: #eff6ff;
       max-width: 650px;
       margin: 0 auto 45px;
     }
@@ -90,7 +90,7 @@ export function renderGalleryScreen() {
     .filter-pill {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(220, 38, 38, 0.15);
-      color: #a7f3d0;
+      color: #bfdbfe;
       padding: 10px 24px;
       border-radius: 100px;
       font-size: 0.9rem;

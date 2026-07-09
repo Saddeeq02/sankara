@@ -71,7 +71,7 @@ export function renderHomeScreen() {
     }
     
     .hero-title-main span {
-      background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #fca5a5 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -79,7 +79,7 @@ export function renderHomeScreen() {
     .hero-desc {
       font-size: 1.2rem;
       line-height: 1.7;
-      color: #d1fae5;
+      color: #eff6ff;
       margin-bottom: 45px;
       max-width: 620px;
     }
@@ -428,7 +428,7 @@ export function renderHomeScreen() {
     .stat-num-val {
       font-size: 3.5rem;
       font-weight: 900;
-      background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #fca5a5 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 12px;
@@ -441,7 +441,7 @@ export function renderHomeScreen() {
       font-weight: 750;
       text-transform: uppercase;
       letter-spacing: 2px;
-      color: #a7f3d0;
+      color: #bfdbfe;
       text-align: center;
     }
     
@@ -1054,7 +1054,7 @@ export function renderHomeScreen() {
         <div style="max-width: 650px;">
           <span style="font-size: 0.8rem; font-weight: 800; color: #3b82f6; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">GET IN TOUCH</span>
           <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; line-height: 1.2; margin-bottom: 20px;">Ready to Mechanize Your Operations?</h2>
-          <p style="color: #d1fae5; font-size: 1.05rem; line-height: 1.6; margin: 0;">
+          <p style="color: #eff6ff; font-size: 1.05rem; line-height: 1.6; margin: 0;">
             Partner with Sankara Nigeria Limited to secure robust agricultural machinery, spare parts supply lines, and dedicated field maintenance support.
           </p>
         </div>

@@ -61,7 +61,7 @@ export function renderContactScreen() {
     }
 
     .contact-hero-title span {
-      background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #fca5a5 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -69,7 +69,7 @@ export function renderContactScreen() {
     .contact-hero-desc {
       font-size: 1.15rem;
       line-height: 1.6;
-      color: #d1fae5;
+      color: #eff6ff;
       max-width: 650px;
       margin: 0 auto;
     }
@@ -125,7 +125,7 @@ export function renderContactScreen() {
     }
 
     .contact-info-subtitle {
-      color: #a7f3d0;
+      color: #bfdbfe;
       font-size: 1.02rem;
       line-height: 1.6;
       margin-bottom: 45px;
@@ -158,7 +158,7 @@ export function renderContactScreen() {
     .contact-channel-details h5 {
       font-size: 0.85rem;
       font-weight: 800;
-      color: #a7f3d0;
+      color: #bfdbfe;
       letter-spacing: 1px;
       text-transform: uppercase;
       margin-bottom: 6px;
@@ -191,7 +191,7 @@ export function renderContactScreen() {
     .hours-title {
       font-size: 0.85rem;
       font-weight: 800;
-      color: #a7f3d0;
+      color: #bfdbfe;
       letter-spacing: 1px;
       text-transform: uppercase;
       margin-bottom: 15px;
@@ -202,7 +202,7 @@ export function renderContactScreen() {
       justify-content: space-between;
       font-size: 0.95rem;
       margin-bottom: 10px;
-      color: #d1fae5;
+      color: #eff6ff;
     }
 
     .hours-row span:last-child {
@@ -301,7 +301,7 @@ export function renderContactScreen() {
       gap: 10px;
       font-size: 0.9rem;
       font-weight: 700;
-      color: #a7f3d0;
+      color: #bfdbfe;
     }
 
     .contact-why-dot {
@@ -596,7 +596,7 @@ export function renderContactScreen() {
           <div class="visit-map-pin">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
-          <span style="color: #a7f3d0; font-size: 0.95rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; position: relative; z-index: 2;">Sankara Nigeria Ltd</span>
+          <span style="color: #bfdbfe; font-size: 0.95rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; position: relative; z-index: 2;">Sankara Nigeria Ltd</span>
           <span style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem; font-weight: 600; margin-top: 5px; position: relative; z-index: 2;">Kano, Nigeria</span>
         </div>
       </div>

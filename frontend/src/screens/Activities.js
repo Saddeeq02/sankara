@@ -63,7 +63,7 @@ export function renderActivitiesScreen() {
     }
 
     .activities-hero-title span {
-      background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #fca5a5 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -71,7 +71,7 @@ export function renderActivitiesScreen() {
     .activities-hero-desc {
       font-size: 1.15rem;
       line-height: 1.6;
-      color: #d1fae5;
+      color: #eff6ff;
       max-width: 650px;
       margin: 0 auto;
     }

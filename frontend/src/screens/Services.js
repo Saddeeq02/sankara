@@ -77,7 +77,7 @@ export function renderServicesScreen() {
     }
 
     .services-hero-title span {
-      background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #fca5a5 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -506,7 +506,7 @@ export function renderServicesScreen() {
     .training-point {
       font-size: 0.92rem;
       font-weight: 700;
-      color: #a7f3d0;
+      color: #bfdbfe;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -737,19 +737,19 @@ export function renderServicesScreen() {
               <h4 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 15px; color: #ffffff;">Engine Diagnostics</h4>
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 30px; margin-bottom: 25px;">
                 <div>
-                  <div style="font-size: 0.75rem; color: #a7f3d0; text-transform: uppercase; letter-spacing: 0.5px;">Injector Timing</div>
+                  <div style="font-size: 0.75rem; color: #bfdbfe; text-transform: uppercase; letter-spacing: 0.5px;">Injector Timing</div>
                   <div style="font-size: 1.1rem; font-weight: 700; color: #ffffff;">0.02ms (Optimal)</div>
                 </div>
                 <div>
-                  <div style="font-size: 0.75rem; color: #a7f3d0; text-transform: uppercase; letter-spacing: 0.5px;">Cylinder Pressure</div>
+                  <div style="font-size: 0.75rem; color: #bfdbfe; text-transform: uppercase; letter-spacing: 0.5px;">Cylinder Pressure</div>
                   <div style="font-size: 1.1rem; font-weight: 700; color: #ffffff;">29.4 Bar (Normal)</div>
                 </div>
                 <div>
-                  <div style="font-size: 0.75rem; color: #a7f3d0; text-transform: uppercase; letter-spacing: 0.5px;">Cooling Flow</div>
+                  <div style="font-size: 0.75rem; color: #bfdbfe; text-transform: uppercase; letter-spacing: 0.5px;">Cooling Flow</div>
                   <div style="font-size: 1.1rem; font-weight: 700; color: #ffffff;">45L/min (Stable)</div>
                 </div>
                 <div>
-                  <div style="font-size: 0.75rem; color: #a7f3d0; text-transform: uppercase; letter-spacing: 0.5px;">Efficiency Ratio</div>
+                  <div style="font-size: 0.75rem; color: #bfdbfe; text-transform: uppercase; letter-spacing: 0.5px;">Efficiency Ratio</div>
                   <div style="font-size: 1.1rem; font-weight: 700; color: #ffffff;">98.4% (Excellent)</div>
                 </div>
               </div>
@@ -760,7 +760,7 @@ export function renderServicesScreen() {
           </div>
 
           <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
-            <span style="font-size: 0.8rem; color: #a7f3d0; font-weight: 600;">Need physical maintenance support?</span>
+            <span style="font-size: 0.8rem; color: #bfdbfe; font-weight: 600;">Need physical maintenance support?</span>
             <a href="/contact" data-route="contact" class="btn-main-green" style="padding: 10px 20px; font-size: 0.85rem; border-radius: 50px; background: #3b82f6; color: #030712; text-decoration: none;">Book Service</a>
           </div>
         </div>
@@ -892,7 +892,7 @@ export function renderServicesScreen() {
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 30px; margin-bottom: 25px;">
             ${data.specs.map(s => `
               <div>
-                <div style="font-size: 0.75rem; color: #a7f3d0; text-transform: uppercase; letter-spacing: 0.5px;">${s.label}</div>
+                <div style="font-size: 0.75rem; color: #bfdbfe; text-transform: uppercase; letter-spacing: 0.5px;">${s.label}</div>
                 <div style="font-size: 1.1rem; font-weight: 700; color: #ffffff;">${s.val}</div>
               </div>
             `).join('')}
