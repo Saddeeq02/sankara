@@ -804,35 +804,15 @@ export function renderHomeScreen() {
   };
 
   // Bind transparency, interactivity, and selectors dynamically
-  const initHeroSlideshow = () => {
+  const initHeroSlideshow = async () => {
     try {
-      const modules = import.meta.glob('../../public/assets/hero_slides/*.{png,jpg,jpeg,webp}', { eager: true });
-      const globSlides = Object.keys(modules).map((path, idx) => {
-        const file = path.split('/').pop();
-        const filename = file.substring(0, file.lastIndexOf('.'));
-        
-        // Clean label names
-        const label = filename.replace(/^\d+[_-]/, '').replace(/[_-]/g, ' ').trim().toUpperCase();
-        
-        // Resolve dynamic hashed image path from Vite module import
-        const resolvedSrc = (modules[path] && typeof modules[path] === 'object' && 'default' in modules[path])
-          ? modules[path].default
-          : modules[path];
-
-        return {
-          id: 'hero-slide-' + filename.replace(/[^a-zA-Z0-9]/g, ''),
-          src: resolvedSrc || ('/assets/hero_slides/' + file),
-          label: label
-        };
-      });
-
-      if (globSlides && globSlides.length > 0) {
-        // Sort slides to maintain alphabetical/numerical order (e.g. if prefixed)
-        globSlides.sort((a, b) => a.src.localeCompare(b.src, undefined, { numeric: true, sensitivity: 'base' }));
-        machinerySlides = globSlides;
+      const res = await fetch('/api/hero-slides');
+      const dynamicSlides = await res.json();
+      if (dynamicSlides && dynamicSlides.length > 0) {
+        machinerySlides = dynamicSlides;
       }
     } catch (err) {
-      console.error('Error loading glob hero slides:', err);
+      console.error('Error loading dynamic hero slides:', err);
     }
 
     const container = heroSec.querySelector('.hero-visual');
