@@ -95,7 +95,7 @@ export function renderHomeScreen() {
     .hero-visual {
       position: relative;
       width: 100%;
-      height: 420px;
+      height: 480px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -103,8 +103,8 @@ export function renderHomeScreen() {
     
     .machinery-shadow {
       position: absolute;
-      bottom: 25px;
-      width: 85%;
+      bottom: 10px;
+      width: 90%;
       height: 25px;
       background: radial-gradient(ellipse, rgba(59, 130, 246, 0.45) 0%, rgba(3, 7, 18, 0) 70%);
       filter: blur(8px);
@@ -114,8 +114,8 @@ export function renderHomeScreen() {
     
     .visual-slide {
       position: absolute;
-      width: 100%;
-      max-width: 520px;
+      width: 110%;
+      max-width: 640px;
       height: auto;
       object-fit: contain;
       opacity: 0;
@@ -167,8 +167,8 @@ export function renderHomeScreen() {
     }
     
     .view-dot:hover, .view-dot.active {
-      color: #3b82f6;
-      text-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+      color: #dc2626;
+      text-shadow: 0 0 8px rgba(220, 38, 38, 0.6);
     }
     
     /* Action Buttons */
@@ -691,11 +691,11 @@ export function renderHomeScreen() {
   const heroSec = document.createElement('section');
   heroSec.className = 'hero-sec';
   
-  // Dynamic Background Images fading behind the green gradient overlay
+  // Dynamic Background Images fading behind the gradient overlay
   const bgImages = [
-    '/assets/hero.png',
+    '/assets/portfolio_aerial.png',
     '/assets/gallery_farmers.png',
-    '/assets/portfolio_aerial.png'
+    '/assets/about_hero.png'
   ];
   let currentBgIndex = 0;
   heroSec.style.backgroundImage = `url(${bgImages[currentBgIndex]})`;
