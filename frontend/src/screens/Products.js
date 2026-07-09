@@ -583,26 +583,26 @@ export function renderProductsScreen() {
       color: #0f172a;
     }
     .products-hero {
-      background: linear-gradient(135deg, #021a15 0%, #010d0a 100%);
+      background: linear-gradient(135deg, #0b0f19 0%, #030712 100%);
       padding: 180px 0 100px;
       text-align: center;
       position: relative;
       overflow: hidden;
-      border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+      border-bottom: 1px solid rgba(220, 38, 38, 0.15);
     }
     .products-hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.15), transparent 70%),
-                  radial-gradient(circle at bottom left, rgba(52, 211, 153, 0.1), transparent 70%);
+      background: radial-gradient(circle at top right, rgba(220, 38, 38, 0.15), transparent 70%),
+                  radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.1), transparent 70%);
       pointer-events: none;
     }
     .prod-filter-pill {
       padding: 10px 22px; 
       border-radius: 50px; 
-      border: 1px solid rgba(16, 185, 129, 0.15);
-      background: rgba(16, 185, 129, 0.03); 
+      border: 1px solid rgba(220, 38, 38, 0.15);
+      background: rgba(220, 38, 38, 0.03); 
       color: #475569; 
       font-weight: 700;
       font-size: 0.9rem; 
@@ -611,14 +611,14 @@ export function renderProductsScreen() {
     }
     .prod-filter-pill:hover { 
       transform: translateY(-2px); 
-      border-color: #10b981; 
-      color: #10b981; 
+      border-color: #dc2626; 
+      color: #dc2626; 
     }
     .prod-filter-pill.active {
-      background: #10b981; 
+      background: #dc2626; 
       color: white; 
-      border-color: #10b981;
-      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+      border-color: #dc2626;
+      box-shadow: 0 8px 24px rgba(220, 38, 38, 0.25);
     }
   `;
   container.appendChild(styleTag);
@@ -628,8 +628,8 @@ export function renderProductsScreen() {
   hero.className = 'products-hero';
   hero.innerHTML = `
     <div class="container">
-      <span class="reveal" style="color: #34d399; font-weight: 800; text-transform: uppercase; letter-spacing: 4px; display: block; margin-bottom: 20px;">Precision Machinery</span>
-      <h1 class="reveal" style="font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 25px; color: #ffffff;">Engineered For <br><span style="background: linear-gradient(135deg, #34d399 0%, #10b981 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Maximum Performance</span></h1>
+      <span class="reveal" style="color: #3b82f6; font-weight: 800; text-transform: uppercase; letter-spacing: 4px; display: block; margin-bottom: 20px;">Precision Machinery</span>
+      <h1 class="reveal" style="font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 25px; color: #ffffff;">Engineered For <br><span style="background: linear-gradient(135deg, #3b82f6 0%, #dc2626 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Maximum Performance</span></h1>
       <p class="reveal" style="color: #cbd5e1; font-size: 1.25rem; max-width: 700px; margin: 0 auto; line-height: 1.8;">
         Explore our curated collection of high-performance agricultural equipment, from world-class Massey Ferguson tractors to specialized industrial implements.
       </p>
@@ -644,7 +644,7 @@ export function renderProductsScreen() {
   controls.style.zIndex = '100';
   controls.innerHTML = `
     <div class="container">
-      <div class="premium-glass-card" style="padding: 15px 30px; border-radius: 100px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(16, 185, 129, 0.15);">
+      <div class="premium-glass-card" style="padding: 15px 30px; border-radius: 100px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(220, 38, 38, 0.15);">
         
         <div id="category-filters-v2" style="display: flex; gap: 10px; flex-wrap: wrap;">
           <button class="prod-filter-pill active" data-category="All">All Equipment</button>
@@ -655,11 +655,11 @@ export function renderProductsScreen() {
         </div>
         
         <div style="position: relative; flex: 1; max-width: 350px; min-width: 250px;">
-          <span style="position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #10b981; opacity: 0.7;">${Search}</span>
+          <span style="position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #dc2626; opacity: 0.7;">${Search}</span>
           <input type="text" id="product-search-v2" placeholder="Search our inventory..." 
-            style="width: 100%; padding: 14px 20px 14px 48px; border-radius: 50px; border: 1px solid rgba(16, 185, 129, 0.15); outline: none; font-size: 0.95rem; background: #ffffff; color: #0f172a; transition: all 0.3s; font-weight: 600;"
-            onfocus="this.style.borderColor='#10b981'; this.style.boxShadow='0 0 15px rgba(16,185,129,0.1)';"
-            onblur="this.style.borderColor='rgba(16, 185, 129, 0.15)'; this.style.boxShadow='none';">
+            style="width: 100%; padding: 14px 20px 14px 48px; border-radius: 50px; border: 1px solid rgba(220, 38, 38, 0.15); outline: none; font-size: 0.95rem; background: #ffffff; color: #0f172a; transition: all 0.3s; font-weight: 600;"
+            onfocus="this.style.borderColor='#dc2626'; this.style.boxShadow='0 0 15px rgba(220, 38, 38, 0.1)';"
+            onblur="this.style.borderColor='rgba(220, 38, 38, 0.15)'; this.style.boxShadow='none';">
         </div>
         
       </div>
@@ -703,9 +703,9 @@ export function renderProductsScreen() {
       if (window.initAnimations) window.initAnimations();
     } else {
       productsContainer.innerHTML = `
-        <div style="grid-column: 1/-1; text-align: center; padding: 120px 20px; background: #f8fafc; border: 1px solid rgba(16, 185, 129, 0.15); border-radius: 32px;">
+        <div style="grid-column: 1/-1; text-align: center; padding: 120px 20px; background: #f8fafc; border: 1px solid rgba(220, 38, 38, 0.15); border-radius: 32px;">
           <div style="font-size: 4rem; margin-bottom: 25px; opacity: 0.1;">${Box}</div>
-          <h3 style="font-size: 1.8rem; font-weight: 900; margin-bottom: 10px; color: #021a15;">No Equipment Found</h3>
+          <h3 style="font-size: 1.8rem; font-weight: 900; margin-bottom: 10px; color: #0b0f19;">No Equipment Found</h3>
           <p style="color: #64748b; font-size: 1.1rem;">Your search criteria did not match any items in our current inventory.</p>
         </div>
       `;

@@ -17,20 +17,20 @@ export function renderServicesScreen() {
     }
     
     .services-hero {
-      background: linear-gradient(135deg, #021a15 0%, #010d0a 100%);
+      background: linear-gradient(135deg, #0b0f19 0%, #030712 100%);
       color: #ffffff;
       padding: 180px 0 130px;
       position: relative;
       overflow: hidden;
-      border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+      border-bottom: 1px solid rgba(220, 38, 38, 0.15);
     }
     
     .services-hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.18), transparent 70%),
-                  radial-gradient(circle at bottom left, rgba(52, 211, 153, 0.12), transparent 70%);
+      background: radial-gradient(circle at top right, rgba(220, 38, 38, 0.18), transparent 70%),
+                  radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.12), transparent 70%);
       pointer-events: none;
       z-index: 1;
     }
@@ -55,12 +55,12 @@ export function renderServicesScreen() {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(16, 185, 129, 0.15);
+      background: rgba(220, 38, 38, 0.15);
       padding: 8px 16px;
       border-radius: 100px;
-      border: 1px solid rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(220, 38, 38, 0.2);
       margin-bottom: 25px;
-      color: #34d399;
+      color: #3b82f6;
       font-size: 0.75rem;
       font-weight: 800;
       letter-spacing: 2px;
@@ -77,7 +77,7 @@ export function renderServicesScreen() {
     }
 
     .services-hero-title span {
-      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      background: linear-gradient(135deg, #3b82f6 0%, #dc2626 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -107,10 +107,10 @@ export function renderServicesScreen() {
 
     .hero-image-card {
       background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(220, 38, 38, 0.2);
       border-radius: 30px;
       padding: 12px;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(16, 185, 129, 0.1);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(220, 38, 38, 0.1);
       backdrop-filter: blur(8px);
       transition: all 0.5s ease;
       width: 100%;
@@ -119,8 +119,8 @@ export function renderServicesScreen() {
 
     .hero-image-card:hover {
       transform: translateY(-8px) scale(1.02);
-      border-color: rgba(52, 211, 153, 0.4);
-      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 50px rgba(16, 185, 129, 0.15);
+      border-color: rgba(59, 130, 246, 0.4);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 50px rgba(220, 38, 38, 0.15);
     }
 
     .hero-image-card img {
@@ -144,7 +144,7 @@ export function renderServicesScreen() {
     .section-badge {
       font-size: 0.85rem;
       font-weight: 800;
-      color: #059669;
+      color: #991b1b;
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 12px;
@@ -207,7 +207,7 @@ export function renderServicesScreen() {
       left: 0;
       width: 100%;
       height: 4px;
-      background: linear-gradient(90deg, #10b981, #34d399);
+      background: linear-gradient(90deg, #dc2626, #3b82f6);
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -215,8 +215,8 @@ export function renderServicesScreen() {
 
     .service-premium-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.05), 0 0 25px rgba(16, 185, 129, 0.02);
-      border-color: rgba(16, 185, 129, 0.25);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.05), 0 0 25px rgba(220, 38, 38, 0.02);
+      border-color: rgba(220, 38, 38, 0.25);
     }
 
     .service-premium-card:hover::before {
@@ -227,8 +227,8 @@ export function renderServicesScreen() {
       width: 56px;
       height: 56px;
       border-radius: 16px;
-      background: rgba(16, 185, 129, 0.08);
-      color: #059669;
+      background: rgba(220, 38, 38, 0.08);
+      color: #991b1b;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -237,10 +237,10 @@ export function renderServicesScreen() {
     }
 
     .service-premium-card:hover .service-card-icon-box {
-      background: #059669;
+      background: #991b1b;
       color: #ffffff;
       transform: scale(1.08) rotate(5deg);
-      box-shadow: 0 5px 15px rgba(5, 150, 105, 0.2);
+      box-shadow: 0 5px 15px rgba(153, 27, 27, 0.2);
     }
 
     .service-card-title {
@@ -282,9 +282,9 @@ export function renderServicesScreen() {
     .service-card-point-dot {
       width: 6px;
       height: 6px;
-      background: #34d399;
+      background: #3b82f6;
       border-radius: 50%;
-      box-shadow: 0 0 6px #34d399;
+      box-shadow: 0 0 6px #3b82f6;
     }
 
     /* Why Choose Us Section */
@@ -323,15 +323,15 @@ export function renderServicesScreen() {
 
     .why-choose-feature:hover {
       transform: translateX(6px);
-      border-color: rgba(16, 185, 129, 0.25);
+      border-color: rgba(220, 38, 38, 0.25);
     }
 
     .why-choose-icon-box {
       width: 48px;
       height: 48px;
       border-radius: 12px;
-      background: rgba(16, 185, 129, 0.1);
-      color: #059669;
+      background: rgba(220, 38, 38, 0.1);
+      color: #991b1b;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -370,14 +370,14 @@ export function renderServicesScreen() {
     }
     
     .why-stat-card:hover {
-      border-color: rgba(16, 185, 129, 0.2);
+      border-color: rgba(220, 38, 38, 0.2);
       transform: translateY(-4px);
     }
 
     .why-stat-num {
       font-size: 3.2rem;
       font-weight: 900;
-      color: #059669;
+      color: #991b1b;
       line-height: 1;
       margin-bottom: 10px;
       letter-spacing: -1px;
@@ -394,7 +394,7 @@ export function renderServicesScreen() {
     /* Training Programs Section */
     .sec-training {
       padding: 120px 0;
-      background: #021a15;
+      background: #0b0f19;
       color: #ffffff;
       position: relative;
       overflow: hidden;
@@ -405,7 +405,7 @@ export function renderServicesScreen() {
       position: absolute;
       width: 500px;
       height: 500px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(220, 38, 38, 0.08) 0%, transparent 70%);
       top: -200px;
       right: -200px;
       pointer-events: none;
@@ -426,7 +426,7 @@ export function renderServicesScreen() {
 
     .training-card {
       background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(220, 38, 38, 0.15);
       border-radius: 24px;
       padding: 45px 35px;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -440,7 +440,7 @@ export function renderServicesScreen() {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(16, 185, 129, 0.04) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(220, 38, 38, 0.04) 0%, transparent 100%);
       opacity: 0;
       transition: opacity 0.4s ease;
       pointer-events: none;
@@ -448,7 +448,7 @@ export function renderServicesScreen() {
 
     .training-card:hover {
       transform: translateY(-8px);
-      border-color: rgba(16, 185, 129, 0.35);
+      border-color: rgba(220, 38, 38, 0.35);
       background: rgba(255, 255, 255, 0.035);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     }
@@ -461,8 +461,8 @@ export function renderServicesScreen() {
       width: 52px;
       height: 52px;
       border-radius: 16px;
-      background: rgba(16, 185, 129, 0.12);
-      color: #34d399;
+      background: rgba(220, 38, 38, 0.12);
+      color: #3b82f6;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -471,10 +471,10 @@ export function renderServicesScreen() {
     }
 
     .training-card:hover .training-card-icon {
-      background: #10b981;
+      background: #dc2626;
       color: #ffffff;
       transform: scale(1.08) rotate(5deg);
-      box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 0 15px rgba(220, 38, 38, 0.3);
     }
 
     .training-title {
@@ -499,7 +499,7 @@ export function renderServicesScreen() {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      border-top: 1px solid rgba(16, 185, 129, 0.15);
+      border-top: 1px solid rgba(220, 38, 38, 0.15);
       padding-top: 25px;
     }
 
@@ -519,7 +519,7 @@ export function renderServicesScreen() {
     }
 
     .cta-card-serv {
-      background: linear-gradient(135deg, #021a15 0%, #010d0a 100%);
+      background: linear-gradient(135deg, #0b0f19 0%, #030712 100%);
       border-radius: 32px;
       padding: 80px;
       color: #ffffff;
@@ -533,7 +533,7 @@ export function renderServicesScreen() {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1), transparent 70%);
+      background: radial-gradient(circle at center, rgba(220, 38, 38, 0.1), transparent 70%);
       pointer-events: none;
     }
 
@@ -720,16 +720,16 @@ export function renderServicesScreen() {
         </div>
 
         <!-- Right: Screen / Results -->
-        <div class="reveal" style="background: #021a15; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 28px; padding: 40px; color: #ffffff; min-height: 380px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 30px 60px rgba(2, 44, 34, 0.25);">
+        <div class="reveal" style="background: #0b0f19; border: 1px solid rgba(220, 38, 38, 0.2); border-radius: 28px; padding: 40px; color: #ffffff; min-height: 380px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 30px 60px rgba(2, 44, 34, 0.25);">
           <!-- Futuristic background elements -->
-          <div style="position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(52, 211, 153, 0.15), transparent 60%); pointer-events: none;"></div>
+          <div style="position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.15), transparent 60%); pointer-events: none;"></div>
           
           <div>
             <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 15px; margin-bottom: 25px;">
-              <span style="font-weight: 900; letter-spacing: 2px; text-transform: uppercase; font-size: 0.75rem; color: #34d399;">System Health Screen</span>
+              <span style="font-weight: 900; letter-spacing: 2px; text-transform: uppercase; font-size: 0.75rem; color: #3b82f6;">System Health Screen</span>
               <div style="display: flex; gap: 6px; align-items: center;">
-                <span id="diag-indicator-light" style="width: 8px; height: 8px; border-radius: 50%; background: #34d399; display: inline-block; box-shadow: 0 0 10px #34d399;"></span>
-                <span id="diag-status-text" style="font-size: 0.75rem; font-weight: 800; color: #34d399;">SYSTEM: READY</span>
+                <span id="diag-indicator-light" style="width: 8px; height: 8px; border-radius: 50%; background: #3b82f6; display: inline-block; box-shadow: 0 0 10px #3b82f6;"></span>
+                <span id="diag-status-text" style="font-size: 0.75rem; font-weight: 800; color: #3b82f6;">SYSTEM: READY</span>
               </div>
             </div>
 
@@ -761,7 +761,7 @@ export function renderServicesScreen() {
 
           <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
             <span style="font-size: 0.8rem; color: #a7f3d0; font-weight: 600;">Need physical maintenance support?</span>
-            <a href="/contact" data-route="contact" class="btn-main-green" style="padding: 10px 20px; font-size: 0.85rem; border-radius: 50px; background: #34d399; color: #022c22; text-decoration: none;">Book Service</a>
+            <a href="/contact" data-route="contact" class="btn-main-green" style="padding: 10px 20px; font-size: 0.85rem; border-radius: 50px; background: #3b82f6; color: #022c22; text-decoration: none;">Book Service</a>
           </div>
         </div>
       </div>
@@ -781,13 +781,13 @@ export function renderServicesScreen() {
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       }
       .diag-btn:hover {
-        border-color: #10b981;
-        background: rgba(16, 185, 129, 0.02);
+        border-color: #dc2626;
+        background: rgba(220, 38, 38, 0.02);
       }
       .diag-btn.active {
-        border-color: #10b981;
-        background: rgba(16, 185, 129, 0.04);
-        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.05);
+        border-color: #dc2626;
+        background: rgba(220, 38, 38, 0.04);
+        box-shadow: 0 4px 15px rgba(220, 38, 38, 0.05);
       }
       .diag-btn-icon {
         width: 38px;
@@ -802,9 +802,9 @@ export function renderServicesScreen() {
         transition: all 0.3s;
       }
       .diag-btn.active .diag-btn-icon {
-        background: #10b981;
+        background: #dc2626;
         color: #ffffff;
-        box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+        box-shadow: 0 4px 10px rgba(220, 38, 38, 0.2);
       }
       .diag-btn-title {
         font-weight: 800;
@@ -903,9 +903,9 @@ export function renderServicesScreen() {
         `;
         resultsBox.style.opacity = '1';
         resultsBox.style.transform = 'none';
-        indicatorLight.style.background = '#34d399';
-        indicatorLight.style.boxShadow = '0 0 10px #34d399';
-        statusText.style.color = '#34d399';
+        indicatorLight.style.background = '#3b82f6';
+        indicatorLight.style.boxShadow = '0 0 10px #3b82f6';
+        statusText.style.color = '#3b82f6';
         statusText.textContent = 'SYSTEM: READY';
       }, 500);
     };
@@ -1006,7 +1006,7 @@ export function renderServicesScreen() {
   trainingSec.innerHTML = `
     <div class="container">
       <div style="text-align: center; margin-bottom: 60px;" class="reveal">
-        <span class="section-badge" style="color: #34d399;">Training & Education</span>
+        <span class="section-badge" style="color: #3b82f6;">Training & Education</span>
         <h2 class="section-title" style="color: #ffffff;">Agricultural Training Programs</h2>
         <p style="color: #cbd5e1; font-size: 1.1rem; max-width: 650px; margin: 0 auto;">
           Empower your farming crew with expert technical knowledge and hands-on operational routines to maximize output.
@@ -1041,13 +1041,13 @@ export function renderServicesScreen() {
   ctaSec.innerHTML = `
     <div class="container">
       <div class="cta-card-serv reveal">
-        <span style="font-size: 0.8rem; font-weight: 800; color: #34d399; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block;">GET IN TOUCH</span>
+        <span style="font-size: 0.8rem; font-weight: 800; color: #3b82f6; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block;">GET IN TOUCH</span>
         <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; line-height: 1.2; margin-bottom: 25px; color: #ffffff;">Ready to Mechanize Your Operations?</h2>
         <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7; max-width: 680px; margin: 0 auto 40px;">
           Partner with Sankara Nigeria Limited to secure robust agricultural machinery, spare parts supply lines, and dedicated field maintenance support.
         </p>
         <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-          <a href="/contact" class="btn-main-green" data-route="contact" style="background: #ffffff; color: #021a15; box-shadow: 0 4px 20px rgba(255,255,255,0.15); text-decoration: none;">
+          <a href="/contact" class="btn-main-green" data-route="contact" style="background: #ffffff; color: #0b0f19; box-shadow: 0 4px 20px rgba(255,255,255,0.15); text-decoration: none;">
             Contact Corporate Office
           </a>
         </div>

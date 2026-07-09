@@ -24,7 +24,7 @@ export function renderActivitiesScreen() {
       padding: 180px 0 110px;
       position: relative;
       overflow: hidden;
-      border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+      border-bottom: 1px solid rgba(220, 38, 38, 0.15);
       text-align: center;
     }
 
@@ -32,7 +32,7 @@ export function renderActivitiesScreen() {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top, rgba(16, 185, 129, 0.15), transparent 70%);
+      background: radial-gradient(circle at top, rgba(220, 38, 38, 0.15), transparent 70%);
       pointer-events: none;
       z-index: 1;
     }
@@ -41,12 +41,12 @@ export function renderActivitiesScreen() {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(16, 185, 129, 0.15);
+      background: rgba(220, 38, 38, 0.15);
       padding: 8px 16px;
       border-radius: 100px;
-      border: 1px solid rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(220, 38, 38, 0.2);
       margin-bottom: 25px;
-      color: #34d399;
+      color: #3b82f6;
       font-size: 0.75rem;
       font-weight: 800;
       letter-spacing: 2px;
@@ -63,7 +63,7 @@ export function renderActivitiesScreen() {
     }
 
     .activities-hero-title span {
-      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      background: linear-gradient(135deg, #3b82f6 0%, #dc2626 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -95,7 +95,7 @@ export function renderActivitiesScreen() {
       top: 0;
       bottom: 0;
       width: 2px;
-      background: linear-gradient(180deg, #10b981 0%, #34d399 80%, transparent 100%);
+      background: linear-gradient(180deg, #dc2626 0%, #3b82f6 80%, transparent 100%);
       transform: translateX(-50%);
     }
 
@@ -131,10 +131,10 @@ export function renderActivitiesScreen() {
       transform: translate(-50%, -50%);
       width: 20px;
       height: 20px;
-      background: #10b981;
+      background: #dc2626;
       border: 4px solid #ffffff;
       border-radius: 50%;
-      box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 0 12px rgba(220, 38, 38, 0.4);
       z-index: 10;
     }
 
@@ -153,7 +153,7 @@ export function renderActivitiesScreen() {
 
     .timeline-card:hover {
       transform: translateY(-6px);
-      border-color: rgba(16, 185, 129, 0.25);
+      border-color: rgba(220, 38, 38, 0.25);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
     }
 
@@ -204,8 +204,8 @@ export function renderActivitiesScreen() {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(16, 185, 129, 0.08);
-      color: #059669;
+      background: rgba(220, 38, 38, 0.08);
+      color: #991b1b;
       padding: 6px 14px;
       border-radius: 50px;
       font-size: 0.8rem;
@@ -234,7 +234,7 @@ export function renderActivitiesScreen() {
     .timeline-date-label {
       font-size: 0.85rem;
       font-weight: 800;
-      color: #059669;
+      color: #991b1b;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       margin-top: 4px;
@@ -339,7 +339,7 @@ export function renderActivitiesScreen() {
             <p class="timeline-card-desc">${event.summary}</p>
             <div class="timeline-card-footer">
               <span class="timeline-card-tag">
-                <span style="width: 5px; height: 5px; border-radius: 50%; background: #059669; display: inline-block;"></span>
+                <span style="width: 5px; height: 5px; border-radius: 50%; background: #991b1b; display: inline-block;"></span>
                 Recent Fieldwork
               </span>
               <span class="timeline-card-location">

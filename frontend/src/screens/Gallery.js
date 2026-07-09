@@ -25,7 +25,7 @@ export function renderGalleryScreen() {
       padding: 180px 0 110px;
       position: relative;
       overflow: hidden;
-      border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+      border-bottom: 1px solid rgba(220, 38, 38, 0.15);
       text-align: center;
     }
 
@@ -33,7 +33,7 @@ export function renderGalleryScreen() {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top, rgba(16, 185, 129, 0.15), transparent 70%);
+      background: radial-gradient(circle at top, rgba(220, 38, 38, 0.15), transparent 70%);
       pointer-events: none;
       z-index: 1;
     }
@@ -42,12 +42,12 @@ export function renderGalleryScreen() {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(16, 185, 129, 0.15);
+      background: rgba(220, 38, 38, 0.15);
       padding: 8px 16px;
       border-radius: 100px;
-      border: 1px solid rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(220, 38, 38, 0.2);
       margin-bottom: 25px;
-      color: #34d399;
+      color: #3b82f6;
       font-size: 0.75rem;
       font-weight: 800;
       letter-spacing: 2px;
@@ -64,7 +64,7 @@ export function renderGalleryScreen() {
     }
 
     .gallery-hero-title span {
-      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      background: linear-gradient(135deg, #3b82f6 0%, #dc2626 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -89,7 +89,7 @@ export function renderGalleryScreen() {
 
     .filter-pill {
       background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(220, 38, 38, 0.15);
       color: #a7f3d0;
       padding: 10px 24px;
       border-radius: 100px;
@@ -100,17 +100,17 @@ export function renderGalleryScreen() {
     }
 
     .filter-pill:hover {
-      background: rgba(16, 185, 129, 0.12);
+      background: rgba(220, 38, 38, 0.12);
       color: #ffffff;
-      border-color: rgba(16, 185, 129, 0.3);
+      border-color: rgba(220, 38, 38, 0.3);
       transform: translateY(-2px);
     }
 
     .filter-pill.active {
-      background: #10b981;
+      background: #dc2626;
       color: #ffffff;
-      border-color: #10b981;
-      box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+      border-color: #dc2626;
+      box-shadow: 0 10px 20px rgba(220, 38, 38, 0.3);
     }
 
     /* Gallery Grid */
@@ -139,7 +139,7 @@ export function renderGalleryScreen() {
     .gallery-item-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
-      border-color: rgba(16, 185, 129, 0.25);
+      border-color: rgba(220, 38, 38, 0.25);
     }
 
     .card-img-wrapper {
@@ -166,7 +166,7 @@ export function renderGalleryScreen() {
       top: 15px;
       right: 15px;
       background: rgba(2, 44, 34, 0.85);
-      border: 1px solid rgba(52, 211, 153, 0.3);
+      border: 1px solid rgba(59, 130, 246, 0.3);
       backdrop-filter: blur(10px);
       width: 40px;
       height: 40px;
@@ -174,7 +174,7 @@ export function renderGalleryScreen() {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #34d399;
+      color: #3b82f6;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
 
@@ -187,7 +187,7 @@ export function renderGalleryScreen() {
     .card-meta-tag {
       font-size: 0.75rem;
       font-weight: 800;
-      color: #059669;
+      color: #991b1b;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       display: block;
@@ -237,7 +237,7 @@ export function renderGalleryScreen() {
       max-height: 75vh;
       object-fit: contain;
       border-radius: 16px;
-      border: 1px solid rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(220, 38, 38, 0.15);
     }
 
     .lb-close-btn {
@@ -259,9 +259,9 @@ export function renderGalleryScreen() {
     }
 
     .lb-close-btn:hover {
-      background: #10b981;
+      background: #dc2626;
       transform: scale(1.08) rotate(90deg);
-      border-color: #10b981;
+      border-color: #dc2626;
     }
 
     .lb-info-box {
@@ -295,8 +295,8 @@ export function renderGalleryScreen() {
     }
 
     .lb-nav-btn:hover {
-      background: #10b981;
-      border-color: #10b981;
+      background: #dc2626;
+      border-color: #dc2626;
       transform: translateY(-50%) scale(1.06);
     }
 
@@ -360,7 +360,7 @@ export function renderGalleryScreen() {
     </button>
     <div class="lb-wrapper" id="lbContent"></div>
     <div class="lb-info-box">
-      <span id="lbCategory" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #34d399; font-weight: 800; display: block; margin-bottom: 10px;"></span>
+      <span id="lbCategory" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #3b82f6; font-weight: 800; display: block; margin-bottom: 10px;"></span>
       <h3 id="lbTitle" style="margin: 0; font-size: 1.6rem; font-weight: 900; line-height: 1.2;"></h3>
     </div>
   `;

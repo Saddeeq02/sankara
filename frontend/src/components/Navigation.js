@@ -66,12 +66,12 @@ export function renderFooter() {
   const styleBlock = document.createElement('style');
   styleBlock.textContent = `
     .premium-footer {
-      background: linear-gradient(135deg, #021a15 0%, #010d0a 100%) !important;
+      background: linear-gradient(135deg, #0b0f19 0%, #030712 100%) !important;
       color: #cbd5e1 !important;
       padding: 90px 0 45px 0;
       position: relative;
       overflow: hidden;
-      border-top: 1px solid rgba(16, 185, 129, 0.15);
+      border-top: 1px solid rgba(220, 38, 38, 0.15);
       font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
     }
     .premium-footer::before {
@@ -81,7 +81,7 @@ export function renderFooter() {
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.4), transparent);
+      background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), transparent);
     }
     .footer-col-title {
       font-size: 1.15rem;
@@ -99,7 +99,7 @@ export function renderFooter() {
       left: 0;
       width: 35px;
       height: 3px;
-      background: linear-gradient(90deg, #34d399, #10b981);
+      background: linear-gradient(90deg, #3b82f6, #dc2626);
       border-radius: 50px;
     }
     .footer-links-list {
@@ -120,7 +120,7 @@ export function renderFooter() {
       font-size: 0.95rem;
     }
     .footer-link-item:hover {
-      color: #34d399;
+      color: #3b82f6;
       transform: translateX(6px);
     }
     .footer-social-btn {
@@ -137,11 +137,11 @@ export function renderFooter() {
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .footer-social-btn:hover {
-      background: rgba(16, 185, 129, 0.15);
-      border-color: #34d399;
-      color: #34d399;
+      background: rgba(220, 38, 38, 0.15);
+      border-color: #3b82f6;
+      color: #3b82f6;
       transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+      box-shadow: 0 8px 20px rgba(220, 38, 38, 0.2);
     }
     .footer-contact-item {
       display: flex;
@@ -150,7 +150,7 @@ export function renderFooter() {
       margin-bottom: 20px;
     }
     .footer-contact-icon {
-      color: #34d399;
+      color: #3b82f6;
       flex-shrink: 0;
       margin-top: 3px;
     }
@@ -173,7 +173,7 @@ export function renderFooter() {
       font-size: 0.95rem;
     }
     .footer-contact-value:hover {
-      color: #34d399;
+      color: #3b82f6;
     }
     .footer-bottom-bar {
       border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -197,7 +197,7 @@ export function renderFooter() {
       transition: color 0.2s ease;
     }
     .footer-bottom-link:hover {
-      color: #34d399;
+      color: #3b82f6;
     }
   `;
   footer.appendChild(styleBlock);
@@ -207,7 +207,7 @@ export function renderFooter() {
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-bottom: 60px;">
         <!-- Column 1: Info and Socials -->
         <div class="reveal" style="animation-delay: 0.1s">
-          <a href="/home" data-route="home" style="display: inline-flex; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 12px; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.05); margin-bottom: 25px;">
+          <a href="/home" data-route="home" style="display: inline-flex; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 12px; box-shadow: 0 4px 20px rgba(220, 38, 38, 0.05); margin-bottom: 25px;">
             <img src="/assets/logo.png" alt="Sankara Logo" style="height: 50px; object-fit: contain; filter: brightness(0) invert(1);">
           </a>
           <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px;">

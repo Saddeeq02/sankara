@@ -22,7 +22,7 @@ export function renderContactScreen() {
       padding: 180px 0 110px;
       position: relative;
       overflow: hidden;
-      border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+      border-bottom: 1px solid rgba(220, 38, 38, 0.15);
       text-align: center;
     }
 
@@ -30,7 +30,7 @@ export function renderContactScreen() {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top, rgba(16, 185, 129, 0.15), transparent 70%);
+      background: radial-gradient(circle at top, rgba(220, 38, 38, 0.15), transparent 70%);
       pointer-events: none;
       z-index: 1;
     }
@@ -39,12 +39,12 @@ export function renderContactScreen() {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(16, 185, 129, 0.15);
+      background: rgba(220, 38, 38, 0.15);
       padding: 8px 16px;
       border-radius: 100px;
-      border: 1px solid rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(220, 38, 38, 0.2);
       margin-bottom: 25px;
-      color: #34d399;
+      color: #3b82f6;
       font-size: 0.75rem;
       font-weight: 800;
       letter-spacing: 2px;
@@ -61,7 +61,7 @@ export function renderContactScreen() {
     }
 
     .contact-hero-title span {
-      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      background: linear-gradient(135deg, #3b82f6 0%, #dc2626 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -97,7 +97,7 @@ export function renderContactScreen() {
     /* Left Column Styling */
     .contact-info-card {
       background: #022c22;
-      border: 1px solid rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(220, 38, 38, 0.2);
       border-radius: 28px;
       padding: 50px 40px;
       color: #ffffff;
@@ -111,7 +111,7 @@ export function renderContactScreen() {
       position: absolute;
       width: 300px;
       height: 300px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(220, 38, 38, 0.15) 0%, transparent 70%);
       bottom: -150px;
       right: -150px;
       pointer-events: none;
@@ -147,8 +147,8 @@ export function renderContactScreen() {
       width: 46px;
       height: 46px;
       border-radius: 12px;
-      background: rgba(52, 211, 153, 0.12);
-      color: #34d399;
+      background: rgba(59, 130, 246, 0.12);
+      color: #3b82f6;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -178,12 +178,12 @@ export function renderContactScreen() {
     }
 
     .contact-channel-details a:hover {
-      color: #34d399;
+      color: #3b82f6;
     }
 
     /* Hours Block */
     .hours-block {
-      border-top: 1px solid rgba(16, 185, 129, 0.15);
+      border-top: 1px solid rgba(220, 38, 38, 0.15);
       margin-top: 40px;
       padding-top: 35px;
     }
@@ -269,9 +269,9 @@ export function renderContactScreen() {
 
     .form-input:focus {
       outline: none;
-      border-color: #10b981;
+      border-color: #dc2626;
       background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+      box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
     }
 
     .form-textarea {
@@ -285,7 +285,7 @@ export function renderContactScreen() {
       grid-template-columns: 1fr 1fr;
       gap: 20px;
       margin-top: 45px;
-      border-top: 1px solid rgba(16, 185, 129, 0.15);
+      border-top: 1px solid rgba(220, 38, 38, 0.15);
       padding-top: 35px;
     }
 
@@ -307,9 +307,9 @@ export function renderContactScreen() {
     .contact-why-dot {
       width: 6px;
       height: 6px;
-      background: #34d399;
+      background: #3b82f6;
       border-radius: 50%;
-      box-shadow: 0 0 6px #34d399;
+      box-shadow: 0 0 6px #3b82f6;
     }
 
     /* Map & Visit Section */
@@ -349,14 +349,14 @@ export function renderContactScreen() {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      border: 1px solid rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(220, 38, 38, 0.2);
     }
 
     .visit-map-mock::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 80%);
+      background: radial-gradient(circle, rgba(220, 38, 38, 0.25) 0%, transparent 80%);
       pointer-events: none;
     }
 
@@ -368,7 +368,7 @@ export function renderContactScreen() {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #059669;
+      color: #991b1b;
       box-shadow: 0 10px 25px rgba(2, 44, 34, 0.4);
       animation: float-pin 3s ease-in-out infinite;
       z-index: 2;
@@ -502,12 +502,12 @@ export function renderContactScreen() {
         <div class="hours-block" style="margin-top: 30px; padding-top: 25px;">
           <h4 class="hours-title">Follow Us</h4>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="https://tinyurl.com/3u7ht39v" target="_blank" style="padding: 8px 14px; background: rgba(52, 211, 153, 0.12); border-radius: 8px; color: #34d399; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(52, 211, 153, 0.25)'" onmouseout="this.style.background='rgba(52, 211, 153, 0.12)'" title="Facebook">Facebook</a>
-            <a href="https://tinyurl.com/529wxjbh" target="_blank" style="padding: 8px 14px; background: rgba(52, 211, 153, 0.12); border-radius: 8px; color: #34d399; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(52, 211, 153, 0.25)'" onmouseout="this.style.background='rgba(52, 211, 153, 0.12)'" title="Instagram">Instagram</a>
-            <a href="https://tinyurl.com/2vx447h9" target="_blank" style="padding: 8px 14px; background: rgba(52, 211, 153, 0.12); border-radius: 8px; color: #34d399; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(52, 211, 153, 0.25)'" onmouseout="this.style.background='rgba(52, 211, 153, 0.12)'" title="Twitter">Twitter</a>
-            <a href="https://tinyurl.com/yc3rknhx" target="_blank" style="padding: 8px 14px; background: rgba(52, 211, 153, 0.12); border-radius: 8px; color: #34d399; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(52, 211, 153, 0.25)'" onmouseout="this.style.background='rgba(52, 211, 153, 0.12)'" title="TikTok">TikTok</a>
-            <a href="https://tinyurl.com/yc3tfjmc" target="_blank" style="padding: 8px 14px; background: rgba(52, 211, 153, 0.12); border-radius: 8px; color: #34d399; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(52, 211, 153, 0.25)'" onmouseout="this.style.background='rgba(52, 211, 153, 0.12)'" title="YouTube">YouTube</a>
-            <a href="https://www.linkedin.com/in/sankaranigerialimited" target="_blank" style="padding: 8px 14px; background: rgba(52, 211, 153, 0.12); border-radius: 8px; color: #34d399; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(52, 211, 153, 0.25)'" onmouseout="this.style.background='rgba(52, 211, 153, 0.12)'" title="LinkedIn">LinkedIn</a>
+            <a href="https://tinyurl.com/3u7ht39v" target="_blank" style="padding: 8px 14px; background: rgba(59, 130, 246, 0.12); border-radius: 8px; color: #3b82f6; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(59, 130, 246, 0.25)'" onmouseout="this.style.background='rgba(59, 130, 246, 0.12)'" title="Facebook">Facebook</a>
+            <a href="https://tinyurl.com/529wxjbh" target="_blank" style="padding: 8px 14px; background: rgba(59, 130, 246, 0.12); border-radius: 8px; color: #3b82f6; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(59, 130, 246, 0.25)'" onmouseout="this.style.background='rgba(59, 130, 246, 0.12)'" title="Instagram">Instagram</a>
+            <a href="https://tinyurl.com/2vx447h9" target="_blank" style="padding: 8px 14px; background: rgba(59, 130, 246, 0.12); border-radius: 8px; color: #3b82f6; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(59, 130, 246, 0.25)'" onmouseout="this.style.background='rgba(59, 130, 246, 0.12)'" title="Twitter">Twitter</a>
+            <a href="https://tinyurl.com/yc3rknhx" target="_blank" style="padding: 8px 14px; background: rgba(59, 130, 246, 0.12); border-radius: 8px; color: #3b82f6; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(59, 130, 246, 0.25)'" onmouseout="this.style.background='rgba(59, 130, 246, 0.12)'" title="TikTok">TikTok</a>
+            <a href="https://tinyurl.com/yc3tfjmc" target="_blank" style="padding: 8px 14px; background: rgba(59, 130, 246, 0.12); border-radius: 8px; color: #3b82f6; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(59, 130, 246, 0.25)'" onmouseout="this.style.background='rgba(59, 130, 246, 0.12)'" title="YouTube">YouTube</a>
+            <a href="https://www.linkedin.com/in/sankaranigerialimited" target="_blank" style="padding: 8px 14px; background: rgba(59, 130, 246, 0.12); border-radius: 8px; color: #3b82f6; font-weight: 700; text-decoration: none; font-size: 0.8rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(59, 130, 246, 0.25)'" onmouseout="this.style.background='rgba(59, 130, 246, 0.12)'" title="LinkedIn">LinkedIn</a>
           </div>
         </div>
 

@@ -46,7 +46,7 @@ export function renderAdminDashboard() {
 
       <!-- Stats Card 2 -->
       <div class="admin-card" style="display: flex; align-items: center; gap: 20px;">
-        <div style="width: 56px; height: 56px; border-radius: 16px; background: rgba(16, 185, 129, 0.1); color: #10b981; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);">
+        <div style="width: 56px; height: 56px; border-radius: 16px; background: rgba(220, 38, 38, 0.1); color: #dc2626; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);">
           ${PhoneCall}
         </div>
         <div>

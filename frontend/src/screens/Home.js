@@ -71,7 +71,7 @@ export function renderHomeScreen() {
     }
     
     .hero-title-main span {
-      background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+      background: linear-gradient(135deg, #dc2626 0%, #3b82f6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -106,7 +106,7 @@ export function renderHomeScreen() {
       bottom: 25px;
       width: 85%;
       height: 25px;
-      background: radial-gradient(ellipse, rgba(52, 211, 153, 0.45) 0%, rgba(2, 44, 34, 0) 70%);
+      background: radial-gradient(ellipse, rgba(59, 130, 246, 0.45) 0%, rgba(2, 44, 34, 0) 70%);
       filter: blur(8px);
       z-index: 1;
       pointer-events: none;
@@ -151,7 +151,7 @@ export function renderHomeScreen() {
       background: rgba(2, 44, 34, 0.7);
       padding: 8px 20px;
       border-radius: 100px;
-      border: 1px solid rgba(52, 211, 153, 0.25);
+      border: 1px solid rgba(59, 130, 246, 0.25);
       backdrop-filter: blur(8px);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
@@ -167,13 +167,13 @@ export function renderHomeScreen() {
     }
     
     .view-dot:hover, .view-dot.active {
-      color: #34d399;
-      text-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
+      color: #3b82f6;
+      text-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
     }
     
     /* Action Buttons */
     .btn-main-green {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
       color: #ffffff;
       padding: 16px 36px;
       border-radius: 12px;
@@ -183,13 +183,13 @@ export function renderHomeScreen() {
       align-items: center;
       gap: 8px;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 4px 20px rgba(220, 38, 38, 0.3);
       font-size: 0.95rem;
     }
     
     .btn-main-green:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(16, 185, 129, 0.45);
+      box-shadow: 0 8px 30px rgba(220, 38, 38, 0.45);
     }
     
     .btn-main-outline {
@@ -242,7 +242,7 @@ export function renderHomeScreen() {
     .feature-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 25px 50px -12px rgba(0,0,0,0.05);
-      border-color: #10b981;
+      border-color: #dc2626;
     }
     
     /* Geometric Star Badge */
@@ -259,7 +259,7 @@ export function renderHomeScreen() {
     .star-badge-bg {
       position: absolute;
       inset: 0;
-      background: rgba(16, 185, 129, 0.1);
+      background: rgba(220, 38, 38, 0.1);
       clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
       animation: rotate-star 12s linear infinite;
     }
@@ -267,7 +267,7 @@ export function renderHomeScreen() {
     .star-badge-icon {
       position: relative;
       z-index: 2;
-      color: #059669;
+      color: #991b1b;
     }
     
     .feature-title {
@@ -321,8 +321,8 @@ export function renderHomeScreen() {
       padding: 100px 0;
       position: relative;
       overflow: hidden;
-      border-top: 1px solid rgba(16, 185, 129, 0.15);
-      border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+      border-top: 1px solid rgba(220, 38, 38, 0.15);
+      border-bottom: 1px solid rgba(220, 38, 38, 0.15);
     }
     
     .sec-stats::before {
@@ -330,7 +330,7 @@ export function renderHomeScreen() {
       position: absolute;
       width: 400px;
       height: 400px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(220, 38, 38, 0.08) 0%, transparent 70%);
       top: -100px;
       left: -100px;
       pointer-events: none;
@@ -342,7 +342,7 @@ export function renderHomeScreen() {
       position: absolute;
       width: 400px;
       height: 400px;
-      background: radial-gradient(circle, rgba(52, 211, 153, 0.05) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
       bottom: -100px;
       right: -100px;
       pointer-events: none;
@@ -371,7 +371,7 @@ export function renderHomeScreen() {
 
     .stats-card {
       background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(220, 38, 38, 0.12);
       border-radius: 24px;
       padding: 40px 25px;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -388,7 +388,7 @@ export function renderHomeScreen() {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(16, 185, 129, 0.04) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(220, 38, 38, 0.04) 0%, transparent 100%);
       opacity: 0;
       transition: opacity 0.4s ease;
       pointer-events: none;
@@ -396,8 +396,8 @@ export function renderHomeScreen() {
 
     .stats-card:hover {
       transform: translateY(-8px);
-      border-color: rgba(16, 185, 129, 0.35);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), 0 0 25px rgba(16, 185, 129, 0.08);
+      border-color: rgba(220, 38, 38, 0.35);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), 0 0 25px rgba(220, 38, 38, 0.08);
       background: rgba(255, 255, 255, 0.03);
     }
 
@@ -409,26 +409,26 @@ export function renderHomeScreen() {
       width: 52px;
       height: 52px;
       border-radius: 16px;
-      background: rgba(16, 185, 129, 0.12);
+      background: rgba(220, 38, 38, 0.12);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #34d399;
+      color: #3b82f6;
       margin-bottom: 22px;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .stats-card:hover .stats-card-icon {
-      background: #10b981;
+      background: #dc2626;
       color: #ffffff;
       transform: scale(1.1) rotate(6deg);
-      box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
     }
     
     .stat-num-val {
       font-size: 3.5rem;
       font-weight: 900;
-      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      background: linear-gradient(135deg, #3b82f6 0%, #dc2626 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 12px;
@@ -519,7 +519,7 @@ export function renderHomeScreen() {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(16, 185, 129, 0.02) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(220, 38, 38, 0.02) 0%, transparent 100%);
       opacity: 0;
       transition: opacity 0.4s ease;
       pointer-events: none;
@@ -527,8 +527,8 @@ export function renderHomeScreen() {
 
     .partner-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05), 0 0 15px rgba(16, 185, 129, 0.05);
-      border-color: rgba(16, 185, 129, 0.3);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05), 0 0 15px rgba(220, 38, 38, 0.05);
+      border-color: rgba(220, 38, 38, 0.3);
     }
 
     .partner-card:hover::before {
@@ -569,12 +569,12 @@ export function renderHomeScreen() {
 
     .team-member-card:hover {
       transform: translateY(-8px);
-      border-color: #10b981;
+      border-color: #dc2626;
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
     }
 
     [data-theme="dark"] .team-member-card:hover {
-      border-color: #34d399;
+      border-color: #3b82f6;
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
     }
 
@@ -609,11 +609,11 @@ export function renderHomeScreen() {
     }
 
     .team-member-card:hover .team-member-img-box img {
-      filter: drop-shadow(0 20px 35px rgba(5, 150, 105, 0.18));
+      filter: drop-shadow(0 20px 35px rgba(153, 27, 27, 0.18));
     }
 
     [data-theme="dark"] .team-member-card:hover .team-member-img-box img {
-      filter: drop-shadow(0 20px 35px rgba(52, 211, 153, 0.25));
+      filter: drop-shadow(0 20px 35px rgba(59, 130, 246, 0.25));
     }
 
     .team-member-name {
@@ -628,21 +628,21 @@ export function renderHomeScreen() {
     .team-member-role {
       font-size: 0.8rem;
       font-weight: 800;
-      color: #059669;
-      background: rgba(5, 150, 105, 0.06);
+      color: #991b1b;
+      background: rgba(153, 27, 27, 0.06);
       padding: 6px 14px;
       border-radius: 100px;
       margin-bottom: 18px;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       display: inline-block;
-      border: 1px solid rgba(5, 150, 105, 0.12);
+      border: 1px solid rgba(153, 27, 27, 0.12);
     }
 
     [data-theme="dark"] .team-member-role {
-      color: #34d399;
-      background: rgba(52, 211, 153, 0.06);
-      border-color: rgba(52, 211, 153, 0.12);
+      color: #3b82f6;
+      background: rgba(59, 130, 246, 0.06);
+      border-color: rgba(59, 130, 246, 0.12);
     }
 
     .team-member-phone {
@@ -671,15 +671,15 @@ export function renderHomeScreen() {
     }
 
     .team-member-card:hover .team-member-phone {
-      background: #059669;
+      background: #991b1b;
       color: #ffffff;
-      box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3);
+      box-shadow: 0 6px 20px rgba(153, 27, 27, 0.3);
     }
 
     [data-theme="dark"] .team-member-card:hover .team-member-phone {
-      background: #10b981;
+      background: #dc2626;
       color: #ffffff;
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
     }
   `;
   container.appendChild(styleTag);
@@ -860,9 +860,9 @@ export function renderHomeScreen() {
     <div class="corp-hero-overlay" style="background: linear-gradient(135deg, rgba(2, 44, 34, 0.75) 0%, rgba(2, 44, 34, 0.65) 100%);"></div>
     <div class="container hero-grid">
       <div class="hero-content-block">
-        <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.15); padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(16, 185, 129, 0.2); margin-bottom: 25px;">
-          <span style="width: 8px; height: 8px; background: #34d399; border-radius: 50%; box-shadow: 0 0 10px #34d399;"></span>
-          <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; color: #34d399; text-transform: uppercase;">Heavy-Duty Mechanization</span>
+        <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(220, 38, 38, 0.15); padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(220, 38, 38, 0.2); margin-bottom: 25px;">
+          <span style="width: 8px; height: 8px; background: #3b82f6; border-radius: 50%; box-shadow: 0 0 10px #3b82f6;"></span>
+          <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; color: #3b82f6; text-transform: uppercase;">Heavy-Duty Mechanization</span>
         </div>
         <h1 class="hero-title-main">Engineering the Future of <span>Mechanized Farming</span></h1>
         <p class="hero-desc">
@@ -879,7 +879,7 @@ export function renderHomeScreen() {
       
       <div class="hero-visual" style="cursor: grab;">
         <svg class="floating-gear-bg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="top:-50px; right:-20px; width:180px; height:180px;">
-          <path d="M50 25C36.19 25 25 36.19 25 50C25 63.81 36.19 75 50 75C63.81 75 75 63.81 75 50C75 36.19 63.81 25 50 25ZM50 67C40.61 67 33 59.39 33 50C33 40.61 40.61 33 50 33C59.39 33 67 40.61 67 50C67 59.39 59.39 67 50 67Z" fill="#34d399"/>
+          <path d="M50 25C36.19 25 25 36.19 25 50C25 63.81 36.19 75 50 75C63.81 75 75 63.81 75 50C75 36.19 63.81 25 50 25ZM50 67C40.61 67 33 59.39 33 50C33 40.61 40.61 33 50 33C59.39 33 67 40.61 67 50C67 59.39 59.39 67 50 67Z" fill="#3b82f6"/>
         </svg>
         <div class="machinery-shadow"></div>
         
@@ -921,7 +921,7 @@ export function renderHomeScreen() {
   featuresSec.innerHTML = `
     <div class="container">
       <div style="text-align: center; margin-bottom: 70px;">
-        <span style="font-size: 0.85rem; font-weight: 800; color: #059669; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">ENGINEERED SOLUTIONS</span>
+        <span style="font-size: 0.85rem; font-weight: 800; color: #991b1b; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">ENGINEERED SOLUTIONS</span>
         <h2 style="font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 850; color: #0f172a; letter-spacing: -1px;">Core Capabilities</h2>
       </div>
       
@@ -971,7 +971,7 @@ export function renderHomeScreen() {
   fleetSec.innerHTML = `
     <div class="container">
       <div style="text-align: center; margin-bottom: 60px;">
-        <span style="font-size: 0.85rem; font-weight: 800; color: #059669; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">OUR FLEET</span>
+        <span style="font-size: 0.85rem; font-weight: 800; color: #991b1b; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">OUR FLEET</span>
         <h2 style="font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 850; color: #0f172a; letter-spacing: -1px; margin-bottom: 15px;">High-Performance Machinery</h2>
         <p style="color: #475569; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Filter and view our verified range of agricultural tractors and farm machinery.</p>
       </div>
@@ -1052,7 +1052,7 @@ export function renderHomeScreen() {
     <div class="container">
       <div class="cta-banner">
         <div style="max-width: 650px;">
-          <span style="font-size: 0.8rem; font-weight: 800; color: #34d399; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">GET IN TOUCH</span>
+          <span style="font-size: 0.8rem; font-weight: 800; color: #3b82f6; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">GET IN TOUCH</span>
           <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; line-height: 1.2; margin-bottom: 20px;">Ready to Mechanize Your Operations?</h2>
           <p style="color: #d1fae5; font-size: 1.05rem; line-height: 1.6; margin: 0;">
             Partner with Sankara Nigeria Limited to secure robust agricultural machinery, spare parts supply lines, and dedicated field maintenance support.
@@ -1067,7 +1067,7 @@ export function renderHomeScreen() {
 
       <!-- Partner Brands Section -->
       <div class="reveal" style="margin-top: 90px; text-align: center; animation-delay: 0.2s;">
-        <h5 style="color: #059669; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">STRATEGIC PARTNERSHIPS</h5>
+        <h5 style="color: #991b1b; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">STRATEGIC PARTNERSHIPS</h5>
         <h2 style="font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 850; color: #0f172a; letter-spacing: -1px; margin-bottom: 25px;">Our Trusted Partners & Brands</h2>
         
         <p style="color: #475569; font-size: 1.1rem; max-width: 800px; margin: 0 auto 50px; line-height: 1.8;">
@@ -1104,8 +1104,8 @@ export function renderHomeScreen() {
     <div class="container" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: start; margin-bottom: 120px;">
       <!-- Left Column: Company Story -->
       <div class="reveal" style="animation-delay: 0.1s;">
-        <span style="font-size: 0.85rem; font-weight: 800; color: #059669; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">OUR LEGACY</span>
-        <h2 style="font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 850; color: #0f172a; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 30px;">Powering Nigeria's <br><span style="color: #059669;">Modern Farming</span></h2>
+        <span style="font-size: 0.85rem; font-weight: 800; color: #991b1b; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">OUR LEGACY</span>
+        <h2 style="font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 850; color: #0f172a; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 30px;">Powering Nigeria's <br><span style="color: #991b1b;">Modern Farming</span></h2>
         
         <p style="color: #334155; font-size: 1.15rem; font-weight: 600; line-height: 1.7; margin-bottom: 20px;">
           Since its establishment in 1986, Sankara Nigeria Limited has remained a trusted force in agricultural transformation across Nigeria and the wider region.
@@ -1125,7 +1125,7 @@ export function renderHomeScreen() {
             <span style="font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">Years of Experience</span>
           </div>
           <div>
-            <h4 style="font-size: 2.2rem; font-weight: 900; color: #059669; margin-bottom: 5px;">1200+</h4>
+            <h4 style="font-size: 2.2rem; font-weight: 900; color: #991b1b; margin-bottom: 5px;">1200+</h4>
             <span style="font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">Tractors Delivered</span>
           </div>
         </div>
@@ -1135,8 +1135,8 @@ export function renderHomeScreen() {
       <div style="display: flex; flex-direction: column; gap: 30px;">
         
         <!-- Mission Card -->
-        <div class="reveal premium-glass-card" style="padding: 35px; border-radius: 24px; background: #ffffff; border: 1px solid #e2e8f0; animation-delay: 0.2s; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.02);" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
-          <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 12px; margin-bottom: 20px;">
+        <div class="reveal premium-glass-card" style="padding: 35px; border-radius: 24px; background: #ffffff; border: 1px solid #e2e8f0; animation-delay: 0.2s; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.02);" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#991b1b';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: rgba(153, 27, 27, 0.1); color: #991b1b; border-radius: 12px; margin-bottom: 20px;">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
           </div>
           <h3 style="font-size: 1.3rem; font-weight: 850; color: #0f172a; margin-bottom: 12px;">Our Mission</h3>
@@ -1146,8 +1146,8 @@ export function renderHomeScreen() {
         </div>
 
         <!-- Vision Card -->
-        <div class="reveal premium-glass-card" style="padding: 35px; border-radius: 24px; background: #ffffff; border: 1px solid #e2e8f0; animation-delay: 0.3s; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.02);" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
-          <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 12px; margin-bottom: 20px;">
+        <div class="reveal premium-glass-card" style="padding: 35px; border-radius: 24px; background: #ffffff; border: 1px solid #e2e8f0; animation-delay: 0.3s; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.02);" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#991b1b';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: rgba(153, 27, 27, 0.1); color: #991b1b; border-radius: 12px; margin-bottom: 20px;">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
           </div>
           <h3 style="font-size: 1.3rem; font-weight: 850; color: #0f172a; margin-bottom: 12px;">Our Vision</h3>
@@ -1157,8 +1157,8 @@ export function renderHomeScreen() {
         </div>
 
         <!-- Values Card -->
-        <div class="reveal premium-glass-card" style="padding: 35px; border-radius: 24px; background: #ffffff; border: 1px solid #e2e8f0; animation-delay: 0.4s; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.02);" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
-          <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 12px; margin-bottom: 20px;">
+        <div class="reveal premium-glass-card" style="padding: 35px; border-radius: 24px; background: #ffffff; border: 1px solid #e2e8f0; animation-delay: 0.4s; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.02);" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#991b1b';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: rgba(153, 27, 27, 0.1); color: #991b1b; border-radius: 12px; margin-bottom: 20px;">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
           </div>
           <h3 style="font-size: 1.3rem; font-weight: 850; color: #0f172a; margin-bottom: 12px;">Our Core Values</h3>
@@ -1172,7 +1172,7 @@ export function renderHomeScreen() {
     <!-- Part 2: Why Choose Us Section -->
     <div class="container" style="margin-bottom: 120px;">
       <div style="text-align: center; margin-bottom: 60px;">
-        <span style="font-size: 0.85rem; font-weight: 800; color: #059669; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">UNCOMPROMISING SERVICE</span>
+        <span style="font-size: 0.85rem; font-weight: 800; color: #991b1b; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">UNCOMPROMISING SERVICE</span>
         <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; color: #0f172a; letter-spacing: -1px; margin-bottom: 20px;">Why Choose Us</h2>
         <p style="color: #475569; font-size: 1.1rem; max-width: 700px; margin: 0 auto; line-height: 1.7;">
           We go beyond selling machinery. We provide comprehensive solutions, unwavering support, and genuine commitment to your agricultural success.
@@ -1181,8 +1181,8 @@ export function renderHomeScreen() {
 
       <div class="about-why-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;">
         <!-- Card 1: Support -->
-        <div class="reveal premium-glass-card" style="padding: 30px; border-radius: 20px; background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
-          <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 10px; margin-bottom: 20px;">
+        <div class="reveal premium-glass-card" style="padding: 30px; border-radius: 20px; background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#991b1b';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(153, 27, 27, 0.1); color: #991b1b; border-radius: 10px; margin-bottom: 20px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </div>
           <h4 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 12px;">24/7 Support</h4>
@@ -1192,8 +1192,8 @@ export function renderHomeScreen() {
         </div>
 
         <!-- Card 2: OEM Parts -->
-        <div class="reveal premium-glass-card" style="padding: 30px; border-radius: 20px; background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s; animation-delay: 0.1s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
-          <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 10px; margin-bottom: 20px;">
+        <div class="reveal premium-glass-card" style="padding: 30px; border-radius: 20px; background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s; animation-delay: 0.1s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#991b1b';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(153, 27, 27, 0.1); color: #991b1b; border-radius: 10px; margin-bottom: 20px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
           </div>
           <h4 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 12px;">Genuine Spare Parts</h4>
@@ -1203,8 +1203,8 @@ export function renderHomeScreen() {
         </div>
 
         <!-- Card 3: Delivery -->
-        <div class="reveal premium-glass-card" style="padding: 30px; border-radius: 20px; background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s; animation-delay: 0.2s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
-          <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 10px; margin-bottom: 20px;">
+        <div class="reveal premium-glass-card" style="padding: 30px; border-radius: 20px; background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s; animation-delay: 0.2s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#991b1b';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(153, 27, 27, 0.1); color: #991b1b; border-radius: 10px; margin-bottom: 20px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
           </div>
           <h4 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 12px;">Nationwide Delivery</h4>
@@ -1214,8 +1214,8 @@ export function renderHomeScreen() {
         </div>
 
         <!-- Card 4: Experts -->
-        <div class="reveal premium-glass-card" style="padding: 30px; border-radius: 20px; background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s; animation-delay: 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
-          <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 10px; margin-bottom: 20px;">
+        <div class="reveal premium-glass-card" style="padding: 30px; border-radius: 20px; background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s; animation-delay: 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#991b1b';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(153, 27, 27, 0.1); color: #991b1b; border-radius: 10px; margin-bottom: 20px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
           <h4 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 12px;">Trained Experts</h4>
@@ -1225,8 +1225,8 @@ export function renderHomeScreen() {
         </div>
 
         <!-- Card 5: Maintenance -->
-        <div class="reveal premium-glass-card" style="padding: 30px; border-radius: 20px; background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s; animation-delay: 0.4s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#059669';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
-          <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(5, 150, 105, 0.1); color: #059669; border-radius: 10px; margin-bottom: 20px;">
+        <div class="reveal premium-glass-card" style="padding: 30px; border-radius: 20px; background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s; animation-delay: 0.4s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#991b1b';" onmouseout="this.style.transform='none'; this.style.borderColor='#e2e8f0';">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(153, 27, 27, 0.1); color: #991b1b; border-radius: 10px; margin-bottom: 20px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
           </div>
           <h4 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 12px;">After-Sales Service</h4>
@@ -1240,7 +1240,7 @@ export function renderHomeScreen() {
     <!-- Part 3: Why Manufacturers Choose Sankara -->
     <div class="container" style="margin-bottom: 120px;">
       <div style="text-align: center; margin-bottom: 60px;">
-        <span style="font-size: 0.85rem; font-weight: 800; color: #059669; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">B2B TRUST & AUTHORITY</span>
+        <span style="font-size: 0.85rem; font-weight: 800; color: #991b1b; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">B2B TRUST & AUTHORITY</span>
         <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; color: #0f172a; letter-spacing: -1px; margin-bottom: 20px;">Why Manufacturers Choose Sankara</h2>
         <p style="color: #475569; font-size: 1.1rem; max-width: 700px; margin: 0 auto; line-height: 1.7;">
           Global heavy agricultural brands select Sankara Nigeria Limited to manage their market deployment due to our long-standing authority and reliable support.
@@ -1249,7 +1249,7 @@ export function renderHomeScreen() {
 
       <div class="about-why-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px;">
         <!-- Fact 1 -->
-        <div class="reveal" style="padding: 30px; border-left: 4px solid #059669; background: rgba(248, 250, 252, 0.5);">
+        <div class="reveal" style="padding: 30px; border-left: 4px solid #991b1b; background: rgba(248, 250, 252, 0.5);">
           <h4 style="font-size: 1.15rem; font-weight: 850; color: #0f172a; margin-bottom: 10px;">Proven Track Record</h4>
           <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
             Nearly 40 years of successful operations and customer satisfaction in the Nigerian agricultural market.
@@ -1257,7 +1257,7 @@ export function renderHomeScreen() {
         </div>
 
         <!-- Fact 2 -->
-        <div class="reveal" style="padding: 30px; border-left: 4px solid #059669; background: rgba(248, 250, 252, 0.5); animation-delay: 0.1s;">
+        <div class="reveal" style="padding: 30px; border-left: 4px solid #991b1b; background: rgba(248, 250, 252, 0.5); animation-delay: 0.1s;">
           <h4 style="font-size: 1.15rem; font-weight: 850; color: #0f172a; margin-bottom: 10px;">Extensive Network</h4>
           <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
             Nationwide presence covering all 36 states with reliable delivery and service infrastructure.
@@ -1265,7 +1265,7 @@ export function renderHomeScreen() {
         </div>
 
         <!-- Fact 3 -->
-        <div class="reveal" style="padding: 30px; border-left: 4px solid #059669; background: rgba(248, 250, 252, 0.5); animation-delay: 0.2s;">
+        <div class="reveal" style="padding: 30px; border-left: 4px solid #991b1b; background: rgba(248, 250, 252, 0.5); animation-delay: 0.2s;">
           <h4 style="font-size: 1.15rem; font-weight: 850; color: #0f172a; margin-bottom: 10px;">Technical Expertise</h4>
           <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
             Certified technicians and comprehensive after-sales support capabilities.
@@ -1273,7 +1273,7 @@ export function renderHomeScreen() {
         </div>
 
         <!-- Fact 4 -->
-        <div class="reveal" style="padding: 30px; border-left: 4px solid #059669; background: rgba(248, 250, 252, 0.5); animation-delay: 0.3s;">
+        <div class="reveal" style="padding: 30px; border-left: 4px solid #991b1b; background: rgba(248, 250, 252, 0.5); animation-delay: 0.3s;">
           <h4 style="font-size: 1.15rem; font-weight: 850; color: #0f172a; margin-bottom: 10px;">Market Leadership</h4>
           <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
             Leading position in agricultural machinery sales with over 1200 tractors delivered.
@@ -1285,7 +1285,7 @@ export function renderHomeScreen() {
     <!-- Part 4: Milestones Timeline Section -->
     <div class="container" style="margin-bottom: 40px;">
       <div style="text-align: center; margin-bottom: 80px;">
-        <span style="font-size: 0.85rem; font-weight: 800; color: #059669; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">OUR MILESTONES</span>
+        <span style="font-size: 0.85rem; font-weight: 800; color: #991b1b; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">OUR MILESTONES</span>
         <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; color: #0f172a; letter-spacing: -1px; margin-bottom: 20px;">Milestones of Excellence</h2>
         <p style="color: #475569; font-size: 1.1rem; max-width: 700px; margin: 0 auto; line-height: 1.7;">
           Tracing our transformative impact on Nigerian agriculture through nearly four decades of dedication.
@@ -1300,14 +1300,14 @@ export function renderHomeScreen() {
         <!-- Node 1: Founding (1986) -->
         <div class="reveal timeline-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 50px; position: relative;">
           <div class="timeline-pane" style="width: 44%; text-align: right; padding-right: 30px;">
-            <span style="font-size: 1.25rem; font-weight: 900; color: #059669;">1986</span>
+            <span style="font-size: 1.25rem; font-weight: 900; color: #991b1b;">1986</span>
             <h4 style="font-size: 1.2rem; font-weight: 850; color: #0f172a; margin: 5px 0 10px;">Company Founded</h4>
             <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
               Sankara Nigeria Limited was established with a vision to transform Nigerian agriculture through reliable machinery.
             </p>
           </div>
           <!-- Center Dot -->
-          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #059669; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(5,150,105,0.15); z-index: 2;"></div>
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #991b1b; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(153, 27, 27, 0.15); z-index: 2;"></div>
           <div style="width: 44%;"></div>
         </div>
 
@@ -1315,9 +1315,9 @@ export function renderHomeScreen() {
         <div class="reveal timeline-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 50px; position: relative;">
           <div style="width: 44%;"></div>
           <!-- Center Dot -->
-          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #059669; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(5,150,105,0.15); z-index: 2;"></div>
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #991b1b; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(153, 27, 27, 0.15); z-index: 2;"></div>
           <div class="timeline-pane" style="width: 44%; text-align: left; padding-left: 30px;">
-            <span style="font-size: 1.25rem; font-weight: 900; color: #059669;">Dealer Certification</span>
+            <span style="font-size: 1.25rem; font-weight: 900; color: #991b1b;">Dealer Certification</span>
             <h4 style="font-size: 1.2rem; font-weight: 850; color: #0f172a; margin: 5px 0 10px;">First Major Partnership</h4>
             <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
               Became authorized dealer for Massey Ferguson, establishing our reputation for quality and reliability.
@@ -1328,14 +1328,14 @@ export function renderHomeScreen() {
         <!-- Node 3: Nationwide Expansion -->
         <div class="reveal timeline-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 50px; position: relative;">
           <div class="timeline-pane" style="width: 44%; text-align: right; padding-right: 30px;">
-            <span style="font-size: 1.25rem; font-weight: 900; color: #059669;">Logistics Scale</span>
+            <span style="font-size: 1.25rem; font-weight: 900; color: #991b1b;">Logistics Scale</span>
             <h4 style="font-size: 1.2rem; font-weight: 850; color: #0f172a; margin: 5px 0 10px;">Nationwide Expansion</h4>
             <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
               Expanded operations to serve farmers across all 36 states of Nigeria with a comprehensive delivery network.
             </p>
           </div>
           <!-- Center Dot -->
-          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #059669; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(5,150,105,0.15); z-index: 2;"></div>
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #991b1b; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(153, 27, 27, 0.15); z-index: 2;"></div>
           <div style="width: 44%;"></div>
         </div>
 
@@ -1343,9 +1343,9 @@ export function renderHomeScreen() {
         <div class="reveal timeline-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 50px; position: relative;">
           <div style="width: 44%;"></div>
           <!-- Center Dot -->
-          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #059669; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(5,150,105,0.15); z-index: 2;"></div>
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #991b1b; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(153, 27, 27, 0.15); z-index: 2;"></div>
           <div class="timeline-pane" style="width: 44%; text-align: left; padding-left: 30px;">
-            <span style="font-size: 1.25rem; font-weight: 900; color: #059669;">Sales Milestone</span>
+            <span style="font-size: 1.25rem; font-weight: 900; color: #991b1b;">Sales Milestone</span>
             <h4 style="font-size: 1.2rem; font-weight: 850; color: #0f172a; margin: 5px 0 10px;">500+ Tractors Delivered</h4>
             <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
               Reached milestone of delivering over 500 tractors, becoming one of Nigeria's leading agricultural machinery suppliers.
@@ -1356,14 +1356,14 @@ export function renderHomeScreen() {
         <!-- Node 5: Parts Network -->
         <div class="reveal timeline-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 50px; position: relative;">
           <div class="timeline-pane" style="width: 44%; text-align: right; padding-right: 30px;">
-            <span style="font-size: 1.25rem; font-weight: 900; color: #059669;">Supply Chain</span>
+            <span style="font-size: 1.25rem; font-weight: 900; color: #991b1b;">Supply Chain</span>
             <h4 style="font-size: 1.2rem; font-weight: 850; color: #0f172a; margin: 5px 0 10px;">Genuine Parts Network</h4>
             <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
               Established nationwide spare parts distribution network ensuring authentic OEM parts availability.
             </p>
           </div>
           <!-- Center Dot -->
-          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #059669; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(5,150,105,0.15); z-index: 2;"></div>
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #991b1b; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(153, 27, 27, 0.15); z-index: 2;"></div>
           <div style="width: 44%;"></div>
         </div>
 
@@ -1371,9 +1371,9 @@ export function renderHomeScreen() {
         <div class="reveal timeline-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; position: relative;">
           <div style="width: 44%;"></div>
           <!-- Center Dot -->
-          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #059669; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(5,150,105,0.15); z-index: 2;"></div>
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #991b1b; border: 4px solid #ffffff; border-radius: 50%; box-shadow: 0 0 0 4px rgba(153, 27, 27, 0.15); z-index: 2;"></div>
           <div class="timeline-pane" style="width: 44%; text-align: left; padding-left: 30px;">
-            <span style="font-size: 1.25rem; font-weight: 900; color: #059669;">Current Legacy</span>
+            <span style="font-size: 1.25rem; font-weight: 900; color: #991b1b;">Current Legacy</span>
             <h4 style="font-size: 1.2rem; font-weight: 850; color: #0f172a; margin: 5px 0 10px;">1200+ Tractors Delivered</h4>
             <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin: 0;">
               Achieved milestone of delivering over 1200 tractors, supporting 5000+ farmers across Nigeria with 24/7 assistance and training programs.
@@ -1427,7 +1427,7 @@ export function renderHomeScreen() {
   teamSec.innerHTML = `
     <div class="container">
       <div style="text-align: center; margin-bottom: 70px;">
-        <span class="reveal" style="font-size: 0.85rem; font-weight: 800; color: #059669; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">Our Team</span>
+        <span class="reveal" style="font-size: 0.85rem; font-weight: 800; color: #991b1b; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">Our Team</span>
         <h2 class="reveal" style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; color: #0f172a; letter-spacing: -1px; margin-bottom: 20px;">The Leadership & Technical Experts</h2>
         <p class="reveal" style="color: #475569; font-size: 1.1rem; max-width: 750px; margin: 0 auto; line-height: 1.7;">
           The dedicated professionals working round the clock to power modern agriculture and customer success across Nigeria.
