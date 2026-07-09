@@ -841,7 +841,13 @@ export function renderHomeScreen() {
     // Process transparency
     machinerySlides.forEach(slide => {
       const img = container.querySelector(`#${slide.id}`);
-      if (img) makeImageTransparent(img, slide.src);
+      if (img) {
+        if (slide.src.includes('hero_slides')) {
+          img.src = slide.src;
+        } else {
+          makeImageTransparent(img, slide.src);
+        }
+      }
     });
 
     // Bind dot click events
