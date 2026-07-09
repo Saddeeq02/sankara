@@ -714,18 +714,17 @@ export function renderHomeScreen() {
 
   // Slideshow Logic for the Machinery Slides
   const machinerySlides = [
-    { id: 'slide-lovol-754h', src: '/assets/hero_slides/LOVOL%20754-H.png', label: 'LOVOL 754-H' },
-    { id: 'slide-lovol-side', src: '/assets/hero_slides/LOVOL%20SIDE.png', label: 'LOVOL SIDE' },
-    { id: 'slide-mf375-front', src: '/assets/hero_slides/MF-375%20FRONT.png', label: 'MF-375 FRONT' },
-    { id: 'slide-mf375', src: '/assets/hero_slides/MF-375.png', label: 'MF-375' },
-    { id: 'slide-powertiller', src: '/assets/hero_slides/POWERTILLER.png', label: 'POWERTILLER' },
-    { id: 'slide-rg108-front', src: '/assets/hero_slides/RG108-FRONT.png', label: 'RG108 FRONT' },
-    { id: 'slide-rg108', src: '/assets/hero_slides/RG108.png', label: 'RG108' },
-    { id: 'slide-rk750', src: '/assets/hero_slides/RK750.png', label: 'RK750' },
-    { id: 'slide-transplanter', src: '/assets/hero_slides/TRANSPLANTER.png', label: 'TRANSPLANTER' },
-    { id: 'slide-zl100-side', src: '/assets/hero_slides/ZL100-SIDE.png', label: 'ZL100 SIDE' },
-    { id: 'slide-zl110-front', src: '/assets/hero_slides/ZL110-FRONT.png', label: 'ZL110 FRONT' },
-    { id: 'slide-zl110', src: '/assets/hero_slides/ZL110.png', label: 'ZL110' }
+    { id: 'slide-lovol-754', src: '/assets/hero_slides/LOVOL-754.png', label: 'LOVOL 754' },
+    { id: 'slide-lovol-754-front', src: '/assets/hero_slides/LOVOL754FRONT.png', label: 'LOVOL 754 FRONT' },
+    { id: 'slide-lovol-back', src: '/assets/hero_slides/LOVOLBACK.png', label: 'LOVOL BACK' },
+    { id: 'slide-mf375', src: '/assets/hero_slides/MF375.png', label: 'MF 375' },
+    { id: 'slide-rg108-plus', src: '/assets/hero_slides/RG108%2B.png', label: 'RG108+' },
+    { id: 'slide-rg108-side', src: '/assets/hero_slides/RG108-SIDE.png', label: 'RG108 SIDE' },
+    { id: 'slide-rk904', src: '/assets/hero_slides/RK904.png', label: 'RK 904' },
+    { id: 'slide-rk904-side', src: '/assets/hero_slides/RK904SIDE.png', label: 'RK 904 SIDE' },
+    { id: 'slide-zl110-s', src: '/assets/hero_slides/ZL110-S.png', label: 'ZL110-S' },
+    { id: 'slide-zl110', src: '/assets/hero_slides/ZL110.png', label: 'ZL 110' },
+    { id: 'slide-tiller', src: '/assets/hero_slides/tiller.png', label: 'TILLER' }
   ];
   
   let currentSlide = 0;
