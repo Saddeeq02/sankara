@@ -356,6 +356,40 @@ Route::delete('inquiries/{id}', function(Request $request, $id) use ($verifyToke
 });
 
 
+Route::get('hero-slides', function() {
+    $dir = base_path('../frontend/public/assets/hero_slides');
+    if (!is_dir($dir)) {
+        return response()->json([]);
+    }
+    
+    $files = array_diff(scandir($dir), ['.', '..']);
+    $slides = [];
+    $idx = 0;
+    
+    // Sort files to preserve user ordering (like 01_, 02_)
+    natsort($files);
+    
+    foreach ($files as $file) {
+        $path = $dir . '/' . $file;
+        if (is_file($path) && in_array(strtolower(pathinfo($file, PATHINFO_EXTENSION)), ['png', 'jpg', 'jpeg', 'webp'])) {
+            $filename = pathinfo($file, PATHINFO_FILENAME);
+            
+            // Extract model label: strip leading digits/underscores, replace underscores with spaces
+            $label = preg_replace('/^\d+[_-]/', '', $filename);
+            $label = str_replace(['_', '-'], ' ', $label);
+            $label = trim(strtoupper($label));
+            
+            $slides[] = [
+                'id' => 'hero-slide-' . preg_replace('/[^a-zA-Z0-9]/', '', $filename),
+                'src' => '/assets/hero_slides/' . $file,
+                'label' => $label
+            ];
+        }
+    }
+    return response()->json($slides);
+});
+
+
 // TEAM MANAGEMENT
 Route::get('team', function() {
     return response()->json(TeamMember::all());

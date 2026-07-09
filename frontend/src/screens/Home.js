@@ -712,8 +712,8 @@ export function renderHomeScreen() {
     heroSec.style.backgroundImage = `url(${bgImages[currentBgIndex]})`;
   }, 1800000); // 30 minutes interval
 
-  // Slideshow Logic for the 11 Lovol and Massey Ferguson Machinery Slides
-  const machinerySlides = [
+  // Slideshow Logic for the Lovol and Massey Ferguson Machinery Slides
+  let machinerySlides = [
     { id: 'tractor-side', src: '/assets/lovol_tractor_754h.png', label: 'TR-SIDE' },
     { id: 'tractor-front', src: '/assets/lovol_tractor_754h_front.png', label: 'TR-FRONT' },
     { id: 'tractor-top', src: '/assets/lovol_tractor_754h_top.png', label: 'TR-TOP' },
@@ -803,18 +803,48 @@ export function renderHomeScreen() {
     };
   };
 
-  // Bind transparency, interactivity, and selectors
-  setTimeout(() => {
-    // Process transparency on all 11 slides
-    machinerySlides.forEach(slide => {
-      const img = heroSec.querySelector(`#${slide.id}`);
-      if (img) makeImageTransparent(img, slide.src);
-    });
+  // Bind transparency, interactivity, and selectors dynamically
+  const initHeroSlideshow = async () => {
+    try {
+      const res = await fetch('/api/hero-slides');
+      const dynamicSlides = await res.json();
+      if (dynamicSlides && dynamicSlides.length > 0) {
+        machinerySlides = dynamicSlides;
+      }
+    } catch (err) {
+      console.error('Error loading dynamic hero slides:', err);
+    }
 
     const container = heroSec.querySelector('.hero-visual');
     if (!container) return;
 
-    // Direct click handler on view selector dots
+    // Generate dynamic slide images and dot selectors
+    const slidesHtml = machinerySlides.map((slide, idx) => `
+      <img id="${slide.id}" class="visual-slide ${idx === 0 ? 'active' : ''}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="${slide.label}">
+    `).join('');
+
+    const dotsHtml = machinerySlides.map((slide, idx) => `
+      <span class="view-dot ${idx === 0 ? 'active' : ''}" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">${slide.label}</span>
+    `).join('');
+
+    container.innerHTML = `
+      <svg class="floating-gear-bg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="top:-50px; right:-20px; width:180px; height:180px;">
+        <path d="M50 25C36.19 25 25 36.19 25 50C25 63.81 36.19 75 50 75C63.81 75 75 63.81 75 50C75 36.19 63.81 25 50 25ZM50 67C40.61 67 33 59.39 33 50C33 40.61 40.61 33 50 33C59.39 33 67 40.61 67 50C67 59.39 59.39 67 50 67Z" fill="#3b82f6"/>
+      </svg>
+      <div class="machinery-shadow"></div>
+      ${slidesHtml}
+      <div class="machinery-view-selector" style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 95%; margin: 15px auto 0;">
+        ${dotsHtml}
+      </div>
+    `;
+
+    // Process transparency
+    machinerySlides.forEach(slide => {
+      const img = container.querySelector(`#${slide.id}`);
+      if (img) makeImageTransparent(img, slide.src);
+    });
+
+    // Bind dot click events
     const dots = container.querySelectorAll('.view-dot');
     dots.forEach((dot, idx) => {
       dot.onclick = (e) => {
@@ -833,7 +863,6 @@ export function renderHomeScreen() {
       const x = clientX - rect.left;
       const y = clientY - rect.top;
       
-      // Rotate between -20deg and +20deg for deeper tactile response
       const rotateX = -((y / rect.height) - 0.5) * 40;
       const rotateY = ((x / rect.width) - 0.5) * 40;
       
@@ -854,7 +883,9 @@ export function renderHomeScreen() {
     container.addEventListener('mouseleave', handleReset);
     container.addEventListener('touchmove', handleMove, { passive: true });
     container.addEventListener('touchend', handleReset);
-  }, 100);
+  };
+
+  setTimeout(initHeroSlideshow, 100);
 
   heroSec.innerHTML = `
     <div class="corp-hero-overlay" style="background: linear-gradient(135deg, rgba(3, 7, 18, 0.85) 0%, rgba(3, 7, 18, 0.75) 100%);"></div>
@@ -878,39 +909,7 @@ export function renderHomeScreen() {
       </div>
       
       <div class="hero-visual" style="cursor: grab;">
-        <svg class="floating-gear-bg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="top:-50px; right:-20px; width:180px; height:180px;">
-          <path d="M50 25C36.19 25 25 36.19 25 50C25 63.81 36.19 75 50 75C63.81 75 75 63.81 75 50C75 36.19 63.81 25 50 25ZM50 67C40.61 67 33 59.39 33 50C33 40.61 40.61 33 50 33C59.39 33 67 40.61 67 50C67 59.39 59.39 67 50 67Z" fill="#3b82f6"/>
-        </svg>
-        <div class="machinery-shadow"></div>
-        
-        <!-- Lovol Tractor Views (Original 3D) -->
-        <img id="tractor-side" class="visual-slide active" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Tractor 754-H Side View">
-        <img id="tractor-front" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Tractor 754-H Front View">
-        <img id="tractor-top" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Tractor 754-H Top View">
-        
-        <!-- Lovol Harvester Views (Original 3D) -->
-        <img id="harvester-side" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Harvester RG109Plus Side View">
-        <img id="harvester-front" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Harvester RG109Plus Front View">
-        <img id="harvester-top" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol Harvester RG109Plus Top View">
-
-        <!-- Uploaded Vehicles (New 5) -->
-        <img id="fleet-lovol-754h" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol 754-H Blue Tractor">
-        <img id="fleet-mf-375" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Massey Ferguson 375 Tractor">
-        <img id="fleet-lovol-rg109plus" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol RG109Plus Harvester">
-        <img id="fleet-lovol-af108" class="visual-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lovol AF108 Harvester">
-
-        <div class="machinery-view-selector" style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 95%; margin: 15px auto 0;">
-          <span class="view-dot active" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">TR-SIDE</span>
-          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">TR-FRONT</span>
-          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">TR-TOP</span>
-          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">HV-SIDE</span>
-          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">HV-FRONT</span>
-          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">HV-TOP</span>
-          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">LOVOL-754H</span>
-          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">MF-375</span>
-          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">RG109+</span>
-          <span class="view-dot" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">AF108</span>
-        </div>
+        <!-- Filled dynamically on load from GET /api/hero-slides -->
       </div>
     </div>
   `;
