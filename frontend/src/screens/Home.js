@@ -19,7 +19,7 @@ export function renderHomeScreen() {
     
     /* Hero section with clean gradient background and custom graphic */
     .hero-sec {
-      background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #022c22 100%);
+      background: linear-gradient(135deg, #030712 0%, #7f1d1d 50%, #030712 100%);
       color: #ffffff;
       padding: 180px 0 160px;
       position: relative;
@@ -71,7 +71,7 @@ export function renderHomeScreen() {
     }
     
     .hero-title-main span {
-      background: linear-gradient(135deg, #dc2626 0%, #3b82f6 100%);
+      background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -106,7 +106,7 @@ export function renderHomeScreen() {
       bottom: 25px;
       width: 85%;
       height: 25px;
-      background: radial-gradient(ellipse, rgba(59, 130, 246, 0.45) 0%, rgba(2, 44, 34, 0) 70%);
+      background: radial-gradient(ellipse, rgba(59, 130, 246, 0.45) 0%, rgba(3, 7, 18, 0) 70%);
       filter: blur(8px);
       z-index: 1;
       pointer-events: none;
@@ -148,7 +148,7 @@ export function renderHomeScreen() {
       display: flex;
       gap: 16px;
       z-index: 10;
-      background: rgba(2, 44, 34, 0.7);
+      background: rgba(3, 7, 18, 0.8);
       padding: 8px 20px;
       border-radius: 100px;
       border: 1px solid rgba(59, 130, 246, 0.25);
@@ -309,14 +309,14 @@ export function renderHomeScreen() {
     }
     
     .tab-btn.active, .tab-btn:hover {
-      background: #022c22;
+      background: #030712;
       color: #ffffff;
-      border-color: #022c22;
+      border-color: #030712;
     }
     
     /* Stats Section */
     .sec-stats {
-      background: radial-gradient(circle at center, #023c2d 0%, #011c15 100%);
+      background: radial-gradient(circle at center, #7f1d1d 0%, #030712 100%);
       color: #ffffff;
       padding: 100px 0;
       position: relative;
@@ -428,7 +428,7 @@ export function renderHomeScreen() {
     .stat-num-val {
       font-size: 3.5rem;
       font-weight: 900;
-      background: linear-gradient(135deg, #3b82f6 0%, #dc2626 100%);
+      background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 12px;
@@ -447,7 +447,7 @@ export function renderHomeScreen() {
     
     /* Partner banner curves */
     .cta-banner {
-      background: linear-gradient(135deg, #022c22 0%, #064e3b 100%);
+      background: linear-gradient(135deg, #030712 0%, #7f1d1d 100%);
       border-radius: 32px;
       padding: 80px;
       color: #ffffff;
@@ -457,7 +457,7 @@ export function renderHomeScreen() {
       align-items: center;
       justify-content: space-between;
       gap: 40px;
-      box-shadow: 0 40px 80px -20px rgba(2, 44, 34, 0.3);
+      box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.3);
     }
     
     @media (max-width: 968px) {
@@ -857,7 +857,7 @@ export function renderHomeScreen() {
   }, 100);
 
   heroSec.innerHTML = `
-    <div class="corp-hero-overlay" style="background: linear-gradient(135deg, rgba(2, 44, 34, 0.75) 0%, rgba(2, 44, 34, 0.65) 100%);"></div>
+    <div class="corp-hero-overlay" style="background: linear-gradient(135deg, rgba(3, 7, 18, 0.85) 0%, rgba(3, 7, 18, 0.75) 100%);"></div>
     <div class="container hero-grid">
       <div class="hero-content-block">
         <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(220, 38, 38, 0.15); padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(220, 38, 38, 0.2); margin-bottom: 25px;">
@@ -1059,7 +1059,7 @@ export function renderHomeScreen() {
           </p>
         </div>
         <div>
-          <a href="/contact" data-route="contact" class="btn-main-green" style="background: #ffffff; color: #022c22; box-shadow: 0 4px 20px rgba(255,255,255,0.15); white-space: nowrap;">
+          <a href="/contact" data-route="contact" class="btn-main-green" style="background: #ffffff; color: #030712; box-shadow: 0 4px 20px rgba(255,255,255,0.15); white-space: nowrap;">
             Contact Corporate Office
           </a>
         </div>

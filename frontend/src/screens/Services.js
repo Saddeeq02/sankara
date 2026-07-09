@@ -77,7 +77,7 @@ export function renderServicesScreen() {
     }
 
     .services-hero-title span {
-      background: linear-gradient(135deg, #3b82f6 0%, #dc2626 100%);
+      background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -207,7 +207,7 @@ export function renderServicesScreen() {
       left: 0;
       width: 100%;
       height: 4px;
-      background: linear-gradient(90deg, #dc2626, #3b82f6);
+      background: linear-gradient(90deg, #dc2626, #7f1d1d);
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -526,7 +526,7 @@ export function renderServicesScreen() {
       position: relative;
       overflow: hidden;
       text-align: center;
-      box-shadow: 0 40px 80px -20px rgba(2, 44, 34, 0.3);
+      box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.3);
     }
 
     .cta-card-serv::before {
@@ -720,7 +720,7 @@ export function renderServicesScreen() {
         </div>
 
         <!-- Right: Screen / Results -->
-        <div class="reveal" style="background: #0b0f19; border: 1px solid rgba(220, 38, 38, 0.2); border-radius: 28px; padding: 40px; color: #ffffff; min-height: 380px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 30px 60px rgba(2, 44, 34, 0.25);">
+        <div class="reveal" style="background: #0b0f19; border: 1px solid rgba(220, 38, 38, 0.2); border-radius: 28px; padding: 40px; color: #ffffff; min-height: 380px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);">
           <!-- Futuristic background elements -->
           <div style="position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.15), transparent 60%); pointer-events: none;"></div>
           
@@ -761,7 +761,7 @@ export function renderServicesScreen() {
 
           <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
             <span style="font-size: 0.8rem; color: #a7f3d0; font-weight: 600;">Need physical maintenance support?</span>
-            <a href="/contact" data-route="contact" class="btn-main-green" style="padding: 10px 20px; font-size: 0.85rem; border-radius: 50px; background: #3b82f6; color: #022c22; text-decoration: none;">Book Service</a>
+            <a href="/contact" data-route="contact" class="btn-main-green" style="padding: 10px 20px; font-size: 0.85rem; border-radius: 50px; background: #3b82f6; color: #030712; text-decoration: none;">Book Service</a>
           </div>
         </div>
       </div>

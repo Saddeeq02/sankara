@@ -17,7 +17,7 @@ export function renderContactScreen() {
     }
 
     .contact-hero {
-      background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #022c22 100%);
+      background: linear-gradient(135deg, #030712 0%, #7f1d1d 50%, #030712 100%);
       color: #ffffff;
       padding: 180px 0 110px;
       position: relative;
@@ -61,7 +61,7 @@ export function renderContactScreen() {
     }
 
     .contact-hero-title span {
-      background: linear-gradient(135deg, #3b82f6 0%, #dc2626 100%);
+      background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -96,12 +96,12 @@ export function renderContactScreen() {
 
     /* Left Column Styling */
     .contact-info-card {
-      background: #022c22;
+      background: #030712;
       border: 1px solid rgba(220, 38, 38, 0.2);
       border-radius: 28px;
       padding: 50px 40px;
       color: #ffffff;
-      box-shadow: 0 20px 50px rgba(2, 44, 34, 0.15);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
       position: relative;
       overflow: hidden;
     }
@@ -340,7 +340,7 @@ export function renderContactScreen() {
     }
 
     .visit-map-mock {
-      background: linear-gradient(135deg, #022c22 0%, #064e3b 100%);
+      background: linear-gradient(135deg, #030712 0%, #7f1d1d 100%);
       border-radius: 24px;
       height: 300px;
       position: relative;
@@ -369,7 +369,7 @@ export function renderContactScreen() {
       align-items: center;
       justify-content: center;
       color: #991b1b;
-      box-shadow: 0 10px 25px rgba(2, 44, 34, 0.4);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
       animation: float-pin 3s ease-in-out infinite;
       z-index: 2;
       margin-bottom: 15px;

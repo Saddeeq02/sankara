@@ -99,7 +99,7 @@ export function renderFooter() {
       left: 0;
       width: 35px;
       height: 3px;
-      background: linear-gradient(90deg, #3b82f6, #dc2626);
+      background: linear-gradient(90deg, #dc2626, #7f1d1d);
       border-radius: 50px;
     }
     .footer-links-list {

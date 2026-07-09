@@ -19,7 +19,7 @@ export function renderActivitiesScreen() {
     }
 
     .activities-hero {
-      background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #022c22 100%);
+      background: linear-gradient(135deg, #030712 0%, #7f1d1d 50%, #030712 100%);
       color: #ffffff;
       padding: 180px 0 110px;
       position: relative;
@@ -63,7 +63,7 @@ export function renderActivitiesScreen() {
     }
 
     .activities-hero-title span {
-      background: linear-gradient(135deg, #3b82f6 0%, #dc2626 100%);
+      background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -95,7 +95,7 @@ export function renderActivitiesScreen() {
       top: 0;
       bottom: 0;
       width: 2px;
-      background: linear-gradient(180deg, #dc2626 0%, #3b82f6 80%, transparent 100%);
+      background: linear-gradient(180deg, #dc2626 0%, #7f1d1d 80%, transparent 100%);
       transform: translateX(-50%);
     }
 
@@ -227,7 +227,7 @@ export function renderActivitiesScreen() {
     .timeline-date-val {
       font-size: 1.8rem;
       font-weight: 900;
-      color: #022c22;
+      color: #030712;
       letter-spacing: -0.5px;
     }
 

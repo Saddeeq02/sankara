@@ -629,7 +629,7 @@ export function renderProductsScreen() {
   hero.innerHTML = `
     <div class="container">
       <span class="reveal" style="color: #3b82f6; font-weight: 800; text-transform: uppercase; letter-spacing: 4px; display: block; margin-bottom: 20px;">Precision Machinery</span>
-      <h1 class="reveal" style="font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 25px; color: #ffffff;">Engineered For <br><span style="background: linear-gradient(135deg, #3b82f6 0%, #dc2626 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Maximum Performance</span></h1>
+      <h1 class="reveal" style="font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 25px; color: #ffffff;">Engineered For <br><span style="background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Maximum Performance</span></h1>
       <p class="reveal" style="color: #cbd5e1; font-size: 1.25rem; max-width: 700px; margin: 0 auto; line-height: 1.8;">
         Explore our curated collection of high-performance agricultural equipment, from world-class Massey Ferguson tractors to specialized industrial implements.
       </p>

@@ -20,7 +20,7 @@ export function renderGalleryScreen() {
     }
 
     .gallery-hero {
-      background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #022c22 100%);
+      background: linear-gradient(135deg, #030712 0%, #7f1d1d 50%, #030712 100%);
       color: #ffffff;
       padding: 180px 0 110px;
       position: relative;
@@ -64,7 +64,7 @@ export function renderGalleryScreen() {
     }
 
     .gallery-hero-title span {
-      background: linear-gradient(135deg, #3b82f6 0%, #dc2626 100%);
+      background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -165,7 +165,7 @@ export function renderGalleryScreen() {
       position: absolute;
       top: 15px;
       right: 15px;
-      background: rgba(2, 44, 34, 0.85);
+      background: rgba(3, 7, 18, 0.85);
       border: 1px solid rgba(59, 130, 246, 0.3);
       backdrop-filter: blur(10px);
       width: 40px;
@@ -210,7 +210,7 @@ export function renderGalleryScreen() {
     .lb-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(2, 28, 21, 0.95);
+      background: rgba(11, 15, 25, 0.95);
       backdrop-filter: blur(25px);
       z-index: 9999;
       display: none;
