@@ -980,6 +980,7 @@ export function renderHomeScreen() {
         <button class="tab-btn active" data-cat="All">All Fleet</button>
         <button class="tab-btn" data-cat="Tractors">Tractors</button>
         <button class="tab-btn" data-cat="Farm Implements">Implements</button>
+        <button class="tab-btn" data-cat="Specialized Equipment">Specialized</button>
         <button class="tab-btn" data-cat="Spare Parts">Spare Parts</button>
       </div>
       
@@ -1488,7 +1489,7 @@ const fallbackProducts = [
   {
     "id": "p-1",
     "name": "13HP Tata Power Tiller",
-    "category": "Farm Implements",
+    "category": "Specialized Equipment",
     "price": "Price on Request",
     "image": "/assets/products_staging/OTHER/13HP Tata Power Tiller/WhatsApp Image 2026-07-09 at 11.34.23 AM.jpeg",
     "images": [
@@ -1508,7 +1509,7 @@ const fallbackProducts = [
   {
     "id": "p-2",
     "name": "4-Row Corn Harvester Header",
-    "category": "Farm Implements",
+    "category": "Specialized Equipment",
     "price": "Price on Request",
     "image": "/assets/products_staging/OTHER/4 ROW CORN HARVESTER HEADER/WhatsApp Image 2026-07-09 at 11.34.04 AM (1).jpeg",
     "images": [
@@ -1529,7 +1530,7 @@ const fallbackProducts = [
   {
     "id": "p-3",
     "name": "7HP Tata Power Tiller",
-    "category": "Farm Implements",
+    "category": "Specialized Equipment",
     "price": "Price on Request",
     "image": "/assets/products_staging/OTHER/7HP Tata Power Tiller/WhatsApp Image 2026-07-09 at 11.34.24 AM (1).jpeg",
     "images": [
@@ -1549,7 +1550,7 @@ const fallbackProducts = [
   {
     "id": "p-4",
     "name": "Bamford Baler",
-    "category": "Farm Implements",
+    "category": "Specialized Equipment",
     "price": "Price on Request",
     "image": "/assets/products_staging/OTHER/Bamford Baler/BamfordBaler-x1zE2RlD.jpeg",
     "images": [
@@ -1568,7 +1569,7 @@ const fallbackProducts = [
   {
     "id": "p-5",
     "name": "Bamford Forage Harvester (Chopper)",
-    "category": "Farm Implements",
+    "category": "Specialized Equipment",
     "price": "Price on Request",
     "image": "/assets/products_staging/OTHER/Bamford Forage Harvester (Chopper)/BamfordForageHarvesterChopper-DfRrIS-T.jpeg",
     "images": [
@@ -1588,7 +1589,7 @@ const fallbackProducts = [
   {
     "id": "p-6",
     "name": "Multi-Crop Thresher",
-    "category": "Farm Implements",
+    "category": "Specialized Equipment",
     "price": "Price on Request",
     "image": "/assets/products_staging/OTHER/THRESHER/WhatsApp Image 2026-07-09 at 11.33.51 AM.jpeg",
     "images": [
@@ -1609,7 +1610,7 @@ const fallbackProducts = [
   {
     "id": "p-7",
     "name": "Tata 2BYZF-4 No-Till Planter with Fertilizer Applicator",
-    "category": "Farm Implements",
+    "category": "Specialized Equipment",
     "price": "Price on Request",
     "image": "/assets/products_staging/OTHER/Tata 2BYZF-4 No-Till Planter with Fertilizer Applicator/FertilizerApplicator4Planter--V26CKtd.jpeg",
     "images": [
@@ -1632,7 +1633,7 @@ const fallbackProducts = [
   {
     "id": "p-8",
     "name": "Tata 2BYZF-6 No-Till Planter with Fertilizer Applicator",
-    "category": "Farm Implements",
+    "category": "Specialized Equipment",
     "price": "Price on Request",
     "image": "/assets/products_staging/OTHER/Tata 2BYZF-6 No-Till Planter with Fertilizer Applicator/FertilizerApplicator-DRJGsdIk.jpeg",
     "images": [
@@ -1654,7 +1655,7 @@ const fallbackProducts = [
   {
     "id": "p-9",
     "name": "Tata 6N2018X-G Rice Mill",
-    "category": "Farm Implements",
+    "category": "Specialized Equipment",
     "price": "Price on Request",
     "image": "/assets/products_staging/OTHER/Tata 6N2018X-G Rice Mill/WhatsApp Image 2026-07-09 at 11.33.52 AM.jpeg",
     "images": [
@@ -1675,7 +1676,7 @@ const fallbackProducts = [
   {
     "id": "p-10",
     "name": "Tata Boom Sprayer",
-    "category": "Farm Implements",
+    "category": "Specialized Equipment",
     "price": "Price on Request",
     "image": "/assets/products_staging/OTHER/Tata Boom Sprayer/TataBoomSprayer-DdUxDens.jpeg",
     "images": [
@@ -1694,7 +1695,7 @@ const fallbackProducts = [
   {
     "id": "p-11",
     "name": "Tata Rice Transplanter",
-    "category": "Farm Implements",
+    "category": "Specialized Equipment",
     "price": "Price on Request",
     "image": "/assets/products_staging/OTHER/Tata Rice Transplanter/RiceTransplanter-nXZtJxAL.jpeg",
     "images": [
