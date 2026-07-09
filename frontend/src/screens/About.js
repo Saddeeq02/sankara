@@ -453,80 +453,128 @@ export function renderAboutScreen() {
   const pageStyle = document.createElement('style');
   pageStyle.innerHTML = `
     .team-member-card {
-      background: #ffffff;
-      border: 1px solid rgba(226, 232, 240, 0.85);
-      border-radius: 24px;
-      padding: 35px 30px;
+      background: var(--surface-color, #ffffff);
+      border: 1px solid var(--glass-border, rgba(226, 232, 240, 0.85));
+      border-radius: 28px;
+      padding: 20px;
       text-align: center;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    [data-theme="dark"] .team-member-card {
+      background: rgba(30, 41, 59, 0.4);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
 
     .team-member-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(16, 185, 129, 0.25);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+      transform: translateY(-8px);
+      border-color: #10b981;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="dark"] .team-member-card:hover {
+      border-color: #34d399;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
     }
 
     .team-member-img-box {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
+      width: 100%;
+      height: 280px;
+      border-radius: 20px;
       overflow: hidden;
-      margin: 0 auto 25px;
-      border: 3px solid #10b981;
-      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15);
-      transition: all 0.4s ease;
+      margin: 0 auto 20px;
+      border: 1px solid var(--glass-border, rgba(226, 232, 240, 0.85));
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    [data-theme="dark"] .team-member-img-box {
+      border-color: rgba(255, 255, 255, 0.08);
     }
 
     .team-member-card:hover .team-member-img-box {
-      transform: scale(1.05) rotate(3deg);
+      transform: scale(1.02);
       border-color: #34d399;
-      box-shadow: 0 12px 30px rgba(52, 211, 153, 0.3);
+      box-shadow: 0 12px 30px rgba(52, 211, 153, 0.2);
     }
 
     .team-member-img-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     .team-member-name {
-      font-size: 1.3rem;
-      font-weight: 850;
-      color: #0f172a;
-      margin-bottom: 8px;
-      letter-spacing: -0.3px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text-main, #0f172a);
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+      font-family: 'Outfit', sans-serif;
     }
 
     .team-member-role {
-      font-size: 0.95rem;
-      font-weight: 750;
+      font-size: 0.8rem;
+      font-weight: 800;
       color: #059669;
-      margin-bottom: 15px;
+      background: rgba(5, 150, 105, 0.06);
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 18px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.08em;
+      display: inline-block;
+      border: 1px solid rgba(5, 150, 105, 0.12);
+    }
+
+    [data-theme="dark"] .team-member-role {
+      color: #34d399;
+      background: rgba(52, 211, 153, 0.06);
+      border-color: rgba(52, 211, 153, 0.12);
     }
 
     .team-member-phone {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: #f8fafc;
-      color: #64748b;
-      padding: 6px 14px;
-      border-radius: 50px;
-      font-size: 0.85rem;
+      justify-content: center;
+      gap: 8px;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 14px;
+      font-size: 0.9rem;
       font-weight: 700;
-      border: 1px solid #e2e8f0;
+      border: none;
+      width: 100%;
+      box-sizing: border-box;
       transition: all 0.3s ease;
       text-decoration: none;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+    }
+
+    [data-theme="dark"] .team-member-phone {
+      background: #334155;
+      color: #f8fafc;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
 
     .team-member-card:hover .team-member-phone {
-      background: rgba(16, 185, 129, 0.08);
-      color: #059669;
-      border-color: rgba(16, 185, 129, 0.15);
+      background: #059669;
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3);
+    }
+
+    [data-theme="dark"] .team-member-card:hover .team-member-phone {
+      background: #10b981;
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
     }
 
     @media (max-width: 991px) {
