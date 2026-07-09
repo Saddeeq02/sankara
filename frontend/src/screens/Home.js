@@ -712,18 +712,20 @@ export function renderHomeScreen() {
     heroSec.style.backgroundImage = `url(${bgImages[currentBgIndex]})`;
   }, 1800000); // 30 minutes interval
 
-  // Slideshow Logic for the Lovol and Massey Ferguson Machinery Slides
-  let machinerySlides = [
-    { id: 'tractor-side', src: '/assets/lovol_tractor_754h.png', label: 'TR-SIDE' },
-    { id: 'tractor-front', src: '/assets/lovol_tractor_754h_front.png', label: 'TR-FRONT' },
-    { id: 'tractor-top', src: '/assets/lovol_tractor_754h_top.png', label: 'TR-TOP' },
-    { id: 'harvester-side', src: '/assets/lovol_harvester_rg109plus.png', label: 'HV-SIDE' },
-    { id: 'harvester-front', src: '/assets/lovol_harvester_rg109plus_front.png', label: 'HV-FRONT' },
-    { id: 'harvester-top', src: '/assets/lovol_harvester_rg109plus_top.png', label: 'HV-TOP' },
-    { id: 'fleet-lovol-754h', src: '/assets/fleet_lovol_754h.png', label: 'LOVOL 754H' },
-    { id: 'fleet-mf-375', src: '/assets/fleet_mf_375.png', label: 'MF 375' },
-    { id: 'fleet-lovol-rg109plus', src: '/assets/fleet_lovol_rg109plus.png', label: 'RG109+' },
-    { id: 'fleet-lovol-af108', src: '/assets/fleet_lovol_af108.png', label: 'AF108' }
+  // Slideshow Logic for the Machinery Slides
+  const machinerySlides = [
+    { id: 'slide-lovol-754h', src: '/assets/hero_slides/LOVOL%20754-H.png', label: 'LOVOL 754-H' },
+    { id: 'slide-lovol-side', src: '/assets/hero_slides/LOVOL%20SIDE.png', label: 'LOVOL SIDE' },
+    { id: 'slide-mf375-front', src: '/assets/hero_slides/MF-375%20FRONT.png', label: 'MF-375 FRONT' },
+    { id: 'slide-mf375', src: '/assets/hero_slides/MF-375.png', label: 'MF-375' },
+    { id: 'slide-powertiller', src: '/assets/hero_slides/POWERTILLER.png', label: 'POWERTILLER' },
+    { id: 'slide-rg108-front', src: '/assets/hero_slides/RG108-FRONT.png', label: 'RG108 FRONT' },
+    { id: 'slide-rg108', src: '/assets/hero_slides/RG108.png', label: 'RG108' },
+    { id: 'slide-rk750', src: '/assets/hero_slides/RK750.png', label: 'RK750' },
+    { id: 'slide-transplanter', src: '/assets/hero_slides/TRANSPLANTER.png', label: 'TRANSPLANTER' },
+    { id: 'slide-zl100-side', src: '/assets/hero_slides/ZL100-SIDE.png', label: 'ZL100 SIDE' },
+    { id: 'slide-zl110-front', src: '/assets/hero_slides/ZL110-FRONT.png', label: 'ZL110 FRONT' },
+    { id: 'slide-zl110', src: '/assets/hero_slides/ZL110.png', label: 'ZL110' }
   ];
   
   let currentSlide = 0;
@@ -803,75 +805,20 @@ export function renderHomeScreen() {
     };
   };
 
-  // Bind transparency, interactivity, and selectors dynamically
-  const initHeroSlideshow = () => {
-    try {
-      const modules = import.meta.glob('../../public/assets/hero_slides/*.{png,jpg,jpeg,webp}', { eager: true });
-      const globSlides = Object.keys(modules).map((path) => {
-        const file = path.split('/').pop();
-        const filename = file.substring(0, file.lastIndexOf('.'));
-        
-        // Clean label names
-        const label = filename.replace(/^\d+[_-]/, '').replace(/[_-]/g, ' ').trim().toUpperCase();
-        
-        // Resolve dynamic hashed image path from Vite module import
-        const resolvedSrc = (modules[path] && typeof modules[path] === 'object' && 'default' in modules[path])
-          ? modules[path].default
-          : modules[path];
-
-        return {
-          id: 'hero-slide-' + filename.replace(/[^a-zA-Z0-9]/g, ''),
-          src: resolvedSrc || ('/assets/hero_slides/' + file),
-          label: label,
-          isNewHero: true
-        };
-      });
-
-      if (globSlides && globSlides.length > 0) {
-        // Sort slides to maintain alphabetical/numerical order (e.g. if prefixed)
-        globSlides.sort((a, b) => a.src.localeCompare(b.src, undefined, { numeric: true, sensitivity: 'base' }));
-        machinerySlides = globSlides;
-      }
-    } catch (err) {
-      console.error('Error loading glob hero slides:', err);
-    }
+  // Bind transparency, interactivity, and selectors
+  setTimeout(() => {
+    // Process transparency on slides (Bypassed: new slides are already transparent PNGs)
+    /*
+    machinerySlides.forEach(slide => {
+      const img = heroSec.querySelector(`#${slide.id}`);
+      if (img) makeImageTransparent(img, slide.src);
+    });
+    */
 
     const container = heroSec.querySelector('.hero-visual');
     if (!container) return;
 
-    // Generate dynamic slide images and dot selectors
-    const slidesHtml = machinerySlides.map((slide, idx) => `
-      <img id="${slide.id}" class="visual-slide ${idx === 0 ? 'active' : ''}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="${slide.label}">
-    `).join('');
-
-    const dotsHtml = machinerySlides.map((slide, idx) => `
-      <span class="view-dot ${idx === 0 ? 'active' : ''}" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">${slide.label}</span>
-    `).join('');
-
-    container.innerHTML = `
-      <svg class="floating-gear-bg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="top:-50px; right:-20px; width:180px; height:180px;">
-        <path d="M50 25C36.19 25 25 36.19 25 50C25 63.81 36.19 75 50 75C63.81 75 75 63.81 75 50C75 36.19 63.81 25 50 25ZM50 67C40.61 67 33 59.39 33 50C33 40.61 40.61 33 50 33C59.39 33 67 40.61 67 50C67 59.39 59.39 67 50 67Z" fill="#3b82f6"/>
-      </svg>
-      <div class="machinery-shadow"></div>
-      ${slidesHtml}
-      <div class="machinery-view-selector" style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 95%; margin: 15px auto 0;">
-        ${dotsHtml}
-      </div>
-    `;
-
-    // Process transparency
-    machinerySlides.forEach(slide => {
-      const img = container.querySelector(`#${slide.id}`);
-      if (img) {
-        if (slide.isNewHero) {
-          img.src = slide.src;
-        } else {
-          makeImageTransparent(img, slide.src);
-        }
-      }
-    });
-
-    // Bind dot click events
+    // Direct click handler on view selector dots
     const dots = container.querySelectorAll('.view-dot');
     dots.forEach((dot, idx) => {
       dot.onclick = (e) => {
@@ -890,6 +837,7 @@ export function renderHomeScreen() {
       const x = clientX - rect.left;
       const y = clientY - rect.top;
       
+      // Rotate between -20deg and +20deg for deeper tactile response
       const rotateX = -((y / rect.height) - 0.5) * 40;
       const rotateY = ((x / rect.width) - 0.5) * 40;
       
@@ -910,9 +858,7 @@ export function renderHomeScreen() {
     container.addEventListener('mouseleave', handleReset);
     container.addEventListener('touchmove', handleMove, { passive: true });
     container.addEventListener('touchend', handleReset);
-  };
-
-  setTimeout(initHeroSlideshow, 100);
+  }, 100);
 
   heroSec.innerHTML = `
     <div class="corp-hero-overlay" style="background: linear-gradient(135deg, rgba(3, 7, 18, 0.85) 0%, rgba(3, 7, 18, 0.75) 100%);"></div>
@@ -936,7 +882,21 @@ export function renderHomeScreen() {
       </div>
       
       <div class="hero-visual" style="cursor: grab;">
-        <!-- Filled dynamically on load from GET /api/hero-slides -->
+        <svg class="floating-gear-bg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="top:-50px; right:-20px; width:180px; height:180px;">
+          <path d="M50 25C36.19 25 25 36.19 25 50C25 63.81 36.19 75 50 75C63.81 75 75 63.81 75 50C75 36.19 63.81 25 50 25ZM50 67C40.61 67 33 59.39 33 50C33 40.61 40.61 33 50 33C59.39 33 67 40.61 67 50C67 59.39 59.39 67 50 67Z" fill="#3b82f6"/>
+        </svg>
+        <div class="machinery-shadow"></div>
+        
+        <!-- Dynamic transparent machinery slides -->
+        ${machinerySlides.map((slide, idx) => `
+          <img id="${slide.id}" class="visual-slide ${idx === 0 ? 'active' : ''}" src="${slide.src}" alt="${slide.label}">
+        `).join('')}
+
+        <div class="machinery-view-selector" style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 95%; margin: 15px auto 0;">
+          ${machinerySlides.map((slide, idx) => `
+            <span class="view-dot ${idx === 0 ? 'active' : ''}" style="font-size: 0.62rem; padding: 4px 8px; margin: 1px;">${slide.label}</span>
+          `).join('')}
+        </div>
       </div>
     </div>
   `;
