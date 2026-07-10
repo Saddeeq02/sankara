@@ -73,9 +73,10 @@ export function renderHomeScreen() {
     }
     
     .hero-title-main span {
-      background: linear-gradient(135deg, #dc2626 0%, #3b82f6 100%);
+      background: linear-gradient(135deg, #facc15 0%, #f97316 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 8px rgba(249, 115, 22, 0.3));
     }
     
     .hero-desc {
