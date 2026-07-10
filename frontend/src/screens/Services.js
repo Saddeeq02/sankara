@@ -17,20 +17,20 @@ export function renderServicesScreen() {
     }
     
     .services-hero {
-      background: linear-gradient(135deg, #0b0f19 0%, #030712 100%);
-      color: #ffffff;
+      background: linear-gradient(135deg, #f8fafc 0%, #fee2e2 50%, #eff6ff 100%);
+      color: #0f172a;
       padding: 180px 0 130px;
       position: relative;
       overflow: hidden;
-      border-bottom: 1px solid rgba(220, 38, 38, 0.15);
+      border-bottom: 1px solid rgba(37, 99, 235, 0.08);
     }
     
     .services-hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top right, rgba(220, 38, 38, 0.18), transparent 70%),
-                  radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.12), transparent 70%);
+      background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.08), transparent 70%),
+                  radial-gradient(circle at bottom left, rgba(220, 38, 38, 0.06), transparent 70%);
       pointer-events: none;
       z-index: 1;
     }
@@ -55,12 +55,12 @@ export function renderServicesScreen() {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(220, 38, 38, 0.15);
+      background: rgba(37, 99, 235, 0.08);
       padding: 8px 16px;
       border-radius: 100px;
-      border: 1px solid rgba(220, 38, 38, 0.2);
+      border: 1px solid rgba(37, 99, 235, 0.15);
       margin-bottom: 25px;
-      color: #3b82f6;
+      color: #2563eb;
       font-size: 0.75rem;
       font-weight: 800;
       letter-spacing: 2px;
@@ -73,11 +73,11 @@ export function renderServicesScreen() {
       line-height: 1.1;
       letter-spacing: -2px;
       margin-bottom: 25px;
-      color: #ffffff;
+      color: #0f172a;
     }
 
     .services-hero-title span {
-      background: linear-gradient(135deg, #ffffff 0%, #fca5a5 100%);
+      background: linear-gradient(135deg, #dc2626 0%, #2563eb 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -85,7 +85,7 @@ export function renderServicesScreen() {
     .services-hero-desc {
       font-size: 1.15rem;
       line-height: 1.7;
-      color: #cbd5e1;
+      color: #475569;
       margin-bottom: 40px;
       max-width: 620px;
     }
@@ -106,11 +106,11 @@ export function renderServicesScreen() {
     }
 
     .hero-image-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(220, 38, 38, 0.2);
+      background: #ffffff;
+      border: 1px solid rgba(37, 99, 235, 0.12);
       border-radius: 30px;
       padding: 12px;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(220, 38, 38, 0.1);
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.04);
       backdrop-filter: blur(8px);
       transition: all 0.5s ease;
       width: 100%;
@@ -119,8 +119,8 @@ export function renderServicesScreen() {
 
     .hero-image-card:hover {
       transform: translateY(-8px) scale(1.02);
-      border-color: rgba(59, 130, 246, 0.4);
-      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 50px rgba(220, 38, 38, 0.15);
+      border-color: rgba(37, 99, 235, 0.3);
+      box-shadow: 0 30px 60px rgba(15, 23, 42, 0.08);
     }
 
     .hero-image-card img {
@@ -207,7 +207,7 @@ export function renderServicesScreen() {
       left: 0;
       width: 100%;
       height: 4px;
-      background: linear-gradient(90deg, #dc2626, #7f1d1d);
+      background: linear-gradient(90deg, #dc2626, #2563eb);
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -215,8 +215,8 @@ export function renderServicesScreen() {
 
     .service-premium-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.05), 0 0 25px rgba(220, 38, 38, 0.02);
-      border-color: rgba(220, 38, 38, 0.25);
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.06);
+      border-color: rgba(37, 99, 235, 0.25);
     }
 
     .service-premium-card:hover::before {
@@ -227,8 +227,8 @@ export function renderServicesScreen() {
       width: 56px;
       height: 56px;
       border-radius: 16px;
-      background: rgba(220, 38, 38, 0.08);
-      color: #991b1b;
+      background: rgba(37, 99, 235, 0.08);
+      color: #2563eb;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -237,10 +237,10 @@ export function renderServicesScreen() {
     }
 
     .service-premium-card:hover .service-card-icon-box {
-      background: #991b1b;
+      background: #2563eb;
       color: #ffffff;
       transform: scale(1.08) rotate(5deg);
-      box-shadow: 0 5px 15px rgba(153, 27, 27, 0.2);
+      box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
     }
 
     .service-card-title {
@@ -282,9 +282,9 @@ export function renderServicesScreen() {
     .service-card-point-dot {
       width: 6px;
       height: 6px;
-      background: #3b82f6;
+      background: #2563eb;
       border-radius: 50%;
-      box-shadow: 0 0 6px #3b82f6;
+      box-shadow: 0 0 6px #2563eb;
     }
 
     /* Why Choose Us Section */
@@ -330,8 +330,8 @@ export function renderServicesScreen() {
       width: 48px;
       height: 48px;
       border-radius: 12px;
-      background: rgba(220, 38, 38, 0.1);
-      color: #991b1b;
+      background: rgba(37, 99, 235, 0.08);
+      color: #2563eb;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -370,14 +370,14 @@ export function renderServicesScreen() {
     }
     
     .why-stat-card:hover {
-      border-color: rgba(220, 38, 38, 0.2);
+      border-color: rgba(37, 99, 235, 0.2);
       transform: translateY(-4px);
     }
 
     .why-stat-num {
       font-size: 3.2rem;
       font-weight: 900;
-      color: #991b1b;
+      color: #2563eb;
       line-height: 1;
       margin-bottom: 10px;
       letter-spacing: -1px;
@@ -394,10 +394,12 @@ export function renderServicesScreen() {
     /* Training Programs Section */
     .sec-training {
       padding: 120px 0;
-      background: #0b0f19;
-      color: #ffffff;
+      background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+      color: #0f172a;
       position: relative;
       overflow: hidden;
+      border-top: 1px solid rgba(37, 99, 235, 0.08);
+      border-bottom: 1px solid rgba(37, 99, 235, 0.08);
     }
 
     .sec-training::before {
@@ -405,7 +407,7 @@ export function renderServicesScreen() {
       position: absolute;
       width: 500px;
       height: 500px;
-      background: radial-gradient(circle, rgba(220, 38, 38, 0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
       top: -200px;
       right: -200px;
       pointer-events: none;
@@ -425,8 +427,8 @@ export function renderServicesScreen() {
     }
 
     .training-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(220, 38, 38, 0.15);
+      background: #ffffff;
+      border: 1px solid rgba(37, 99, 235, 0.12);
       border-radius: 24px;
       padding: 45px 35px;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -434,13 +436,14 @@ export function renderServicesScreen() {
       flex-direction: column;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.02);
     }
 
     .training-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(220, 38, 38, 0.04) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(37, 99, 235, 0.02) 0%, transparent 100%);
       opacity: 0;
       transition: opacity 0.4s ease;
       pointer-events: none;
@@ -448,9 +451,9 @@ export function renderServicesScreen() {
 
     .training-card:hover {
       transform: translateY(-8px);
-      border-color: rgba(220, 38, 38, 0.35);
-      background: rgba(255, 255, 255, 0.035);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      border-color: rgba(37, 99, 235, 0.3);
+      background: #ffffff;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06);
     }
 
     .training-card:hover::before {
@@ -461,8 +464,8 @@ export function renderServicesScreen() {
       width: 52px;
       height: 52px;
       border-radius: 16px;
-      background: rgba(220, 38, 38, 0.12);
-      color: #3b82f6;
+      background: rgba(37, 99, 235, 0.08);
+      color: #2563eb;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -471,23 +474,23 @@ export function renderServicesScreen() {
     }
 
     .training-card:hover .training-card-icon {
-      background: #dc2626;
+      background: #2563eb;
       color: #ffffff;
       transform: scale(1.08) rotate(5deg);
-      box-shadow: 0 0 15px rgba(220, 38, 38, 0.3);
+      box-shadow: 0 0 15px rgba(37, 99, 235, 0.25);
     }
 
     .training-title {
       font-size: 1.45rem;
       font-weight: 800;
-      color: #ffffff;
+      color: #0f172a;
       margin-bottom: 15px;
     }
 
     .training-desc {
       font-size: 1.02rem;
       line-height: 1.6;
-      color: #cbd5e1;
+      color: #475569;
       margin-bottom: 30px;
       flex-grow: 1;
     }
@@ -499,14 +502,14 @@ export function renderServicesScreen() {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      border-top: 1px solid rgba(220, 38, 38, 0.15);
+      border-top: 1px solid rgba(37, 99, 235, 0.12);
       padding-top: 25px;
     }
 
     .training-point {
       font-size: 0.92rem;
       font-weight: 700;
-      color: #bfdbfe;
+      color: #475569;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -519,21 +522,22 @@ export function renderServicesScreen() {
     }
 
     .cta-card-serv {
-      background: linear-gradient(135deg, #0b0f19 0%, #030712 100%);
+      background: linear-gradient(135deg, #fee2e2 0%, #dbeafe 100%);
       border-radius: 32px;
       padding: 80px;
-      color: #ffffff;
+      color: #0f172a;
       position: relative;
       overflow: hidden;
       text-align: center;
-      box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05);
+      border: 1px solid rgba(37, 99, 235, 0.08);
     }
 
     .cta-card-serv::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at center, rgba(220, 38, 38, 0.1), transparent 70%);
+      background: radial-gradient(circle at center, rgba(37, 99, 235, 0.06), transparent 70%);
       pointer-events: none;
     }
 
@@ -1006,9 +1010,9 @@ export function renderServicesScreen() {
   trainingSec.innerHTML = `
     <div class="container">
       <div style="text-align: center; margin-bottom: 60px;" class="reveal">
-        <span class="section-badge" style="color: #3b82f6;">Training & Education</span>
-        <h2 class="section-title" style="color: #ffffff;">Agricultural Training Programs</h2>
-        <p style="color: #cbd5e1; font-size: 1.1rem; max-width: 650px; margin: 0 auto;">
+        <span class="section-badge" style="color: #2563eb;">Training & Education</span>
+        <h2 class="section-title" style="color: #0f172a;">Agricultural Training Programs</h2>
+        <p style="color: #475569; font-size: 1.1rem; max-width: 650px; margin: 0 auto;">
           Empower your farming crew with expert technical knowledge and hands-on operational routines to maximize output.
         </p>
       </div>
@@ -1041,13 +1045,13 @@ export function renderServicesScreen() {
   ctaSec.innerHTML = `
     <div class="container">
       <div class="cta-card-serv reveal">
-        <span style="font-size: 0.8rem; font-weight: 800; color: #3b82f6; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block;">GET IN TOUCH</span>
-        <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; line-height: 1.2; margin-bottom: 25px; color: #ffffff;">Ready to Mechanize Your Operations?</h2>
-        <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7; max-width: 680px; margin: 0 auto 40px;">
+        <span style="font-size: 0.8rem; font-weight: 800; color: #2563eb; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block;">GET IN TOUCH</span>
+        <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; line-height: 1.2; margin-bottom: 25px; color: #0f172a;">Ready to Mechanize Your Operations?</h2>
+        <p style="color: #475569; font-size: 1.1rem; line-height: 1.7; max-width: 680px; margin: 0 auto 40px;">
           Partner with Sankara Nigeria Limited to secure robust agricultural machinery, spare parts supply lines, and dedicated field maintenance support.
         </p>
         <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-          <a href="/contact" class="btn-main-green" data-route="contact" style="background: #ffffff; color: #0b0f19; box-shadow: 0 4px 20px rgba(255,255,255,0.15); text-decoration: none;">
+          <a href="/contact" class="btn-main-green" data-route="contact" style="background: #2563eb; color: #ffffff; box-shadow: 0 4px 20px rgba(37,99,235,0.25); text-decoration: none;">
             Contact Corporate Office
           </a>
         </div>

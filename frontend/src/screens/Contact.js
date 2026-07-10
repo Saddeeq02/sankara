@@ -17,12 +17,12 @@ export function renderContactScreen() {
     }
 
     .contact-hero {
-      background: linear-gradient(135deg, #030712 0%, #7f1d1d 50%, #030712 100%);
-      color: #ffffff;
+      background: linear-gradient(135deg, #f8fafc 0%, #fee2e2 50%, #eff6ff 100%);
+      color: #0f172a;
       padding: 180px 0 110px;
       position: relative;
       overflow: hidden;
-      border-bottom: 1px solid rgba(220, 38, 38, 0.15);
+      border-bottom: 1px solid rgba(37, 99, 235, 0.08);
       text-align: center;
     }
 
@@ -30,7 +30,7 @@ export function renderContactScreen() {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top, rgba(220, 38, 38, 0.15), transparent 70%);
+      background: radial-gradient(circle at top, rgba(37, 99, 235, 0.06), transparent 70%);
       pointer-events: none;
       z-index: 1;
     }
@@ -39,12 +39,12 @@ export function renderContactScreen() {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(220, 38, 38, 0.15);
+      background: rgba(37, 99, 235, 0.08);
       padding: 8px 16px;
       border-radius: 100px;
-      border: 1px solid rgba(220, 38, 38, 0.2);
+      border: 1px solid rgba(37, 99, 235, 0.15);
       margin-bottom: 25px;
-      color: #3b82f6;
+      color: #2563eb;
       font-size: 0.75rem;
       font-weight: 800;
       letter-spacing: 2px;
@@ -57,11 +57,11 @@ export function renderContactScreen() {
       line-height: 1.15;
       letter-spacing: -1.5px;
       margin-bottom: 20px;
-      color: #ffffff;
+      color: #0f172a;
     }
 
     .contact-hero-title span {
-      background: linear-gradient(135deg, #ffffff 0%, #fca5a5 100%);
+      background: linear-gradient(135deg, #dc2626 0%, #2563eb 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -69,7 +69,7 @@ export function renderContactScreen() {
     .contact-hero-desc {
       font-size: 1.15rem;
       line-height: 1.6;
-      color: #eff6ff;
+      color: #475569;
       max-width: 650px;
       margin: 0 auto;
     }
@@ -96,12 +96,12 @@ export function renderContactScreen() {
 
     /* Left Column Styling */
     .contact-info-card {
-      background: #030712;
-      border: 1px solid rgba(220, 38, 38, 0.2);
+      background: #ffffff;
+      border: 1px solid rgba(37, 99, 235, 0.12);
       border-radius: 28px;
       padding: 50px 40px;
-      color: #ffffff;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      color: #0f172a;
+      box-shadow: 0 15px 35px rgba(15, 23, 42, 0.04);
       position: relative;
       overflow: hidden;
     }
@@ -111,7 +111,7 @@ export function renderContactScreen() {
       position: absolute;
       width: 300px;
       height: 300px;
-      background: radial-gradient(circle, rgba(220, 38, 38, 0.15) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
       bottom: -150px;
       right: -150px;
       pointer-events: none;
@@ -122,10 +122,11 @@ export function renderContactScreen() {
       font-weight: 850;
       margin-bottom: 15px;
       letter-spacing: -0.5px;
+      color: #0f172a;
     }
 
     .contact-info-subtitle {
-      color: #bfdbfe;
+      color: #475569;
       font-size: 1.02rem;
       line-height: 1.6;
       margin-bottom: 45px;
@@ -147,8 +148,8 @@ export function renderContactScreen() {
       width: 46px;
       height: 46px;
       border-radius: 12px;
-      background: rgba(59, 130, 246, 0.12);
-      color: #3b82f6;
+      background: rgba(37, 99, 235, 0.08);
+      color: #2563eb;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -158,7 +159,7 @@ export function renderContactScreen() {
     .contact-channel-details h5 {
       font-size: 0.85rem;
       font-weight: 800;
-      color: #bfdbfe;
+      color: #2563eb;
       letter-spacing: 1px;
       text-transform: uppercase;
       margin-bottom: 6px;
@@ -167,23 +168,23 @@ export function renderContactScreen() {
     .contact-channel-details p {
       font-size: 1.15rem;
       font-weight: 700;
-      color: #ffffff;
+      color: #0f172a;
       margin: 0;
     }
 
     .contact-channel-details a {
-      color: #ffffff;
+      color: #0f172a;
       text-decoration: none;
       transition: color 0.3s ease;
     }
 
     .contact-channel-details a:hover {
-      color: #3b82f6;
+      color: #2563eb;
     }
 
     /* Hours Block */
     .hours-block {
-      border-top: 1px solid rgba(220, 38, 38, 0.15);
+      border-top: 1px solid rgba(37, 99, 235, 0.12);
       margin-top: 40px;
       padding-top: 35px;
     }
@@ -191,7 +192,7 @@ export function renderContactScreen() {
     .hours-title {
       font-size: 0.85rem;
       font-weight: 800;
-      color: #bfdbfe;
+      color: #2563eb;
       letter-spacing: 1px;
       text-transform: uppercase;
       margin-bottom: 15px;
@@ -202,12 +203,12 @@ export function renderContactScreen() {
       justify-content: space-between;
       font-size: 0.95rem;
       margin-bottom: 10px;
-      color: #eff6ff;
+      color: #475569;
     }
 
     .hours-row span:last-child {
       font-weight: 700;
-      color: #ffffff;
+      color: #0f172a;
     }
 
     /* Form Column Styling */
@@ -285,7 +286,7 @@ export function renderContactScreen() {
       grid-template-columns: 1fr 1fr;
       gap: 20px;
       margin-top: 45px;
-      border-top: 1px solid rgba(220, 38, 38, 0.15);
+      border-top: 1px solid rgba(37, 99, 235, 0.12);
       padding-top: 35px;
     }
 
@@ -301,15 +302,15 @@ export function renderContactScreen() {
       gap: 10px;
       font-size: 0.9rem;
       font-weight: 700;
-      color: #bfdbfe;
+      color: #475569;
     }
 
     .contact-why-dot {
       width: 6px;
       height: 6px;
-      background: #3b82f6;
+      background: #2563eb;
       border-radius: 50%;
-      box-shadow: 0 0 6px #3b82f6;
+      box-shadow: 0 0 6px #2563eb;
     }
 
     /* Map & Visit Section */
@@ -340,7 +341,7 @@ export function renderContactScreen() {
     }
 
     .visit-map-mock {
-      background: linear-gradient(135deg, #030712 0%, #7f1d1d 100%);
+      background: linear-gradient(135deg, #fee2e2 0%, #dbeafe 100%);
       border-radius: 24px;
       height: 300px;
       position: relative;
@@ -349,14 +350,14 @@ export function renderContactScreen() {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      border: 1px solid rgba(220, 38, 38, 0.2);
+      border: 1px solid rgba(37, 99, 235, 0.1);
     }
 
     .visit-map-mock::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle, rgba(220, 38, 38, 0.25) 0%, transparent 80%);
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 80%);
       pointer-events: none;
     }
 
@@ -562,7 +563,7 @@ export function renderContactScreen() {
             <textarea id="contact-message" name="message" class="form-input form-textarea" placeholder="Tell us about your requirements — machinery type, farm size, location, or any specific questions..." required></textarea>
           </div>
 
-          <button type="submit" id="submit-btn-modern" class="btn-main-green" style="width: 100%; border: none; padding: 18px; border-radius: 14px; font-size: 1.05rem; font-weight: 800; cursor: pointer;">
+          <button type="submit" id="submit-btn-modern" class="btn-main-green" style="width: 100%; border: none; padding: 18px; border-radius: 14px; font-size: 1.05rem; font-weight: 800; cursor: pointer; background: #2563eb; color: #ffffff; box-shadow: 0 4px 20px rgba(37,99,235,0.25);">
             Send Inquiry
           </button>
         </form>
@@ -596,8 +597,8 @@ export function renderContactScreen() {
           <div class="visit-map-pin">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
-          <span style="color: #bfdbfe; font-size: 0.95rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; position: relative; z-index: 2;">Sankara Nigeria Ltd</span>
-          <span style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem; font-weight: 600; margin-top: 5px; position: relative; z-index: 2;">Kano, Nigeria</span>
+          <span style="color: #0f172a; font-size: 0.95rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; position: relative; z-index: 2;">Sankara Nigeria Ltd</span>
+          <span style="color: #475569; font-size: 0.8rem; font-weight: 600; margin-top: 5px; position: relative; z-index: 2;">Kano, Nigeria</span>
         </div>
       </div>
     </div>

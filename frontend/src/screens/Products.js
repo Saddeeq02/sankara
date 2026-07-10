@@ -231,7 +231,7 @@ const fallbackProducts = [
   {
     "id": "p-12",
     "name": "Lovol Harvester RG108 (Standard Combine)",
-    "category": "Farm Implements",
+    "category": "Combine Harvester",
     "price": "Price on Request",
     "image": "/assets/products_staging/combine harvestor/LOVOL-RG108+/WhatsApp Image 2026-07-09 at 11.33.11 AM.jpeg",
     "images": [
@@ -255,7 +255,7 @@ const fallbackProducts = [
   {
     "id": "p-13",
     "name": "Zoomlion Crawler Type Harvester ZL105",
-    "category": "Farm Implements",
+    "category": "Combine Harvester",
     "price": "Price on Request",
     "image": "/assets/products_staging/combine harvestor/ZOOMLION/WhatsApp Image 2026-07-09 at 11.33.18 AM (1).jpeg",
     "images": [
@@ -649,6 +649,7 @@ export function renderProductsScreen() {
         <div id="category-filters-v2" style="display: flex; gap: 10px; flex-wrap: wrap;">
           <button class="prod-filter-pill active" data-category="All">All Equipment</button>
           <button class="prod-filter-pill" data-category="Tractors">Tractors</button>
+          <button class="prod-filter-pill" data-category="Combine Harvester">Combine Harvester</button>
           <button class="prod-filter-pill" data-category="Farm Implements">Implements</button>
           <button class="prod-filter-pill" data-category="Specialized Equipment">Specialized</button>
           <button class="prod-filter-pill" data-category="Spare Parts">Spare Parts</button>
@@ -733,6 +734,20 @@ export function renderProductsScreen() {
 
   };
 
+  const sortProducts = (list) => {
+    return [...list].sort((a, b) => {
+      const isTractorA = a.category === 'Tractors' || a.name.toLowerCase().includes('tractor');
+      const isHarvesterA = a.category?.toLowerCase().includes('harvester') || a.category?.toLowerCase().includes('combine') || a.name.toLowerCase().includes('harvester') || a.name.toLowerCase().includes('combine');
+      const priorityA = isTractorA ? 2 : (isHarvesterA ? 1 : 0);
+
+      const isTractorB = b.category === 'Tractors' || b.name.toLowerCase().includes('tractor');
+      const isHarvesterB = b.category?.toLowerCase().includes('harvester') || b.category?.toLowerCase().includes('combine') || b.name.toLowerCase().includes('harvester') || b.name.toLowerCase().includes('combine');
+      const priorityB = isTractorB ? 2 : (isHarvesterB ? 1 : 0);
+
+      return priorityB - priorityA;
+    });
+  };
+
   const loadPublicProducts = async () => {
     try {
       const response = await fetch('/api/products');
@@ -741,12 +756,12 @@ export function renderProductsScreen() {
       const dbNames = new Set(dbProducts.map(p => p.name.toLowerCase()));
       const uniqueFallbacks = fallbackProducts.filter(p => !dbNames.has(p.name.toLowerCase()));
       
-      allProducts = [...dbProducts, ...uniqueFallbacks];
+      allProducts = sortProducts([...dbProducts, ...uniqueFallbacks]);
       applyFilters();
       setupEventListeners();
     } catch (err) {
       console.error('Error fetching products, using fallbacks:', err);
-      allProducts = [...fallbackProducts];
+      allProducts = sortProducts([...fallbackProducts]);
       applyFilters();
       setupEventListeners();
     }

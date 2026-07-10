@@ -319,21 +319,21 @@ export function renderAboutScreen() {
       </div>
 
       <!-- Multiple Brand Partnerships Panel -->
-      <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 32px; padding: 60px 80px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; color: #ffffff; margin-bottom: 80px;" class="reveal about-panel-grid">
+      <div style="background: linear-gradient(135deg, #fee2e2 0%, #dbeafe 100%); border-radius: 32px; padding: 60px 80px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; color: #0f172a; margin-bottom: 80px; border: 1px solid rgba(37,99,235,0.08);" class="reveal about-panel-grid">
         <div>
-          <h3 style="font-size: 1.8rem; font-weight: 850; margin-bottom: 15px;">Strategic Global Networks</h3>
-          <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.7; margin: 0;">
+          <h3 style="font-size: 1.8rem; font-weight: 850; margin-bottom: 15px; color: #0f172a;">Strategic Global Networks</h3>
+          <p style="color: #475569; font-size: 1.05rem; line-height: 1.7; margin: 0;">
             We maintain strategic partnerships with numerous leading agricultural machinery manufacturers worldwide.
           </p>
         </div>
         <div style="display: flex; gap: 40px; justify-content: flex-end;" class="about-panel-stats">
           <div style="text-align: center;">
-            <div style="font-size: 3rem; font-weight: 900; color: #3b82f6; line-height: 1;">15+</div>
-            <span style="color: #94a3b8; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: block; margin-top: 5px;">Brand Partners</span>
+            <div style="font-size: 3rem; font-weight: 900; color: #2563eb; line-height: 1;">15+</div>
+            <span style="color: #475569; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: block; margin-top: 5px;">Brand Partners</span>
           </div>
           <div style="text-align: center;">
-            <div style="font-size: 3rem; font-weight: 900; color: #3b82f6; line-height: 1;">100%</div>
-            <span style="color: #94a3b8; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: block; margin-top: 5px;">Authentic Products</span>
+            <div style="font-size: 3rem; font-weight: 900; color: #2563eb; line-height: 1;">100%</div>
+            <span style="color: #475569; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: block; margin-top: 5px;">Authentic Products</span>
           </div>
         </div>
       </div>

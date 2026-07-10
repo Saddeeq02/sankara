@@ -38,6 +38,7 @@ export function renderAdminProducts() {
         <select id="adminCategoryFilter" style="padding: 12px 20px; background: var(--admin-surface); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 14px; font-size: 0.9rem; font-weight: 600; outline: none; cursor: pointer; transition: all 0.2s;">
           <option value="All">All Categories</option>
           <option value="Tractors">Tractors</option>
+          <option value="Combine Harvester">Combine Harvester</option>
           <option value="Farm Implements">Farm Implements</option>
           <option value="Spare Parts">Spare Parts</option>
         </select>
@@ -90,6 +91,7 @@ export function renderAdminProducts() {
             <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; font-weight: 700; margin-bottom: 6px; display: block; letter-spacing: 0.05em; text-transform: uppercase;">Category</label>
             <select name="category" required style="width: 100%; padding: 12px 16px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 12px; font-weight: 600; outline: none; cursor: pointer; box-sizing: border-box; transition: all 0.2s;" onfocus="this.style.borderColor='var(--admin-primary)';" onblur="this.style.borderColor='var(--admin-border)';">
               <option value="Tractors">Tractors</option>
+              <option value="Combine Harvester">Combine Harvester</option>
               <option value="Farm Implements">Farm Implements</option>
               <option value="Spare Parts">Spare Parts</option>
             </select>

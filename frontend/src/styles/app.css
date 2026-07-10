@@ -1,43 +1,43 @@
 :root {
-  /* PREMIUM CORPORATE RED & BLUE DESIGN SYSTEM */
+  /* PREMIUM CORPORATE LIGHT BRAND DESIGN SYSTEM */
   --primary-color: #dc2626;   /* Brand Crimson Red */
-  --secondary-color: #3b82f6; /* Brand Royal Blue Accent */
-  --accent-color: #991b1b;    /* Deep Crimson Red */
-  --background-color: #030712; /* Premium Slate Black Background */
-  --surface-color: #0b0f19;    /* Premium Slate Card Surface */
-  --text-main: #f8fafc;        /* Off-white Text */
-  --text-muted: #94a3b8;       /* Slate Muted Text */
-  --glass-bg: rgba(11, 15, 25, 0.8);
+  --secondary-color: #2563eb; /* Brand Royal Blue Accent (optimized for light backgrounds) */
+  --accent-color: #1e40af;    /* Deep Royal Blue Accent */
+  --background-color: #f8fafc; /* Premium Slate 50 Light Background */
+  --surface-color: #ffffff;    /* Pure White Card Surface */
+  --text-main: #0f172a;        /* Slate 900 Deep Text */
+  --text-muted: #475569;       /* Slate 600 Muted Text */
+  --glass-bg: rgba(255, 255, 255, 0.85);
   --glass-blur: blur(12px);
-  --glass-border: rgba(220, 38, 38, 0.15);
-  --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  --glass-border: rgba(37, 99, 235, 0.12); /* Subtle blue glow borders */
+  --card-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
   --transition-speed: 0.3s;
   --border-radius: 12px;
   
   /* Contact Redesign Tokens */
   --contact-accent: #dc2626;
-  --contact-navy-frame: #0b0f19;
-  --contact-input-bg: #030712;
-  --contact-text-dark: #f8fafc;
+  --contact-navy-frame: #ffffff;
+  --contact-input-bg: #f1f5f9;
+  --contact-text-dark: #0f172a;
   
-  --stats-bg: #030712;
-  --stats-text-primary: #ffffff;
-  --stats-text-muted: #94a3b8;
+  --stats-bg: #f8fafc;
+  --stats-text-primary: #0f172a;
+  --stats-text-muted: #475569;
   --stats-accent: #dc2626;
-  --stats-card-bg: rgba(255, 255, 255, 0.02);
+  --stats-card-bg: rgba(0, 0, 0, 0.02);
   
-  --footer-bg: #030712;
+  --footer-bg: #0f172a; /* Slate 900 for premium footer contrast */
   --footer-text: #cbd5e1;
   --footer-link: #94a3b8;
 
   /* Stats Redesign Extra Tokens */
-  --stats-glow-color: rgba(220, 38, 38, 0.15);
-  --glass-card-bg: rgba(255, 255, 255, 0.02);
-  --glass-card-border: rgba(220, 38, 38, 0.1);
+  --stats-glow-color: rgba(37, 99, 235, 0.08);
+  --glass-card-bg: rgba(255, 255, 255, 0.7);
+  --glass-card-border: rgba(37, 99, 235, 0.08);
 }
 
 [data-theme="dark"] {
-  /* Retain exact premium dark values */
+  /* PREMIUM CORPORATE DARK BRAND DESIGN SYSTEM */
   --primary-color: #dc2626;
   --secondary-color: #3b82f6; 
   --accent-color: #991b1b;    
@@ -46,8 +46,15 @@
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --glass-bg: rgba(11, 15, 25, 0.8);
+  --glass-blur: blur(12px);
   --glass-border: rgba(220, 38, 38, 0.15);
   --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  
+  /* Contact Redesign Tokens */
+  --contact-accent: #dc2626;
+  --contact-navy-frame: #0b0f19;
+  --contact-input-bg: #030712;
+  --contact-text-dark: #f8fafc;
   
   --stats-bg: #030712;
   --stats-text-primary: #f8fafc;

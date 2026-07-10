@@ -19,11 +19,12 @@ export function renderHomeScreen() {
     
     /* Hero section with clean gradient background and custom graphic */
     .hero-sec {
-      background: linear-gradient(135deg, #030712 0%, #7f1d1d 50%, #030712 100%);
-      color: #ffffff;
+      background: linear-gradient(135deg, #f8fafc 0%, #fee2e2 50%, #eff6ff 100%);
+      color: #0f172a;
       padding: 180px 0 160px;
       position: relative;
       overflow: hidden;
+      border-bottom: 1px solid rgba(37, 99, 235, 0.08);
     }
     
     .corp-hero-overlay {
@@ -67,11 +68,11 @@ export function renderHomeScreen() {
       line-height: 1.1;
       letter-spacing: -2px;
       margin-bottom: 25px;
-      color: #ffffff;
+      color: #0f172a;
     }
     
     .hero-title-main span {
-      background: linear-gradient(135deg, #ffffff 0%, #fca5a5 100%);
+      background: linear-gradient(135deg, #dc2626 0%, #2563eb 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -79,7 +80,7 @@ export function renderHomeScreen() {
     .hero-desc {
       font-size: 1.2rem;
       line-height: 1.7;
-      color: #eff6ff;
+      color: #475569;
       margin-bottom: 45px;
       max-width: 620px;
     }
@@ -309,20 +310,21 @@ export function renderHomeScreen() {
     }
     
     .tab-btn.active, .tab-btn:hover {
-      background: #030712;
+      background: var(--secondary-color);
       color: #ffffff;
-      border-color: #030712;
+      border-color: var(--secondary-color);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
     }
     
     /* Stats Section */
     .sec-stats {
-      background: radial-gradient(circle at center, #7f1d1d 0%, #030712 100%);
-      color: #ffffff;
+      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+      color: #0f172a;
       padding: 100px 0;
       position: relative;
       overflow: hidden;
-      border-top: 1px solid rgba(220, 38, 38, 0.15);
-      border-bottom: 1px solid rgba(220, 38, 38, 0.15);
+      border-top: 1px solid rgba(37, 99, 235, 0.1);
+      border-bottom: 1px solid rgba(37, 99, 235, 0.1);
     }
     
     .sec-stats::before {
@@ -428,7 +430,7 @@ export function renderHomeScreen() {
     .stat-num-val {
       font-size: 3.5rem;
       font-weight: 900;
-      background: linear-gradient(135deg, #ffffff 0%, #fca5a5 100%);
+      background: linear-gradient(135deg, #dc2626 0%, #2563eb 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 12px;
@@ -441,23 +443,24 @@ export function renderHomeScreen() {
       font-weight: 750;
       text-transform: uppercase;
       letter-spacing: 2px;
-      color: #bfdbfe;
+      color: #1e3a8a;
       text-align: center;
     }
     
     /* Partner banner curves */
     .cta-banner {
-      background: linear-gradient(135deg, #030712 0%, #7f1d1d 100%);
+      background: linear-gradient(135deg, #fee2e2 0%, #dbeafe 100%);
       border-radius: 32px;
       padding: 80px;
-      color: #ffffff;
+      color: #0f172a;
       position: relative;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 40px;
-      box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05);
+      border: 1px solid rgba(37, 99, 235, 0.08);
     }
     
     @media (max-width: 968px) {
@@ -714,17 +717,17 @@ export function renderHomeScreen() {
 
   // Slideshow Logic for the Machinery Slides
   const machinerySlides = [
-    { id: 'slide-lovol-754', src: '/assets/hero_slides/LOVOL-754.png', label: 'LOVOL 754' },
-    { id: 'slide-lovol-754-front', src: '/assets/hero_slides/LOVOL754FRONT.png', label: 'LOVOL 754 FRONT' },
-    { id: 'slide-lovol-back', src: '/assets/hero_slides/LOVOLBACK.png', label: 'LOVOL BACK' },
-    { id: 'slide-mf375', src: '/assets/hero_slides/MF375.png', label: 'MF 375' },
-    { id: 'slide-rg108-plus', src: '/assets/hero_slides/RG108%2B.png', label: 'RG108+' },
-    { id: 'slide-rg108-side', src: '/assets/hero_slides/RG108-SIDE.png', label: 'RG108 SIDE' },
-    { id: 'slide-rk904', src: '/assets/hero_slides/RK904.png', label: 'RK 904' },
-    { id: 'slide-rk904-side', src: '/assets/hero_slides/RK904SIDE.png', label: 'RK 904 SIDE' },
-    { id: 'slide-zl110-s', src: '/assets/hero_slides/ZL110-S.png', label: 'ZL110-S' },
-    { id: 'slide-zl110', src: '/assets/hero_slides/ZL110.png', label: 'ZL 110' },
-    { id: 'slide-tiller', src: '/assets/hero_slides/tiller.png', label: 'TILLER' }
+    { id: 'slide-lovol-754', src: '/assets/hero_slides/LOVOL-754.webp', label: 'LOVOL 754' },
+    { id: 'slide-lovol-754-front', src: '/assets/hero_slides/LOVOL754FRONT.webp', label: 'LOVOL 754 FRONT' },
+    { id: 'slide-lovol-back', src: '/assets/hero_slides/LOVOLBACK.webp', label: 'LOVOL BACK' },
+    { id: 'slide-mf375', src: '/assets/hero_slides/MF375.webp', label: 'MF 375' },
+    { id: 'slide-rg108-plus', src: '/assets/hero_slides/RG108%2B.webp', label: 'RG108+' },
+    { id: 'slide-rg108-side', src: '/assets/hero_slides/RG108-SIDE.webp', label: 'RG108 SIDE' },
+    { id: 'slide-rk904', src: '/assets/hero_slides/RK904.webp', label: 'RK 904' },
+    { id: 'slide-rk904-side', src: '/assets/hero_slides/RK904SIDE.webp', label: 'RK 904 SIDE' },
+    { id: 'slide-zl110-s', src: '/assets/hero_slides/ZL110-S.webp', label: 'ZL110-S' },
+    { id: 'slide-zl110', src: '/assets/hero_slides/ZL110.webp', label: 'ZL 110' },
+    { id: 'slide-tiller', src: '/assets/hero_slides/tiller.webp', label: 'TILLER' }
   ];
   
   let currentSlide = 0;
@@ -1037,14 +1040,14 @@ export function renderHomeScreen() {
     <div class="container">
       <div class="cta-banner">
         <div style="max-width: 650px;">
-          <span style="font-size: 0.8rem; font-weight: 800; color: #3b82f6; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">GET IN TOUCH</span>
-          <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; line-height: 1.2; margin-bottom: 20px;">Ready to Mechanize Your Operations?</h2>
-          <p style="color: #eff6ff; font-size: 1.05rem; line-height: 1.6; margin: 0;">
+          <span style="font-size: 0.8rem; font-weight: 800; color: #2563eb; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">GET IN TOUCH</span>
+          <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; line-height: 1.2; margin-bottom: 20px; color: #0f172a;">Ready to Mechanize Your Operations?</h2>
+          <p style="color: #475569; font-size: 1.05rem; line-height: 1.6; margin: 0;">
             Partner with Sankara Nigeria Limited to secure robust agricultural machinery, spare parts supply lines, and dedicated field maintenance support.
           </p>
         </div>
         <div>
-          <a href="/contact" data-route="contact" class="btn-main-green" style="background: #ffffff; color: #030712; box-shadow: 0 4px 20px rgba(255,255,255,0.15); white-space: nowrap;">
+          <a href="/contact" data-route="contact" class="btn-main-green" style="background: #2563eb; color: #ffffff; box-shadow: 0 4px 20px rgba(37,99,235,0.25); white-space: nowrap;">
             Contact Corporate Office
           </a>
         </div>
@@ -1693,7 +1696,7 @@ const fallbackProducts = [
   {
     "id": "p-12",
     "name": "Lovol Harvester RG108 (Standard Combine)",
-    "category": "Farm Implements",
+    "category": "Combine Harvester",
     "price": "Price on Request",
     "image": "/assets/products_staging/combine harvestor/LOVOL-RG108+/WhatsApp Image 2026-07-09 at 11.33.11 AM.jpeg",
     "images": [
@@ -1717,7 +1720,7 @@ const fallbackProducts = [
   {
     "id": "p-13",
     "name": "Zoomlion Crawler Type Harvester ZL105",
-    "category": "Farm Implements",
+    "category": "Combine Harvester",
     "price": "Price on Request",
     "image": "/assets/products_staging/combine harvestor/ZOOMLION/WhatsApp Image 2026-07-09 at 11.33.18 AM (1).jpeg",
     "images": [
@@ -2038,6 +2041,20 @@ const fallbackProducts = [
   container.appendChild(renderFooter());
 
   let productsList = [];
+  const sortProducts = (list) => {
+    return [...list].sort((a, b) => {
+      const isTractorA = a.category === 'Tractors' || a.name.toLowerCase().includes('tractor');
+      const isHarvesterA = a.category?.toLowerCase().includes('harvester') || a.category?.toLowerCase().includes('combine') || a.name.toLowerCase().includes('harvester') || a.name.toLowerCase().includes('combine');
+      const priorityA = isTractorA ? 2 : (isHarvesterA ? 1 : 0);
+
+      const isTractorB = b.category === 'Tractors' || b.name.toLowerCase().includes('tractor');
+      const isHarvesterB = b.category?.toLowerCase().includes('harvester') || b.category?.toLowerCase().includes('combine') || b.name.toLowerCase().includes('harvester') || b.name.toLowerCase().includes('combine');
+      const priorityB = isTractorB ? 2 : (isHarvesterB ? 1 : 0);
+
+      return priorityB - priorityA;
+    });
+  };
+
   const loadFleet = async () => {
     try {
       const res = await fetch('/api/products');
@@ -2046,11 +2063,11 @@ const fallbackProducts = [
       const dbNames = new Set(dbProducts.map(p => p.name.toLowerCase()));
       const uniqueFallbacks = fallbackProducts.filter(p => !dbNames.has(p.name.toLowerCase()));
       
-      productsList = [...dbProducts, ...uniqueFallbacks];
+      productsList = sortProducts([...dbProducts, ...uniqueFallbacks]);
       renderFleet('All');
     } catch (err) {
       console.error('Error fetching fleet, using fallbacks:', err);
-      productsList = [...fallbackProducts];
+      productsList = sortProducts([...fallbackProducts]);
       renderFleet('All');
     }
   };
