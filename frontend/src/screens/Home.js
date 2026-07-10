@@ -697,8 +697,11 @@ export function renderHomeScreen() {
   // Dynamic Background Images fading behind the green gradient overlay
   const bgImages = [
     '/assets/hero.png',
-    '/assets/gallery_farmers.png',
-    '/assets/portfolio_aerial.png'
+    '/assets/hero2.png',
+    '/assets/hero3.png',
+    '/assets/hero4.png',
+    '/assets/hero5.png',
+    '/assets/hero6.png'
   ];
   let currentBgIndex = 0;
   heroSec.style.backgroundImage = `url(${bgImages[currentBgIndex]})`;
@@ -713,7 +716,7 @@ export function renderHomeScreen() {
     }
     currentBgIndex = (currentBgIndex + 1) % bgImages.length;
     heroSec.style.backgroundImage = `url(${bgImages[currentBgIndex]})`;
-  }, 1800000); // 30 minutes interval
+  }, 600000); // 10 minutes interval
 
   // Slideshow Logic for the Machinery Slides
   const machinerySlides = [
