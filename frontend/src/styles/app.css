@@ -1220,6 +1220,10 @@ html, body {
   height: 65px;
   object-fit: contain;
   transition: transform 0.3s ease, filter 0.3s ease;
+  filter: brightness(0) opacity(0.85);
+}
+
+[data-theme="dark"] .nav-logo {
   filter: brightness(0) invert(1);
 }
 

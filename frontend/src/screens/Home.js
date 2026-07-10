@@ -68,11 +68,11 @@ export function renderHomeScreen() {
       line-height: 1.1;
       letter-spacing: -2px;
       margin-bottom: 25px;
-      color: #0f172a;
+      color: #ffffff;
     }
     
     .hero-title-main span {
-      background: linear-gradient(135deg, #dc2626 0%, #2563eb 100%);
+      background: linear-gradient(135deg, #dc2626 0%, #3b82f6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -80,7 +80,7 @@ export function renderHomeScreen() {
     .hero-desc {
       font-size: 1.2rem;
       line-height: 1.7;
-      color: #475569;
+      color: #cbd5e1;
       margin-bottom: 45px;
       max-width: 620px;
     }
