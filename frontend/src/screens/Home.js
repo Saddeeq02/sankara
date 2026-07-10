@@ -1701,14 +1701,14 @@ const fallbackProducts = [
     "name": "Lovol Harvester RG108 (Standard Combine)",
     "category": "Combine Harvester",
     "price": "Price on Request",
-    "image": "/assets/products_staging/combine harvestor/LOVOL-RG108+/WhatsApp Image 2026-07-09 at 11.33.11 AM.jpeg",
+    "image": "/assets/products_staging/combine harvestor/LOVOL-RG108_Plus/WhatsApp Image 2026-07-09 at 11.33.11 AM.jpeg",
     "images": [
-      "/assets/products_staging/combine harvestor/LOVOL-RG108+/WhatsApp Image 2026-07-09 at 11.33.11 AM.jpeg",
-      "/assets/products_staging/combine harvestor/LOVOL-RG108+/WhatsApp Image 2026-07-09 at 11.33.13 AM.jpeg",
-      "/assets/products_staging/combine harvestor/LOVOL-RG108+/WhatsApp Image 2026-07-09 at 11.33.14 AM (1).jpeg",
-      "/assets/products_staging/combine harvestor/LOVOL-RG108+/WhatsApp Image 2026-07-09 at 11.33.14 AM.jpeg",
-      "/assets/products_staging/combine harvestor/LOVOL-RG108+/WhatsApp Image 2026-07-09 at 11.33.17 AM.jpeg",
-      "/assets/products_staging/combine harvestor/LOVOL-RG108+/WhatsApp Image 2026-07-09 at 11.33.18 AM.jpeg"
+      "/assets/products_staging/combine harvestor/LOVOL-RG108_Plus/WhatsApp Image 2026-07-09 at 11.33.11 AM.jpeg",
+      "/assets/products_staging/combine harvestor/LOVOL-RG108_Plus/WhatsApp Image 2026-07-09 at 11.33.13 AM.jpeg",
+      "/assets/products_staging/combine harvestor/LOVOL-RG108_Plus/WhatsApp Image 2026-07-09 at 11.33.14 AM (1).jpeg",
+      "/assets/products_staging/combine harvestor/LOVOL-RG108_Plus/WhatsApp Image 2026-07-09 at 11.33.14 AM.jpeg",
+      "/assets/products_staging/combine harvestor/LOVOL-RG108_Plus/WhatsApp Image 2026-07-09 at 11.33.17 AM.jpeg",
+      "/assets/products_staging/combine harvestor/LOVOL-RG108_Plus/WhatsApp Image 2026-07-09 at 11.33.18 AM.jpeg"
     ],
     "specs": [
       "Reliable Mechanical Drive",
@@ -2047,12 +2047,14 @@ const fallbackProducts = [
   const sortProducts = (list) => {
     return [...list].sort((a, b) => {
       const isTractorA = a.category === 'Tractors' || a.name.toLowerCase().includes('tractor');
-      const isHarvesterA = a.category?.toLowerCase().includes('harvester') || a.category?.toLowerCase().includes('combine') || a.name.toLowerCase().includes('harvester') || a.name.toLowerCase().includes('combine');
-      const priorityA = isTractorA ? 2 : (isHarvesterA ? 1 : 0);
+      const isRealHarvesterA = a.category === 'Combine Harvester';
+      const isOtherHarvesterA = !isRealHarvesterA && (a.category?.toLowerCase().includes('harvester') || a.category?.toLowerCase().includes('combine') || a.name.toLowerCase().includes('harvester') || a.name.toLowerCase().includes('combine'));
+      const priorityA = isTractorA ? 3 : (isRealHarvesterA ? 2 : (isOtherHarvesterA ? 1 : 0));
 
       const isTractorB = b.category === 'Tractors' || b.name.toLowerCase().includes('tractor');
-      const isHarvesterB = b.category?.toLowerCase().includes('harvester') || b.category?.toLowerCase().includes('combine') || b.name.toLowerCase().includes('harvester') || b.name.toLowerCase().includes('combine');
-      const priorityB = isTractorB ? 2 : (isHarvesterB ? 1 : 0);
+      const isRealHarvesterB = b.category === 'Combine Harvester';
+      const isOtherHarvesterB = !isRealHarvesterB && (b.category?.toLowerCase().includes('harvester') || b.category?.toLowerCase().includes('combine') || b.name.toLowerCase().includes('harvester') || b.name.toLowerCase().includes('combine'));
+      const priorityB = isTractorB ? 3 : (isRealHarvesterB ? 2 : (isOtherHarvesterB ? 1 : 0));
 
       return priorityB - priorityA;
     });
@@ -2077,9 +2079,22 @@ const fallbackProducts = [
 
   const renderFleet = (cat) => {
     const grid = fleetSec.querySelector('#fleet-grid-container');
-    const filtered = cat === 'All' 
-      ? productsList.slice(0, 6) 
-      : productsList.filter(p => p.category === cat).slice(0, 6);
+    let filtered;
+    if (cat === 'All') {
+      const tractors = productsList.filter(p => p.category === 'Tractors' || p.name.toLowerCase().includes('tractor')).slice(0, 3);
+      const combines = productsList.filter(p => p.category === 'Combine Harvester' || p.name.toLowerCase().includes('harvester') || p.name.toLowerCase().includes('combine')).slice(0, 3);
+      const selected = [...tractors, ...combines];
+      
+      if (selected.length < 6) {
+        const selectedIds = new Set(selected.map(p => p.id));
+        const others = productsList.filter(p => !selectedIds.has(p.id)).slice(0, 6 - selected.length);
+        filtered = [...selected, ...others];
+      } else {
+        filtered = selected;
+      }
+    } else {
+      filtered = productsList.filter(p => p.category === cat).slice(0, 6);
+    }
       
     if (filtered.length > 0) {
       grid.innerHTML = '';

@@ -233,14 +233,14 @@ const fallbackProducts = [
     "name": "Lovol Harvester RG108 (Standard Combine)",
     "category": "Combine Harvester",
     "price": "Price on Request",
-    "image": "/assets/products_staging/combine harvestor/LOVOL-RG108+/WhatsApp Image 2026-07-09 at 11.33.11 AM.jpeg",
+    "image": "/assets/products_staging/combine harvestor/LOVOL-RG108_Plus/WhatsApp Image 2026-07-09 at 11.33.11 AM.jpeg",
     "images": [
-      "/assets/products_staging/combine harvestor/LOVOL-RG108+/WhatsApp Image 2026-07-09 at 11.33.11 AM.jpeg",
-      "/assets/products_staging/combine harvestor/LOVOL-RG108+/WhatsApp Image 2026-07-09 at 11.33.13 AM.jpeg",
-      "/assets/products_staging/combine harvestor/LOVOL-RG108+/WhatsApp Image 2026-07-09 at 11.33.14 AM (1).jpeg",
-      "/assets/products_staging/combine harvestor/LOVOL-RG108+/WhatsApp Image 2026-07-09 at 11.33.14 AM.jpeg",
-      "/assets/products_staging/combine harvestor/LOVOL-RG108+/WhatsApp Image 2026-07-09 at 11.33.17 AM.jpeg",
-      "/assets/products_staging/combine harvestor/LOVOL-RG108+/WhatsApp Image 2026-07-09 at 11.33.18 AM.jpeg"
+      "/assets/products_staging/combine harvestor/LOVOL-RG108_Plus/WhatsApp Image 2026-07-09 at 11.33.11 AM.jpeg",
+      "/assets/products_staging/combine harvestor/LOVOL-RG108_Plus/WhatsApp Image 2026-07-09 at 11.33.13 AM.jpeg",
+      "/assets/products_staging/combine harvestor/LOVOL-RG108_Plus/WhatsApp Image 2026-07-09 at 11.33.14 AM (1).jpeg",
+      "/assets/products_staging/combine harvestor/LOVOL-RG108_Plus/WhatsApp Image 2026-07-09 at 11.33.14 AM.jpeg",
+      "/assets/products_staging/combine harvestor/LOVOL-RG108_Plus/WhatsApp Image 2026-07-09 at 11.33.17 AM.jpeg",
+      "/assets/products_staging/combine harvestor/LOVOL-RG108_Plus/WhatsApp Image 2026-07-09 at 11.33.18 AM.jpeg"
     ],
     "specs": [
       "Reliable Mechanical Drive",
@@ -583,19 +583,19 @@ export function renderProductsScreen() {
       color: #0f172a;
     }
     .products-hero {
-      background: linear-gradient(135deg, #0b0f19 0%, #030712 100%);
+      background: linear-gradient(135deg, #f8fafc 0%, #fee2e2 50%, #eff6ff 100%);
       padding: 180px 0 100px;
       text-align: center;
       position: relative;
       overflow: hidden;
-      border-bottom: 1px solid rgba(220, 38, 38, 0.15);
+      border-bottom: 1px solid rgba(220, 38, 38, 0.08);
     }
     .products-hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top right, rgba(220, 38, 38, 0.15), transparent 70%),
-                  radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.1), transparent 70%);
+      background: radial-gradient(circle at top right, rgba(220, 38, 38, 0.08), transparent 70%),
+                  radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.06), transparent 70%);
       pointer-events: none;
     }
     .prod-filter-pill {
@@ -628,9 +628,9 @@ export function renderProductsScreen() {
   hero.className = 'products-hero';
   hero.innerHTML = `
     <div class="container">
-      <span class="reveal" style="color: #3b82f6; font-weight: 800; text-transform: uppercase; letter-spacing: 4px; display: block; margin-bottom: 20px;">Precision Machinery</span>
-      <h1 class="reveal" style="font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 25px; color: #ffffff;">Engineered For <br><span style="background: linear-gradient(135deg, #ffffff 0%, #fca5a5 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Maximum Performance</span></h1>
-      <p class="reveal" style="color: #cbd5e1; font-size: 1.25rem; max-width: 700px; margin: 0 auto; line-height: 1.8;">
+      <span class="reveal" style="color: #2563eb; font-weight: 800; text-transform: uppercase; letter-spacing: 4px; display: block; margin-bottom: 20px;">Precision Machinery</span>
+      <h1 class="reveal" style="font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 25px; color: #0f172a;">Engineered For <br><span style="background: linear-gradient(135deg, #dc2626 0%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Maximum Performance</span></h1>
+      <p class="reveal" style="color: #475569; font-size: 1.25rem; max-width: 700px; margin: 0 auto; line-height: 1.8;">
         Explore our curated collection of high-performance agricultural equipment, from world-class Massey Ferguson tractors to specialized industrial implements.
       </p>
     </div>
@@ -737,12 +737,14 @@ export function renderProductsScreen() {
   const sortProducts = (list) => {
     return [...list].sort((a, b) => {
       const isTractorA = a.category === 'Tractors' || a.name.toLowerCase().includes('tractor');
-      const isHarvesterA = a.category?.toLowerCase().includes('harvester') || a.category?.toLowerCase().includes('combine') || a.name.toLowerCase().includes('harvester') || a.name.toLowerCase().includes('combine');
-      const priorityA = isTractorA ? 2 : (isHarvesterA ? 1 : 0);
+      const isRealHarvesterA = a.category === 'Combine Harvester';
+      const isOtherHarvesterA = !isRealHarvesterA && (a.category?.toLowerCase().includes('harvester') || a.category?.toLowerCase().includes('combine') || a.name.toLowerCase().includes('harvester') || a.name.toLowerCase().includes('combine'));
+      const priorityA = isTractorA ? 3 : (isRealHarvesterA ? 2 : (isOtherHarvesterA ? 1 : 0));
 
       const isTractorB = b.category === 'Tractors' || b.name.toLowerCase().includes('tractor');
-      const isHarvesterB = b.category?.toLowerCase().includes('harvester') || b.category?.toLowerCase().includes('combine') || b.name.toLowerCase().includes('harvester') || b.name.toLowerCase().includes('combine');
-      const priorityB = isTractorB ? 2 : (isHarvesterB ? 1 : 0);
+      const isRealHarvesterB = b.category === 'Combine Harvester';
+      const isOtherHarvesterB = !isRealHarvesterB && (b.category?.toLowerCase().includes('harvester') || b.category?.toLowerCase().includes('combine') || b.name.toLowerCase().includes('harvester') || b.name.toLowerCase().includes('combine'));
+      const priorityB = isTractorB ? 3 : (isRealHarvesterB ? 2 : (isOtherHarvesterB ? 1 : 0));
 
       return priorityB - priorityA;
     });

@@ -8,10 +8,11 @@ export function renderAboutScreen() {
   const heroSec = document.createElement('header');
   heroSec.className = 'about-hero';
   heroSec.style.padding = '160px 0 100px';
-  heroSec.style.background = 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)';
-  heroSec.style.color = '#ffffff';
+  heroSec.style.background = 'linear-gradient(135deg, #f8fafc 0%, #fee2e2 50%, #eff6ff 100%)';
+  heroSec.style.color = '#0f172a';
   heroSec.style.position = 'relative';
   heroSec.style.overflow = 'hidden';
+  heroSec.style.borderBottom = '1px solid rgba(220, 38, 38, 0.08)';
   heroSec.innerHTML = `
     <!-- Decorative background elements -->
     <div style="position: absolute; top: -50%; left: -20%; width: 80%; height: 150%; background: radial-gradient(circle, rgba(153, 27, 27, 0.08) 0%, transparent 60%); pointer-events: none;"></div>
@@ -19,13 +20,13 @@ export function renderAboutScreen() {
     
     <div class="container" style="position: relative; z-index: 1;">
       <div style="max-width: 800px; margin: 0 auto; text-align: center; margin-bottom: 70px;">
-        <span class="reveal" style="font-size: 0.85rem; font-weight: 800; color: #3b82f6; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: inline-block; background: rgba(59, 130, 246, 0.1); padding: 8px 18px; border-radius: 100px; border: 1px solid rgba(59, 130, 246, 0.25);">
+        <span class="reveal" style="font-size: 0.85rem; font-weight: 800; color: #2563eb; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: inline-block; background: rgba(37, 99, 235, 0.08); padding: 8px 18px; border-radius: 100px; border: 1px solid rgba(37, 99, 235, 0.18);">
           About Sankara Nigeria Limited
         </span>
-        <h1 class="reveal" style="font-size: clamp(2.5rem, 6vw, 4.8rem); font-weight: 900; line-height: 1.1; letter-spacing: -2px; margin-bottom: 25px;">
-          Powering Nigeria's <br><span style="color: #3b82f6;">Modern Farming</span>
+        <h1 class="reveal" style="font-size: clamp(2.5rem, 6vw, 4.8rem); font-weight: 900; line-height: 1.1; letter-spacing: -2px; margin-bottom: 25px; color: #0f172a;">
+          Powering Nigeria's <br><span style="background: linear-gradient(135deg, #dc2626 0%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Modern Farming</span>
         </h1>
-        <p class="reveal" style="color: #94a3b8; font-size: 1.25rem; line-height: 1.8; margin-bottom: 40px; font-weight: 450;">
+        <p class="reveal" style="color: #475569; font-size: 1.25rem; line-height: 1.8; margin-bottom: 40px; font-weight: 450;">
           Since 1986, we've been Nigeria's trusted partner in agricultural mechanization, delivering quality machinery and exceptional service to farmers nationwide.
         </p>
         
@@ -34,29 +35,29 @@ export function renderAboutScreen() {
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             Call Sales (+2348099933644)
           </a>
-          <button data-route="contact" class="btn-secondary" style="background: transparent; color: #ffffff; border: 2px solid rgba(255,255,255,0.2); padding: 16px 32px; font-weight: 700; border-radius: 12px; cursor: pointer; transition: background 0.2s, border-color 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.4)';" onmouseout="this.style.background='transparent'; this.style.borderColor='rgba(255,255,255,0.2)';">
+          <button data-route="contact" class="btn-secondary" style="background: transparent; color: #0f172a; border: 2px solid rgba(15, 23, 42, 0.15); padding: 16px 32px; font-weight: 700; border-radius: 12px; cursor: pointer; transition: background 0.2s, border-color 0.2s;" onmouseover="this.style.background='rgba(15, 23, 42, 0.05)'; this.style.borderColor='rgba(15, 23, 42, 0.3)';" onmouseout="this.style.background='transparent'; this.style.borderColor='rgba(15, 23, 42, 0.15)';">
             Get Quote
           </button>
         </div>
       </div>
       
       <!-- Stats block -->
-      <div class="reveal about-stats-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 60px;">
+      <div class="reveal about-stats-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 60px; border-top: 1px solid rgba(15, 23, 42, 0.08); padding-top: 60px;">
         <div style="text-align: center;">
-          <h3 style="font-size: 3rem; font-weight: 900; color: #3b82f6; margin-bottom: 8px; line-height: 1;">40+</h3>
-          <span style="color: #94a3b8; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Years of Excellence</span>
+          <h3 style="font-size: 3rem; font-weight: 900; color: #2563eb; margin-bottom: 8px; line-height: 1;">40+</h3>
+          <span style="color: #475569; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Years of Excellence</span>
         </div>
         <div style="text-align: center;">
-          <h3 style="font-size: 3rem; font-weight: 900; color: #3b82f6; margin-bottom: 8px; line-height: 1;">1200+</h3>
-          <span style="color: #94a3b8; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Tractors Delivered</span>
+          <h3 style="font-size: 3rem; font-weight: 900; color: #2563eb; margin-bottom: 8px; line-height: 1;">1200+</h3>
+          <span style="color: #475569; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Tractors Delivered</span>
         </div>
         <div style="text-align: center;">
-          <h3 style="font-size: 3rem; font-weight: 900; color: #3b82f6; margin-bottom: 8px; line-height: 1;">5000+</h3>
-          <span style="color: #94a3b8; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Farmers Served</span>
+          <h3 style="font-size: 3rem; font-weight: 900; color: #2563eb; margin-bottom: 8px; line-height: 1;">5000+</h3>
+          <span style="color: #475569; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Farmers Served</span>
         </div>
         <div style="text-align: center;">
-          <h3 style="font-size: 3rem; font-weight: 900; color: #3b82f6; margin-bottom: 8px; line-height: 1;">36</h3>
-          <span style="color: #94a3b8; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">States Covered</span>
+          <h3 style="font-size: 3rem; font-weight: 900; color: #2563eb; margin-bottom: 8px; line-height: 1;">36</h3>
+          <span style="color: #475569; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">States Covered</span>
         </div>
       </div>
     </div>
