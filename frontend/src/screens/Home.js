@@ -88,13 +88,13 @@ export function renderHomeScreen() {
     }
     
     .hero-content-block {
-      background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      padding: 40px;
-      border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      padding: 0;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
       max-width: 680px;
       text-align: left;
     }
@@ -105,8 +105,7 @@ export function renderHomeScreen() {
         margin-right: auto;
       }
       .hero-content-block {
-        padding: 25px 20px;
-        border-radius: 16px;
+        padding: 0;
         margin: 0 auto;
       }
     }
@@ -885,7 +884,7 @@ export function renderHomeScreen() {
   }, 100);
 
   heroSec.innerHTML = `
-    <div class="corp-hero-overlay" style="background: linear-gradient(135deg, rgba(3, 7, 18, 0.3) 0%, rgba(3, 7, 18, 0.15) 100%);"></div>
+    <div class="corp-hero-overlay" style="background: linear-gradient(135deg, rgba(3, 7, 18, 0.48) 0%, rgba(3, 7, 18, 0.38) 100%);"></div>
     <div class="container hero-grid">
       <div class="hero-content-block">
         <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(220, 38, 38, 0.15); padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(220, 38, 38, 0.2); margin-bottom: 25px;">
