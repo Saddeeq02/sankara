@@ -9,6 +9,6 @@ class GalleryItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'category', 'image', 'video_url'];
+    protected $fillable = ['title', 'category', 'image', 'video_url', 'description', 'date', 'summary'];
 }
 

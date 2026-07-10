@@ -252,12 +252,16 @@ Route::delete('products/{id}', function(Request $request, $id) use ($verifyToken
     if ($product) $product->delete();
     return response()->json(['success' => true]);
 });
-
-// GALLERY MANAGEMENT
+// GALLERY MANAGEMENT (Timeline Events: title, date, summary, image)
 Route::post('gallery', function(Request $request) use ($verifyToken, $uploadToSupabase) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $data = $request->only(['title', 'category', 'video_url']);
+    $data = [
+        'title' => $request->input('title'),
+        'date' => $request->input('date'),
+        'summary' => $request->input('summary'),
+        'description' => $request->input('summary'),
+    ];
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');
@@ -278,13 +282,19 @@ Route::delete('gallery/{id}', function(Request $request, $id) use ($verifyToken)
     return response()->json(['success' => true]);
 });
 
-
-// PORTFOLIO MANAGEMENT
-Route::post('portfolio', function(Request $request) use ($verifyToken, $uploadToSupabase) {
+// ACTIVITIES MANAGEMENT (Media Gallery: name, event_description, category, video_url, image)
+Route::post('activities', function(Request $request) use ($verifyToken, $uploadToSupabase) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $data = $request->only(['title', 'client', 'year', 'description']);
-    $data['slug'] = \Illuminate\Support\Str::slug($data['title']) . '-' . time();
+    $data = [
+        'title' => $request->input('name') ?? $request->input('title'),
+        'slug' => \Illuminate\Support\Str::slug($request->input('name') ?? $request->input('title')) . '-' . time(),
+        'category' => $request->input('category'),
+        'description' => $request->input('event_description') ?? $request->input('description'),
+        'summary' => $request->input('event_description') ?? $request->input('description'),
+        'content' => $request->input('event_description') ?? $request->input('description'),
+        'video_url' => $request->input('video_url'),
+    ];
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');
@@ -293,35 +303,9 @@ Route::post('portfolio', function(Request $request) use ($verifyToken, $uploadTo
         return response()->json(['error' => 'Image is required'], 422);
     }
     
-    $project = PortfolioProject::create($data);
-    return response()->json($project, 201);
-});
-
-Route::delete('portfolio/{id}', function(Request $request, $id) use ($verifyToken) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
-    
-    $project = PortfolioProject::find($id);
-    if ($project) $project->delete();
-    return response()->json(['success' => true]);
-});
-
-// ACTIVITIES MANAGEMENT
-Route::post('activities', function(Request $request) use ($verifyToken, $uploadToSupabase) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
-    
-    $data = $request->only(['title', 'date', 'summary']);
-    $data['slug'] = \Illuminate\Support\Str::slug($data['title']) . '-' . time();
-    $data['content'] = $data['summary']; // Map summary to content for now
-    
-    if ($request->hasFile('image')) {
-        $file = $request->file('image');
-        $data['image'] = $uploadToSupabase($file);
-    }
-    
     $activity = Activity::create($data);
     return response()->json($activity, 201);
 });
-
 Route::delete('activities/{id}', function(Request $request, $id) use ($verifyToken) {
     if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
     

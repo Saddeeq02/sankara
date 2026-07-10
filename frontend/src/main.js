@@ -7,7 +7,6 @@ import { renderContactScreen } from './screens/Contact';
 import { renderServicesScreen } from './screens/Services';
 import { renderGalleryScreen } from './screens/Gallery';
 import { renderActivitiesScreen } from './screens/Activities';
-import { renderPortfolioScreen } from './screens/Portfolio';
 
 // Admin Screens
 import { renderAdminDashboard } from './screens/admin/Dashboard';
@@ -39,7 +38,6 @@ const routes = {
   services: renderServicesScreen,
   gallery: renderGalleryScreen,
   activities: renderActivitiesScreen,
-  portfolio: renderPortfolioScreen,
   'admin-login': renderLogin,
   'admin-dashboard': renderAdminDashboard,
   'admin-products': renderAdminProducts,
@@ -56,7 +54,6 @@ const metaData = {
   services: { title: 'Professional Services | Sankara', desc: 'Training, maintenance, and technical support for large-scale agricultural projects.' },
   gallery: { title: 'Media Gallery | Sankara Nigeria Limited', desc: 'Visual journey of our exhibitions, workshops, and regional field visits.' },
   activities: { title: 'Corporate Activities | Sankara', desc: 'Tracking our impactful agricultural workshops and government partnerships.' },
-  portfolio: { title: 'Project Portfolio | Sankara Nigeria Limited', desc: 'Case studies of large-scale mechanization projects across Nigeria.' },
   'admin-login': { title: 'Admin Access | Sankara', desc: 'Secure login for Sankara Nigeria Limited management system.' },
 };
 
@@ -68,7 +65,6 @@ const routeToPath = {
   contact: '/contact',
   gallery: '/gallery',
   activities: '/activities',
-  portfolio: '/portfolio',
   'admin-login': '/admin/login',
   'admin-dashboard': '/admin',
   'admin-products': '/admin/products',
@@ -88,7 +84,6 @@ const pathToRoute = {
   '/contact': 'contact',
   '/gallery': 'gallery',
   '/activities': 'activities',
-  '/portfolio': 'portfolio',
   '/admin': 'admin-dashboard',
   '/admin/login': 'admin-login',
   '/admin/products': 'admin-products',

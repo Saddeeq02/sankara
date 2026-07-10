@@ -610,6 +610,7 @@ export function renderActivitiesScreen() {
     <div class="lb-info-box">
       <span id="lbCategory" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #2563eb; font-weight: 800; display: block; margin-bottom: 10px;"></span>
       <h3 id="lbTitle" style="margin: 0; font-size: 1.6rem; font-weight: 900; line-height: 1.2;"></h3>
+      <p id="lbDescription" style="margin: 10px 0 0 0; font-size: 1.05rem; color: #e2e8f0; font-weight: 450; line-height: 1.5;"></p>
     </div>
   `;
 
@@ -1024,10 +1025,10 @@ export function renderActivitiesScreen() {
     }
   ];
 
-  // Load Activities (Timeline)
+  // Load Activities (Timeline) -> now fetched from /api/gallery
   const loadActivities = async () => {
     try {
-      const res = await fetch('/api/activities');
+      const res = await fetch('/api/gallery');
       events = await res.json();
       events.sort((a, b) => b.id - a.id);
       renderEvents();
@@ -1065,7 +1066,7 @@ export function renderActivitiesScreen() {
               </div>
             ` : ''}
             <h3 class="timeline-card-title">${event.title}</h3>
-            <p class="timeline-card-desc">${event.summary}</p>
+            <p class="timeline-card-desc">${event.summary || event.description || ''}</p>
             <div class="timeline-card-footer">
               <span class="timeline-card-tag">
                 <span style="width: 5px; height: 5px; border-radius: 50%; background: #2563eb; display: inline-block;"></span>
@@ -1086,13 +1087,13 @@ export function renderActivitiesScreen() {
     }
   };
 
-  // Load Media Gallery items
+  // Load Media Gallery items -> now fetched from /api/activities
   const loadGallery = async () => {
     try {
-      const res = await fetch('/api/gallery');
+      const res = await fetch('/api/activities');
       const dbItems = await res.json();
       
-      const dbTitles = new Set(dbItems.map(i => i.title.toLowerCase()));
+      const dbTitles = new Set(dbItems.map(i => (i.title || i.name || '').toLowerCase()));
       const uniqueFallbacks = fallbackGalleryItems.filter(i => !dbTitles.has(i.title.toLowerCase()));
       
       allGalleryItems = [...dbItems, ...uniqueFallbacks];
@@ -1120,7 +1121,7 @@ export function renderActivitiesScreen() {
     grid.innerHTML = filteredItems.map((item, idx) => `
       <div class="gallery-item-card" data-idx="${idx}">
         <div class="card-img-wrapper">
-          <img src="${item.image}" alt="${item.title}" loading="lazy">
+          <img src="${item.image}" alt="${item.title || item.name}" loading="lazy">
           ${item.video_url ? `
             <div class="video-badge">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -1129,7 +1130,7 @@ export function renderActivitiesScreen() {
         </div>
         <div class="card-body-info">
           <span class="card-meta-tag">${item.category}</span>
-          <h4 class="card-title-text">${item.title}</h4>
+          <h4 class="card-title-text">${item.title || item.name}</h4>
         </div>
       </div>
     `).join('');
@@ -1154,6 +1155,7 @@ export function renderActivitiesScreen() {
     const content = lightboxOverlay.querySelector('#lbContent');
     const title = lightboxOverlay.querySelector('#lbTitle');
     const category = lightboxOverlay.querySelector('#lbCategory');
+    const description = lightboxOverlay.querySelector('#lbDescription');
 
     if (item.video_url) {
       let vidId = '';
@@ -1166,11 +1168,12 @@ export function renderActivitiesScreen() {
         content.innerHTML = `<video src="${item.video_url}" controls autoplay style="max-width: 100%; max-height: 70vh; border-radius: 16px;"></video>`;
       }
     } else {
-      content.innerHTML = `<img src="${item.image}" class="lb-image" alt="${item.title}">`;
+      content.innerHTML = `<img src="${item.image}" class="lb-image" alt="${item.title || item.name}">`;
     }
 
-    title.textContent = item.title;
-    category.textContent = item.category;
+    title.textContent = item.title || item.name;
+    category.textContent = item.category || 'Field Activity';
+    description.textContent = item.description || item.event_description || '';
 
     lightboxOverlay.style.display = 'flex';
     document.body.style.overflow = 'hidden';
