@@ -17,7 +17,7 @@ export function renderServicesScreen() {
     }
     
     .services-hero {
-      background: linear-gradient(135deg, #f8fafc 0%, #fee2e2 50%, #eff6ff 100%);
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #eff6ff 100%);
       color: #0f172a;
       padding: 180px 0 130px;
       position: relative;
@@ -522,7 +522,7 @@ export function renderServicesScreen() {
     }
 
     .cta-card-serv {
-      background: linear-gradient(135deg, #fee2e2 0%, #dbeafe 100%);
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
       border-radius: 32px;
       padding: 80px;
       color: #0f172a;

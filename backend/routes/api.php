@@ -263,8 +263,13 @@ Route::post('gallery', function(Request $request) use ($verifyToken, $uploadToSu
     ];
     
     if ($request->hasFile('image')) {
-        $file = $request->file('image');
-        $data['image'] = $uploadToSupabase($file);
+        $files = $request->file('image');
+        if (!is_array($files)) $files = [$files];
+        $uploadedImages = [];
+        foreach ($files as $file) {
+            $uploadedImages[] = $uploadToSupabase($file);
+        }
+        $data['image'] = count($uploadedImages) === 1 ? $uploadedImages[0] : json_encode($uploadedImages);
     } else {
         return response()->json(['error' => 'Image is required'], 422);
     }
@@ -296,8 +301,13 @@ Route::post('activities', function(Request $request) use ($verifyToken, $uploadT
     ];
     
     if ($request->hasFile('image')) {
-        $file = $request->file('image');
-        $data['image'] = $uploadToSupabase($file);
+        $files = $request->file('image');
+        if (!is_array($files)) $files = [$files];
+        $uploadedImages = [];
+        foreach ($files as $file) {
+            $uploadedImages[] = $uploadToSupabase($file);
+        }
+        $data['image'] = count($uploadedImages) === 1 ? $uploadedImages[0] : json_encode($uploadedImages);
     } else {
         return response()->json(['error' => 'Image is required'], 422);
     }

@@ -62,11 +62,25 @@ export function renderAdminContent() {
     }
 
     grid.innerHTML = items.map(item => {
+      let firstImage = '';
+      if (item.image) {
+        try {
+          if (item.image.startsWith('[') && item.image.endsWith(']')) {
+            const arr = JSON.parse(item.image);
+            if (arr.length > 0) firstImage = arr[0];
+          } else {
+            firstImage = item.image;
+          }
+        } catch(e) {
+          firstImage = item.image;
+        }
+      }
+
       if (activeTab === 'gallery') {
         return `
           <div style="border: 1px solid var(--admin-border); background: var(--admin-bg); border-radius: 12px; padding: 15px; display: flex; gap: 15px; align-items: flex-start;">
             <div style="width: 80px; height: 80px; border-radius: 8px; overflow: hidden; flex-shrink: 0; background: #eee;">
-              ${item.image ? `<img src="${item.image}" style="width: 100%; height: 100%; object-fit: cover;">` : `<div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#999;">${ImageIcon}</div>`}
+              ${firstImage ? `<img src="${firstImage}" style="width: 100%; height: 100%; object-fit: cover;">` : `<div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#999;">${ImageIcon}</div>`}
             </div>
             <div style="flex-grow: 1;">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
@@ -82,7 +96,7 @@ export function renderAdminContent() {
         return `
           <div style="border: 1px solid var(--admin-border); background: var(--admin-bg); border-radius: 12px; overflow: hidden;">
             <div style="height: 180px; position: relative; background: #000;">
-              <img src="${item.image}" style="width: 100%; height: 100%; object-fit: cover;">
+              ${firstImage ? `<img src="${firstImage}" style="width: 100%; height: 100%; object-fit: cover;">` : ''}
               ${item.video_url ? `<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: white;">${Play}</div>` : ''}
               <button class="delete-btn" data-id="${item.id}" style="position: absolute; top: 10px; right: 10px; padding: 6px; background: rgba(239,68,68,0.9); border: none; border-radius: 6px; color: white; cursor: pointer;">${Trash2}</button>
             </div>
@@ -131,7 +145,7 @@ export function renderAdminContent() {
          <input type="text" name="title" placeholder="Title" required class="theme-input">
          <input type="text" name="date" placeholder="Date (e.g. Oct 12, 2024)" required class="theme-input">
          <textarea name="summary" placeholder="Brief Summary" required class="theme-input" style="min-height:80px;"></textarea>
-         <input type="file" name="image" required style="font-size:0.8rem; color: var(--admin-text);">
+         <input type="file" name="image[]" multiple required style="font-size:0.8rem; color: var(--admin-text);">
        `;
     } else if (activeTab === 'activities') {
        formFields = `
@@ -146,7 +160,7 @@ export function renderAdminContent() {
            <option value="ECOWAS Visit">ECOWAS Visit</option>
          </select>
          <input type="url" name="video_url" placeholder="Video URL (Optional)" class="theme-input">
-         <input type="file" name="image" required style="font-size:0.8rem; color: var(--admin-text);">
+         <input type="file" name="image[]" multiple required style="font-size:0.8rem; color: var(--admin-text);">
        `;
     } else if (activeTab === 'team') {
        formFields = `

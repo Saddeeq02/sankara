@@ -583,7 +583,7 @@ export function renderProductsScreen() {
       color: #0f172a;
     }
     .products-hero {
-      background: linear-gradient(135deg, #f8fafc 0%, #fee2e2 50%, #eff6ff 100%);
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #eff6ff 100%);
       padding: 180px 0 100px;
       text-align: center;
       position: relative;

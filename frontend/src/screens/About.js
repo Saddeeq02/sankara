@@ -8,7 +8,7 @@ export function renderAboutScreen() {
   const heroSec = document.createElement('header');
   heroSec.className = 'about-hero';
   heroSec.style.padding = '160px 0 100px';
-  heroSec.style.background = 'linear-gradient(135deg, #f8fafc 0%, #fee2e2 50%, #eff6ff 100%)';
+  heroSec.style.background = 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #eff6ff 100%)';
   heroSec.style.color = '#0f172a';
   heroSec.style.position = 'relative';
   heroSec.style.overflow = 'hidden';
@@ -320,7 +320,7 @@ export function renderAboutScreen() {
       </div>
 
       <!-- Multiple Brand Partnerships Panel -->
-      <div style="background: linear-gradient(135deg, #fee2e2 0%, #dbeafe 100%); border-radius: 32px; padding: 60px 80px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; color: #0f172a; margin-bottom: 80px; border: 1px solid rgba(37,99,235,0.08);" class="reveal about-panel-grid">
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 32px; padding: 60px 80px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; color: #0f172a; margin-bottom: 80px; border: 1px solid rgba(37,99,235,0.08);" class="reveal about-panel-grid">
         <div>
           <h3 style="font-size: 1.8rem; font-weight: 850; margin-bottom: 15px; color: #0f172a;">Strategic Global Networks</h3>
           <p style="color: #475569; font-size: 1.05rem; line-height: 1.7; margin: 0;">
