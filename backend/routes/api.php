@@ -259,7 +259,6 @@ Route::post('gallery', function(Request $request) use ($verifyToken, $uploadToSu
     $data = [
         'title' => $request->input('title'),
         'date' => $request->input('date'),
-        'summary' => $request->input('summary'),
         'description' => $request->input('summary'),
     ];
     
