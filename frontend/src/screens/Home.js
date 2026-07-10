@@ -87,10 +87,27 @@ export function renderHomeScreen() {
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
     }
     
+    .hero-content-block {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 40px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      max-width: 680px;
+      text-align: left;
+    }
+    
     @media (max-width: 968px) {
       .hero-desc {
         margin-left: auto;
         margin-right: auto;
+      }
+      .hero-content-block {
+        padding: 25px 20px;
+        border-radius: 16px;
+        margin: 0 auto;
       }
     }
     
