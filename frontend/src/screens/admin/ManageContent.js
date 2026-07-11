@@ -238,32 +238,41 @@ export function renderAdminContent() {
       btn.textContent = 'Uploading...';
       btn.disabled = true;
 
-      const formData = new FormData();
-      for (const element of e.target.elements) {
-        if (element.name && element.type !== 'file') {
-          formData.append(element.name, element.value);
+      try {
+        const formData = new FormData();
+        for (const element of e.target.elements) {
+          if (element.name && element.type !== 'file') {
+            formData.append(element.name, element.value);
+          }
         }
-      }
-      
-      const fileInput = e.target.querySelector('input[type="file"]');
-      if (fileInput && fileInput.files.length > 0) {
-        for (const file of fileInput.files) {
-          const compressedFile = await compressImage(file);
-          formData.append(fileInput.name || 'image', compressedFile);
+        
+        const fileInput = e.target.querySelector('input[type="file"]');
+        if (fileInput && fileInput.files.length > 0) {
+          for (const file of fileInput.files) {
+            const compressedFile = await compressImage(file);
+            formData.append(fileInput.name || 'image', compressedFile);
+          }
         }
-      }
 
-      const res = await fetch(`/api/${activeTab}`, {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` },
-        body: formData
-      });
+        const res = await fetch(`/api/${activeTab}`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_token')}` },
+          body: formData
+        });
 
-      if (res.ok) {
-        container.innerHTML = '';
-        loadSectionData();
-      } else {
-        alert('Upload failed');
+        if (res.ok) {
+          container.innerHTML = '';
+          await loadSectionData();
+          alert('Upload successful!');
+        } else {
+          const errData = await res.json().catch(() => ({}));
+          alert(`Upload failed: ${errData.error || res.statusText || 'Server error'}`);
+          btn.textContent = 'Upload Content';
+          btn.disabled = false;
+        }
+      } catch (err) {
+        console.error('Upload error:', err);
+        alert(`Upload failed: ${err.message || err}`);
         btn.textContent = 'Upload Content';
         btn.disabled = false;
       }
