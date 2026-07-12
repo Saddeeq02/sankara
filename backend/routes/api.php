@@ -9,6 +9,7 @@ use App\Models\Activity;
 use App\Models\Inquiry;
 use App\Models\User;
 use App\Models\TeamMember;
+use App\Models\ActivityLog;
 use Illuminate\Support\Facades\Hash;
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -35,6 +36,22 @@ $verifyPermission = function(Request $request, $permission) use ($verifyToken) {
     if ($user->permissions === null) return true;
     
     return in_array($permission, $user->permissions);
+};
+
+$logActivity = function(Request $request, string $action, string $description) {
+    try {
+        $token = $request->bearerToken();
+        $user = User::where('api_token', $token)->first();
+        ActivityLog::create([
+            'user_id' => $user ? $user->id : null,
+            'user_name' => $user ? $user->name : 'System/Guest',
+            'action' => $action,
+            'description' => $description,
+            'ip_address' => $request->ip()
+        ]);
+    } catch (\Exception $e) {
+        \Illuminate\Support\Facades\Log::error("Failed to log activity: " . $e->getMessage());
+    }
 };
 
 $uploadToSupabase = function($file) {
@@ -196,7 +213,7 @@ Route::post('inquiries', function(Request $request) {
 
 
 // PROTECTED ADMIN ENDPOINTS
-Route::post('products', function(Request $request) use ($verifyPermission, $uploadToSupabase) {
+Route::post('products', function(Request $request) use ($verifyPermission, $uploadToSupabase, $logActivity) {
     if (!$verifyPermission($request, 'admin-products')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $data = $request->only(['name', 'category', 'price', 'description', 'task']);
@@ -223,10 +240,12 @@ Route::post('products', function(Request $request) use ($verifyPermission, $uplo
     $data['status'] = 'Active';
     $product = Product::create($data);
     
+    $logActivity($request, 'CREATE_PRODUCT', "Created product: {$product->name} in category {$product->category}");
+    
     return response()->json($product, 201);
 });
 
-Route::post('products/{id}', function(Request $request, $id) use ($verifyPermission, $uploadToSupabase) {
+Route::post('products/{id}', function(Request $request, $id) use ($verifyPermission, $uploadToSupabase, $logActivity) {
     if (!$verifyPermission($request, 'admin-products')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $product = Product::find($id);
@@ -257,10 +276,12 @@ Route::post('products/{id}', function(Request $request, $id) use ($verifyPermiss
     
     $product->update(array_filter($updatedData, fn($v) => !is_null($v)));
     
+    $logActivity($request, 'UPDATE_PRODUCT', "Updated product details for: {$product->name}");
+    
     return response()->json($product);
 });
 
-Route::patch('products/{id}/status', function(Request $request, $id) use ($verifyPermission) {
+Route::patch('products/{id}/status', function(Request $request, $id) use ($verifyPermission, $logActivity) {
     if (!$verifyPermission($request, 'admin-products')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $product = Product::find($id);
@@ -268,18 +289,24 @@ Route::patch('products/{id}/status', function(Request $request, $id) use ($verif
     
     $product->status = $product->status === 'Active' ? 'Suspended' : 'Active';
     $product->save();
+    
+    $logActivity($request, 'TOGGLE_PRODUCT_STATUS', "Changed product status of {$product->name} to: {$product->status}");
+    
     return response()->json(['success' => true, 'status' => $product->status]);
 });
 
-Route::delete('products/{id}', function(Request $request, $id) use ($verifyPermission) {
+Route::delete('products/{id}', function(Request $request, $id) use ($verifyPermission, $logActivity) {
     if (!$verifyPermission($request, 'admin-products')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $product = Product::find($id);
-    if ($product) $product->delete();
+    if ($product) {
+        $logActivity($request, 'DELETE_PRODUCT', "Deleted product: {$product->name}");
+        $product->delete();
+    }
     return response()->json(['success' => true]);
 });
 // GALLERY MANAGEMENT (Timeline Events: title, date, summary, image)
-Route::post('gallery', function(Request $request) use ($verifyPermission, $uploadToSupabase) {
+Route::post('gallery', function(Request $request) use ($verifyPermission, $uploadToSupabase, $logActivity) {
     if (!$verifyPermission($request, 'admin-content')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $data = [
@@ -301,19 +328,25 @@ Route::post('gallery', function(Request $request) use ($verifyPermission, $uploa
     }
     
     $item = GalleryItem::create($data);
+    
+    $logActivity($request, 'CREATE_GALLERY', "Created gallery item: {$item->title}");
+    
     return response()->json($item, 201);
 });
 
-Route::delete('gallery/{id}', function(Request $request, $id) use ($verifyPermission) {
+Route::delete('gallery/{id}', function(Request $request, $id) use ($verifyPermission, $logActivity) {
     if (!$verifyPermission($request, 'admin-content')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $item = GalleryItem::find($id);
-    if ($item) $item->delete();
+    if ($item) {
+        $logActivity($request, 'DELETE_GALLERY', "Deleted gallery item: {$item->title}");
+        $item->delete();
+    }
     return response()->json(['success' => true]);
 });
 
 // ACTIVITIES MANAGEMENT (Media Gallery: name, event_description, category, video_url, image)
-Route::post('activities', function(Request $request) use ($verifyPermission, $uploadToSupabase) {
+Route::post('activities', function(Request $request) use ($verifyPermission, $uploadToSupabase, $logActivity) {
     if (!$verifyPermission($request, 'admin-content')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $data = [
@@ -339,13 +372,19 @@ Route::post('activities', function(Request $request) use ($verifyPermission, $up
     }
     
     $activity = Activity::create($data);
+    
+    $logActivity($request, 'CREATE_ACTIVITY', "Created activity: {$activity->title} (Category: {$activity->category})");
+    
     return response()->json($activity, 201);
 });
-Route::delete('activities/{id}', function(Request $request, $id) use ($verifyPermission) {
+Route::delete('activities/{id}', function(Request $request, $id) use ($verifyPermission, $logActivity) {
     if (!$verifyPermission($request, 'admin-content')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $activity = Activity::find($id);
-    if ($activity) $activity->delete();
+    if ($activity) {
+        $logActivity($request, 'DELETE_ACTIVITY', "Deleted activity: {$activity->title}");
+        $activity->delete();
+    }
     return response()->json(['success' => true]);
 });
 
@@ -355,7 +394,7 @@ Route::get('inquiries', function(Request $request) use ($verifyPermission) {
     return response()->json(Inquiry::latest()->get());
 });
 
-Route::patch('inquiries/{id}/status', function(Request $request, $id) use ($verifyPermission) {
+Route::patch('inquiries/{id}/status', function(Request $request, $id) use ($verifyPermission, $logActivity) {
     if (!$verifyPermission($request, 'admin-inquiries')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $inquiry = Inquiry::find($id);
@@ -363,14 +402,20 @@ Route::patch('inquiries/{id}/status', function(Request $request, $id) use ($veri
     
     $inquiry->status = $inquiry->status === 'Resolved' ? 'Pending' : 'Resolved';
     $inquiry->save();
+    
+    $logActivity($request, 'TOGGLE_INQUIRY_STATUS', "Changed status of inquiry from {$inquiry->name} ({$inquiry->email}) to: {$inquiry->status}");
+    
     return response()->json($inquiry);
 });
 
-Route::delete('inquiries/{id}', function(Request $request, $id) use ($verifyPermission) {
+Route::delete('inquiries/{id}', function(Request $request, $id) use ($verifyPermission, $logActivity) {
     if (!$verifyPermission($request, 'admin-inquiries')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $inquiry = Inquiry::find($id);
-    if ($inquiry) $inquiry->delete();
+    if ($inquiry) {
+        $logActivity($request, 'DELETE_INQUIRY', "Deleted inquiry from {$inquiry->name} ({$inquiry->email})");
+        $inquiry->delete();
+    }
     return response()->json(['success' => true]);
 });
 
@@ -383,7 +428,7 @@ Route::get('team', function() {
         ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
 });
 
-Route::post('team', function(Request $request) use ($verifyPermission, $uploadToSupabase) {
+Route::post('team', function(Request $request) use ($verifyPermission, $uploadToSupabase, $logActivity) {
     if (!$verifyPermission($request, 'admin-content')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $data = $request->only(['name', 'role']);
@@ -396,14 +441,20 @@ Route::post('team', function(Request $request) use ($verifyPermission, $uploadTo
     }
     
     $member = TeamMember::create($data);
+    
+    $logActivity($request, 'CREATE_TEAM_MEMBER', "Added team member: {$member->name} ({$member->role})");
+    
     return response()->json($member, 201);
 });
 
-Route::delete('team/{id}', function(Request $request, $id) use ($verifyPermission) {
+Route::delete('team/{id}', function(Request $request, $id) use ($verifyPermission, $logActivity) {
     if (!$verifyPermission($request, 'admin-content')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $member = TeamMember::find($id);
-    if ($member) $member->delete();
+    if ($member) {
+        $logActivity($request, 'DELETE_TEAM_MEMBER', "Deleted team member: {$member->name} ({$member->role})");
+        $member->delete();
+    }
     return response()->json(['success' => true]);
 });
 
@@ -513,7 +564,7 @@ Route::get('admin/users', function(Request $request) use ($verifyPermission) {
     return response()->json(User::all());
 });
 
-Route::post('admin/users', function(Request $request) use ($verifyPermission) {
+Route::post('admin/users', function(Request $request) use ($verifyPermission, $logActivity) {
     if (!$verifyPermission($request, 'admin-users')) return response()->json(['error' => 'Forbidden'], 403);
     
     $request->validate([
@@ -531,10 +582,47 @@ Route::post('admin/users', function(Request $request) use ($verifyPermission) {
         'permissions' => $request->input('permissions')
     ]);
     
+    $logActivity($request, 'CREATE_USER', "Created new administrator account: {$user->name} ({$user->email})");
+    
     return response()->json($user, 201);
 });
 
-Route::delete('admin/users/{id}', function(Request $request, $id) use ($verifyPermission) {
+Route::put('admin/users/{id}', function(Request $request, $id) use ($verifyPermission, $logActivity) {
+    if (!$verifyPermission($request, 'admin-users')) return response()->json(['error' => 'Forbidden'], 403);
+    
+    $user = User::find($id);
+    if (!$user) return response()->json(['error' => 'Not Found'], 404);
+    
+    $request->validate([
+        'name' => 'required|string',
+        'email' => 'required|email|unique:users,email,' . $id,
+        'password' => 'nullable|min:6',
+        'permissions' => 'nullable|array'
+    ]);
+    
+    $updateData = [
+        'name' => $request->input('name'),
+        'email' => $request->input('email')
+    ];
+    
+    if ($user->email === 'admin@sankara.com') {
+        $updateData['permissions'] = null; // force null for super admin
+    } else {
+        $updateData['permissions'] = $request->input('permissions');
+    }
+    
+    if ($request->filled('password')) {
+        $updateData['password'] = Hash::make($request->input('password'));
+    }
+    
+    $user->update($updateData);
+    
+    $logActivity($request, 'UPDATE_USER', "Updated administrator account for {$user->name} ({$user->email})");
+    
+    return response()->json($user);
+});
+
+Route::delete('admin/users/{id}', function(Request $request, $id) use ($verifyPermission, $logActivity) {
     if (!$verifyPermission($request, 'admin-users')) return response()->json(['error' => 'Forbidden'], 403);
     
     $user = User::find($id);
@@ -547,6 +635,13 @@ Route::delete('admin/users/{id}', function(Request $request, $id) use ($verifyPe
         return response()->json(['error' => 'Cannot delete yourself'], 400);
     }
     
+    $logActivity($request, 'DELETE_USER', "Deleted administrator account: {$user->name} ({$user->email})");
+    
     $user->delete();
     return response()->json(['success' => true]);
+});
+
+Route::get('admin/logs', function(Request $request) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-users')) return response()->json(['error' => 'Forbidden'], 403);
+    return response()->json(ActivityLog::orderBy('created_at', 'desc')->get());
 });
