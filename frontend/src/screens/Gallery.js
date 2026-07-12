@@ -457,7 +457,7 @@ export function renderGalleryScreen() {
 
   const loadActivities = async () => {
     try {
-      const res = await fetch('/api/gallery');
+      const res = await fetch(`/api/gallery?t=${Date.now()}`);
       events = await res.json();
       events.sort((a, b) => b.id - a.id);
       renderEvents();

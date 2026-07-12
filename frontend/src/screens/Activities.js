@@ -820,7 +820,7 @@ export function renderActivitiesScreen() {
   // Load Media Gallery items - fetched from /api/activities
   const loadGallery = async () => {
     try {
-      const res = await fetch('/api/activities');
+      const res = await fetch(`/api/activities?t=${Date.now()}`);
       const dbItems = await res.json();
       
       const dbTitles = new Set(dbItems.map(i => (i.title || i.name || '').toLowerCase()));

@@ -281,7 +281,7 @@ export function renderAdminContent() {
 
   const loadSectionData = async () => {
     try {
-      const res = await fetch(`/api/${activeTab}`);
+      const res = await fetch(`/api/${activeTab}?t=${Date.now()}`);
       data[activeTab] = await res.json();
       renderGrid();
     } catch (err) { console.error(err); }
