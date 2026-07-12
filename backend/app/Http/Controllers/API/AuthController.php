@@ -17,6 +17,18 @@ class AuthController extends Controller
         $user = User::where('email', $credentials['email'])->first();
 
         if ($user && Hash::check($credentials['password'], $user->password)) {
+            try {
+                \App\Models\ActivityLog::create([
+                    'user_id' => $user->id,
+                    'user_name' => $user->name,
+                    'action' => 'LOGIN',
+                    'description' => 'Administrator logged in successfully',
+                    'ip_address' => $request->ip()
+                ]);
+            } catch (\Exception $e) {
+                // Ignore log failures
+            }
+
             return response()->json([
                 'success' => true, 
                 'api_token' => $user->api_token,
