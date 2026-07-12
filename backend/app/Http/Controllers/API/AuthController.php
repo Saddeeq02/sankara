@@ -21,7 +21,9 @@ class AuthController extends Controller
                 'success' => true, 
                 'api_token' => $user->api_token,
                 'user' => [
-                    'email' => $user->email
+                    'email' => $user->email,
+                    'name' => $user->name,
+                    'permissions' => $user->permissions
                 ]
             ]);
         }
@@ -37,10 +39,17 @@ class AuthController extends Controller
             return response()->json(['success' => false], 401);
         }
         
-        $exists = User::where('api_token', $token)->exists();
+        $user = User::where('api_token', $token)->first();
         
-        if ($exists) {
-            return response()->json(['success' => true]);
+        if ($user) {
+            return response()->json([
+                'success' => true,
+                'user' => [
+                    'email' => $user->email,
+                    'name' => $user->name,
+                    'permissions' => $user->permissions
+                ]
+            ]);
         }
         
         return response()->json(['success' => false], 401);

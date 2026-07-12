@@ -14,6 +14,7 @@ import { renderAdminProducts } from './screens/admin/ManageProducts';
 import { renderAdminContent } from './screens/admin/ManageContent';
 import { renderAdminInquiries } from './screens/admin/ManageInquiries';
 import { renderAdminHealth } from './screens/admin/Health';
+import { renderAdminUsers } from './screens/admin/ManageUsers';
 import { renderLogin } from './screens/admin/Login';
 
 const appRoot = document.querySelector('#app');
@@ -44,6 +45,7 @@ const routes = {
   'admin-content': renderAdminContent,
   'admin-inquiries': renderAdminInquiries,
   'admin-health': renderAdminHealth,
+  'admin-users': renderAdminUsers,
 };
 
 const metaData = {
@@ -55,6 +57,7 @@ const metaData = {
   gallery: { title: 'Media Gallery | Sankara Nigeria Limited', desc: 'Visual journey of our exhibitions, workshops, and regional field visits.' },
   activities: { title: 'Corporate Activities | Sankara', desc: 'Tracking our impactful agricultural workshops and government partnerships.' },
   'admin-login': { title: 'Admin Access | Sankara', desc: 'Secure login for Sankara Nigeria Limited management system.' },
+  'admin-users': { title: 'Admin Users | Sankara', desc: 'Manage system administrators and permissions.' },
 };
 
 const routeToPath = {
@@ -70,7 +73,8 @@ const routeToPath = {
   'admin-products': '/admin/products',
   'admin-content': '/admin/content',
   'admin-inquiries': '/admin/inquiries',
-  'admin-health': '/admin/health'
+  'admin-health': '/admin/health',
+  'admin-users': '/admin/users'
 };
 
 const pathToRoute = {
@@ -89,7 +93,8 @@ const pathToRoute = {
   '/admin/products': 'admin-products',
   '/admin/content': 'admin-content',
   '/admin/inquiries': 'admin-inquiries',
-  '/admin/health': 'admin-health'
+  '/admin/health': 'admin-health',
+  '/admin/users': 'admin-users'
 };
 
 function updateMeta(routeName) {
@@ -111,6 +116,21 @@ window.navigate = function(routeName, pushState = true) {
       routeName = 'admin-dashboard';
     } else if (routeName !== 'admin-login' && !token) {
       routeName = 'admin-login';
+    }
+
+    // Permission check if logged in
+    if (token && routeName !== 'admin-login') {
+      const permissions = JSON.parse(localStorage.getItem('admin_permissions') || 'null');
+      if (permissions !== null) {
+        if (!permissions.includes(routeName)) {
+          if (permissions.length > 0) {
+            routeName = permissions[0];
+          } else {
+            localStorage.removeItem('admin_token');
+            routeName = 'admin-login';
+          }
+        }
+      }
     }
   }
 

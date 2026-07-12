@@ -23,6 +23,19 @@ $verifyToken = function(Request $request) {
     });
 };
 
+$verifyPermission = function(Request $request, $permission) use ($verifyToken) {
+    if (!$verifyToken($request)) return false;
+    
+    $token = $request->bearerToken();
+    $user = User::where('api_token', $token)->first();
+    if (!$user) return false;
+    
+    // permissions === null means Super Admin
+    if ($user->permissions === null) return true;
+    
+    return in_array($permission, $user->permissions);
+};
+
 $uploadToSupabase = function($file) {
     $projectRef = 'mfbljuhpnkmeckmtxlkn';
     $anonKey = env('SUPABASE_ANON_KEY');
@@ -182,8 +195,8 @@ Route::post('inquiries', function(Request $request) {
 
 
 // PROTECTED ADMIN ENDPOINTS
-Route::post('products', function(Request $request) use ($verifyToken, $uploadToSupabase) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+Route::post('products', function(Request $request) use ($verifyPermission, $uploadToSupabase) {
+    if (!$verifyPermission($request, 'admin-products')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $data = $request->only(['name', 'category', 'price', 'description', 'task']);
     $data['is_new_arrival'] = $request->input('is_new_arrival') === 'true' || $request->input('is_new_arrival') === '1';
@@ -212,8 +225,8 @@ Route::post('products', function(Request $request) use ($verifyToken, $uploadToS
     return response()->json($product, 201);
 });
 
-Route::post('products/{id}', function(Request $request, $id) use ($verifyToken, $uploadToSupabase) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+Route::post('products/{id}', function(Request $request, $id) use ($verifyPermission, $uploadToSupabase) {
+    if (!$verifyPermission($request, 'admin-products')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $product = Product::find($id);
     if (!$product) return response()->json(['error' => 'Not Found'], 404);
@@ -246,8 +259,8 @@ Route::post('products/{id}', function(Request $request, $id) use ($verifyToken, 
     return response()->json($product);
 });
 
-Route::patch('products/{id}/status', function(Request $request, $id) use ($verifyToken) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+Route::patch('products/{id}/status', function(Request $request, $id) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-products')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $product = Product::find($id);
     if (!$product) return response()->json(['error' => 'Not Found'], 404);
@@ -257,16 +270,16 @@ Route::patch('products/{id}/status', function(Request $request, $id) use ($verif
     return response()->json(['success' => true, 'status' => $product->status]);
 });
 
-Route::delete('products/{id}', function(Request $request, $id) use ($verifyToken) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+Route::delete('products/{id}', function(Request $request, $id) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-products')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $product = Product::find($id);
     if ($product) $product->delete();
     return response()->json(['success' => true]);
 });
 // GALLERY MANAGEMENT (Timeline Events: title, date, summary, image)
-Route::post('gallery', function(Request $request) use ($verifyToken, $uploadToSupabase) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+Route::post('gallery', function(Request $request) use ($verifyPermission, $uploadToSupabase) {
+    if (!$verifyPermission($request, 'admin-content')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $data = [
         'title' => $request->input('title'),
@@ -290,8 +303,8 @@ Route::post('gallery', function(Request $request) use ($verifyToken, $uploadToSu
     return response()->json($item, 201);
 });
 
-Route::delete('gallery/{id}', function(Request $request, $id) use ($verifyToken) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+Route::delete('gallery/{id}', function(Request $request, $id) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-content')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $item = GalleryItem::find($id);
     if ($item) $item->delete();
@@ -299,8 +312,8 @@ Route::delete('gallery/{id}', function(Request $request, $id) use ($verifyToken)
 });
 
 // ACTIVITIES MANAGEMENT (Media Gallery: name, event_description, category, video_url, image)
-Route::post('activities', function(Request $request) use ($verifyToken, $uploadToSupabase) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+Route::post('activities', function(Request $request) use ($verifyPermission, $uploadToSupabase) {
+    if (!$verifyPermission($request, 'admin-content')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $data = [
         'title' => $request->input('name') ?? $request->input('title'),
@@ -327,8 +340,8 @@ Route::post('activities', function(Request $request) use ($verifyToken, $uploadT
     $activity = Activity::create($data);
     return response()->json($activity, 201);
 });
-Route::delete('activities/{id}', function(Request $request, $id) use ($verifyToken) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+Route::delete('activities/{id}', function(Request $request, $id) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-content')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $activity = Activity::find($id);
     if ($activity) $activity->delete();
@@ -336,13 +349,13 @@ Route::delete('activities/{id}', function(Request $request, $id) use ($verifyTok
 });
 
 // INQUIRY MANAGEMENT
-Route::get('inquiries', function(Request $request) use ($verifyToken) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+Route::get('inquiries', function(Request $request) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-inquiries')) return response()->json(['error' => 'Unauthorized'], 401);
     return response()->json(Inquiry::latest()->get());
 });
 
-Route::patch('inquiries/{id}/status', function(Request $request, $id) use ($verifyToken) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+Route::patch('inquiries/{id}/status', function(Request $request, $id) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-inquiries')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $inquiry = Inquiry::find($id);
     if (!$inquiry) return response()->json(['error' => 'Not Found'], 404);
@@ -352,8 +365,8 @@ Route::patch('inquiries/{id}/status', function(Request $request, $id) use ($veri
     return response()->json($inquiry);
 });
 
-Route::delete('inquiries/{id}', function(Request $request, $id) use ($verifyToken) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+Route::delete('inquiries/{id}', function(Request $request, $id) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-inquiries')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $inquiry = Inquiry::find($id);
     if ($inquiry) $inquiry->delete();
@@ -369,8 +382,8 @@ Route::get('team', function() {
         ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
 });
 
-Route::post('team', function(Request $request) use ($verifyToken, $uploadToSupabase) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+Route::post('team', function(Request $request) use ($verifyPermission, $uploadToSupabase) {
+    if (!$verifyPermission($request, 'admin-content')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $data = $request->only(['name', 'role']);
     
@@ -385,8 +398,8 @@ Route::post('team', function(Request $request) use ($verifyToken, $uploadToSupab
     return response()->json($member, 201);
 });
 
-Route::delete('team/{id}', function(Request $request, $id) use ($verifyToken) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+Route::delete('team/{id}', function(Request $request, $id) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-content')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $member = TeamMember::find($id);
     if ($member) $member->delete();
@@ -394,8 +407,8 @@ Route::delete('team/{id}', function(Request $request, $id) use ($verifyToken) {
 });
 
 // Dashboard Metrics
-Route::get('metrics', function(Request $request) use ($verifyToken) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+Route::get('metrics', function(Request $request) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-dashboard')) return response()->json(['error' => 'Unauthorized'], 401);
     
     // Combine count queries into a single database roundtrip
     $counts = \DB::selectOne("
@@ -422,8 +435,8 @@ Route::get('metrics', function(Request $request) use ($verifyToken) {
 });
 
 // System Migration Trigger
-Route::get('admin/migrate', function(Request $request) use ($verifyToken) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+Route::get('admin/migrate', function(Request $request) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-health')) return response()->json(['error' => 'Unauthorized'], 401);
     try {
         \Artisan::call('migrate', ['--force' => true]);
         return response()->json([
@@ -439,8 +452,8 @@ Route::get('admin/migrate', function(Request $request) use ($verifyToken) {
 });
 
 // System Health Diagnostics
-Route::get('admin/health', function(Request $request) use ($verifyToken) {
-    if (!$verifyToken($request)) return response()->json(['error' => 'Unauthorized'], 401);
+Route::get('admin/health', function(Request $request) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-health')) return response()->json(['error' => 'Unauthorized'], 401);
     
     $uploadsPath = public_path('uploads');
     
@@ -491,3 +504,48 @@ Route::get('admin/health', function(Request $request) use ($verifyToken) {
     ]);
 });
 
+
+
+// ADMIN USERS CRUD MANAGEMENT
+Route::get('admin/users', function(Request $request) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-users')) return response()->json(['error' => 'Forbidden'], 403);
+    return response()->json(User::all());
+});
+
+Route::post('admin/users', function(Request $request) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-users')) return response()->json(['error' => 'Forbidden'], 403);
+    
+    $request->validate([
+        'name' => 'required|string',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|min:6',
+        'permissions' => 'nullable|array'
+    ]);
+    
+    $user = User::create([
+        'name' => $request->input('name'),
+        'email' => $request->input('email'),
+        'password' => Hash::make($request->input('password')),
+        'api_token' => \Illuminate\Support\Str::random(60),
+        'permissions' => $request->input('permissions')
+    ]);
+    
+    return response()->json($user, 201);
+});
+
+Route::delete('admin/users/{id}', function(Request $request, $id) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-users')) return response()->json(['error' => 'Forbidden'], 403);
+    
+    $user = User::find($id);
+    if (!$user) return response()->json(['error' => 'Not Found'], 404);
+    
+    // Prevent self deletion
+    $token = $request->bearerToken();
+    $currentUser = User::where('api_token', $token)->first();
+    if ($currentUser && $currentUser->id == $id) {
+        return response()->json(['error' => 'Cannot delete yourself'], 400);
+    }
+    
+    $user->delete();
+    return response()->json(['success' => true]);
+});

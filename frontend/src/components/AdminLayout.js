@@ -1,4 +1,4 @@
-import { LayoutDashboard, Package, MessageSquare, Image, Activity, LogOut, AlertTriangle } from 'lucide-static';
+import { LayoutDashboard, Package, MessageSquare, Image, Activity, LogOut, AlertTriangle, Users } from 'lucide-static';
 
 export function renderAdminLayout(contentElement, activeRoute) {
   const container = document.createElement('div');
@@ -26,40 +26,80 @@ export function renderAdminLayout(contentElement, activeRoute) {
     </a>
   `;
   
-  const nav = document.createElement('nav');
-  nav.className = 'admin-nav';
-  nav.innerHTML = `
-    <ul>
+  const permissions = JSON.parse(localStorage.getItem('admin_permissions') || 'null');
+  const hasPermission = (tabName) => {
+    if (permissions === null) return true;
+    return permissions.includes(tabName);
+  };
+
+  let navItemsHtml = '';
+  
+  if (hasPermission('admin-dashboard')) {
+    navItemsHtml += `
       <li>
         <a href="/admin" data-route="admin-dashboard" class="${activeRoute === 'admin-dashboard' ? 'active' : ''}">
           ${LayoutDashboard}
           <span>Dashboard</span>
         </a>
       </li>
+    `;
+  }
+  if (hasPermission('admin-products')) {
+    navItemsHtml += `
       <li>
         <a href="/admin/products" data-route="admin-products" class="${activeRoute === 'admin-products' ? 'active' : ''}">
           ${Package}
           <span>Products</span>
         </a>
       </li>
+    `;
+  }
+  if (hasPermission('admin-inquiries')) {
+    navItemsHtml += `
       <li>
         <a href="/admin/inquiries" data-route="admin-inquiries" class="${activeRoute === 'admin-inquiries' ? 'active' : ''}">
           ${MessageSquare}
           <span>Inquiries</span>
         </a>
       </li>
+    `;
+  }
+  if (hasPermission('admin-content')) {
+    navItemsHtml += `
       <li>
         <a href="/admin/content" data-route="admin-content" class="${activeRoute === 'admin-content' ? 'active' : ''}">
           ${Image}
           <span>Content</span>
         </a>
       </li>
+    `;
+  }
+  if (hasPermission('admin-health')) {
+    navItemsHtml += `
       <li>
         <a href="/admin/health" data-route="admin-health" class="${activeRoute === 'admin-health' ? 'active' : ''}">
           ${Activity}
           <span>System Health</span>
         </a>
       </li>
+    `;
+  }
+  if (hasPermission('admin-users')) {
+    navItemsHtml += `
+      <li>
+        <a href="/admin/users" data-route="admin-users" class="${activeRoute === 'admin-users' ? 'active' : ''}">
+          ${Users}
+          <span>Admins</span>
+        </a>
+      </li>
+    `;
+  }
+
+  const nav = document.createElement('nav');
+  nav.className = 'admin-nav';
+  nav.innerHTML = `
+    <ul>
+      ${navItemsHtml}
     </ul>
   `;
 
@@ -89,6 +129,9 @@ export function renderAdminLayout(contentElement, activeRoute) {
       logoutBtn.onclick = (e) => {
         e.preventDefault();
         localStorage.removeItem('admin_token');
+        localStorage.removeItem('admin_permissions');
+        localStorage.removeItem('admin_name');
+        localStorage.removeItem('admin_email');
         window.navigate('admin-login');
       };
     }
@@ -101,6 +144,9 @@ export function renderAdminLayout(contentElement, activeRoute) {
   // 2. Main Content Area
   const main = document.createElement('main');
   main.className = 'admin-main';
+
+  const adminName = localStorage.getItem('admin_name') || 'Administrator';
+  const roleName = permissions === null ? 'Super User' : 'Sub-Admin';
 
   // Header
   const header = document.createElement('header');
@@ -124,11 +170,11 @@ export function renderAdminLayout(contentElement, activeRoute) {
       
       <div style="display: flex; align-items: center; gap: 12px; padding: 6px 16px 6px 6px; border: 1px solid var(--admin-border); border-radius: 100px; background: var(--admin-surface);">
         <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--admin-primary) 0%, #1e3a8a 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.85rem; box-shadow: var(--shadow-sm);">
-          A
+          ${adminName.charAt(0).toUpperCase()}
         </div>
         <div style="display: flex; flex-direction: column;">
-          <span class="admin-user-name" style="font-weight: 700; font-size: 0.85rem; line-height: 1.2; color: var(--admin-text);">Administrator</span>
-          <span style="font-size: 0.7rem; color: var(--admin-text-muted); font-weight: 500;">Super User</span>
+          <span class="admin-user-name" style="font-weight: 700; font-size: 0.85rem; line-height: 1.2; color: var(--admin-text);">${adminName}</span>
+          <span style="font-size: 0.7rem; color: var(--admin-text-muted); font-weight: 500;">${roleName}</span>
         </div>
       </div>
     </div>

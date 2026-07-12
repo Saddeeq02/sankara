@@ -127,6 +127,9 @@ export function renderLogin() {
       
       if (data.success) {
         localStorage.setItem('admin_token', data.api_token);
+        localStorage.setItem('admin_name', data.user.name || 'Administrator');
+        localStorage.setItem('admin_email', data.user.email);
+        localStorage.setItem('admin_permissions', JSON.stringify(data.user.permissions));
         window.navigate('admin-dashboard');
       } else {
         errorMsg.style.display = 'block';

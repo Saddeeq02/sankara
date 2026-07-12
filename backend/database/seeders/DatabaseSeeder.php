@@ -15,14 +15,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::firstOrCreate(
+        $admin = User::firstOrCreate(
             ['email' => 'admin@sankara.com'],
             [
                 'name' => 'Admin',
                 'password' => 'sankara2026',
-                'api_token' => 'sankara_super_secret_token_123'
+                'api_token' => 'sankara_super_secret_token_123',
+                'permissions' => null
             ]
         );
+        if ($admin) {
+            $admin->update([
+                'name' => 'Admin',
+                'permissions' => null
+            ]);
+        }
 
         $this->call(ProductSeeder::class);
     }
