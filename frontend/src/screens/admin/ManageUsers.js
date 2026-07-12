@@ -59,7 +59,7 @@ export function renderAdminUsers() {
 
     tbody.innerHTML = users.map(user => {
       let permsBadge = '';
-      if (user.permissions === null) {
+      if (!user.permissions || user.permissions === null) {
         permsBadge = `<span class="badge badge-success" style="background: rgba(34, 197, 94, 0.1); color: #22c55e; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Super User (All Access)</span>`;
       } else if (user.permissions.length === 0) {
         permsBadge = `<span class="badge badge-danger" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">No Access</span>`;
