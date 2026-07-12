@@ -17,7 +17,7 @@ Route::get('/auth-check', [AuthController::class, 'check']);
 
 // Token Middleware Helper function (Updated for DB with caching)
 $verifyToken = function(Request $request) {
-    $token = $request->bearerToken();
+    $token = $request->bearerToken() ?: $request->query('token');
     if (!$token) return false;
     
     return \Illuminate\Support\Facades\Cache::remember('verify_token_' . md5($token), 60, function() use ($token) {
