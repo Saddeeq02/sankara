@@ -430,8 +430,9 @@ Route::get('admin/health', function(Request $request) use ($verifyToken) {
     // 1. Database Health
     try {
         \DB::connection()->getPdo();
+        $driver = \DB::connection()->getDriverName();
         $dbStatus = true;
-        $dbMsg = 'Connected (PostgreSQL)';
+        $dbMsg = 'Connected (' . ucfirst($driver) . ')';
     } catch (\Exception $e) {
         $dbStatus = false;
         $dbMsg = 'Database Connection Error: ' . $e->getMessage();
