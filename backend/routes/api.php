@@ -9,6 +9,7 @@ use App\Models\Activity;
 use App\Models\Inquiry;
 use App\Models\User;
 use App\Models\TeamMember;
+use Illuminate\Support\Facades\Hash;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/auth-check', [AuthController::class, 'check']);
