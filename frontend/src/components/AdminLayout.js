@@ -79,7 +79,7 @@ export function renderAdminLayout(contentElement, activeRoute) {
       <li>
         <a href="/admin/health" data-route="admin-health" class="${activeRoute === 'admin-health' ? 'active' : ''}">
           ${Activity}
-          <span>System Health</span>
+          <span>Developer Hub</span>
         </a>
       </li>
     `;

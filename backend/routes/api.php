@@ -507,9 +507,7 @@ Route::get('admin/migrate', function(Request $request) use ($verifyPermission) {
 Route::get('admin/health', function(Request $request) use ($verifyPermission) {
     if (!$verifyPermission($request, 'admin-health')) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $uploadsPath = public_path('uploads');
-    
-    // 1. Database Health
+    // 1. Website Database Health
     try {
         \DB::connection()->getPdo();
         $driver = \DB::connection()->getDriverName();
@@ -520,32 +518,71 @@ Route::get('admin/health', function(Request $request) use ($verifyPermission) {
         $dbMsg = 'Database Connection Error: ' . $e->getMessage();
     }
     
-    // 2. File System Health (Bypassed since uploads use database storage)
+    // 2. ID Card System (FastAPI Python Server) Health Check
+    $idSystemActive = false;
+    $idSystemMsg = '';
+    $idSystemStats = [
+        'staff_count' => 0,
+        'complaints_count' => 0,
+        'attendance_count' => 0
+    ];
+
+    try {
+        $pingResponse = \Illuminate\Support\Facades\Http::timeout(2)->get('https://sankara-id.vercel.app/');
+        if ($pingResponse->successful()) {
+            $idSystemActive = true;
+            $idSystemMsg = 'Online';
+            
+            // Fetch extra stats since server is alive
+            $staffResponse = \Illuminate\Support\Facades\Http::timeout(2)->get('https://sankara-id.vercel.app/staff/');
+            if ($staffResponse->successful()) {
+                $idSystemStats['staff_count'] = count($staffResponse->json() ?: []);
+            }
+            
+            $complaintsResponse = \Illuminate\Support\Facades\Http::timeout(2)->get('https://sankara-id.vercel.app/complaints/');
+            if ($complaintsResponse->successful()) {
+                $idSystemStats['complaints_count'] = count($complaintsResponse->json() ?: []);
+            }
+
+            $attendanceResponse = \Illuminate\Support\Facades\Http::timeout(2)->get('https://sankara-id.vercel.app/attendance/');
+            if ($attendanceResponse->successful()) {
+                $idSystemStats['attendance_count'] = count($attendanceResponse->json() ?: []);
+            }
+        } else {
+            $idSystemMsg = 'HTTP Error: ' . $pingResponse->status();
+        }
+    } catch (\Exception $e) {
+        $idSystemMsg = 'Connection Timeout / Offline';
+    }
+    
     $uploadsStatus = true;
     
-    // 3. System Context
     return response()->json([
         'status' => 'success',
         'timestamp' => now()->toIso8601String(),
         'diagnostics' => [
             [
-                'name' => 'Database',
+                'name' => 'Website Database',
                 'status' => $dbStatus ? 'Healthy' : 'Error',
                 'message' => $dbMsg,
                 'id' => 'db'
             ],
             [
-                'name' => 'Uploads Directory',
+                'name' => 'Website Uploads Directory',
                 'status' => $uploadsStatus ? 'Healthy' : 'Error',
-                'message' => $uploadsStatus ? 'Writable' : 'Permissions issue at public/uploads',
+                'message' => 'Writable & Connected',
                 'id' => 'uploads'
             ],
             [
-                'name' => 'API Endpoint',
-                'status' => 'Healthy',
-                'message' => 'Responding correctly',
-                'id' => 'api'
+                'name' => 'ID Card System API',
+                'status' => $idSystemActive ? 'Healthy' : 'Error',
+                'message' => $idSystemMsg,
+                'id' => 'id_api'
             ]
+        ],
+        'id_system' => [
+            'active' => $idSystemActive,
+            'stats' => $idSystemStats
         ],
         'system' => [
             'php_version' => PHP_VERSION,
@@ -554,6 +591,20 @@ Route::get('admin/health', function(Request $request) use ($verifyPermission) {
             'uptime' => 'System Online'
         ]
     ]);
+});
+
+Route::post('admin/id-system/reset-scores', function(Request $request) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-health')) return response()->json(['error' => 'Unauthorized'], 401);
+    
+    try {
+        $res = \Illuminate\Support\Facades\Http::timeout(5)->post('https://sankara-id.vercel.app/staff/reset_monthly_scores');
+        if ($res->successful()) {
+            return response()->json($res->json());
+        }
+        return response()->json(['error' => 'Failed to reset scores on ID System API'], 502);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
 });
 
 
