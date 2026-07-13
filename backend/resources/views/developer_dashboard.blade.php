@@ -168,13 +168,19 @@
                 
                 <!-- Category Tabs -->
                 <div class="glass-panel rounded-2xl p-4 space-y-2">
-                    <button onclick="switchCategory('website')" id="tab-btn-website" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-600/10 text-blue-400 font-semibold text-sm transition-all">
+                    <button onclick="switchCategory('website')" id="tab-btn-website" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-600/10 text-blue-400 font-semibold text-sm transition-all text-left">
                         <span>🖥️</span> Website Portal
                     </button>
-                    <button onclick="switchCategory('id_system')" id="tab-btn-id_system" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-800/40 text-gray-400 font-semibold text-sm transition-all">
+                    <button onclick="switchCategory('id_system')" id="tab-btn-id_system" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-800/40 text-gray-400 font-semibold text-sm transition-all text-left">
                         <span>🆔</span> ID Cards System
                     </button>
-                    <button onclick="switchCategory('dev_tools')" id="tab-btn-dev_tools" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-800/40 text-gray-400 font-semibold text-sm transition-all">
+                    <button onclick="switchCategory('api_logs')" id="tab-btn-api_logs" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-800/40 text-gray-400 font-semibold text-sm transition-all text-left">
+                        <span>⚡</span> API Request Logs
+                    </button>
+                    <button onclick="switchCategory('endpoints')" id="tab-btn-endpoints" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-800/40 text-gray-400 font-semibold text-sm transition-all text-left">
+                        <span>🗺️</span> Route Catalog
+                    </button>
+                    <button onclick="switchCategory('dev_tools')" id="tab-btn-dev_tools" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-800/40 text-gray-400 font-semibold text-sm transition-all text-left">
                         <span>🛠️</span> Developer Tools
                     </button>
                 </div>
@@ -353,6 +359,80 @@
                     </div>
                 </div>
 
+                <!-- API REQUEST LOGS -->
+                <div id="category-api_logs" class="space-y-6 hidden">
+                    <div class="glass-panel rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <h3 class="text-base font-bold flex items-center gap-2">
+                                <span>⚡</span> API Requests & Performance Monitor
+                            </h3>
+                            <p class="text-xs text-gray-400 mt-1">Live requests tracking, response status codes, and latency.</p>
+                        </div>
+                        <div>
+                            <input oninput="filterRequestLogs(this.value)" type="text" placeholder="Search requests..." 
+                                class="px-4 py-2 text-xs font-medium rounded-xl bg-gray-900/60 border border-brand-border text-white focus:outline-none focus:border-blue-500 transition-colors w-64">
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl overflow-hidden">
+                        <div class="overflow-x-auto max-h-[600px] overflow-y-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="border-b border-brand-border bg-brand-card/40 text-xs font-bold text-gray-400 uppercase">
+                                        <th class="px-6 py-3.5">Method</th>
+                                        <th class="px-6 py-3.5">URL / Route</th>
+                                        <th class="px-6 py-3.5">Status</th>
+                                        <th class="px-6 py-3.5">Latency</th>
+                                        <th class="px-6 py-3.5">IP Address</th>
+                                        <th class="px-6 py-3.5">Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-brand-border text-xs" id="api-request-logs-tbody">
+                                    <tr>
+                                        <td colspan="6" class="px-6 py-12 text-center text-gray-500 font-medium">Loading requests log...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROUTE CATALOG -->
+                <div id="category-endpoints" class="space-y-6 hidden">
+                    <div class="glass-panel rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <h3 class="text-base font-bold flex items-center gap-2">
+                                <span>🗺️</span> Backend Route Catalog
+                            </h3>
+                            <p class="text-xs text-gray-400 mt-1">Full list of declared Laravel endpoints, controllers, and middlewares.</p>
+                        </div>
+                        <div>
+                            <input oninput="filterRoutes(this.value)" type="text" placeholder="Filter routes..." 
+                                class="px-4 py-2 text-xs font-medium rounded-xl bg-gray-900/60 border border-brand-border text-white focus:outline-none focus:border-blue-500 transition-colors w-64">
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl overflow-hidden">
+                        <div class="overflow-x-auto max-h-[600px] overflow-y-auto">
+                            <table class="w-full text-left border-collapse text-xs">
+                                <thead>
+                                    <tr class="border-b border-brand-border bg-brand-card/40 text-xs font-bold text-gray-400 uppercase">
+                                        <th class="px-6 py-3.5">HTTP Method</th>
+                                        <th class="px-6 py-3.5">URI Path</th>
+                                        <th class="px-6 py-3.5">Controller Action</th>
+                                        <th class="px-6 py-3.5">Middleware</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-brand-border font-medium" id="routes-catalog-tbody">
+                                    <tr>
+                                        <td colspan="4" class="px-6 py-12 text-center text-gray-500 font-medium">Retrieving system routes...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- DEV TOOLS CATEGORY -->
                 <div id="category-dev_tools" class="space-y-6 hidden">
                     <div class="glass-panel rounded-2xl p-6 space-y-6">
@@ -408,6 +488,8 @@
         <script>
             const backendToken = "{{ $token }}";
             let activeTab = 'website';
+            let allRequestLogs = [];
+            let allRoutes = [];
 
             function switchCategory(cat) {
                 activeTab = cat;
@@ -415,33 +497,150 @@
                 // Hide all categories
                 document.getElementById('category-website').classList.add('hidden');
                 document.getElementById('category-id_system').classList.add('hidden');
+                document.getElementById('category-api_logs').classList.add('hidden');
+                document.getElementById('category-endpoints').classList.add('hidden');
                 document.getElementById('category-dev_tools').classList.add('hidden');
                 
                 // Reset tab buttons
-                document.getElementById('tab-btn-website').className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-800/40 text-gray-400 font-semibold text-sm transition-all";
-                document.getElementById('tab-btn-id_system').className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-800/40 text-gray-400 font-semibold text-sm transition-all";
-                document.getElementById('tab-btn-dev_tools').className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-800/40 text-gray-400 font-semibold text-sm transition-all";
+                const btnIds = ['website', 'id_system', 'api_logs', 'endpoints', 'dev_tools'];
+                btnIds.forEach(id => {
+                    document.getElementById('tab-btn-' + id).className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-800/40 text-gray-400 font-semibold text-sm transition-all text-left";
+                });
                 
                 // Show active category & set button state
                 document.getElementById('category-' + cat).classList.remove('hidden');
                 const activeBtn = document.getElementById('tab-btn-' + cat);
                 
                 if (cat === 'dev_tools') {
-                    activeBtn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-brand-danger/10 text-brand-danger font-semibold text-sm transition-all";
+                    activeBtn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-brand-danger/10 text-brand-danger font-semibold text-sm transition-all text-left";
                 } else {
-                    activeBtn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-600/10 text-blue-400 font-semibold text-sm transition-all";
+                    activeBtn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-600/10 text-blue-400 font-semibold text-sm transition-all text-left";
                 }
 
                 if (cat === 'id_system') {
                     fetchIDSystemLogs();
+                } else if (cat === 'api_logs') {
+                    fetchApiRequestLogs();
+                } else if (cat === 'endpoints') {
+                    fetchRoutesCatalog();
                 }
+            }
+
+            async function fetchRoutesCatalog() {
+                const tbody = document.getElementById('routes-catalog-tbody');
+                tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-12 text-center text-gray-500 font-medium">Retrieving system routes...</td></tr>`;
+
+                try {
+                    const res = await fetch(`/api/admin/routes?token=${backendToken}`);
+                    if (res.ok) {
+                        allRoutes = await res.json();
+                        renderRoutes(allRoutes);
+                    } else {
+                        tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-12 text-center text-brand-danger font-medium">Failed to load route catalog.</td></tr>`;
+                    }
+                } catch(e) {
+                    tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-12 text-center text-brand-danger font-medium">Error connecting to routes API.</td></tr>`;
+                }
+            }
+
+            function renderRoutes(routes) {
+                const tbody = document.getElementById('routes-catalog-tbody');
+                if (routes.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-12 text-center text-gray-500 font-medium font-bold">No matching routes found.</td></tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = routes.map(route => {
+                    let methodBadge = 'bg-blue-600/10 text-blue-400';
+                    if (route.method.includes('POST')) methodBadge = 'bg-brand-success/10 text-brand-success';
+                    if (route.method.includes('DELETE')) methodBadge = 'bg-brand-danger/10 text-brand-danger';
+                    if (route.method.includes('PUT') || route.method.includes('PATCH')) methodBadge = 'bg-brand-warning/10 text-brand-warning';
+
+                    return `
+                        <tr class="hover:bg-gray-800/10 transition-colors">
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold ${methodBadge}">${route.method}</span>
+                            </td>
+                            <td class="px-6 py-4 font-mono font-bold text-white">${route.uri}</td>
+                            <td class="px-6 py-4 text-gray-300 font-mono text-[11px]">${route.action}</td>
+                            <td class="px-6 py-4 text-gray-400">${route.middleware.join(', ')}</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            function filterRoutes(q) {
+                const filtered = allRoutes.filter(r => 
+                    r.uri.toLowerCase().includes(q.toLowerCase()) || 
+                    r.method.toLowerCase().includes(q.toLowerCase()) || 
+                    r.action.toLowerCase().includes(q.toLowerCase())
+                );
+                renderRoutes(filtered);
+            }
+
+            async function fetchApiRequestLogs() {
+                const tbody = document.getElementById('api-request-logs-tbody');
+                tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-12 text-center text-gray-500 font-medium">Loading requests log...</td></tr>`;
+
+                try {
+                    const res = await fetch(`/api/admin/request-logs?token=${backendToken}`);
+                    if (res.ok) {
+                        allRequestLogs = await res.json();
+                        renderRequestLogs(allRequestLogs);
+                    } else {
+                        tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-12 text-center text-brand-danger font-medium">Failed to retrieve request logs.</td></tr>`;
+                    }
+                } catch(e) {
+                    tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-12 text-center text-brand-danger font-medium font-bold">Error communicating with logs API.</td></tr>`;
+                }
+            }
+
+            function renderRequestLogs(logs) {
+                const tbody = document.getElementById('api-request-logs-tbody');
+                if (logs.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-12 text-center text-gray-500 font-medium">No HTTP requests recorded yet.</td></tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = logs.map(log => {
+                    let methodBadge = 'bg-blue-600/10 text-blue-400';
+                    if (log.method === 'POST') methodBadge = 'bg-brand-success/10 text-brand-success';
+                    if (log.method === 'DELETE') methodBadge = 'bg-brand-danger/10 text-brand-danger';
+                    if (log.method === 'PUT' || log.method === 'PATCH') methodBadge = 'bg-brand-warning/10 text-brand-warning';
+
+                    let statusBadge = 'bg-brand-success/15 text-brand-success';
+                    if (log.status_code >= 400 && log.status_code < 500) statusBadge = 'bg-brand-warning/15 text-brand-warning';
+                    if (log.status_code >= 500) statusBadge = 'bg-brand-danger/15 text-brand-danger';
+
+                    return `
+                        <tr class="hover:bg-gray-800/10 transition-colors">
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold ${methodBadge}">${log.method}</span>
+                            </td>
+                            <td class="px-6 py-4 font-mono font-bold text-white break-all">${log.url}</td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold ${statusBadge}">${log.status_code}</span>
+                            </td>
+                            <td class="px-6 py-4 text-gray-300 font-mono">${log.duration_ms} ms</td>
+                            <td class="px-6 py-4 text-gray-400 font-mono">${log.ip_address}</td>
+                            <td class="px-6 py-4 text-gray-400">${new Date(log.created_at).toLocaleString()}</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            function filterRequestLogs(q) {
+                const filtered = allRequestLogs.filter(log => 
+                    log.url.toLowerCase().includes(q.toLowerCase()) || 
+                    log.method.toLowerCase().includes(q.toLowerCase()) || 
+                    String(log.status_code).includes(q)
+                );
+                renderRequestLogs(filtered);
             }
 
             async function fetchIDSystemLogs() {
                 try {
-                    const badge = document.getElementById('health-badge-fastapi');
                     const tbody = document.getElementById('id-attendance-tbody');
-                    
                     tbody.innerHTML = `<tr><td colspan="5" class="px-6 py-12 text-center text-gray-500 font-medium">Fetching active streams...</td></tr>`;
 
                     const attRes = await fetch('https://sankara-id.vercel.app/attendance/');
@@ -482,18 +681,15 @@
             }
 
             async function refreshData() {
-                // Live endpoint status pings
                 const fastapiBadge = document.getElementById('health-badge-fastapi');
                 fastapiBadge.textContent = 'PENDING...';
                 fastapiBadge.className = 'px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-gray-600/10 text-gray-400';
                 
                 try {
-                    // Fetch Laravel health stats
                     const healthRes = await fetch(`/api/admin/health?token=${backendToken}`);
                     if (healthRes.ok) {
                         const data = await healthRes.json();
                         
-                        // Update DB health status badge
                         const dbBadge = document.getElementById('health-badge-db');
                         if (data.diagnostics[0].status === 'Healthy') {
                             dbBadge.className = 'px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-brand-success/10 text-brand-success';
@@ -503,7 +699,6 @@
                             dbBadge.textContent = 'Error';
                         }
 
-                        // Update FastAPI Python health status badge
                         if (data.id_system.active) {
                             fastapiBadge.className = 'px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-brand-success/10 text-brand-success';
                             fastapiBadge.textContent = 'Healthy';
@@ -522,6 +717,10 @@
 
                 if (activeTab === 'id_system') {
                     fetchIDSystemLogs();
+                } else if (activeTab === 'api_logs') {
+                    fetchApiRequestLogs();
+                } else if (activeTab === 'endpoints') {
+                    fetchRoutesCatalog();
                 }
             }
 

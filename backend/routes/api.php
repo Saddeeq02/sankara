@@ -607,6 +607,39 @@ Route::post('admin/id-system/reset-scores', function(Request $request) use ($ver
     }
 });
 
+Route::get('admin/request-logs', function(Request $request) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-health')) return response()->json(['error' => 'Unauthorized'], 401);
+    
+    try {
+        if (\Schema::hasTable('api_request_logs')) {
+            $logs = \DB::table('api_request_logs')
+                ->orderBy('created_at', 'desc')
+                ->limit(100)
+                ->get();
+            return response()->json($logs);
+        }
+        return response()->json([]);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+});
+
+Route::get('admin/routes', function(Request $request) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-health')) return response()->json(['error' => 'Unauthorized'], 401);
+    
+    $routes = collect(\Route::getRoutes())->map(function($route) {
+        return [
+            'method' => implode('|', $route->methods()),
+            'uri' => $route->uri(),
+            'name' => $route->getName() ?: '-',
+            'action' => $route->getActionName(),
+            'middleware' => $route->middleware(),
+        ];
+    })->values();
+    
+    return response()->json($routes);
+});
+
 
 
 // ADMIN USERS CRUD MANAGEMENT
