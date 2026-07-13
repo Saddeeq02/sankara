@@ -28,7 +28,7 @@ $verifyToken = function(Request $request) {
 $verifyPermission = function(Request $request, $permission) use ($verifyToken) {
     if (!$verifyToken($request)) return false;
     
-    $token = $request->bearerToken();
+    $token = $request->bearerToken() ?: $request->query('token');
     $user = User::where('api_token', $token)->first();
     if (!$user) return false;
     
