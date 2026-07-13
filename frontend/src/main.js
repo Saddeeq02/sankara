@@ -13,7 +13,6 @@ import { renderAdminDashboard } from './screens/admin/Dashboard';
 import { renderAdminProducts } from './screens/admin/ManageProducts';
 import { renderAdminContent } from './screens/admin/ManageContent';
 import { renderAdminInquiries } from './screens/admin/ManageInquiries';
-import { renderAdminHealth } from './screens/admin/Health';
 import { renderAdminUsers } from './screens/admin/ManageUsers';
 import { renderLogin } from './screens/admin/Login';
 
@@ -44,7 +43,6 @@ const routes = {
   'admin-products': renderAdminProducts,
   'admin-content': renderAdminContent,
   'admin-inquiries': renderAdminInquiries,
-  'admin-health': renderAdminHealth,
   'admin-users': renderAdminUsers,
 };
 
@@ -73,7 +71,6 @@ const routeToPath = {
   'admin-products': '/admin/products',
   'admin-content': '/admin/content',
   'admin-inquiries': '/admin/inquiries',
-  'admin-health': '/admin/health',
   'admin-users': '/admin/users'
 };
 
@@ -93,7 +90,6 @@ const pathToRoute = {
   '/admin/products': 'admin-products',
   '/admin/content': 'admin-content',
   '/admin/inquiries': 'admin-inquiries',
-  '/admin/health': 'admin-health',
   '/admin/users': 'admin-users'
 };
 

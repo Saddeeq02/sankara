@@ -74,16 +74,6 @@ export function renderAdminLayout(contentElement, activeRoute) {
       </li>
     `;
   }
-  if (hasPermission('admin-health')) {
-    navItemsHtml += `
-      <li>
-        <a href="/admin/health" data-route="admin-health" class="${activeRoute === 'admin-health' ? 'active' : ''}">
-          ${Activity}
-          <span>Developer Hub</span>
-        </a>
-      </li>
-    `;
-  }
   if (hasPermission('admin-users')) {
     navItemsHtml += `
       <li>
