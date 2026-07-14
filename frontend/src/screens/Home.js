@@ -703,6 +703,90 @@ export function renderHomeScreen() {
       color: #ffffff;
       box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
     }
+
+    /* Home Workshop Highlights Section */
+    .home-workshop-section {
+      margin-top: 100px;
+      padding-top: 80px;
+      border-top: 1px solid rgba(226, 232, 240, 0.8);
+      text-align: center;
+    }
+    
+    .home-workshop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+      margin-bottom: 50px;
+      text-align: left;
+    }
+    
+    .home-workshop-card {
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.015);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .home-workshop-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05);
+      border-color: rgba(37, 99, 235, 0.25);
+    }
+    
+    .home-card-img-wrapper {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: #f1f5f9;
+    }
+    
+    .home-card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .home-workshop-card:hover .home-card-img-wrapper img {
+      transform: scale(1.08);
+    }
+    
+    .home-card-body-info {
+      padding: 24px 20px;
+      border-top: 1px solid #f1f5f9;
+    }
+    
+    .home-card-meta-tag {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #2563eb;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      display: block;
+      margin-bottom: 8px;
+    }
+    
+    .home-card-title-text {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    [data-theme="dark"] .home-workshop-card {
+      background: var(--surface-color);
+      border-color: var(--glass-border);
+    }
+    [data-theme="dark"] .home-card-title-text {
+      color: var(--text-main);
+    }
   `;
   container.appendChild(styleTag);
 
@@ -1071,6 +1155,57 @@ export function renderHomeScreen() {
         <div>
           <a href="/contact" data-route="contact" class="btn-main-green" style="background: #2563eb; color: #ffffff; box-shadow: 0 4px 20px rgba(37,99,235,0.25); white-space: nowrap;">
             Contact Corporate Office
+          </a>
+        </div>
+      </div>
+
+      <!-- Workshop Highlights Section -->
+      <div class="home-workshop-section reveal" style="animation-delay: 0.1s;">
+        <span style="font-size: 0.85rem; font-weight: 800; color: #991b1b; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">Workshop Journal</span>
+        <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; color: #0f172a; letter-spacing: -1px; margin-bottom: 20px;">Lovol × Sankara Agricultural Workshop</h2>
+        <p style="color: #475569; font-size: 1.1rem; max-width: 750px; margin: 0 auto; line-height: 1.7;">
+          Empowering Nigerian agribusinesses and local operators with practical heavy-duty machinery training and live product demonstrations.
+        </p>
+        
+        <div class="home-workshop-grid">
+          <!-- Card 1 -->
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper">
+              <img src="/assets/gallery/gallery_workshop_w1_1.jpg" alt="Lovol × Sankara Agricultural Workshop - Highlight 1" loading="lazy">
+            </div>
+            <div class="home-card-body-info">
+              <span class="home-card-meta-tag">Workshop</span>
+              <h4 class="home-card-title-text">Lovol × Sankara Agricultural Workshop - Highlight 1</h4>
+            </div>
+          </a>
+          
+          <!-- Card 2 -->
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper">
+              <img src="/assets/gallery/gallery_workshop_w1_2.jpg" alt="Lovol × Sankara Agricultural Workshop - Highlight 2" loading="lazy">
+            </div>
+            <div class="home-card-body-info">
+              <span class="home-card-meta-tag">Workshop</span>
+              <h4 class="home-card-title-text">Lovol × Sankara Agricultural Workshop - Highlight 2</h4>
+            </div>
+          </a>
+          
+          <!-- Card 3 -->
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper">
+              <img src="/assets/gallery/gallery_workshop_w1_3.jpg" alt="Lovol × Sankara Agricultural Workshop - Highlight 3" loading="lazy">
+            </div>
+            <div class="home-card-body-info">
+              <span class="home-card-meta-tag">Workshop</span>
+              <h4 class="home-card-title-text">Lovol × Sankara Agricultural Workshop - Highlight 3</h4>
+            </div>
+          </a>
+        </div>
+        
+        <div style="margin-top: 40px; margin-bottom: 30px;">
+          <a href="/activities" data-route="activities" class="btn-main-green" style="background: #2563eb; color: #ffffff; box-shadow: 0 4px 20px rgba(37,99,235,0.25); display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+            Explore All Activities
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
         </div>
       </div>
