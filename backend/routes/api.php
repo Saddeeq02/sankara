@@ -503,6 +503,23 @@ Route::get('admin/migrate', function(Request $request) use ($verifyPermission) {
     }
 });
 
+// System Seed Trigger
+Route::get('admin/seed', function(Request $request) use ($verifyPermission) {
+    if (!$verifyPermission($request, 'admin-health')) return response()->json(['error' => 'Unauthorized'], 401);
+    try {
+        \Artisan::call('db:seed', ['--force' => true]);
+        return response()->json([
+            'status' => 'success',
+            'output' => \Artisan::output()
+        ]);
+    } catch (\Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ], 500);
+    }
+});
+
 // System Health Diagnostics
 Route::get('admin/health', function(Request $request) use ($verifyPermission) {
     if (!$verifyPermission($request, 'admin-health')) return response()->json(['error' => 'Unauthorized'], 401);

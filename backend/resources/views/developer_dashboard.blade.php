@@ -437,11 +437,11 @@
                             <p class="text-xs text-slate-500 mt-1">Direct backend operational calls for developers.</p>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
                                 <div>
                                     <h4 class="font-bold text-sm text-slate-800">Force Run DB Migrations</h4>
-                                    <p class="text-xs text-slate-500 mt-1 mb-4 leading-relaxed">
+                                    <p class="text-xs text-slate-555 mt-1 mb-4 leading-relaxed">
                                         Pushes pending schema modifications to production PostgreSQL.
                                     </p>
                                 </div>
@@ -452,8 +452,20 @@
 
                             <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
                                 <div>
+                                    <h4 class="font-bold text-sm text-slate-800">Force Run DB Seeders</h4>
+                                    <p class="text-xs text-slate-550 mt-1 mb-4 leading-relaxed">
+                                        Synchronizes activities and products from files to database.
+                                    </p>
+                                </div>
+                                <button onclick="triggerSeeding()" id="btn-run-seed" class="glow-button w-full py-2.5 bg-indigo-650 hover:bg-indigo-750 font-semibold text-xs rounded-lg text-white text-center flex items-center justify-center gap-2 shadow-sm" style="background-color: #4f46e5;">
+                                    Run Artisan Seed
+                                </button>
+                            </div>
+
+                            <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+                                <div>
                                     <h4 class="font-bold text-sm text-slate-800">Reset Staff leaderboards</h4>
-                                    <p class="text-xs text-slate-500 mt-1 mb-4 leading-relaxed">
+                                    <p class="text-xs text-slate-505 mt-1 mb-4 leading-relaxed">
                                         Resets active staff monthly performance scores to 0 and archives history.
                                     </p>
                                 </div>
@@ -463,6 +475,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
                     <!-- Execution Output Console -->
                     <div id="console-card" class="glass-panel rounded-2xl p-6 hidden bg-white">
@@ -747,6 +760,36 @@
                 } finally {
                     btn.disabled = false;
                     btn.textContent = 'Run Artisan Migrate';
+                }
+            }
+
+            async function triggerSeeding() {
+                if (!confirm('Run Laravel Database artisan seeders? This updates products and activity media categories.')) return;
+                
+                const btn = document.getElementById('btn-run-seed');
+                const consoleCard = document.getElementById('console-card');
+                const consoleOutput = document.getElementById('console-output');
+                
+                btn.disabled = true;
+                btn.textContent = 'Executing...';
+                consoleCard.classList.remove('hidden');
+                consoleOutput.textContent = 'Connecting to artisan terminal...\nRunning: php artisan db:seed --force\n';
+                
+                try {
+                    const res = await fetch(`/api/admin/seed?token=${backendToken}`);
+                    const data = await res.json();
+                    if (res.ok && data.status === 'success') {
+                        consoleOutput.textContent += `\nSuccess:\n${data.output}`;
+                        alert('Database seeded successfully!');
+                    } else {
+                        consoleOutput.textContent += `\nError:\n${data.message || 'Unknown seeding error'}`;
+                        alert('Seeding failed.');
+                    }
+                } catch(e) {
+                    consoleOutput.textContent += `\nConnection Error: ${e.message}`;
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = 'Run Artisan Seed';
                 }
             }
 
