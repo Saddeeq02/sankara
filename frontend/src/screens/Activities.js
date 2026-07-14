@@ -814,7 +814,367 @@ export function renderActivitiesScreen() {
       "title": "Sankara Nigeria Team & Office Operations - Highlight 9",
       "category": "Our Company",
       "image": "/assets/gallery/gallery_our_comapny_9.jpg"
-    }
+    },
+{
+      "id": "fb-db-100",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 1",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.22.47 PM.jpeg"
+    },
+    {
+      "id": "fb-db-101",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 2",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.22.48 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-102",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 3",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.22.48 PM.jpeg"
+    },
+    {
+      "id": "fb-db-103",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 4",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.22.49 PM.jpeg"
+    },
+    {
+      "id": "fb-db-104",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 5",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.22.50 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-105",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 6",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.22.50 PM.jpeg"
+    },
+    {
+      "id": "fb-db-106",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 7",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.22.52 PM.jpeg"
+    },
+    {
+      "id": "fb-db-107",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 8",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.22.53 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-108",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 9",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.22.53 PM.jpeg"
+    },
+    {
+      "id": "fb-db-109",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 10",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.22.54 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-110",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 11",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.22.54 PM.jpeg"
+    },
+    {
+      "id": "fb-db-111",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 12",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.22.55 PM.jpeg"
+    },
+    {
+      "id": "fb-db-112",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 13",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.23.03 PM.jpeg"
+    },
+    {
+      "id": "fb-db-113",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 14",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.23.04 PM.jpeg"
+    },
+    {
+      "id": "fb-db-114",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 15",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.23.06 PM.jpeg"
+    },
+    {
+      "id": "fb-db-115",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 16",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.23.13 PM.jpeg"
+    },
+    {
+      "id": "fb-db-116",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 17",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.23.16 PM.jpeg"
+    },
+    {
+      "id": "fb-db-117",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 18",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.23.17 PM.jpeg"
+    },
+    {
+      "id": "fb-db-118",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 19",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.23.18 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-119",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 20",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.23.18 PM.jpeg"
+    },
+    {
+      "id": "fb-db-120",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 21",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.23.21 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-121",
+      "title": "ECOWAS Delegation Partnership Visit - Highlight 22",
+      "category": "ECOWAS Visit",
+      "image": "/assets/gallery/ECOWAS/WhatsApp Image 2026-07-13 at 3.23.21 PM.jpeg"
+    },
+    {
+      "id": "fb-db-122",
+      "title": "Regional Agricultural Machinery Field Excursion - Highlight 1",
+      "category": "Excursion",
+      "image": "/assets/gallery/EXCURSION/WhatsApp Image 2026-07-13 at 3.17.21 PM.jpeg"
+    },
+    {
+      "id": "fb-db-123",
+      "title": "Regional Agricultural Machinery Field Excursion - Highlight 2",
+      "category": "Excursion",
+      "image": "/assets/gallery/EXCURSION/WhatsApp Image 2026-07-13 at 3.17.28 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-124",
+      "title": "Regional Agricultural Machinery Field Excursion - Highlight 3",
+      "category": "Excursion",
+      "image": "/assets/gallery/EXCURSION/WhatsApp Image 2026-07-13 at 3.17.28 PM.jpeg"
+    },
+    {
+      "id": "fb-db-125",
+      "title": "Regional Agricultural Machinery Field Excursion - Highlight 4",
+      "category": "Excursion",
+      "image": "/assets/gallery/EXCURSION/WhatsApp Image 2026-07-13 at 3.17.29 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-126",
+      "title": "Regional Agricultural Machinery Field Excursion - Highlight 5",
+      "category": "Excursion",
+      "image": "/assets/gallery/EXCURSION/WhatsApp Image 2026-07-13 at 3.17.29 PM (2).jpeg"
+    },
+    {
+      "id": "fb-db-127",
+      "title": "Regional Agricultural Machinery Field Excursion - Highlight 6",
+      "category": "Excursion",
+      "image": "/assets/gallery/EXCURSION/WhatsApp Image 2026-07-13 at 3.17.29 PM.jpeg"
+    },
+    {
+      "id": "fb-db-128",
+      "title": "Regional Agricultural Machinery Field Excursion - Highlight 7",
+      "category": "Excursion",
+      "image": "/assets/gallery/EXCURSION/WhatsApp Image 2026-07-13 at 3.17.30 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-129",
+      "title": "Regional Agricultural Machinery Field Excursion - Highlight 8",
+      "category": "Excursion",
+      "image": "/assets/gallery/EXCURSION/WhatsApp Image 2026-07-13 at 3.17.30 PM (2).jpeg"
+    },
+    {
+      "id": "fb-db-130",
+      "title": "Regional Agricultural Machinery Field Excursion - Highlight 9",
+      "category": "Excursion",
+      "image": "/assets/gallery/EXCURSION/WhatsApp Image 2026-07-13 at 3.17.30 PM.jpeg"
+    },
+    {
+      "id": "fb-db-131",
+      "title": "Regional Agricultural Machinery Field Excursion - Highlight 10",
+      "category": "Excursion",
+      "image": "/assets/gallery/EXCURSION/WhatsApp Image 2026-07-13 at 3.17.31 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-132",
+      "title": "Regional Agricultural Machinery Field Excursion - Highlight 11",
+      "category": "Excursion",
+      "image": "/assets/gallery/EXCURSION/WhatsApp Image 2026-07-13 at 3.17.31 PM.jpeg"
+    },
+    {
+      "id": "fb-db-133",
+      "title": "Regional Agricultural Machinery Field Excursion - Highlight 12",
+      "category": "Excursion",
+      "image": "/assets/gallery/EXCURSION/WhatsApp Image 2026-07-13 at 3.17.32 PM.jpeg"
+    },
+    {
+      "id": "fb-db-134",
+      "title": "Student Study Tour & Practical Training Day - Highlight 1",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.13 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-135",
+      "title": "Student Study Tour & Practical Training Day - Highlight 2",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.13 PM.jpeg"
+    },
+    {
+      "id": "fb-db-136",
+      "title": "Student Study Tour & Practical Training Day - Highlight 3",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.15 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-137",
+      "title": "Student Study Tour & Practical Training Day - Highlight 4",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.15 PM (2).jpeg"
+    },
+    {
+      "id": "fb-db-138",
+      "title": "Student Study Tour & Practical Training Day - Highlight 5",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.15 PM.jpeg"
+    },
+    {
+      "id": "fb-db-139",
+      "title": "Student Study Tour & Practical Training Day - Highlight 6",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.16 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-140",
+      "title": "Student Study Tour & Practical Training Day - Highlight 7",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.16 PM (2).jpeg"
+    },
+    {
+      "id": "fb-db-141",
+      "title": "Student Study Tour & Practical Training Day - Highlight 8",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.16 PM.jpeg"
+    },
+    {
+      "id": "fb-db-142",
+      "title": "Student Study Tour & Practical Training Day - Highlight 9",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.17 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-143",
+      "title": "Student Study Tour & Practical Training Day - Highlight 10",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.17 PM.jpeg"
+    },
+    {
+      "id": "fb-db-144",
+      "title": "Student Study Tour & Practical Training Day - Highlight 11",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.21 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-145",
+      "title": "Student Study Tour & Practical Training Day - Highlight 12",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.21 PM.jpeg"
+    },
+    {
+      "id": "fb-db-146",
+      "title": "Student Study Tour & Practical Training Day - Highlight 13",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.22 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-147",
+      "title": "Student Study Tour & Practical Training Day - Highlight 14",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.22 PM (2).jpeg"
+    },
+    {
+      "id": "fb-db-148",
+      "title": "Student Study Tour & Practical Training Day - Highlight 15",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.22 PM (3).jpeg"
+    },
+    {
+      "id": "fb-db-149",
+      "title": "Student Study Tour & Practical Training Day - Highlight 16",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.22 PM.jpeg"
+    },
+    {
+      "id": "fb-db-150",
+      "title": "Student Study Tour & Practical Training Day - Highlight 17",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.23 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-151",
+      "title": "Student Study Tour & Practical Training Day - Highlight 18",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.23 PM (2).jpeg"
+    },
+    {
+      "id": "fb-db-152",
+      "title": "Student Study Tour & Practical Training Day - Highlight 19",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.23 PM.jpeg"
+    },
+    {
+      "id": "fb-db-153",
+      "title": "Student Study Tour & Practical Training Day - Highlight 20",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.27 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-154",
+      "title": "Student Study Tour & Practical Training Day - Highlight 21",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.27 PM.jpeg"
+    },
+    {
+      "id": "fb-db-155",
+      "title": "Student Study Tour & Practical Training Day - Highlight 22",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.28 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-156",
+      "title": "Student Study Tour & Practical Training Day - Highlight 23",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.28 PM.jpeg"
+    },
+    {
+      "id": "fb-db-157",
+      "title": "Student Study Tour & Practical Training Day - Highlight 24",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.29 PM (1).jpeg"
+    },
+    {
+      "id": "fb-db-158",
+      "title": "Student Study Tour & Practical Training Day - Highlight 25",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.29 PM.jpeg"
+    },
+    {
+      "id": "fb-db-159",
+      "title": "Student Study Tour & Practical Training Day - Highlight 26",
+      "category": "Student Visit",
+      "image": "/assets/gallery/STUDENT VISIT/WhatsApp Image 2026-07-13 at 3.14.30 PM.jpeg"
+    },
   ];
 
   // Load Media Gallery items - fetched from /api/activities
