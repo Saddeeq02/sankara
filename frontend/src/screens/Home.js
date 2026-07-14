@@ -1200,6 +1200,105 @@ export function renderHomeScreen() {
               <h4 class="home-card-title-text">Lovol × Sankara Agricultural Workshop - Highlight 3</h4>
             </div>
           </a>
+
+          <!-- Card 4 -->
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper">
+              <img src="/assets/gallery/gallery_workshop_w1_4.jpg" alt="Lovol × Sankara Agricultural Workshop - Highlight 4" loading="lazy">
+            </div>
+            <div class="home-card-body-info">
+              <span class="home-card-meta-tag">Workshop</span>
+              <h4 class="home-card-title-text">Lovol × Sankara Agricultural Workshop - Highlight 4</h4>
+            </div>
+          </a>
+
+          <!-- Card 5 -->
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper">
+              <img src="/assets/gallery/gallery_workshop_w1_5.jpg" alt="Lovol × Sankara Agricultural Workshop - Highlight 5" loading="lazy">
+            </div>
+            <div class="home-card-body-info">
+              <span class="home-card-meta-tag">Workshop</span>
+              <h4 class="home-card-title-text">Lovol × Sankara Agricultural Workshop - Highlight 5</h4>
+            </div>
+          </a>
+
+          <!-- Card 6 -->
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper">
+              <img src="/assets/gallery/gallery_workshop_w1_6.jpg" alt="Lovol × Sankara Agricultural Workshop - Highlight 6" loading="lazy">
+            </div>
+            <div class="home-card-body-info">
+              <span class="home-card-meta-tag">Workshop</span>
+              <h4 class="home-card-title-text">Lovol × Sankara Agricultural Workshop - Highlight 6</h4>
+            </div>
+          </a>
+
+          <!-- Card 7 -->
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper">
+              <img src="/assets/gallery/gallery_workshop_w2_1.jpg" alt="Lovol × Sankara Agricultural Workshop - Highlight 7" loading="lazy">
+            </div>
+            <div class="home-card-body-info">
+              <span class="home-card-meta-tag">Workshop</span>
+              <h4 class="home-card-title-text">Lovol × Sankara Agricultural Workshop - Highlight 7</h4>
+            </div>
+          </a>
+
+          <!-- Card 8 -->
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper">
+              <img src="/assets/gallery/gallery_workshop_w2_2.jpg" alt="Lovol × Sankara Agricultural Workshop - Highlight 8" loading="lazy">
+            </div>
+            <div class="home-card-body-info">
+              <span class="home-card-meta-tag">Workshop</span>
+              <h4 class="home-card-title-text">Lovol × Sankara Agricultural Workshop - Highlight 8</h4>
+            </div>
+          </a>
+
+          <!-- Card 9 -->
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper">
+              <img src="/assets/gallery/gallery_workshop_w2_3.jpg" alt="Lovol × Sankara Agricultural Workshop - Highlight 9" loading="lazy">
+            </div>
+            <div class="home-card-body-info">
+              <span class="home-card-meta-tag">Workshop</span>
+              <h4 class="home-card-title-text">Lovol × Sankara Agricultural Workshop - Highlight 9</h4>
+            </div>
+          </a>
+
+          <!-- Card 10 -->
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper">
+              <img src="/assets/gallery/gallery_workshop_w3_1.jpg" alt="Lovol × Sankara Agricultural Workshop - Highlight 10" loading="lazy">
+            </div>
+            <div class="home-card-body-info">
+              <span class="home-card-meta-tag">Workshop</span>
+              <h4 class="home-card-title-text">Lovol × Sankara Agricultural Workshop - Highlight 10</h4>
+            </div>
+          </a>
+
+          <!-- Card 11 -->
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper">
+              <img src="/assets/gallery/gallery_workshop_w3_2.jpg" alt="Lovol × Sankara Agricultural Workshop - Highlight 11" loading="lazy">
+            </div>
+            <div class="home-card-body-info">
+              <span class="home-card-meta-tag">Workshop</span>
+              <h4 class="home-card-title-text">Lovol × Sankara Agricultural Workshop - Highlight 11</h4>
+            </div>
+          </a>
+
+          <!-- Card 12 -->
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper">
+              <img src="/assets/gallery/gallery_workshop_w4_1.jpg" alt="Lovol × Sankara Agricultural Workshop - Highlight 12" loading="lazy">
+            </div>
+            <div class="home-card-body-info">
+              <span class="home-card-meta-tag">Workshop</span>
+              <h4 class="home-card-title-text">Lovol × Sankara Agricultural Workshop - Highlight 12</h4>
+            </div>
+          </a>
         </div>
         
         <div style="margin-top: 40px; margin-bottom: 30px;">
