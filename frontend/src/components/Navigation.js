@@ -66,12 +66,12 @@ export function renderFooter() {
   const styleBlock = document.createElement('style');
   styleBlock.textContent = `
     .premium-footer {
-      background: linear-gradient(135deg, #0b0f19 0%, #030712 100%) !important;
-      color: #cbd5e1 !important;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+      color: #475569 !important;
       padding: 90px 0 45px 0;
       position: relative;
       overflow: hidden;
-      border-top: 1px solid rgba(220, 38, 38, 0.15);
+      border-top: 1px solid rgba(220, 38, 38, 0.1);
       font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
     }
     .premium-footer::before {
@@ -81,12 +81,12 @@ export function renderFooter() {
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), transparent);
+      background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.2), transparent);
     }
     .footer-col-title {
       font-size: 1.15rem;
       font-weight: 800;
-      color: #ffffff;
+      color: #0f172a;
       margin-bottom: 25px;
       position: relative;
       padding-bottom: 12px;
@@ -99,7 +99,7 @@ export function renderFooter() {
       left: 0;
       width: 35px;
       height: 3px;
-      background: linear-gradient(90deg, #dc2626, #7f1d1d);
+      background: linear-gradient(90deg, #dc2626, #2563eb);
       border-radius: 50px;
     }
     .footer-links-list {
@@ -111,7 +111,7 @@ export function renderFooter() {
       gap: 14px;
     }
     .footer-link-item {
-      color: #94a3b8;
+      color: #475569;
       text-decoration: none;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       display: inline-flex;
@@ -120,28 +120,28 @@ export function renderFooter() {
       font-size: 0.95rem;
     }
     .footer-link-item:hover {
-      color: #3b82f6;
+      color: #dc2626;
       transform: translateX(6px);
     }
     .footer-social-btn {
       width: 40px;
       height: 40px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #cbd5e1;
+      color: #475569;
       text-decoration: none;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .footer-social-btn:hover {
-      background: rgba(220, 38, 38, 0.15);
-      border-color: #3b82f6;
-      color: #3b82f6;
+      background: rgba(220, 38, 38, 0.05);
+      border-color: #dc2626;
+      color: #dc2626;
       transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(220, 38, 38, 0.2);
+      box-shadow: 0 8px 20px rgba(220, 38, 38, 0.15);
     }
     .footer-contact-item {
       display: flex;
@@ -150,7 +150,7 @@ export function renderFooter() {
       margin-bottom: 20px;
     }
     .footer-contact-icon {
-      color: #3b82f6;
+      color: #dc2626;
       flex-shrink: 0;
       margin-top: 3px;
     }
@@ -161,22 +161,22 @@ export function renderFooter() {
     }
     .footer-contact-label {
       font-weight: 800;
-      color: #cbd5e1;
+      color: #0f172a;
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 1.5px;
     }
     .footer-contact-value {
-      color: #94a3b8;
+      color: #475569;
       text-decoration: none;
       transition: color 0.2s ease;
       font-size: 0.95rem;
     }
     .footer-contact-value:hover {
-      color: #3b82f6;
+      color: #dc2626;
     }
     .footer-bottom-bar {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
       padding-top: 35px;
       margin-top: 60px;
       display: flex;
@@ -197,7 +197,7 @@ export function renderFooter() {
       transition: color 0.2s ease;
     }
     .footer-bottom-link:hover {
-      color: #3b82f6;
+      color: #dc2626;
     }
   `;
   footer.appendChild(styleBlock);
@@ -207,10 +207,10 @@ export function renderFooter() {
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-bottom: 60px;">
         <!-- Column 1: Info and Socials -->
         <div class="reveal" style="animation-delay: 0.1s">
-          <a href="/home" data-route="home" style="display: inline-flex; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 12px; box-shadow: 0 4px 20px rgba(220, 38, 38, 0.05); margin-bottom: 25px;">
+          <a href="/home" data-route="home" style="display: inline-flex; background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.05); padding: 10px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); margin-bottom: 25px;">
             <img src="/assets/logo.png" alt="Sankara Logo" style="height: 50px; object-fit: contain;">
           </a>
-          <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px;">
+          <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px;">
             Sankara Nigeria Limited is your trusted partner for premium heavy-duty tractors, farm implements, and genuine spare parts across Nigeria.
           </p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">

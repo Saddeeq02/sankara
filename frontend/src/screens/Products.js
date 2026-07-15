@@ -280,9 +280,8 @@ const fallbackProducts = [
     "name": "Alvan Blanch Disc Harrow",
     "category": "Farm Implements",
     "price": "Price on Request",
-    "image": "/assets/products_staging/implements/Alvan Blanch Disc Harrow/OffsetDiscPlough-DO6luG0F.jpeg",
+    "image": "/assets/products_staging/implements/Alvan Blanch Disc Harrow/WhatsApp Image 2026-07-09 at 11.33.49 AM (1).jpeg",
     "images": [
-      "/assets/products_staging/implements/Alvan Blanch Disc Harrow/OffsetDiscPlough-DO6luG0F.jpeg",
       "/assets/products_staging/implements/Alvan Blanch Disc Harrow/WhatsApp Image 2026-07-09 at 11.33.49 AM (1).jpeg",
       "/assets/products_staging/implements/Alvan Blanch Disc Harrow/WhatsApp Image 2026-07-09 at 11.34.41 AM.jpeg"
     ],
@@ -301,10 +300,8 @@ const fallbackProducts = [
     "name": "Disc Ridger",
     "category": "Farm Implements",
     "price": "Price on Request",
-    "image": "/assets/products_staging/implements/Disc Ridger/WhatsApp Image 2026-07-09 at 11.34.07 AM.jpeg",
+    "image": "/assets/products_staging/implements/Disc Ridger/WhatsApp Image 2026-07-09 at 11.34.41 AM (1).jpeg",
     "images": [
-      "/assets/products_staging/implements/Disc Ridger/WhatsApp Image 2026-07-09 at 11.34.07 AM.jpeg",
-      "/assets/products_staging/implements/Disc Ridger/WhatsApp Image 2026-07-09 at 11.34.12 AM.jpeg",
       "/assets/products_staging/implements/Disc Ridger/WhatsApp Image 2026-07-09 at 11.34.41 AM (1).jpeg",
       "/assets/products_staging/implements/Disc Ridger/WhatsApp Image 2026-07-09 at 11.34.41 AM (2).jpeg"
     ],
@@ -364,9 +361,10 @@ const fallbackProducts = [
     "name": "Offset Disc Plough",
     "category": "Farm Implements",
     "price": "Price on Request",
-    "image": "/assets/products_staging/implements/Offset Disc Plough/OffsetDiscPlough-DO6luG0F.jpeg",
+    "image": "/assets/products_staging/implements/Disc Plough/WhatsApp Image 2026-07-09 at 11.34.07 AM.jpeg",
     "images": [
-      "/assets/products_staging/implements/Offset Disc Plough/OffsetDiscPlough-DO6luG0F.jpeg"
+      "/assets/products_staging/implements/Disc Plough/WhatsApp Image 2026-07-09 at 11.34.07 AM.jpeg",
+      "/assets/products_staging/implements/Disc Plough/WhatsApp Image 2026-07-09 at 11.34.12 AM.jpeg"
     ],
     "specs": [
       "Offset Frame Design",
@@ -383,9 +381,8 @@ const fallbackProducts = [
     "name": "Shrubmaster Rotary Slasher",
     "category": "Farm Implements",
     "price": "Price on Request",
-    "image": "/assets/products_staging/implements/Shrubmaster Rotary Slasher/ShrubmasterRotarySlasher-bgnnic4k.jpeg",
+    "image": "/assets/products_staging/implements/Shrubmaster Rotary Slasher/WhatsApp Image 2026-07-09 at 11.33.54 AM.jpeg",
     "images": [
-      "/assets/products_staging/implements/Shrubmaster Rotary Slasher/ShrubmasterRotarySlasher-bgnnic4k.jpeg",
       "/assets/products_staging/implements/Shrubmaster Rotary Slasher/WhatsApp Image 2026-07-09 at 11.33.54 AM.jpeg",
       "/assets/products_staging/implements/Shrubmaster Rotary Slasher/WhatsApp Image 2026-07-09 at 11.34.14 AM.jpeg",
       "/assets/products_staging/implements/Shrubmaster Rotary Slasher/WhatsApp Image 2026-07-09 at 11.34.15 AM.jpeg",

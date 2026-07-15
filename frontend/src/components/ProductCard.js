@@ -16,7 +16,7 @@ export function renderProductCard(product) {
   
   card.innerHTML = `
     <div style="height: 280px; position: relative; overflow: hidden; border-bottom: 1px solid var(--glass-border);">
-      <img src="${mainImage}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease;" class="card-img-v2">
+      <img src="${mainImage}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease;" class="card-img-v2" onerror="this.src='https://via.placeholder.com/400x300?text=Sankara+Machinery'">
       
       ${product.is_new_arrival ? `
         <div class="new-arrival-badge">
@@ -90,9 +90,9 @@ function openProductModal(product) {
       <div class="modal-content-grid-v2">
         <!-- Gallery -->
         <div class="modal-gallery-v2">
-          <img src="${images[0]}" alt="${product.name}" class="modal-main-img-v2">
+          <img src="${images[0]}" alt="${product.name}" class="modal-main-img-v2" onerror="this.src='https://via.placeholder.com/400x300?text=Sankara+Machinery'">
           <div class="thumb-grid-v2">
-             ${images.map((img, i) => `<img src="${img}" class="thumb-v2 ${i === 0 ? 'active' : ''}" data-index="${i}">`).join('')}
+             ${images.map((img, i) => `<img src="${img}" class="thumb-v2 ${i === 0 ? 'active' : ''}" data-index="${i}" onerror="this.style.display='none'">`).join('')}
           </div>
         </div>
         
@@ -120,13 +120,23 @@ function openProductModal(product) {
             </p>
           </div>
           
-          <div style="margin-top: auto; display: flex; gap: 15px;">
-            <a href="tel:+2348099933644" class="btn-primary" style="flex: 1; padding: 18px; text-align: center; border-radius: 16px; font-weight: 800; font-size: 1.1rem; text-decoration: none;">
-               Request Executive Quote
-            </a>
-            <a href="https://wa.me/2348099933644?text=Interested in ${product.name}" target="_blank" style="padding: 18px 25px; border-radius: 16px; border: 2px solid #25d366; color: #25d366; display: flex; align-items: center; justify-content: center;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.7c.9 0 1.8.1 2.7.4L21 3l-1.3 5.4c.1.9.3 1.8.3 3.1z"/></svg>
-            </a>
+          <div style="margin-top: auto; display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; gap: 12px; width: 100%;">
+              <a href="tel:+2348099933644" class="btn-primary" style="flex: 1; padding: 16px; text-align: center; border-radius: 16px; font-weight: 800; font-size: 1rem; text-decoration: none;">
+                 Call Sales 1 (+234 809 993 3644)
+              </a>
+              <a href="https://wa.me/2348099933644?text=Interested in ${product.name}" target="_blank" style="padding: 16px 20px; border-radius: 16px; border: 2px solid #25d366; color: #25d366; display: flex; align-items: center; justify-content: center;" title="WhatsApp Sales 1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.7c.9 0 1.8.1 2.7.4L21 3l-1.3 5.4c.1.9.3 1.8.3 3.1z"/></svg>
+              </a>
+            </div>
+            <div style="display: flex; gap: 12px; width: 100%;">
+              <a href="tel:+2348038074309" class="btn-primary" style="flex: 1; padding: 16px; text-align: center; border-radius: 16px; font-weight: 800; font-size: 1rem; text-decoration: none; background: #2563eb;">
+                 Call Sales 2 (+234 803 807 4309)
+              </a>
+              <a href="https://wa.me/2348038074309?text=Interested in ${product.name}" target="_blank" style="padding: 16px 20px; border-radius: 16px; border: 2px solid #25d366; color: #25d366; display: flex; align-items: center; justify-content: center;" title="WhatsApp Sales 2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.7c.9 0 1.8.1 2.7.4L21 3l-1.3 5.4c.1.9.3 1.8.3 3.1z"/></svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>

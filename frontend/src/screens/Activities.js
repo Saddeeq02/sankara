@@ -427,37 +427,37 @@ export function renderActivitiesScreen() {
     },
     {
       "id": "gb-st-4",
-      "title": "Lovol Tractors & Harvesters Unveiling (Kura) - Highlight 1",
+      "title": "Lovol Tractors & Harvesters Unveiling (Jigawa State) - Highlight 1",
       "category": "Exhibition",
       "image": "/assets/gallery/gallery_exhibition_ex2_1.jpg"
     },
     {
       "id": "gb-st-5",
-      "title": "Lovol Tractors & Harvesters Unveiling (Kura) - Highlight 2",
+      "title": "Lovol Tractors & Harvesters Unveiling (Jigawa State) - Highlight 2",
       "category": "Exhibition",
       "image": "/assets/gallery/gallery_exhibition_ex2_2.jpg"
     },
     {
       "id": "gb-st-6",
-      "title": "Lovol Tractors & Harvesters Unveiling (Kura) - Highlight 3",
+      "title": "Lovol Tractors & Harvesters Unveiling (Jigawa State) - Highlight 3",
       "category": "Exhibition",
       "image": "/assets/gallery/gallery_exhibition_ex2_3.jpg"
     },
     {
       "id": "gb-st-7",
-      "title": "Lovol Tractors & Harvesters Unveiling (Kura) - Highlight 4",
+      "title": "Lovol Tractors & Harvesters Unveiling (Jigawa State) - Highlight 4",
       "category": "Exhibition",
       "image": "/assets/gallery/gallery_exhibition_ex2_4.jpg"
     },
     {
       "id": "gb-st-8",
-      "title": "Lovol Tractors & Harvesters Unveiling (Kura) - Highlight 5",
+      "title": "Lovol Tractors & Harvesters Unveiling (Jigawa State) - Highlight 5",
       "category": "Exhibition",
       "image": "/assets/gallery/gallery_exhibition_ex2_5.jpg"
     },
     {
       "id": "gb-st-9",
-      "title": "Lovol Tractors & Harvesters Unveiling (Kura) - Highlight 6",
+      "title": "Lovol Tractors & Harvesters Unveiling (Jigawa State) - Highlight 6",
       "category": "Exhibition",
       "image": "/assets/gallery/gallery_exhibition_ex2_6.jpg"
     },
