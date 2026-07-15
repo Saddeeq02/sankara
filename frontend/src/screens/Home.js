@@ -1029,7 +1029,7 @@ export function renderHomeScreen() {
             </div>
           </div>
           <h3 class="feature-title">Tractor Procurement</h3>
-          <p class="feature-desc">Delivering certified Massey Ferguson tractors equipped with customized field tires and weights suited for heavy soils.</p>
+          <p class="feature-desc">Providing certified tractors fitted with specialized field tires and weights engineered to handle demanding, heavy soil conditions.</p>
         </div>
         
         <!-- Card 2 -->
