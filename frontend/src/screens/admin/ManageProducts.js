@@ -94,7 +94,13 @@ export function renderAdminProducts() {
               <option value="Combine Harvester">Combine Harvester</option>
               <option value="Farm Implements">Farm Implements</option>
               <option value="Spare Parts">Spare Parts</option>
+              <option value="__ADD_NEW__" style="color: var(--admin-primary); font-weight: bold;">+ Add New Category...</option>
             </select>
+          </div>
+
+          <div class="form-group-v2" id="customCategoryGroup" style="display: none;">
+            <label class="label-v2" style="color: var(--admin-text-muted); font-size: 0.75rem; font-weight: 700; margin-bottom: 6px; display: block; letter-spacing: 0.05em; text-transform: uppercase;">Custom Category Name</label>
+            <input type="text" name="custom_category" placeholder="e.g. Tractor Spare Parts" style="width: 100%; padding: 12px 16px; background: var(--admin-bg); color: var(--admin-text); border: 1px solid var(--admin-border); border-radius: 12px; font-weight: 500; outline: none; box-sizing: border-box; transition: all 0.2s;" onfocus="this.style.borderColor='var(--admin-primary)';" onblur="this.style.borderColor='var(--admin-border)';" />
           </div>
 
           <div class="form-group-v2">
@@ -204,6 +210,85 @@ export function renderAdminProducts() {
     applyFilters();
   };
 
+  const toggleFieldsBasedOnCategory = () => {
+    const formSelect = addForm.querySelector('select[name="category"]');
+    const customGroup = content.querySelector('#customCategoryGroup');
+    const customInput = addForm.querySelector('input[name="custom_category"]');
+    
+    if (!formSelect) return;
+    
+    const selectedCategory = formSelect.value;
+    const isCustom = selectedCategory === '__ADD_NEW__';
+    
+    if (isCustom) {
+      customGroup.style.display = 'block';
+      customInput.required = true;
+    } else {
+      customGroup.style.display = 'none';
+      customInput.required = false;
+    }
+    
+    const categoryName = isCustom ? customInput.value : selectedCategory;
+    const isSpare = categoryName.toLowerCase().includes('spare');
+    
+    const specsGroup = addForm.querySelector('input[name="specs"]').closest('.form-group-v2');
+    const taskGroup = addForm.querySelector('textarea[name="task"]').closest('.form-group-v2');
+    const descGroup = addForm.querySelector('textarea[name="description"]').closest('.form-group-v2');
+    const arrivalGroup = addForm.querySelector('#is_new_arrival_input').closest('.form-group-v2');
+    
+    const groups = [specsGroup, taskGroup, descGroup, arrivalGroup];
+    groups.forEach(g => {
+      if (g) {
+        g.style.display = isSpare ? 'none' : 'block';
+        const input = g.querySelector('input, textarea');
+        if (input) {
+          if (isSpare) {
+            input.required = false;
+          }
+        }
+      }
+    });
+  };
+
+  const updateCategoryDropdowns = () => {
+    const uniqueCats = new Set(allProducts.map(p => p.category).filter(Boolean));
+    const defaultCats = ['Tractors', 'Combine Harvester', 'Farm Implements', 'Spare Parts'];
+    defaultCats.forEach(cat => uniqueCats.add(cat));
+    
+    const currentFilterVal = categoryFilter.value;
+    const formSelect = addForm.querySelector('select[name="category"]');
+    const currentFormVal = formSelect ? formSelect.value : 'Tractors';
+    
+    categoryFilter.innerHTML = `<option value="All">All Categories</option>` + 
+      Array.from(uniqueCats).map(cat => `<option value="${cat}">${cat}</option>`).join('');
+    
+    if (Array.from(uniqueCats).includes(currentFilterVal)) {
+      categoryFilter.value = currentFilterVal;
+    } else {
+      categoryFilter.value = 'All';
+      currentCategory = 'All';
+    }
+    
+    if (formSelect) {
+      formSelect.innerHTML = Array.from(uniqueCats).map(cat => `<option value="${cat}">${cat}</option>`).join('') + 
+        `<option value="__ADD_NEW__" style="color: var(--admin-primary); font-weight: bold;">+ Add New Category...</option>`;
+      if (Array.from(uniqueCats).includes(currentFormVal) || currentFormVal === '__ADD_NEW__') {
+        formSelect.value = currentFormVal;
+      } else {
+        formSelect.value = 'Tractors';
+      }
+    }
+  };
+
+  const categorySelect = addForm.querySelector('select[name="category"]');
+  if (categorySelect) {
+    categorySelect.onchange = toggleFieldsBasedOnCategory;
+  }
+  const customCategoryInput = addForm.querySelector('input[name="custom_category"]');
+  if (customCategoryInput) {
+    customCategoryInput.oninput = toggleFieldsBasedOnCategory;
+  }
+
   const openEditModal = (product) => {
     currentEditId = product.id;
     modalTitle.textContent = 'Refine Equipment Details';
@@ -215,6 +300,7 @@ export function renderAdminProducts() {
     addForm.description.value = product.description || '';
     addForm.is_new_arrival.checked = !!product.is_new_arrival;
     addForm.elements['image[]'].required = false; 
+    toggleFieldsBasedOnCategory();
     
     // Open modal with smooth animation
     modal.classList.add('active');
@@ -226,6 +312,7 @@ export function renderAdminProducts() {
     submitBtn.textContent = 'Save Equipment';
     addForm.reset();
     addForm.elements['image[]'].required = true;
+    toggleFieldsBasedOnCategory();
     
     // Open modal with smooth animation
     modal.classList.add('active');
@@ -293,18 +380,26 @@ export function renderAdminProducts() {
 
     const formData = new FormData();
     formData.append('name', addForm.name.value);
-    formData.append('category', addForm.category.value);
-    formData.append('description', addForm.description.value);
-    formData.append('task', addForm.task.value);
-    formData.append('is_new_arrival', addForm.is_new_arrival.checked ? '1' : '0');
+    
+    const categorySelect = addForm.querySelector('select[name="category"]');
+    const isCustom = categorySelect.value === '__ADD_NEW__';
+    const finalCategory = isCustom ? addForm.elements['custom_category'].value.trim() : categorySelect.value;
+    formData.append('category', finalCategory);
+
+    const isSpare = finalCategory.toLowerCase().includes('spare');
+    formData.append('description', isSpare ? '' : addForm.description.value);
+    formData.append('task', isSpare ? '' : addForm.task.value);
+    formData.append('is_new_arrival', (!isSpare && addForm.is_new_arrival.checked) ? '1' : '0');
     formData.append('price', '');
     if (currentEditId) {
       formData.append('status', addForm.status ? addForm.status.value : 'Active');
     }
     
     // Handle Technical Specifications if present
-    if (addForm.specs) {
+    if (addForm.specs && !isSpare) {
       formData.append('specs', addForm.specs.value);
+    } else {
+      formData.append('specs', '');
     }
     
     // Compress and append image files
@@ -360,6 +455,7 @@ export function renderAdminProducts() {
         return;
       }
       allProducts = await response.json();
+      updateCategoryDropdowns();
       applyFilters();
     } catch (err) {
       console.error(err);

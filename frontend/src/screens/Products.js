@@ -710,6 +710,36 @@ export function renderProductsScreen() {
     }
   };
 
+  const renderCategoryFilters = () => {
+    const filterContainer = controls.querySelector('#category-filters-v2');
+    if (!filterContainer) return;
+
+    const uniqueCats = new Set(allProducts.map(p => p.category).filter(Boolean));
+    const ordered = ['Tractors', 'Combine Harvester', 'Farm Implements', 'Specialized Equipment', 'Spare Parts'];
+    const actualCategories = [];
+    
+    ordered.forEach(cat => {
+      if (uniqueCats.has(cat)) {
+        actualCategories.push(cat);
+        uniqueCats.delete(cat);
+      }
+    });
+    
+    Array.from(uniqueCats).forEach(cat => {
+      actualCategories.push(cat);
+    });
+
+    filterContainer.innerHTML = `
+      <button class="prod-filter-pill ${currentCategory === 'All' ? 'active' : ''}" data-category="All">All Equipment</button>
+      ${actualCategories.map(cat => {
+        let displayName = cat;
+        if (cat === 'Farm Implements') displayName = 'Implements';
+        else if (cat === 'Specialized Equipment') displayName = 'Specialized';
+        return `<button class="prod-filter-pill ${currentCategory === cat ? 'active' : ''}" data-category="${cat}">${displayName}</button>`;
+      }).join('')}
+    `;
+  };
+
   const setupEventListeners = () => {
     const searchInput = controls.querySelector('#product-search-v2');
     const filterBtns = controls.querySelectorAll('.prod-filter-pill');
@@ -727,8 +757,6 @@ export function renderProductsScreen() {
         applyFilters();
       };
     });
-
-
   };
 
   const sortProducts = (list) => {
@@ -756,11 +784,13 @@ export function renderProductsScreen() {
       const uniqueFallbacks = fallbackProducts.filter(p => !dbNames.has(p.name.toLowerCase()));
       
       allProducts = sortProducts([...dbProducts, ...uniqueFallbacks]);
+      renderCategoryFilters();
       applyFilters();
       setupEventListeners();
     } catch (err) {
       console.error('Error fetching products, using fallbacks:', err);
       allProducts = sortProducts([...fallbackProducts]);
+      renderCategoryFilters();
       applyFilters();
       setupEventListeners();
     }
