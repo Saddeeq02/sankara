@@ -299,7 +299,7 @@ export function renderFooter() {
             </div>
             <div class="footer-contact-info">
               <span class="footer-contact-label">Email Strategy</span>
-              <a href="mailto:sankaranigerialimited@gmail.com" class="footer-contact-value" style="word-break: break-all;">sankaranigerialimited@gmail.com</a>
+              <a href="mailto:info@sankaranigerialimited.com" class="footer-contact-value" style="word-break: break-all;">info@sankaranigerialimited.com</a>
             </div>
           </div>
         </div>

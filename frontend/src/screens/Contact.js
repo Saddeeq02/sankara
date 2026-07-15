@@ -470,7 +470,7 @@ export function renderContactScreen() {
           </div>
           <div class="contact-channel-details">
             <h5>Email Strategy</h5>
-            <p><a href="mailto:sankaranigerialimited@gmail.com">sankaranigerialimited@gmail.com</a></p>
+            <p><a href="mailto:info@sankaranigerialimited.com">info@sankaranigerialimited.com</a></p>
           </div>
         </div>
 
