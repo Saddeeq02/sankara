@@ -422,7 +422,7 @@ Route::delete('inquiries/{id}', function(Request $request, $id) use ($verifyPerm
 
 // TEAM MANAGEMENT
 Route::get('team', function() {
-    return response()->json(TeamMember::all())
+    return response()->json(TeamMember::orderBy('sort_order', 'asc')->orderBy('id', 'asc')->get())
         ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
         ->header('Pragma', 'no-cache')
         ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
@@ -431,7 +431,8 @@ Route::get('team', function() {
 Route::post('team', function(Request $request) use ($verifyPermission, $uploadToSupabase, $logActivity) {
     if (!$verifyPermission($request, 'admin-content')) return response()->json(['error' => 'Unauthorized'], 401);
     
-    $data = $request->only(['name', 'role']);
+    $data = $request->only(['name', 'role', 'sort_order']);
+    $data['sort_order'] = (int) ($data['sort_order'] ?? 0);
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');

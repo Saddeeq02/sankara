@@ -9,5 +9,5 @@ class TeamMember extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'role', 'image'];
+    protected $fillable = ['name', 'role', 'image', 'sort_order'];
 }

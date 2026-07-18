@@ -116,6 +116,7 @@ export function renderAdminContent() {
             </div>
             <div style="font-weight: 700; font-size: 1.1rem;">${item.name}</div>
             <div style="font-size: 0.85rem; color: var(--primary-color); font-weight: 600; margin-top: 5px;">${item.role}</div>
+            <div style="font-size: 0.8rem; color: var(--admin-text-muted); margin-top: 4px;">Rank: ${item.sort_order ?? 0}</div>
           </div>
         `;
       }
@@ -166,6 +167,7 @@ export function renderAdminContent() {
        formFields = `
          <input type="text" name="name" placeholder="Full Name" required class="theme-input">
          <input type="text" name="role" placeholder="Job Title / Role" required class="theme-input">
+         <input type="number" name="sort_order" placeholder="Display Order Rank (e.g. 1, 2, 3...)" required class="theme-input" value="0" min="0">
          <input type="file" name="image" required style="font-size:0.8rem; color: var(--admin-text);">
        `;
     }
