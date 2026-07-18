@@ -15,20 +15,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = User::firstOrCreate(
-            ['email' => 'admin@sankara.com'],
-            [
-                'name' => 'Admin',
-                'password' => 'sankara2026',
-                'api_token' => 'sankara_super_secret_token_123',
-                'permissions' => null
-            ]
-        );
+        $admin = User::where('api_token', 'sankara_super_secret_token_123')->first();
         if ($admin) {
             $admin->update([
                 'name' => 'Admin',
                 'permissions' => null
             ]);
+        } else {
+            $adminByEmail = User::where('email', 'admin@sankara.com')->first();
+            if ($adminByEmail) {
+                $adminByEmail->update([
+                    'name' => 'Admin',
+                    'api_token' => 'sankara_super_secret_token_123',
+                    'permissions' => null
+                ]);
+            } else {
+                User::create([
+                    'email' => 'admin@sankara.com',
+                    'name' => 'Admin',
+                    'password' => 'sankara2026',
+                    'api_token' => 'sankara_super_secret_token_123',
+                    'permissions' => null
+                ]);
+            }
         }
 
         $this->call(ProductSeeder::class);
