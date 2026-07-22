@@ -1309,8 +1309,78 @@ export function renderHomeScreen() {
         </div>
       </div>
 
+      <!-- Our Company Facilities & Corporate Showcase Section -->
+      <div class="home-workshop-section reveal" style="margin-top: 80px; animation-delay: 0.15s;">
+        <span style="font-size: 0.85rem; font-weight: 800; color: #991b1b; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">OUR COMPANY & FACILITIES</span>
+        <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; color: #0f172a; letter-spacing: -1px; margin-bottom: 20px;">Corporate Machinery Hub & Warehousing</h2>
+        <p style="color: #475569; font-size: 1.1rem; max-width: 750px; margin: 0 auto 40px; line-height: 1.7;">
+          Inside our modern agricultural equipment assembly center, spare parts warehousing, and administrative headquarters.
+        </p>
+
+        <div id="home-our-company-grid" class="home-workshop-grid">
+          <!-- Dynamically populated or static fallbacks -->
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper"><img src="/assets/gallery/gallery_our_comapny_1.jpg" alt="Our Company Facility 1" loading="lazy"></div>
+            <div class="home-card-body-info"><span class="home-card-meta-tag">Our Company</span><h4 class="home-card-title-text">Sankara Headquarters & Assembly Center</h4></div>
+          </a>
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper"><img src="/assets/gallery/gallery_our_comapny_2.jpg" alt="Our Company Facility 2" loading="lazy"></div>
+            <div class="home-card-body-info"><span class="home-card-meta-tag">Our Company</span><h4 class="home-card-title-text">Heavy Equipment Warehousing Hub</h4></div>
+          </a>
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper"><img src="/assets/gallery/gallery_our_comapny_3.jpg" alt="Our Company Facility 3" loading="lazy"></div>
+            <div class="home-card-body-info"><span class="home-card-meta-tag">Our Company</span><h4 class="home-card-title-text">Technical Maintenance & Servicing Bay</h4></div>
+          </a>
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper"><img src="/assets/gallery/gallery_our_comapny_4.jpg" alt="Our Company Facility 4" loading="lazy"></div>
+            <div class="home-card-body-info"><span class="home-card-meta-tag">Our Company</span><h4 class="home-card-title-text">Implement Inventory & Spare Parts Center</h4></div>
+          </a>
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper"><img src="/assets/gallery/gallery_our_comapny_5.jpg" alt="Our Company Facility 5" loading="lazy"></div>
+            <div class="home-card-body-info"><span class="home-card-meta-tag">Our Company</span><h4 class="home-card-title-text">Operational Dispatch & Fleet Logistics</h4></div>
+          </a>
+          <a href="/activities" data-route="activities" class="home-workshop-card">
+            <div class="home-card-img-wrapper"><img src="/assets/gallery/gallery_our_comapny_6.jpg" alt="Our Company Facility 6" loading="lazy"></div>
+            <div class="home-card-body-info"><span class="home-card-meta-tag">Our Company</span><h4 class="home-card-title-text">Engineering Quality Assurance Hub</h4></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Corporate Video Journal Section (2-Column Grid Layout: 2 across per row) -->
+      <div class="home-workshop-section reveal" style="margin-top: 80px; animation-delay: 0.2s;">
+        <span style="font-size: 0.85rem; font-weight: 800; color: #991b1b; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">VIDEO JOURNAL & FIELD DEMOS</span>
+        <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; color: #0f172a; letter-spacing: -1px; margin-bottom: 20px;">Corporate Videos & Field Demonstrations</h2>
+        <p style="color: #475569; font-size: 1.1rem; max-width: 750px; margin: 0 auto 40px; line-height: 1.7;">
+          Watch live machinery operations, customer handovers, and technical excursions across farming communities.
+        </p>
+
+        <div id="home-video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 30px;">
+          <!-- Video Card Placeholder 1 -->
+          <div style="background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; transition: transform 0.3s ease;">
+            <div style="position: relative; padding-top: 56.25%; background: #0f172a;">
+              <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" style="position: absolute; top:0; left:0; width:100%; height:100%; border:none;" allowfullscreen></iframe>
+            </div>
+            <div style="padding: 20px; text-align: left;">
+              <span style="display: inline-block; background: rgba(37,99,235,0.1); color: #2563eb; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; margin-bottom: 8px;">Corporate Video</span>
+              <h4 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin: 0;">Lovol & Sankara Heavy Machinery Field Demonstration</h4>
+            </div>
+          </div>
+
+          <!-- Video Card Placeholder 2 -->
+          <div style="background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; transition: transform 0.3s ease;">
+            <div style="position: relative; padding-top: 56.25%; background: #0f172a;">
+              <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" style="position: absolute; top:0; left:0; width:100%; height:100%; border:none;" allowfullscreen></iframe>
+            </div>
+            <div style="padding: 20px; text-align: left;">
+              <span style="display: inline-block; background: rgba(37,99,235,0.1); color: #2563eb; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; margin-bottom: 8px;">Field Excursion</span>
+              <h4 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin: 0;">Zoomlion Combine Harvester Operational Test Drive</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Partner Brands Section -->
-      <div class="reveal" style="margin-top: 90px; text-align: center; animation-delay: 0.2s;">
+      <div class="reveal" style="margin-top: 90px; text-align: center; animation-delay: 0.25s;">
         <h5 style="color: #991b1b; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">STRATEGIC PARTNERSHIPS</h5>
         <h2 style="font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 850; color: #0f172a; letter-spacing: -1px; margin-bottom: 25px;">Our Trusted Partners & Brands</h2>
         
@@ -2184,7 +2254,105 @@ const fallbackProducts = [
     };
   });
 
+  const loadHomeActivities = async () => {
+    try {
+      const res = await fetch(`/api/activities?t=${Date.now()}`);
+      if (!res.ok) return;
+      const activities = await res.json();
+      if (!Array.isArray(activities) || activities.length === 0) return;
+
+      // 1. Render Our Company Photos from DB
+      const companyGrid = homeRoot.querySelector('#home-our-company-grid');
+      const companyItems = activities.filter(a => 
+        (a.category && a.category.toLowerCase().includes('company')) || 
+        (a.title && a.title.toLowerCase().includes('company'))
+      );
+
+      if (companyGrid && companyItems.length > 0) {
+        companyGrid.innerHTML = '';
+        companyItems.forEach(item => {
+          let firstImg = '/assets/gallery/gallery_our_comapny_1.jpg';
+          if (item.image) {
+            try {
+              if (item.image.startsWith('[')) {
+                const parsed = JSON.parse(item.image);
+                if (parsed.length > 0) firstImg = parsed[0];
+              } else {
+                firstImg = item.image;
+              }
+            } catch(e) { firstImg = item.image; }
+          }
+          const cardHtml = `
+            <a href="/activities" data-route="activities" class="home-workshop-card">
+              <div class="home-card-img-wrapper"><img src="${firstImg}" alt="${item.title}" loading="lazy"></div>
+              <div class="home-card-body-info">
+                <span class="home-card-meta-tag">${item.category || 'Our Company'}</span>
+                <h4 class="home-card-title-text">${item.title}</h4>
+              </div>
+            </a>
+          `;
+          companyGrid.insertAdjacentHTML('beforeend', cardHtml);
+        });
+      }
+
+      // 2. Render 2-Column Video Grid from DB
+      const videoGrid = homeRoot.querySelector('#home-video-grid');
+      const videoItems = activities.filter(a => a.video_url && a.video_url.trim() !== '');
+
+      if (videoGrid && videoItems.length > 0) {
+        videoGrid.innerHTML = '';
+        videoItems.forEach(item => {
+          let embedUrl = '';
+          const url = item.video_url;
+
+          if (url.includes('youtube.com/shorts/')) {
+            const vidId = url.split('shorts/')[1].split('?')[0].split('/')[0];
+            embedUrl = `https://www.youtube.com/embed/${vidId}`;
+          } else if (url.includes('youtube.com/watch?v=')) {
+            const vidId = url.split('v=')[1].split('&')[0];
+            embedUrl = `https://www.youtube.com/embed/${vidId}`;
+          } else if (url.includes('youtu.be/')) {
+            const vidId = url.split('be/')[1].split('?')[0].split('/')[0];
+            embedUrl = `https://www.youtube.com/embed/${vidId}`;
+          } else if (url.includes('youtube.com/embed/')) {
+            embedUrl = url;
+          } else if (url.includes('drive.google.com')) {
+            embedUrl = url.includes('/view') ? url.replace('/view', '/preview') : url;
+          } else if (url.includes('vimeo.com/')) {
+            const vimeoId = url.split('vimeo.com/')[1].split('?')[0].split('/')[0];
+            embedUrl = `https://player.vimeo.com/video/${vimeoId}`;
+          }
+
+          let playerHtml = '';
+          if (embedUrl) {
+            playerHtml = `<iframe src="${embedUrl}" style="position: absolute; top:0; left:0; width:100%; height:100%; border:none; border-radius: 16px 16px 0 0;" allowfullscreen></iframe>`;
+          } else if (url.match(/\.(mp4|webm|ogg|mov)(\?.*)?$/i) || url.startsWith('data:video/')) {
+            playerHtml = `<video src="${url}" controls style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; border-radius: 16px 16px 0 0;"></video>`;
+          } else {
+            playerHtml = `<div style="position: absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-center; background:#1e293b; color:white; padding:20px; text-align:center;"><p style="margin-bottom:10px; font-size:0.9rem;">${item.title}</p><a href="${url}" target="_blank" style="background:#0284c7; color:white; padding:6px 14px; border-radius:6px; font-size:0.8rem; font-weight:700; text-decoration:none;">Watch Video &rarr;</a></div>`;
+          }
+
+          const cardHtml = `
+            <div style="background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; transition: transform 0.3s ease;">
+              <div style="position: relative; padding-top: 56.25%; background: #0f172a;">
+                ${playerHtml}
+              </div>
+              <div style="padding: 20px; text-align: left;">
+                <span style="display: inline-block; background: rgba(37,99,235,0.1); color: #2563eb; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; margin-bottom: 8px;">${item.category || 'Video'}</span>
+                <h4 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin: 0;">${item.title}</h4>
+              </div>
+            </div>
+          `;
+          videoGrid.insertAdjacentHTML('beforeend', cardHtml);
+        });
+      }
+    } catch(err) {
+      console.error('Error loading home activities:', err);
+    }
+  };
+
   loadFleet();
+  loadHomeActivities();
 
   // Trigger animations
   setTimeout(() => {

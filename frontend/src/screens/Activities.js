@@ -1268,15 +1268,61 @@ export function renderActivitiesScreen() {
       thumbsContainer.style.display = 'none';
       thumbsContainer.innerHTML = '';
       
-      let vidId = '';
-      if (item.video_url.includes('youtube.com/watch?v=')) vidId = item.video_url.split('v=')[1].split('&')[0];
-      else if (item.video_url.includes('youtu.be/')) vidId = item.video_url.split('be/')[1].split('?')[0];
+      const getVideoEmbedHtml = (url) => {
+        if (!url) return '';
+        let vidId = '';
 
-      if (vidId) {
-        content.innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}?autoplay=1" style="width: 80vw; height: 45vw; max-height: 60vh; border: none; border-radius: 16px;" allow="autoplay; fullscreen"></iframe>`;
-      } else {
-        content.innerHTML = `<video src="${item.video_url}" controls autoplay style="max-width: 100%; max-height: 60vh; border-radius: 16px;"></video>`;
-      }
+        // 1. YouTube Shorts
+        if (url.includes('youtube.com/shorts/')) {
+          vidId = url.split('shorts/')[1].split('?')[0].split('/')[0];
+        }
+        // 2. YouTube Watch
+        else if (url.includes('youtube.com/watch?v=')) {
+          vidId = url.split('v=')[1].split('&')[0];
+        }
+        // 3. YouTube Shortened (youtu.be)
+        else if (url.includes('youtu.be/')) {
+          vidId = url.split('be/')[1].split('?')[0].split('/')[0];
+        }
+        // 4. YouTube Embed
+        else if (url.includes('youtube.com/embed/')) {
+          vidId = url.split('embed/')[1].split('?')[0].split('/')[0];
+        }
+
+        if (vidId) {
+          return `<iframe src="https://www.youtube.com/embed/${vidId}?autoplay=1" style="width: 80vw; height: 45vw; max-width: 900px; max-height: 60vh; border: none; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>`;
+        }
+
+        // 5. Google Drive Video
+        if (url.includes('drive.google.com')) {
+          let driveUrl = url;
+          if (driveUrl.includes('/view')) driveUrl = driveUrl.replace('/view', '/preview');
+          else if (!driveUrl.includes('/preview')) driveUrl += '/preview';
+          return `<iframe src="${driveUrl}" style="width: 80vw; height: 45vw; max-width: 900px; max-height: 60vh; border: none; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+        }
+
+        // 6. Vimeo
+        if (url.includes('vimeo.com/')) {
+          const vimeoId = url.split('vimeo.com/')[1].split('?')[0].split('/')[0];
+          if (vimeoId) {
+            return `<iframe src="https://player.vimeo.com/video/${vimeoId}?autoplay=1" style="width: 80vw; height: 45vw; max-width: 900px; max-height: 60vh; border: none; border-radius: 16px;" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+          }
+        }
+
+        // 7. Direct HTML5 Video File (.mp4, .webm, .mov, data:video/)
+        if (url.match(/\.(mp4|webm|ogg|mov)(\?.*)?$/i) || url.startsWith('data:video/') || url.startsWith('blob:')) {
+          return `<video src="${url}" controls autoplay style="max-width: 90vw; max-height: 65vh; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);"></video>`;
+        }
+
+        // 8. General fallback for any other video webpage URL
+        return `<div style="width: 80vw; max-width: 650px; padding: 2.5rem; background: #1e293b; border-radius: 16px; text-align: center; color: white;">
+          <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem; color: #38bdf8;">Video Stream</h3>
+          <p style="color: #94a3b8; margin-bottom: 1.25rem; font-size: 0.95rem;">Click the button below to watch this video stream directly.</p>
+          <a href="${url}" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #0284c7; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 700; text-decoration: none;">Watch Video Source &rarr;</a>
+        </div>`;
+      };
+
+      content.innerHTML = getVideoEmbedHtml(item.video_url);
     } else {
       // Parse image array
       let images = [];
