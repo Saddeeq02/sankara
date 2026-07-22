@@ -652,7 +652,8 @@
                     const tbody = document.getElementById('id-attendance-tbody');
                     tbody.innerHTML = `<tr><td colspan="5" class="px-6 py-12 text-center text-slate-550 font-medium">Fetching active streams...</td></tr>`;
 
-                    const attRes = await fetch('https://sankara-id.vercel.app/attendance/');
+                    const idBaseUrl = "{{ rtrim(env('SANKARA_ID_API_URL', 'https://sankara-id.vercel.app'), '/') }}";
+                    const attRes = await fetch(`${idBaseUrl}/attendance/`);
                     if (attRes.ok) {
                         const data = await attRes.json();
                         

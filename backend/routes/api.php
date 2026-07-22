@@ -545,24 +545,26 @@ Route::get('admin/health', function(Request $request) use ($verifyPermission) {
         'attendance_count' => 0
     ];
 
+    $idApiUrl = rtrim(env('SANKARA_ID_API_URL', 'https://sankara-id.vercel.app'), '/');
+
     try {
-        $pingResponse = \Illuminate\Support\Facades\Http::timeout(2)->get('https://sankara-id.vercel.app/');
+        $pingResponse = \Illuminate\Support\Facades\Http::timeout(2)->get("{$idApiUrl}/");
         if ($pingResponse->successful()) {
             $idSystemActive = true;
             $idSystemMsg = 'Online';
             
             // Fetch extra stats since server is alive
-            $staffResponse = \Illuminate\Support\Facades\Http::timeout(2)->get('https://sankara-id.vercel.app/staff/');
+            $staffResponse = \Illuminate\Support\Facades\Http::timeout(2)->get("{$idApiUrl}/staff/");
             if ($staffResponse->successful()) {
                 $idSystemStats['staff_count'] = count($staffResponse->json() ?: []);
             }
             
-            $complaintsResponse = \Illuminate\Support\Facades\Http::timeout(2)->get('https://sankara-id.vercel.app/complaints/');
+            $complaintsResponse = \Illuminate\Support\Facades\Http::timeout(2)->get("{$idApiUrl}/complaints/");
             if ($complaintsResponse->successful()) {
                 $idSystemStats['complaints_count'] = count($complaintsResponse->json() ?: []);
             }
 
-            $attendanceResponse = \Illuminate\Support\Facades\Http::timeout(2)->get('https://sankara-id.vercel.app/attendance/');
+            $attendanceResponse = \Illuminate\Support\Facades\Http::timeout(2)->get("{$idApiUrl}/attendance/");
             if ($attendanceResponse->successful()) {
                 $idSystemStats['attendance_count'] = count($attendanceResponse->json() ?: []);
             }
@@ -615,7 +617,8 @@ Route::post('admin/id-system/reset-scores', function(Request $request) use ($ver
     if (!$verifyPermission($request, 'admin-health')) return response()->json(['error' => 'Unauthorized'], 401);
     
     try {
-        $res = \Illuminate\Support\Facades\Http::timeout(5)->post('https://sankara-id.vercel.app/staff/reset_monthly_scores');
+        $idApiUrl = rtrim(env('SANKARA_ID_API_URL', 'https://sankara-id.vercel.app'), '/');
+        $res = \Illuminate\Support\Facades\Http::timeout(5)->post("{$idApiUrl}/staff/reset_monthly_scores");
         if ($res->successful()) {
             return response()->json($res->json());
         }
