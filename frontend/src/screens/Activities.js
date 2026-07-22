@@ -151,14 +151,26 @@ export function renderActivitiesScreen() {
       position: relative;
       aspect-ratio: 4/3;
       overflow: hidden;
-      background: #f1f5f9;
+      background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+      background-size: 200% 100%;
+      animation: imgSkeletonPulse 1.8s infinite ease-in-out;
+    }
+
+    @keyframes imgSkeletonPulse {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
     }
 
     .card-img-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0;
+      transition: opacity 0.4s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .card-img-wrapper img.loaded {
+      opacity: 1;
     }
 
     .gallery-item-card:hover .card-img-wrapper img {
@@ -1177,26 +1189,43 @@ export function renderActivitiesScreen() {
     },
   ];
 
-  // Load Media Gallery items - fetched from /api/activities
+  // 0ms Instant Initial Pre-Render from Cache or Fallbacks
+  const cachedData = sessionStorage.getItem('sankara_activities_cache');
+  if (cachedData) {
+    try {
+      allGalleryItems = JSON.parse(cachedData);
+    } catch(e) {
+      allGalleryItems = [...fallbackGalleryItems];
+    }
+  } else {
+    allGalleryItems = [...fallbackGalleryItems];
+  }
+
+  // Load Media Gallery items - fetched asynchronously in background from /api/activities
   const loadGallery = async () => {
+    // Render initial cached/fallback items instantly (0ms latency)
+    renderGalleryItems();
+
     try {
       const res = await fetch(`/api/activities?t=${Date.now()}`);
+      if (!res.ok) return;
       const dbItems = await res.json();
       
       const dbTitles = new Set(dbItems.map(i => (i.title || i.name || '').toLowerCase()));
       const uniqueFallbacks = fallbackGalleryItems.filter(i => !dbTitles.has(i.title.toLowerCase()));
       
       allGalleryItems = [...dbItems, ...uniqueFallbacks];
+      sessionStorage.setItem('sankara_activities_cache', JSON.stringify(allGalleryItems));
       renderGalleryItems();
     } catch (err) {
-      console.error('Error loading gallery API, using fallbacks:', err);
-      allGalleryItems = [...fallbackGalleryItems];
-      renderGalleryItems();
+      console.error('Error loading gallery API, keeping initial items:', err);
     }
   };
 
   const renderGalleryItems = () => {
     const grid = gallerySec.querySelector('#gallery-items-grid');
+    if (!grid) return;
+
     filteredItems = currentFilter === 'All' ? allGalleryItems : allGalleryItems.filter(i => i.category === currentFilter);
 
     if (filteredItems.length === 0) {
@@ -1226,7 +1255,7 @@ export function renderActivitiesScreen() {
       return `
         <div class="gallery-item-card" data-idx="${idx}">
           <div class="card-img-wrapper">
-            ${firstImage ? `<img src="${firstImage}" alt="${item.title || item.name}" loading="lazy">` : ''}
+            ${firstImage ? `<img src="${firstImage}" alt="${item.title || item.name}" loading="lazy" decoding="async" onload="this.classList.add('loaded')">` : ''}
             ${item.video_url ? `
               <div class="video-badge">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
