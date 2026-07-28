@@ -569,35 +569,71 @@ export function renderHomeScreen() {
       transform: scale(1.06);
     }
 
-    /* Team Section CSS styling */
-    .team-member-card {
+    /* Team Section CSS styling & Horizontal Slider */
+    .team-slider-wrapper {
+      position: relative;
+      margin: 0 -15px;
+    }
+
+    .team-slider-track {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 25px 30px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-behavior: smooth;
+    }
+
+    .team-slider-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .team-slider-track .team-member-card {
+      flex: 0 0 78%;
+      max-width: 320px;
+      scroll-snap-align: center;
       background: var(--surface-color, #ffffff);
       border: 1px solid var(--glass-border, rgba(226, 232, 240, 0.85));
       border-radius: 28px;
-      padding: 20px;
+      padding: 24px 20px;
       text-align: center;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
       display: flex;
       flex-direction: column;
       align-items: center;
+      user-select: none;
     }
 
-    [data-theme="dark"] .team-member-card {
-      background: rgba(30, 41, 59, 0.4);
+    @media (min-width: 640px) {
+      .team-slider-track .team-member-card {
+        flex: 0 0 44%;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .team-slider-track .team-member-card {
+        flex: 0 0 29%;
+      }
+    }
+
+    [data-theme="dark"] .team-slider-track .team-member-card {
+      background: rgba(30, 41, 59, 0.5);
       border-color: rgba(255, 255, 255, 0.08);
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
 
-    .team-member-card:hover {
-      transform: translateY(-8px);
+    .team-slider-track .team-member-card:hover {
+      transform: translateY(-8px) scale(1.02);
       border-color: #dc2626;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 30px 60px rgba(153, 27, 27, 0.12);
     }
 
-    [data-theme="dark"] .team-member-card:hover {
+    [data-theme="dark"] .team-slider-track .team-member-card:hover {
       border-color: #3b82f6;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 30px 60px rgba(59, 130, 246, 0.2);
     }
 
     .team-member-img-box {
@@ -1550,15 +1586,15 @@ export function renderHomeScreen() {
   `;
   document.head.appendChild(aboutStyle);
 
-  // Section 7: Team Section (After Milestones of Excellence)
+  // Section 7: Team Section (Horizontal Interactive Carousel Slider)
   const teamSec = document.createElement('section');
   teamSec.className = 'sec-team';
   teamSec.style.padding = '120px 0';
   teamSec.style.background = '#ffffff';
   teamSec.style.borderTop = '1px solid #e2e8f0';
   teamSec.innerHTML = `
-    <div class="container">
-      <div style="text-align: center; margin-bottom: 70px;">
+    <div class="container" style="position: relative;">
+      <div style="text-align: center; margin-bottom: 50px;">
         <span class="reveal" style="font-size: 0.85rem; font-weight: 800; color: #991b1b; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block;">Our Team</span>
         <h2 class="reveal" style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 850; color: #0f172a; letter-spacing: -1px; margin-bottom: 20px;">The Leadership & Technical Experts</h2>
         <p class="reveal" style="color: #475569; font-size: 1.1rem; max-width: 750px; margin: 0 auto; line-height: 1.7;">
@@ -1566,8 +1602,17 @@ export function renderHomeScreen() {
         </p>
       </div>
 
-      <div class="team-grid" id="home-team-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px;">
-        <div style="grid-column: 1/-1; text-align: center; padding: 40px 0; color: #64748b;">Loading team profiles...</div>
+      <div class="team-slider-wrapper">
+        <button class="team-slider-btn prev-btn" aria-label="Previous Staff" style="position: absolute; left: -18px; top: 50%; transform: translateY(-50%); z-index: 10; width: 48px; height: 48px; border-radius: 50%; background: #ffffff; border: 1px solid rgba(0,0,0,0.12); box-shadow: 0 12px 28px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer; color: #0f172a; transition: all 0.3s ease;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button class="team-slider-btn next-btn" aria-label="Next Staff" style="position: absolute; right: -18px; top: 50%; transform: translateY(-50%); z-index: 10; width: 48px; height: 48px; border-radius: 50%; background: #ffffff; border: 1px solid rgba(0,0,0,0.12); box-shadow: 0 12px 28px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer; color: #0f172a; transition: all 0.3s ease;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+
+        <div class="team-slider-track" id="home-team-grid">
+          <div style="width: 100%; text-align: center; padding: 40px 0; color: #64748b;">Loading team profiles...</div>
+        </div>
       </div>
     </div>
   `;
@@ -1580,7 +1625,7 @@ export function renderHomeScreen() {
       
       if (team.length === 0) {
         grid.innerHTML = `
-          <div style="grid-column: 1/-1; text-align: center; padding: 60px 0; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 24px;">
+          <div style="width: 100%; text-align: center; padding: 60px 0; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 24px;">
             <p style="color: #64748b; font-size: 1.1rem; font-weight: 600;">Meet our team soon! Our member profile listings are being updated.</p>
           </div>
         `;
@@ -1588,7 +1633,7 @@ export function renderHomeScreen() {
       }
 
       grid.innerHTML = team.map((member, idx) => `
-        <div class="reveal team-member-card" style="animation-delay: ${idx * 0.1}s;">
+        <div class="reveal team-member-card" style="animation-delay: ${idx * 0.08}s;">
           <div class="team-member-img-box">
             <img src="${member.image}" alt="${member.name}" loading="lazy">
           </div>
@@ -1596,6 +1641,20 @@ export function renderHomeScreen() {
           <div class="team-member-role">${member.role}</div>
         </div>
       `).join('');
+
+      // Enable Slider Button Navigation Controls
+      const prevBtn = teamSec.querySelector('.prev-btn');
+      const nextBtn = teamSec.querySelector('.next-btn');
+      if (prevBtn && nextBtn && grid) {
+        prevBtn.onclick = () => {
+          const cardWidth = grid.querySelector('.team-member-card')?.offsetWidth || 290;
+          grid.scrollBy({ left: -(cardWidth + 24), behavior: 'smooth' });
+        };
+        nextBtn.onclick = () => {
+          const cardWidth = grid.querySelector('.team-member-card')?.offsetWidth || 290;
+          grid.scrollBy({ left: (cardWidth + 24), behavior: 'smooth' });
+        };
+      }
 
       if (window.initAnimations) {
         setTimeout(window.initAnimations, 100);
