@@ -460,7 +460,7 @@ export function renderContactScreen() {
           </div>
           <div class="contact-channel-details">
             <h5>Management Hotline</h5>
-            <p><a href="tel:+2347034528752">+234 703 452 8752</a></p>
+            <p><a href="tel:+2348036272902">+234 803 627 2902</a></p>
           </div>
         </div>
 

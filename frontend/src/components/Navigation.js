@@ -289,7 +289,7 @@ export function renderFooter() {
             </div>
             <div class="footer-contact-info">
               <span class="footer-contact-label">Management</span>
-              <a href="tel:+2347034528752" class="footer-contact-value">+234 703 452 8752</a>
+              <a href="tel:+2348036272902" class="footer-contact-value">+234 803 627 2902</a>
             </div>
           </div>
 
