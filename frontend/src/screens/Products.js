@@ -798,10 +798,39 @@ export function renderProductsScreen() {
 
   loadPublicProducts();
 
+  // E-Store Direct Procurement Callout Banner
+  const estoreBanner = document.createElement('div');
+  estoreBanner.className = 'container estore-products-banner-wrap reveal';
+  estoreBanner.innerHTML = `
+    <div class="estore-products-banner">
+      <div class="estore-banner-icon-col">
+        <div class="estore-banner-badge-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+      </div>
+      <div class="estore-banner-text-col">
+        <div class="estore-pill-live">
+          <span class="estore-live-pulse-sm"></span> DIRECT PROCUREMENT AVAILABLE
+        </div>
+        <h3 class="estore-banner-heading">Need Genuine Spare Parts, Implements, or Tractors Fast?</h3>
+        <p class="estore-banner-sub">
+          Order genuine Massey Ferguson, Lovol & Zoomlion spare parts, field implements, and full machinery online directly from <strong>store.sankaranigerialimited.com</strong> with nationwide delivery.
+        </p>
+      </div>
+      <div class="estore-banner-action-col">
+        <a href="https://store.sankaranigerialimited.com" target="_blank" rel="noopener noreferrer" class="btn-estore-products-cta">
+          <span>Order Online Directly</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  `;
+
   productsGrid.appendChild(productsContainer);
   container.appendChild(renderNavbar());
   container.appendChild(hero);
   container.appendChild(controls);
+  container.appendChild(estoreBanner);
   container.appendChild(productsGrid);
   container.appendChild(renderFooter());
 

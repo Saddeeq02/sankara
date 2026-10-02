@@ -1045,6 +1045,139 @@ export function renderHomeScreen() {
     </div>
   `;
 
+  // --- E-STORE SPOTLIGHT SHOWCASE SECTION ---
+  const estoreSpotlightSec = document.createElement('section');
+  estoreSpotlightSec.className = 'sec-estore-spotlight reveal';
+  estoreSpotlightSec.innerHTML = `
+    <div class="container">
+      <div class="estore-spotlight-card">
+        <div class="estore-spotlight-glow glow-red"></div>
+        <div class="estore-spotlight-glow glow-blue"></div>
+        
+        <!-- Header -->
+        <div class="estore-spotlight-header">
+          <div class="estore-badge-label">
+            <span class="estore-live-pulse"></span>
+            <span>OFFICIAL DIGITAL STOREFRONT</span>
+          </div>
+          <h2 class="estore-spotlight-title">Now Live: The Official Sankara E-Store</h2>
+          <p class="estore-spotlight-subtitle">
+            Order genuine agricultural machinery, factory-certified spare parts, and heavy-duty implements online directly with fast, insured delivery to your farm or project site across Nigeria.
+          </p>
+        </div>
+
+        <!-- 3 Major Pillars Grid -->
+        <div class="estore-pillars-grid">
+          <!-- Card 1: Genuine Spare Parts -->
+          <div class="estore-pillar-card">
+            <div class="pillar-top-row">
+              <span class="pillar-number">01</span>
+              <span class="pillar-tag">100% OEM CERTIFIED</span>
+            </div>
+            <div class="pillar-icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 1.41-2.83l-1.41-1.41a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </div>
+            <h3 class="pillar-title">Genuine Spare Parts</h3>
+            <p class="pillar-desc">
+              Filters, hydraulic pumps, injector nozzles, clutch assemblies, and electrical kits. Guaranteed OEM compatibility for Massey Ferguson, Lovol & Zoomlion.
+            </p>
+            <ul class="pillar-specs">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> OEM Factory Verified</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Direct Dispatch & Tracking</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Technical Fitment Guarantee</li>
+            </ul>
+            <a href="https://store.sankaranigerialimited.com" target="_blank" rel="noopener noreferrer" class="pillar-cta-btn">
+              <span>Order Spare Parts</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- Card 2: Implements & Attachments -->
+          <div class="estore-pillar-card featured-pillar">
+            <div class="pillar-top-row">
+              <span class="pillar-number">02</span>
+              <span class="pillar-tag badge-popular">FIELD-PROVEN</span>
+            </div>
+            <div class="pillar-icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <h3 class="pillar-title">Implements & Attachments</h3>
+            <p class="pillar-desc">
+              Heavy-duty rotary tillers, disc plows, ridge cutters, seed drills, balers, and agricultural tipping trailers built for demanding Nigerian soil.
+            </p>
+            <ul class="pillar-specs">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> High-Tensile Steel Structure</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Universal 3-Point & PTO Hitch</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Assembled & Field Tested</li>
+            </ul>
+            <a href="https://store.sankaranigerialimited.com" target="_blank" rel="noopener noreferrer" class="pillar-cta-btn highlight-btn">
+              <span>Order Implements</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- Card 3: Full Tractors -->
+          <div class="estore-pillar-card">
+            <div class="pillar-top-row">
+              <span class="pillar-number">03</span>
+              <span class="pillar-tag">FACTORY WARRANTY</span>
+            </div>
+            <div class="pillar-icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10 11 11 .9c.6 0 .9.5.8 1.1l-.8 5h-1"/><circle cx="18" cy="18" r="2"/><circle cx="7" cy="15" r="5"/></svg>
+            </div>
+            <h3 class="pillar-title">Full Tractors</h3>
+            <p class="pillar-desc">
+              Browse and order complete 50HP – 150HP+ tractors with official warranty documentation, pre-delivery inspection, and dedicated delivery logistics.
+            </p>
+            <ul class="pillar-specs">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Complete Manufacturer Warranty</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Pre-Delivery Commissioning</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Operator Training Support</li>
+            </ul>
+            <a href="https://store.sankaranigerialimited.com" target="_blank" rel="noopener noreferrer" class="pillar-cta-btn">
+              <span>Order Tractors Online</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Trust Badges & Main CTA Bar -->
+        <div class="estore-spotlight-footer">
+          <div class="estore-trust-grid">
+            <div class="estore-trust-item">
+              <div class="trust-icon">🚚</div>
+              <div class="trust-text">
+                <strong>Fast Nationwide Logistics</strong>
+                <span>Doorstep & depot dispatch to all 36 Nigerian states</span>
+              </div>
+            </div>
+            <div class="estore-trust-item">
+              <div class="trust-icon">🛡️</div>
+              <div class="trust-text">
+                <strong>100% Genuine Guaranteed</strong>
+                <span>Direct from authorized factory channels with warranty</span>
+              </div>
+            </div>
+            <div class="estore-trust-item">
+              <div class="trust-icon">⚡</div>
+              <div class="trust-text">
+                <strong>Order Online Directly</strong>
+                <span>Instant order confirmation, clear quotes & invoices</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="estore-spotlight-cta-wrap">
+            <a href="https://store.sankaranigerialimited.com" target="_blank" rel="noopener noreferrer" class="btn-estore-spotlight-main">
+              <span>Visit Official E-Store: store.sankaranigerialimited.com</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
   // 2. FEATURE / CAPABILITIES SECTION (With Star Badges)
   const featuresSec = document.createElement('section');
   featuresSec.className = 'sec-features';
@@ -1668,6 +1801,7 @@ export function renderHomeScreen() {
 
   // Append everything
   homeRoot.appendChild(heroSec);
+  homeRoot.appendChild(estoreSpotlightSec);
   homeRoot.appendChild(featuresSec);
   homeRoot.appendChild(fleetSec);
 const fallbackProducts = [

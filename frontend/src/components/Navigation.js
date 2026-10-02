@@ -2,6 +2,25 @@ export function renderNavbar() {
   const nav = document.createElement('nav');
   nav.className = 'glass-navbar';
   nav.innerHTML = `
+    <!-- E-Store Announcement Ribbon -->
+    <div class="estore-top-banner" id="estore-top-banner">
+      <div class="container estore-banner-container">
+        <div class="estore-banner-content">
+          <span class="estore-banner-pill"><span class="estore-banner-dot"></span> NOW LIVE</span>
+          <span class="estore-banner-message">Official Sankara E-Store: <strong>Order Genuine Spare Parts, Implements & Full Tractors Online Directly!</strong></span>
+        </div>
+        <div class="estore-banner-actions">
+          <a href="https://store.sankaranigerialimited.com" target="_blank" rel="noopener noreferrer" class="estore-banner-action-btn">
+            <span>Order Online Directly</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <button class="estore-banner-dismiss" id="estore-banner-close" aria-label="Dismiss banner" title="Dismiss announcement">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="container nav-row">
       <a href="/home" data-route="home" class="logo">
         <img src="/assets/logo.png" alt="Sankara Logo" class="nav-logo">
@@ -23,14 +42,42 @@ export function renderNavbar() {
           <li><a href="/home" data-route="home" class="nav-link-item">Home</a></li>
           <li><a href="/about" data-route="about" class="nav-link-item">About Us</a></li>
           <li><a href="/product" data-route="products" class="nav-link-item">Products</a></li>
+          <li>
+            <a href="https://store.sankaranigerialimited.com" target="_blank" rel="noopener noreferrer" class="nav-link-item nav-link-estore" title="Order Online Directly from Sankara E-Store">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="estore-tab-icon"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              <span>E-Store</span>
+              <span class="estore-badge-pill">NEW</span>
+            </a>
+          </li>
           <li><a href="/service" data-route="services" class="nav-link-item">Services</a></li>
           <li><a href="/gallery" data-route="gallery" class="nav-link-item">Gallery</a></li>
           <li><a href="/activities" data-route="activities" class="nav-link-item">Activities</a></li>
         </ul>
         <div class="nav-actions">
+          <a href="https://store.sankaranigerialimited.com" target="_blank" rel="noopener noreferrer" class="btn-estore-nav-action" title="Visit Sankara E-Store">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+            <span>Visit E-Store</span>
+          </a>
           <a href="/contact" data-route="contact" class="btn-primary contact-nav-btn" style="padding: 10px 24px; font-size: 0.9rem; text-decoration: none; border-radius: 50px;">Contact Us</a>
         </div>
       </div>
+    </div>
+
+    <!-- Floating E-Store Quick Action Pill -->
+    <div class="estore-floating-pill" id="estore-floating-pill">
+      <a href="https://store.sankaranigerialimited.com" target="_blank" rel="noopener noreferrer" class="estore-pill-inner" title="Order Online Directly at Sankara E-Store">
+        <span class="estore-pill-icon-glow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        </span>
+        <span class="estore-pill-text-wrap">
+          <span class="estore-pill-tag">OFFICIAL STORE</span>
+          <span class="estore-pill-heading">Order Online Directly</span>
+        </span>
+        <span class="estore-pill-arrow-circle">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </span>
+      </a>
+      <button class="estore-pill-dismiss-btn" id="estore-pill-close" aria-label="Dismiss store badge" title="Dismiss">×</button>
     </div>
   `;
 
@@ -43,13 +90,51 @@ export function renderNavbar() {
     toggle.classList.toggle('toggle-active');
   };
 
-  // Close menu when clicking a link or button
-  menu.querySelectorAll('a, button').forEach(link => {
+  // Close menu when clicking an internal link
+  menu.querySelectorAll('a[data-route]').forEach(link => {
     link.onclick = (e) => {
       menu.classList.remove('mobile-active');
       toggle.classList.remove('toggle-active');
     }
   });
+
+  // Handle banner dismiss persistence
+  const banner = nav.querySelector('#estore-top-banner');
+  const closeBtn = nav.querySelector('#estore-banner-close');
+  if (sessionStorage.getItem('sankara_estore_banner_dismissed') === 'true') {
+    if (banner) banner.style.display = 'none';
+  } else if (closeBtn && banner) {
+    closeBtn.onclick = (e) => {
+      e.stopPropagation();
+      banner.style.transition = 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
+      banner.style.maxHeight = '0';
+      banner.style.padding = '0';
+      banner.style.opacity = '0';
+      banner.style.overflow = 'hidden';
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, 350);
+      sessionStorage.setItem('sankara_estore_banner_dismissed', 'true');
+    };
+  }
+
+  // Handle floating pill dismiss persistence
+  const floatingPill = nav.querySelector('#estore-floating-pill');
+  const pillClose = nav.querySelector('#estore-pill-close');
+  if (sessionStorage.getItem('sankara_estore_pill_dismissed') === 'true') {
+    if (floatingPill) floatingPill.style.display = 'none';
+  } else if (pillClose && floatingPill) {
+    pillClose.onclick = (e) => {
+      e.stopPropagation();
+      floatingPill.style.transition = 'all 0.3s ease';
+      floatingPill.style.transform = 'translateY(30px) scale(0.8)';
+      floatingPill.style.opacity = '0';
+      setTimeout(() => {
+        floatingPill.style.display = 'none';
+      }, 300);
+      sessionStorage.setItem('sankara_estore_pill_dismissed', 'true');
+    };
+  }
 
   // Apply saved theme preference silently
   const currentTheme = localStorage.getItem('theme') || 'light';
@@ -255,6 +340,7 @@ export function renderFooter() {
             <li><a href="/product" data-route="products" class="footer-link-item"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 9l4-4-4-4"/></svg> Zoomlion Tractors</a></li>
             <li><a href="/product" data-route="products" class="footer-link-item"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 9l4-4-4-4"/></svg> Farm Implements</a></li>
             <li><a href="/product" data-route="products" class="footer-link-item"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 9l4-4-4-4"/></svg> Spare Parts</a></li>
+            <li><a href="https://store.sankaranigerialimited.com" target="_blank" rel="noopener noreferrer" class="footer-link-item footer-link-estore" style="color: #dc2626; font-weight: 700;"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 9l4-4-4-4"/></svg> 🛍️ Official E-Store (Shop Online) ↗</a></li>
           </ul>
         </div>
 
