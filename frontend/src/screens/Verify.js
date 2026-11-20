@@ -1,8 +1,9 @@
 const STAFF_API_BASE = 'https://sankara-id.vercel.app';
 
 const BADGE_REGISTRY = {
-  'SANK-ID-001': { dbId: 1, displayCode: 'SANK-ID-001' },
+  'SNL-ID-001': { dbId: 1, displayCode: 'SNL-ID-001' },
   'SNL-ID-002': { dbId: 2, displayCode: 'SNL-ID-002' },
+  'SNL-ID-016': { dbId: 16, displayCode: 'SNL-ID-016' },
   'SNL-ID-080': { dbId: 3, displayCode: 'SNL-ID-080' },
   'SNL-ID-081': { dbId: 15, displayCode: 'SNL-ID-081' },
   'SNL-ID-082': { dbId: 11, displayCode: 'SNL-ID-082' },
@@ -16,11 +17,18 @@ const BADGE_REGISTRY = {
   'SNL-ID-091': { dbId: 13, displayCode: 'SNL-ID-091' },
   'SNL-ID-092': { dbId: 8, displayCode: 'SNL-ID-092' },
   'SNL-ID-095': { dbId: 4, displayCode: 'SNL-ID-095' },
-  'SANK-ID-096': { dbId: null, displayCode: 'SANK-ID-096' },
-  'SANK-ID-097': { dbId: 10, displayCode: 'SANK-ID-097' },
-  'SANK-ID-098': { dbId: null, displayCode: 'SANK-ID-098' },
-  'SANK-ID-099': { dbId: null, displayCode: 'SANK-ID-099' },
-  'SANK-ID-0016': { dbId: 16, displayCode: 'SANK-ID-0016' },
+  'SNL-ID-096': { dbId: null, displayCode: 'SNL-ID-096' },
+  'SNL-ID-097': { dbId: 10, displayCode: 'SNL-ID-097' },
+  'SNL-ID-098': { dbId: null, displayCode: 'SNL-ID-098' },
+  'SNL-ID-099': { dbId: null, displayCode: 'SNL-ID-099' },
+  // Legacy SANK-ID-* aliases normalized to SNL-ID-*
+  'SANK-ID-001': { dbId: 1, displayCode: 'SNL-ID-001' },
+  'SANK-ID-016': { dbId: 16, displayCode: 'SNL-ID-016' },
+  'SANK-ID-0016': { dbId: 16, displayCode: 'SNL-ID-016' },
+  'SANK-ID-096': { dbId: null, displayCode: 'SNL-ID-096' },
+  'SANK-ID-097': { dbId: 10, displayCode: 'SNL-ID-097' },
+  'SANK-ID-098': { dbId: null, displayCode: 'SNL-ID-098' },
+  'SANK-ID-099': { dbId: null, displayCode: 'SNL-ID-099' },
 };
 
 const DB_ID_TO_BADGE = Object.values(BADGE_REGISTRY).reduce((acc, entry) => {
@@ -38,11 +46,11 @@ function resolveScannedCode(rawParam) {
     return BADGE_REGISTRY[normalized];
   }
 
-  const numericMatch = normalized.match(/^(?:SANK-ID-)?0*([1-9]\d*)$/i);
+  const numericMatch = normalized.match(/^(?:(?:SNL|SANK)-ID-)?0*([1-9]\d*)$/i);
   if (numericMatch) {
     const dbId = parseInt(numericMatch[1], 10);
     const displayCode =
-      DB_ID_TO_BADGE[dbId] || `SANK-ID-${String(dbId).padStart(4, '0')}`;
+      DB_ID_TO_BADGE[dbId] || `SNL-ID-${String(dbId).padStart(3, '0')}`;
     return { dbId, displayCode };
   }
 
