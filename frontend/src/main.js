@@ -7,6 +7,7 @@ import { renderContactScreen } from './screens/Contact';
 import { renderServicesScreen } from './screens/Services';
 import { renderGalleryScreen } from './screens/Gallery';
 import { renderActivitiesScreen } from './screens/Activities';
+import { renderVerifyScreen } from './screens/Verify';
 
 // Admin Screens
 import { renderAdminDashboard } from './screens/admin/Dashboard';
@@ -38,6 +39,7 @@ const routes = {
   services: renderServicesScreen,
   gallery: renderGalleryScreen,
   activities: renderActivitiesScreen,
+  verify: renderVerifyScreen,
   'admin-login': renderLogin,
   'admin-dashboard': renderAdminDashboard,
   'admin-products': renderAdminProducts,
@@ -54,6 +56,7 @@ const metaData = {
   services: { title: 'Professional Services | Sankara', desc: 'Training, maintenance, and technical support for large-scale agricultural projects.' },
   gallery: { title: 'Media Gallery | Sankara Nigeria Limited', desc: 'Visual journey of our exhibitions, workshops, and regional field visits.' },
   activities: { title: 'Corporate Activities | Sankara', desc: 'Tracking our impactful agricultural workshops and government partnerships.' },
+  verify: { title: 'Staff ID Verification | Sankara Nigeria Limited', desc: 'Official QR verification portal for Sankara Nigeria Limited staff ID cards.' },
   'admin-login': { title: 'Admin Access | Sankara', desc: 'Secure login for Sankara Nigeria Limited management system.' },
   'admin-users': { title: 'Admin Users | Sankara', desc: 'Manage system administrators and permissions.' },
 };
@@ -66,6 +69,7 @@ const routeToPath = {
   contact: '/contact',
   gallery: '/gallery',
   activities: '/activities',
+  verify: '/verify',
   'admin-login': '/admin/login',
   'admin-dashboard': '/admin',
   'admin-products': '/admin/products',
@@ -85,6 +89,7 @@ const pathToRoute = {
   '/contact': 'contact',
   '/gallery': 'gallery',
   '/activities': 'activities',
+  '/verify': 'verify',
   '/admin': 'admin-dashboard',
   '/admin/login': 'admin-login',
   '/admin/products': 'admin-products',
@@ -137,12 +142,14 @@ window.navigate = function(routeName, pushState = true) {
   }
 
   const urlPath = routeToPath[routeName] || '/home';
+  const targetUrl = routeName === 'verify' ? `${urlPath}${window.location.search}` : urlPath;
 
   // Render the screen if it's new, OR if we are showing home on the root URL
   const screenPathChanged = window.location.pathname !== urlPath;
   const isTargetHomeOnRoot = routeName === 'home' && (window.location.pathname === '/' || window.location.pathname === '/home');
+  const isVerifyRoute = routeName === 'verify';
   
-  if (screenPathChanged || isTargetHomeOnRoot || appRoot.children.length === 0) {
+  if (screenPathChanged || isTargetHomeOnRoot || isVerifyRoute || appRoot.children.length === 0) {
     appRoot.innerHTML = '';
     const screenRenderer = routes[routeName] || renderHomeScreen;
     appRoot.appendChild(screenRenderer());
@@ -150,9 +157,9 @@ window.navigate = function(routeName, pushState = true) {
 
   // Update history state
   if (pushState) {
-    window.history.pushState({ route: routeName }, '', urlPath);
+    window.history.pushState({ route: routeName }, '', targetUrl);
   } else if (originalRoute !== routeName) {
-    window.history.replaceState({ route: routeName }, '', urlPath);
+    window.history.replaceState({ route: routeName }, '', targetUrl);
   }
 
   // Scroll to top
@@ -173,17 +180,34 @@ window.navigate = function(routeName, pushState = true) {
   }
 }
 
+function hasVerifyQueryParam() {
+  const params = new URLSearchParams(window.location.search);
+  return Boolean((params.get('id') || '').trim());
+}
+
 // Initial Navigation
 window.addEventListener('popstate', (e) => {
   const path = window.location.pathname;
+  if (hasVerifyQueryParam() && (path === '/' || path === '/home' || path === '/verify')) {
+    window.navigate('verify', false);
+    return;
+  }
   const route = pathToRoute[path] || 'home';
   window.navigate(route, false);
 });
 
 // Start the app (Parse initial URL) - Robust for Production
 const initialPath = window.location.pathname;
-const initialRoute = pathToRoute[initialPath] || 'home';
-if (initialPath === '/') {
+const initialHasVerifyId = hasVerifyQueryParam();
+let initialRoute = pathToRoute[initialPath] || 'home';
+
+if (initialHasVerifyId && (initialPath === '/' || initialPath === '/home' || initialPath === '/verify')) {
+  initialRoute = 'verify';
+  if (initialPath !== '/verify') {
+    window.history.replaceState({ route: 'verify' }, '', `/verify${window.location.search}`);
+  }
+  window.navigate('verify', false);
+} else if (initialPath === '/') {
   window.navigate('home', true);
 } else {
   window.navigate(initialRoute, false);
@@ -192,10 +216,14 @@ if (initialPath === '/') {
 // Dismiss the Splash Screen after initial load
 const splash = document.getElementById('splash-screen');
 if (splash) {
-  setTimeout(() => {
-    splash.classList.add('fade-out');
-    setTimeout(() => splash.remove(), 600);
-  }, 1000); // 1.0s delay for high-end aesthetic transition
+  if (initialRoute === 'verify') {
+    splash.remove();
+  } else {
+    setTimeout(() => {
+      splash.classList.add('fade-out');
+      setTimeout(() => splash.remove(), 600);
+    }, 1000); // 1.0s delay for high-end aesthetic transition
+  }
 }
 
 
